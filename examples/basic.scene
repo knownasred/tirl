@@ -1,0 +1,4 @@
+Camera {
+    position: Vec3(0.0, 0.0, 0.0),
+    rotation: Quat(0.0, 0.0, 0.0, 1.0),
+}
