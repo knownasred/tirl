@@ -15,10 +15,12 @@
 Aurélien Richard",
 
   affiliation: "HEIG-VD",
+  datetime-fmt: "[year]-[month]-[day]",
   language: "fr",
   compact-mode: true,
   it,
 )
+
 
 = Introduction
 
@@ -30,7 +32,7 @@ Le paradigme de métaprogrammation consiste à créer un programme prenant une e
 voire même du code) et retournant du code en sortie.
 
 Ce paradigme est présent dans de nombreux langages de programmation, car il permet de répondre à la question suivante :
-_"Je veux que ma structure de données fonctionne pour n'importe quel truc"_. En Java, on vous montrera #raw(
+_"Je veux que ma structure de données fonctionne pour n'importe quel type d'objet"_. En Java, on vous montrera #raw(
   "List<T>",
   lang: "Java",
 ) pour tout #raw("T", lang: "Java"). Ces types génériques sont une forme de métaprogrammation. C'est un programme (dans
@@ -42,14 +44,22 @@ lisibilité. Dans ce cas, une autre question se pose : "Comment faire si ce que 
 génériques ?" Cette question se pose souvent dans des cas où il est impossible de représenter le paramètre comme un
 type. Par exemple, comment faire une version optimisée d'une matrice de taille $N times M$ en Java ?
 
+Les génériques ne sont qu'un premier exemple de l'utilité de la métaprogrammation. La sérialisation (et déserialisation)
+de données est un autre cas où elle est utilisée. L'écriture de sérialiseurs pour des formats comme JSON, YAML ou
+binaire est une tâche répétitive. Un programme connaissant les champs, leurs types et leurs noms peut générer ce code
+sans intervention du développeur. Des langages comme Go ou Java utilisent la réflexion (reflection), qui permet
+d'accéder à ces informations mais uniquement à l'exécution, ce qui implique un impact sur la performance.
 
-Plusieurs solutions sont possibles, en fonction du langage. Dans ce rapport, nous allons nous focaliser sur un seul
-langage, *Zig*, afin de comprendre son approche, très différente de celle d'autres langages.
+Ces deux problèmes semblent être deux applications totalement différentes de la métaprogrammation, mais sont très
+similaires si l'on revient à la définition formelle du paradigme. Les génériques et la génération de sérialiseurs
+peuvent tous deux être implémentés via une fonction ou un programme générant du code spécialisé en fonction d'entrées
+(types, champs, valeurs) connues à la compilation. Zig est un des rares langages à unifier ces deux problèmes, en
+brouillant la ligne entre le préprocesseur et le langage.
 
 = Présentation de Zig
 
-Zig est un langage généraliste permettant de maintenir des programmes robustes, optimaux et réutilisables. Il a été créé
-en 2016 par Andrew Kelley @noauthor_introduction_nodate et a pour objectif d'être :
+Zig est un langage généraliste permettant de maintenir des programmes robustes, optimaux et réutilisables
+@noauthor_home_nodate. Il a été créé en 2016 par Andrew Kelley @noauthor_introduction_nodate et a pour objectif d'être :
 - Pragmatique : le langage doit aider à faire quelque chose de mieux que tous les autres langages
 - Optimal : si on écrit du code de la manière la plus naturelle, il doit permettre d'obtenir une performance équivalente
   (ou meilleure) que C.
@@ -83,8 +93,8 @@ Grâce à cette fonctionnalité, les deux exemples de code (en C et en Zig) sont
   ```
 ]
 
-Cette capacité d'exécuter du code est présente dans de nombreux langages. Même Rust est en train d'ajouter le support de
-cette fonctionnalité. Cependant, Zig est un des rares langages à supporter le type `type`.
+Cette capacité d'exécuter du code est présente dans de nombreux langages. Rust, avec `const fn`, est un des langages
+populaires le supportant. Cependant, Zig est un des rares langages à supporter le type `type`.
 
 == `type`, le type de types
 
@@ -102,7 +112,7 @@ Voici donc comment créer une liste générique en Zig :
 ```zig
 fn List(T: type) type {
     return struct {
-        items: []T,
+        items: [*]T,
         len: usize,
     };
 }
@@ -127,8 +137,7 @@ fn Matrix2D(
 }
 
 // On peut avoir 2 types de matrices en parallèle,
-// bonne chance pour le faire en C
-
+// difficile (voire impossible) à reproduire en C
 const mat1: ?Matrix2D(4,3,i32) = null;
 const mat2: ?Matrix2D(5,2,f64) = null;
 
@@ -138,13 +147,41 @@ Dans cet exemple, le mot clé `comptime` est important. Il permet d'indiquer au 
 connue à la compilation, afin que le compilateur puisse exécuter à la compilation cette fonction retournant un type. Si
 elle n'est pas connue, le compilateur lève une erreur.
 
+Cela est réalisable dans d'autres langages, grâce par exemple aux templates en C++. Là ou Zig se démarque, c'est qu'un
+paramètre `type` n'est pas une référence opaque. Via la fonction `@typeInfo(t)`, il est possible d'effectuer de la
+reflection à la compilation. Cela permet d'écrire une implémentation d'un `printStruct` en quelques lignes:
+
+```zig
+fn dump(value: anytype) void {
+  inline for (@typeInfo(@TypeOf(value)).@"struct".fields) |f|
+    std.debug.print(
+      "{s} = {any}\n",
+      .{ f.name, @field(value, f.name) }
+    );
+}
+
+pub fn main() void {
+  dump(.{ .x = 3, .y = 7 });
+}
+```
+
+On voit ici le `inline for`, qui déroule une boucle au moment de la compilation. Une fois monomorphisé, le code sera
+équivalent à
+
+```zig
+fn dumpTest(value: [...]) {
+  std.debug.print("x = {any}\n", .{ value.x });
+  std.debug.print("y = {any}\n", .{ value.y });
+}
+```
+
 == La gestion explicite de mémoire
 
 Zig est souvent défini comme étant "un meilleur C", et cela est très probablement dû au fait que la mémoire doit être
 gérée manuellement, au contraire d'autres langages dont la mémoire est gérée par le langage, tels que Rust ou Go.
 
-Cependant, les créateurs de Zig ont pensé à améliorer un peu l'expérience, grâce aux mots-clés `defer` et `errdefer`,
-qui exécutent du code une fois que l'exécution sort du scope dont il provient.
+Cependant, les créateurs de Zig ont pensé à améliorer un peu l'expérience, grâce aux mots-clés `defer`, qui exécutent du
+code une fois que l'exécution sort du scope dont il provient.
 
 Un autre choix très apprécié vient du fait qu'il n'y a pas d'allocateur global défini en Zig : chaque fonction allouant
 la mémoire prend un paramètre du type `allocator`. Cela permet, par exemple, de définir un allocateur d'arène pour
@@ -154,9 +191,9 @@ chaque requête plutôt que d'effectuer plusieurs `malloc` et `free`.
 
 Tirl, notre format de définition de scène, s'inscrit donc dans ce contexte, avec son moteur de rendu. Beaucoup de
 moteurs de rendu commerciaux utilisent C++ (RenderMan @noauthor_renderman_nodate, Moonray @noauthor_moonray_nodate), et
-beaucoup d'exemples utilisent C @peter_shirley_ray_2025 ou C++ @pharr_physically_2023. Des implémentations dans d'autres
-langages ont été tentées par le passé, mais la performance laisse à désirer, car il est nécessaire de contrôler les
-allocations afin de garantir une certaine performance.
+beaucoup d'exemples utilisent C @peter_shirley_ray_2025 ou C++ @pharr_physically_2023. Malgré cela, beaucoup
+d'implémentations de ces exemples existent dans d'autres langages, car ce type d'exercices est un bon moyen d'apprendre
+un nouveau language.
 
 Zig répond donc à ces soucis, avec beaucoup moins de footguns #footnote[Il y aura toujours des footguns car le langage
   est d'abord optimisé pour l'optimalité (les use after free sont possibles par exemple), mais tout sera mieux que C ou
@@ -166,16 +203,16 @@ Zig répond donc à ces soucis, avec beaucoup moins de footguns #footnote[Il y a
 == Un format de définition de scène?
 
 Chaque moteur de rendu prenant des décisions d'architecture différentes (Moonray @noauthor_moonray_nodate et Redshift
-@noauthor_redshift_nodate) ont une approche totalement différente, par exemple), chacun a son format spécifique pour le
-rendu. Cependant, un standard est apparu en 2012 chez Pixar, USD. Il a depuis été rendu open source et est devenu
-l'outil principal pour la définition de scène.ys
+@noauthor_redshift_nodate prennent chacun une approche totalement différente sur leur pipeline), chacun a son format
+spécifique pour le rendu. Cependant, un standard développé par Pixar, USD, a été rendu open-source en 2017. Il est
+devenu l'outil principal pour la définition de scène entre logiciels.
 
 Même si l'intégration d'OpenUSD @noauthor_usd_nodate dans Zig (via une délégation Hydra @noauthor_usd_nodate-1) est un
 problème intéressant, cela ne permettrait pas de mettre en avant les capacités de Zig. Nous avons donc choisi de créer
 un format de définition de scène personnalisé, inspiré par USD mais plus condensé dans son format texte : Tirl.
 
 Zig rendra cette implémentation claire et lisible, tout en restant performant, grâce à ses capacités d'exécution de code
-à la compilation. En effet, il est possible d'unroll la boucle de matching de type (celle qui choisit, par exemple,
+à la compilation. En effet, il est possible de dérouler la boucle de matching de type (celle qui choisit, par exemple,
 entre une `Camera` ou une `Sphere`) à la compilation grâce à `inline for`, permettant d'obtenir une performance
 équivalente à un switch sans avoir à l'écrire à la main.
 
@@ -217,4 +254,37 @@ L'objectif final est de pouvoir obtenir une image de la forme suivante (tirée d
 
 #pagebreak()
 
-#bibliography("zotero.bib", full: true)
+== Cahier des charges Tirl
+_Format Tirl_
+
+- Parseur d'un format texte avec nœuds typés et nommés (Camera, Sphere, Material) et attributs nommés
+- Types de valeurs supportés :
+entiers, flottants, vecteurs 3D (x, y, z), couleurs hexadécimales \#rrggbb, chaînes, nœuds imbriqués
+- Messages d'erreur localisés (ligne, colonne) en cas de parsing invalide
+- Dispatch de type résolu à la compilation via `inline` for sur les nœuds connus
+
+_Moteur de rendu_
+
+- Primitive géométrique : sphère
+- Caméra perspective avec position et point visé
+- Modèle d'illumination : éclairage direct + shadow rays
+- Au moins une source lumineuse ponctuelle
+- Matériau Simple : couleur diffuse + réflectance
+- Sortie image au format PPM
+
+_Eléments bonus (selon temps disponible)_
+
+- Primitive plan (pour le sol de la scène de référence)
+- Primitive triangle ou maillage simple
+- Réflexions récursives (rayon réfléchi avec profondeur bornée)
+- Matériau métallique ou diélectrique
+- Textures (embarquées dans le document ou référencées par chemin)
+- Anti-aliasing par super-sampling
+- Parallélisation du rendu sur plusieurs threads
+- Intégration de la librairie C OpenEXR @noauthor_reading_nodate pour la sortie d'image en EXR (format de référence pour
+  l'industrie)
+
+
+#pagebreak()
+
+#bibliography("zotero.bib")
