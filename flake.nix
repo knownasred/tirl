@@ -37,8 +37,10 @@
       apps.zig2nix = env.app [] "zig2nix \"$@\"";
 
       devShells.default = env.mkShell {
-        nativeBuildInputs =
+        nativeBuildInputs = with env.pkgs;
           [
+            tinymist
+            typst
           ]
           ++ packages.default.nativeBuildInputs
           ++ packages.default.buildInputs

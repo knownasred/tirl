@@ -1,14 +1,16 @@
 const types = @import("types.zig");
 const std = @import("std");
 
-fn takeWhile(pred: fn (u8) bool) types.ParserElem([]const u8) {
+pub fn takeWhile(pred: fn (u8) bool) types.ParserElem([]const u8) {
     return .{
         .parse = struct {
             fn parse(pa: *types.Parser) types.ParserResult([]const u8) {
                 const cp = pa.checkpoint();
+
                 if (pa.isEof()) {
                     return types.Ok([]const u8, &.{});
                 }
+
                 // Note: The start pos is storysed in the checkpoint.
                 var currentChar = pa.peek(1).?[0];
                 while (pred(currentChar) and !pa.isEof()) {

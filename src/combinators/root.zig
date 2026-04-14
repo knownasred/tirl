@@ -8,4 +8,6 @@ pub const multi = @import("multi.zig");
 // For tests
 comptime {
     _ = @import("multi.zig");
+    _ = @import("litteral.zig");
+    _ = @import("either.zig");
 }

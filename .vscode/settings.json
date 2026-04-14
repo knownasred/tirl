@@ -1,0 +1,7 @@
+{
+    "tinymist.preview.cursorIndicator": true,
+    "tinymist.formatterProseWrap": true,
+    "tinymist.lint.enabled": true,
+    "tinymist.lint.when": "onType",
+    "editor.formatOnSave": true
+}
