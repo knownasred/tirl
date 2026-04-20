@@ -45,11 +45,12 @@ fn EitherParserType(comptime obj: anytype) type {
         field_types[i] = field.type.OutputType;
         field_attributes[i] = .{};
     }
-    var array: [field_names.len]intType = undefined;
+
+    var field_names_ids: [field_names.len]intType = undefined;
     for (0..field_names.len) |i| {
-        array[i] = i;
+        field_names_ids[i] = i;
     }
-    const enumVal = @Enum(intType, .exhaustive, &field_names, &array);
+    const enumVal = @Enum(intType, .exhaustive, &field_names, &field_names_ids);
     return parser.Parser(@Union(.auto, enumVal, &field_names, &field_types, &field_attributes));
 }
 
@@ -170,4 +171,272 @@ test "test that either can be called with anonymous parsers of same type compact
 
     // NOTE: Because it is a tuple, type compaction is allowed
     typeTools.assertTypesMatch([]const u8, returnType);
+}
+
+test "either with anonymous parsers of different types: first parser matches" {
+    const t = @import("utils.zig");
+    const lit = @import("litteral.zig");
+
+    const p1 = comptime lit.literal("hello").map(struct {
+        fn map(_: void) u32 {
+            return 42;
+        }
+    }.map);
+    const p2 = comptime lit.literal("world").map(struct {
+        fn map(_: void) []const u8 {
+            return "world";
+        }
+    }.map);
+    const combinator = comptime either(.{ p1, p2 });
+
+    const result = t.testParse(combinator, "hello");
+    switch (result) {
+        .ok => |val| switch (val) {
+            .@"0" => |inner| try std.testing.expectEqual(@as(u32, 42), inner),
+            else => return error.TestUnexpectedResult,
+        },
+        .err => |err| {
+            std.log.err("Expected ok, got: {s}", .{err.desc});
+            return error.TestUnexpectedResult;
+        },
+    }
+}
+
+test "either with anonymous parsers of different types: second parser matches" {
+    const t = @import("utils.zig");
+    const lit = @import("litteral.zig");
+
+    const p1 = comptime lit.literal("hello").map(struct {
+        fn map(_: void) u32 {
+            return 42;
+        }
+    }.map);
+    const p2 = comptime lit.literal("world").map(struct {
+        fn map(_: void) []const u8 {
+            return "world";
+        }
+    }.map);
+    const combinator = comptime either(.{ p1, p2 });
+
+    const result = t.testParse(combinator, "world");
+    switch (result) {
+        .ok => |val| switch (val) {
+            .@"1" => |inner| try std.testing.expectEqualStrings("world", inner),
+            else => return error.TestUnexpectedResult,
+        },
+        .err => |err| {
+            std.log.err("Expected ok, got: {s}", .{err.desc});
+            return error.TestUnexpectedResult;
+        },
+    }
+}
+
+test "either with anonymous parsers of different types: no match returns ReadError" {
+    const t = @import("utils.zig");
+    const lit = @import("litteral.zig");
+
+    const p1 = comptime lit.literal("hello").map(struct {
+        fn map(_: void) u32 {
+            return 42;
+        }
+    }.map);
+    const p2 = comptime lit.literal("world").map(struct {
+        fn map(_: void) []const u8 {
+            return "world";
+        }
+    }.map);
+    const combinator = comptime either(.{ p1, p2 });
+
+    const result = t.testParse(combinator, "foobar");
+    switch (result) {
+        .ok => return error.TestUnexpectedResult,
+        .err => |err| try std.testing.expectEqual(parser.ErrorCode.ReadError, err.code),
+    }
+}
+
+test "either with named parsers of different types: first parser matches" {
+    const t = @import("utils.zig");
+    const lit = @import("litteral.zig");
+
+    const p1 = comptime lit.literal("hello").map(struct {
+        fn map(_: void) u32 {
+            return 42;
+        }
+    }.map);
+    const p2 = comptime lit.literal("world").map(struct {
+        fn map(_: void) []const u8 {
+            return "world";
+        }
+    }.map);
+    const combinator = comptime either(.{ .first = p1, .second = p2 });
+
+    const result = t.testParse(combinator, "hello");
+    switch (result) {
+        .ok => |val| switch (val) {
+            .first => |inner| try std.testing.expectEqual(@as(u32, 42), inner),
+            else => return error.TestUnexpectedResult,
+        },
+        .err => |err| {
+            std.log.err("Expected ok, got: {s}", .{err.desc});
+            return error.TestUnexpectedResult;
+        },
+    }
+}
+
+test "either with named parsers of different types: second parser matches" {
+    const t = @import("utils.zig");
+    const lit = @import("litteral.zig");
+
+    const p1 = comptime lit.literal("hello").map(struct {
+        fn map(_: void) u32 {
+            return 42;
+        }
+    }.map);
+    const p2 = comptime lit.literal("world").map(struct {
+        fn map(_: void) []const u8 {
+            return "world";
+        }
+    }.map);
+    const combinator = comptime either(.{ .first = p1, .second = p2 });
+
+    const result = t.testParse(combinator, "world");
+    switch (result) {
+        .ok => |val| switch (val) {
+            .second => |inner| try std.testing.expectEqualStrings("world", inner),
+            else => return error.TestUnexpectedResult,
+        },
+        .err => |err| {
+            std.log.err("Expected ok, got: {s}", .{err.desc});
+            return error.TestUnexpectedResult;
+        },
+    }
+}
+
+test "either with named parsers of different types: no match returns UnexpectedToken" {
+    const t = @import("utils.zig");
+    const lit = @import("litteral.zig");
+
+    const p1 = comptime lit.literal("hello").map(struct {
+        fn map(_: void) u32 {
+            return 42;
+        }
+    }.map);
+    const p2 = comptime lit.literal("world").map(struct {
+        fn map(_: void) []const u8 {
+            return "world";
+        }
+    }.map);
+    const combinator = comptime either(.{ .first = p1, .second = p2 });
+
+    const result = t.testParse(combinator, "foobar");
+    switch (result) {
+        .ok => return error.TestUnexpectedResult,
+        .err => |err| try std.testing.expectEqual(parser.ErrorCode.UnexpectedToken, err.code),
+    }
+}
+
+test "either with anonymous same-type parsers: first matches, returns value directly" {
+    const t = @import("utils.zig");
+    const multi = @import("multi.zig");
+
+    const p1 = comptime multi.takeWhile(std.ascii.isAlphabetic).notEmpty();
+    const p2 = comptime multi.takeWhile(std.ascii.isDigit).notEmpty();
+    const combinator = comptime either(.{ p1, p2 });
+
+    const result = t.testParse(combinator, "hello123");
+    try t.isOkAndEq(result, "hello");
+}
+
+test "either with anonymous same-type parsers: second matches when first fails" {
+    const t = @import("utils.zig");
+    const multi = @import("multi.zig");
+
+    const p1 = comptime multi.takeWhile(std.ascii.isAlphabetic).notEmpty();
+    const p2 = comptime multi.takeWhile(std.ascii.isDigit).notEmpty();
+    const combinator = comptime either(.{ p1, p2 });
+
+    const result = t.testParse(combinator, "123hello");
+    try t.isOkAndEq(result, "123");
+}
+
+test "either with anonymous same-type parsers: no match returns error" {
+    const t = @import("utils.zig");
+    const multi = @import("multi.zig");
+
+    const p1 = comptime multi.takeWhile(std.ascii.isAlphabetic).notEmpty();
+    const p2 = comptime multi.takeWhile(std.ascii.isDigit).notEmpty();
+    const combinator = comptime either(.{ p1, p2 });
+
+    const result = t.testParse(combinator, "!@#");
+    try std.testing.expect(t.isErr(result));
+}
+
+test "either with named same-type parsers: first matches, returns named union variant" {
+    const t = @import("utils.zig");
+    const multi = @import("multi.zig");
+
+    const p1 = comptime multi.takeWhile(std.ascii.isAlphabetic).notEmpty();
+    const p2 = comptime multi.takeWhile(std.ascii.isDigit).notEmpty();
+    const combinator = comptime either(.{ .letters = p1, .digits = p2 });
+
+    const result = t.testParse(combinator, "hello123");
+    switch (result) {
+        .ok => |val| switch (val) {
+            .letters => |s| try std.testing.expectEqualStrings("hello", s),
+            else => return error.TestUnexpectedResult,
+        },
+        .err => |err| {
+            std.log.err("Expected ok, got: {s}", .{err.desc});
+            return error.TestUnexpectedResult;
+        },
+    }
+}
+
+test "either with named same-type parsers: second matches, returns named union variant" {
+    const t = @import("utils.zig");
+    const multi = @import("multi.zig");
+
+    const p1 = comptime multi.takeWhile(std.ascii.isAlphabetic).notEmpty();
+    const p2 = comptime multi.takeWhile(std.ascii.isDigit).notEmpty();
+    const combinator = comptime either(.{ .letters = p1, .digits = p2 });
+
+    const result = t.testParse(combinator, "123hello");
+    switch (result) {
+        .ok => |val| switch (val) {
+            .digits => |s| try std.testing.expectEqualStrings("123", s),
+            else => return error.TestUnexpectedResult,
+        },
+        .err => |err| {
+            std.log.err("Expected ok, got: {s}", .{err.desc});
+            return error.TestUnexpectedResult;
+        },
+    }
+}
+
+test "either: rolls back state when first parser advances and fails" {
+    const t = @import("utils.zig");
+    const lit = @import("litteral.zig");
+
+    // A parser that consumes 3 bytes then unconditionally fails.
+    // Shares OutputType ([]const u8) with the second parser so either() uses
+    // compact mode — the result is Result([]const u8) directly, letting us
+    // call t.isOkAndEq without unwrapping a union.
+    const failAfterAdvance = struct {
+        fn parse(p: *parser.State) parser.Result([]const u8) {
+            p.advance(3);
+            return parser.Err([]const u8, parser.ErrorCode.UnexpectedToken, "intentional fail", p.checkpoint());
+        }
+    };
+    const p1 = comptime parser.Parser([]const u8){ .parse = failAfterAdvance.parse };
+    const p2 = comptime lit.literal("abc").map(struct {
+        fn map(_: void) []const u8 {
+            return "abc";
+        }
+    }.map);
+    const combinator = comptime either(.{ p1, p2 });
+
+    // p1 advances 3 bytes then errors; either must restore pos to 0 before
+    // trying p2, which then matches the full "abc" from the start.
+    const result = t.testParse(combinator, "abc");
+    try t.isOkAndEq(result, "abc");
 }
