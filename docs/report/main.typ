@@ -126,7 +126,9 @@ var list = List(i32) {
 On voit bien en ligne 8 que le type retourné par la fonction `List` est utilisé pour créer une nouvelle instance dans
 `list`. Vu que nous avons la quasi-totalité du langage à notre disposition dans ces fonctions #footnote[Toutes les
   fonctionnalités du langage liées à l'entrée/sortie, ou spécifiques à la machine sont volontairement désactivées afin
-  de garder des builds hermétiques.], il est possible de faire ce que les génériques ne nous laissaient pas faire :
+  de garder des builds hermétiques. L'article "Things Zig's comptime won't do" @noauthor_things_nodate explique ces
+  contraintes plus clairement que je ne pourrais le faire.], il est possible de faire ce que les génériques ne nous
+laissaient pas faire :
 
 ```zig
 fn Matrix2D(
