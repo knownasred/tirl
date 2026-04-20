@@ -1,14 +1,14 @@
-const types = @import("types.zig");
+const parser = @import("parser.zig");
 const std = @import("std");
 
-pub fn takeWhile(pred: fn (u8) bool) types.ParserElem([]const u8) {
+pub fn takeWhile(pred: fn (u8) bool) parser.Parser([]const u8) {
     return .{
         .parse = struct {
-            fn parse(pa: *types.Parser) types.ParserResult([]const u8) {
+            fn parse(pa: *parser.State) parser.Result([]const u8) {
                 const cp = pa.checkpoint();
 
                 if (pa.isEof()) {
-                    return types.Ok([]const u8, &.{});
+                    return parser.Ok([]const u8, &.{});
                 }
 
                 // Note: The start pos is storysed in the checkpoint.
@@ -19,7 +19,7 @@ pub fn takeWhile(pred: fn (u8) bool) types.ParserElem([]const u8) {
                 }
                 const finalPos = pa.checkpoint();
                 // Return the slice between the last checkpoint and the end, if there are at least one character taken
-                return types.Ok([]const u8, pa.data[cp.pos..finalPos.pos]);
+                return parser.Ok([]const u8, pa.data[cp.pos..finalPos.pos]);
             }
         }.parse,
     };

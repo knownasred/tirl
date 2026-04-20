@@ -1,17 +1,17 @@
-const p = @import("types.zig");
+const parser = @import("parser.zig");
 const std = @import("std");
-pub fn isErr(parser: anytype) bool {
-    return switch (parser) {
+pub fn isErr(result: anytype) bool {
+    return switch (result) {
         .err => true,
         .ok => false,
     };
 }
 
-pub fn isOk(parser: anytype) bool {
-    return !isErr(parser);
+pub fn isOk(result: anytype) bool {
+    return !isErr(result);
 }
-pub fn isOkAndEq(parser: anytype, val: anytype) !void {
-    switch (parser) {
+pub fn isOkAndEq(result: anytype, val: anytype) !void {
+    switch (result) {
         .ok => |value| {
             try std.testing.expectEqualDeep(val, value);
         },
@@ -23,13 +23,17 @@ pub fn isOkAndEq(parser: anytype, val: anytype) !void {
     }
 }
 
-pub fn testParse(comptime def: anytype, str: []const u8) ReturnType(def.parse) {
-    var parser = p.Parser.init(str);
+pub fn testParse(comptime def: anytype, str: []const u8) TypeOfParser(def).ResultType {
+    var state = parser.State.init(str);
 
-    return def.parse(&parser);
+    return def.parse(&state);
 }
 
-pub fn derefParserElem(comptime P: type) type {
+pub fn TypeOfParser(comptime p: anytype) type {
+    return derefType(@TypeOf(p));
+}
+
+pub fn derefType(comptime P: type) type {
     return switch (@typeInfo(P)) {
         .pointer => |info| info.child,
         else => P,
@@ -43,8 +47,4 @@ pub fn ReturnType(comptime f: anytype) type {
         .pointer => |info| @typeInfo(info.child).@"fn".return_type.?,
         else => @compileError("expected fn or *const fn, got " ++ @typeName(T)),
     };
-}
-
-pub fn InnerReturnType(comptime f: anytype) type {
-    return @TypeOf(f.*).T_;
 }

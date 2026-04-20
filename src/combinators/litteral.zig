@@ -1,17 +1,17 @@
-const types = @import("types.zig");
+const parser = @import("parser.zig");
 const std = @import("std");
 
-pub fn literal(comptime expected: []const u8) types.ParserElem(void) {
+pub fn literal(comptime expected: []const u8) parser.Parser(void) {
     return .{
         .parse = struct {
-            fn parse(pa: *types.Parser) types.ParserResult(void) {
+            fn parse(pa: *parser.State) parser.Result(void) {
                 const cp = pa.checkpoint();
                 // Try and check literally:
-                const actual = pa.peek(expected.len) orelse return types.Err(void, types.ErrorCode.UnexpectedEOF, "Expected tokem, found end of file.", cp);
+                const actual = pa.peek(expected.len) orelse return parser.Err(void, parser.ErrorCode.UnexpectedEOF, "Expected token, found end of file.", cp);
                 if (!std.mem.startsWith(u8, actual, expected))
-                    return types.Err(void, types.ErrorCode.UnexpectedToken, "Unexpected token!", cp);
+                    return parser.Err(void, parser.ErrorCode.UnexpectedToken, "Unexpected token!", cp);
                 pa.advance(expected.len);
-                return types.Ok(void, void{});
+                return parser.Ok(void, void{});
             }
         }.parse,
     };
