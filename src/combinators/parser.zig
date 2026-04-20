@@ -78,6 +78,14 @@ pub fn Parser(comptime Ty: type) type {
         pub const OutputType = Ty;
         pub const ResultType = Result(Ty);
 
+        pub fn Ok(val: OutputType) ResultType {
+            return combinators.Ok(OutputType, val);
+        }
+
+        pub fn Err(errCode: ErrorCode, desc: []const u8, loc: Checkpoint) ResultType {
+            return combinators.Err(OutputType, errCode, desc, loc);
+        }
+
         parse: *const fn (p: *State) ResultType,
 
         // UFCS aliases — these let you write `literal("x").map(f)` as chained calls
