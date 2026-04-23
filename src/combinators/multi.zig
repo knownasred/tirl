@@ -4,7 +4,7 @@ const std = @import("std");
 pub fn takeWhile(comptime pred: fn (u8) bool) parser.Parser([]const u8) {
     return .{
         .parse = struct {
-            fn parse(pa: *parser.State) parser.Result([]const u8) {
+            fn parse(_: std.mem.Allocator, pa: *parser.State) parser.Result([]const u8) {
                 const cp = pa.checkpoint();
 
                 if (pa.isEof()) {

@@ -1,6 +1,7 @@
 const parser = @import("parser.zig");
 const utils = @import("utils.zig");
 const litteral = @import("litteral.zig");
+const std = @import("std");
 
 fn isString(comptime T: type) bool {
     return switch (@typeInfo(T)) {
@@ -40,11 +41,11 @@ pub fn delimited(comptime open: anytype, comptime inner: anytype, comptime close
 
     return .{
         .parse = struct {
-            fn parse(p: *parser.State) InnerParser.ResultType {
+            fn parse(alloc: std.mem.Allocator, p: *parser.State) InnerParser.ResultType {
                 const initialCheckpoint = p.checkpoint();
 
                 // Parse open
-                const openResult = open_parser.parse(p);
+                const openResult = open_parser.parse(alloc, p);
                 if (utils.isErr(openResult)) {
                     p.restore(initialCheckpoint);
                     return InnerParser.ResultType{ .err = .{
@@ -56,14 +57,14 @@ pub fn delimited(comptime open: anytype, comptime inner: anytype, comptime close
                 }
 
                 // Parse inner
-                const innerResult = inner.parse(p);
+                const innerResult = inner.parse(alloc, p);
                 if (utils.isErr(innerResult)) {
                     p.restore(initialCheckpoint);
                     return innerResult;
                 }
 
                 // Parse close
-                const closeResult = close_parser.parse(p);
+                const closeResult = close_parser.parse(alloc, p);
                 if (utils.isErr(closeResult)) {
                     p.restore(initialCheckpoint);
                     return InnerParser.ResultType{ .err = .{

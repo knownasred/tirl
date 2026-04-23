@@ -139,7 +139,7 @@ pub fn TestParseResult(comptime T: type) type {
 /// Parse `input` with `def`, returning a builder-style `TestParseResult` for chained assertions.
 pub fn testParse(comptime def: anytype, input: []const u8) TestParseResult(TypeOfParser(def).OutputType) {
     var state = parser.State.init(input);
-    const result = def.parse(&state);
+    const result = def.parse(std.testing.allocator, &state);
     return .{
         .result = result,
         .state = state,

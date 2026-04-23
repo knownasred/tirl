@@ -4,7 +4,7 @@ const std = @import("std");
 pub fn satisfy(comptime pred: fn (char: u8) bool) parser.Parser(u8) {
     return .{
         .parse = struct {
-            fn parse(state: *parser.State) parser.Result(u8) {
+            fn parse(_: std.mem.Allocator, state: *parser.State) parser.Result(u8) {
                 // No need to checkpoint tbh
                 if (state.isEof()) {
                     return parser.Err(u8, parser.ErrorCode.UnexpectedEOF, "Unexpected EOF", state.checkpoint());

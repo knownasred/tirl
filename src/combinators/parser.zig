@@ -12,8 +12,8 @@ fn map(comptime parser: anytype, comptime f: anytype) Parser(utils.ReturnType(f)
     }
     return .{
         .parse = struct {
-            fn parse(p: *State) Result(utils.ReturnType(f)) {
-                return switch (parser.parse(p)) {
+            fn parse(alloc: std.mem.Allocator, p: *State) Result(utils.ReturnType(f)) {
+                return switch (parser.parse(alloc, p)) {
                     .ok => |val| .{ .ok = f(val) },
                     .err => |err| .{ .err = err },
                 };
@@ -29,8 +29,8 @@ pub fn label(comptime parser: anytype, comptime name: []const u8) utils.TypeOfPa
     const P = utils.TypeOfParser(parser);
     return .{
         .parse = struct {
-            fn parse(p: *State) P.ResultType {
-                return switch (parser.parse(p)) {
+            fn parse(alloc: std.mem.Allocator, p: *State) P.ResultType {
+                return switch (parser.parse(alloc, p)) {
                     .ok => |val| .{ .ok = val },
                     .err => |err| .{ .err = .{
                         .code = err.code,
@@ -48,11 +48,11 @@ pub fn notEmpty(comptime self: anytype) @TypeOf(self.*) {
     const Self = utils.TypeOfParser(self);
     return .{
         .parse = struct {
-            fn parse(pa: *State) Self.ResultType {
+            fn parse(alloc: std.mem.Allocator, pa: *State) Self.ResultType {
                 // Consider the value, even if all of them are silenced
                 const cp = pa.checkpoint();
 
-                const result = self.parse(pa);
+                const result = self.parse(alloc, pa);
 
                 switch (result) {
                     .ok => |val| {
@@ -144,7 +144,7 @@ test "Error.display formats line and col" {
         buf: []u8,
         pos: *usize,
         pub fn writeAll(self: @This(), bytes: []const u8) !void {
-            @memcpy(self.buf[self.pos.*..self.pos.* + bytes.len], bytes);
+            @memcpy(self.buf[self.pos.* .. self.pos.* + bytes.len], bytes);
             self.pos.* += bytes.len;
         }
         pub fn print(self: @This(), comptime fmt: []const u8, args: anytype) !void {
@@ -171,7 +171,7 @@ test "Error.display without expected" {
         buf: []u8,
         pos: *usize,
         pub fn writeAll(self: @This(), bytes: []const u8) !void {
-            @memcpy(self.buf[self.pos.*..self.pos.* + bytes.len], bytes);
+            @memcpy(self.buf[self.pos.* .. self.pos.* + bytes.len], bytes);
             self.pos.* += bytes.len;
         }
         pub fn print(self: @This(), comptime fmt: []const u8, args: anytype) !void {
@@ -204,7 +204,7 @@ pub fn Parser(comptime Ty: type) type {
             return combinators.Err(OutputType, errCode, desc, loc);
         }
 
-        parse: *const fn (p: *State) ResultType,
+        parse: *const fn (alloc: std.mem.Allocator, p: *State) ResultType,
 
         // UFCS aliases — these let you write `literal("x").map(f)` as chained calls
         pub const map = combinators.map;

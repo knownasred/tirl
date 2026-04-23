@@ -4,7 +4,7 @@ const std = @import("std");
 pub fn literal(comptime expected: []const u8) parser.Parser(void) {
     return .{
         .parse = struct {
-            fn parse(pa: *parser.State) parser.Result(void) {
+            fn parse(_: std.mem.Allocator, pa: *parser.State) parser.Result(void) {
                 const cp = pa.checkpoint();
                 // Try and check literally:
                 const actual = pa.peek(expected.len) orelse return parser.Err(void, parser.ErrorCode.UnexpectedEOF, "Expected token, found end of file.", cp);

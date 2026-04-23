@@ -7,7 +7,7 @@ fn skipWs() parser.Parser(void) {
     const p = parser.Parser(void);
     return .{
         .parse = struct {
-            fn parse(state: *parser.State) p.ResultType {
+            fn parse(alloc: std.mem.Allocator, state: *parser.State) p.ResultType {
                 mainLoop: while (!state.isEof()) {
                     const char = state.peek(1).?[0];
                     switch (char) {
@@ -18,7 +18,7 @@ fn skipWs() parser.Parser(void) {
                                 fn pred(val: u8) bool {
                                     return val != '\n';
                                 }
-                            }.pred).parse(state);
+                            }.pred).parse(alloc, state);
                         },
                         else => break :mainLoop,
                     }
@@ -34,11 +34,11 @@ pub fn lexeme(comptime p: anytype) @TypeOf(p) {
     const P = @TypeOf(p);
     return .{
         .parse = struct {
-            fn parse(state: *parser.State) P.ResultType {
-                const result = p.parse(state);
+            fn parse(alloc: std.mem.Allocator, state: *parser.State) P.ResultType {
+                const result = p.parse(alloc, state);
 
                 if (utils.isOk(result)) {
-                    _ = skipWs().parse(state);
+                    _ = skipWs().parse(alloc, state);
                 }
 
                 return result;
@@ -121,35 +121,35 @@ test "lexeme works with no trailing whitespace" {
 
 test "skipWs skips spaces" {
     var state = parser.State.init("   hello");
-    const result = skipWs().parse(&state);
+    const result = skipWs().parse(std.testing.allocator, &state);
     try std.testing.expect(utils.isOk(result));
     try std.testing.expectEqualStrings("hello", state.rest());
 }
 
 test "skipWs skips tabs and newlines" {
     var state = parser.State.init("\t\n\r\nhello");
-    const result = skipWs().parse(&state);
+    const result = skipWs().parse(std.testing.allocator, &state);
     try std.testing.expect(utils.isOk(result));
     try std.testing.expectEqualStrings("hello", state.rest());
 }
 
 test "skipWs skips comments until newline" {
     var state = parser.State.init("# this is a comment\nhello");
-    const result = skipWs().parse(&state);
+    const result = skipWs().parse(std.testing.allocator, &state);
     try std.testing.expect(utils.isOk(result));
     try std.testing.expectEqualStrings("hello", state.rest());
 }
 
 test "skipWs stops at non-whitespace" {
     var state = parser.State.init("hello");
-    const result = skipWs().parse(&state);
+    const result = skipWs().parse(std.testing.allocator, &state);
     try std.testing.expect(utils.isOk(result));
     try std.testing.expectEqualStrings("hello", state.rest());
 }
 
 test "skipWs at eof returns ok" {
     var state = parser.State.init("");
-    const result = skipWs().parse(&state);
+    const result = skipWs().parse(std.testing.allocator, &state);
     try std.testing.expect(utils.isOk(result));
     try std.testing.expect(state.isEof());
 }

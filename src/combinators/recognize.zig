@@ -4,12 +4,12 @@ const std = @import("std");
 pub fn recognize(comptime p: anytype) parser.Parser([]const u8) {
     return .{
         .parse = struct {
-            fn parse(state: *parser.State) parser.Result([]const u8) {
+            fn parse(alloc: std.mem.Allocator, state: *parser.State) parser.Result([]const u8) {
                 const checkpoint = state.checkpoint();
 
                 // Execute the parser
                 // if ok, returns the slice between the two elements
-                const parseResult = p.parse(state);
+                const parseResult = p.parse(alloc, state);
 
                 switch (parseResult) {
                     .ok => {

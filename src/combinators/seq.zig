@@ -40,13 +40,13 @@ pub fn seq(comptime t: anytype) SeqParserType(t) {
 
     return .{
         .parse = struct {
-            fn parse(p: *parser.State) ParserType.ResultType {
+            fn parse(alloc: std.mem.Allocator, p: *parser.State) ParserType.ResultType {
                 const initialCheckpoint = p.checkpoint();
 
                 var result: ParserType.OutputType = undefined;
 
                 inline for (elemStruct.fields) |field| {
-                    const parseResult = @field(t, field.name).parse(p);
+                    const parseResult = @field(t, field.name).parse(alloc, p);
 
                     switch (parseResult) {
                         .ok => |ok| {

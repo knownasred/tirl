@@ -74,12 +74,12 @@ pub fn either(comptime t: anytype) EitherParserType(t) {
 
     return .{
         .parse = struct {
-            fn parse(p: *parser.State) ParserType.ResultType {
+            fn parse(alloc: std.mem.Allocator, p: *parser.State) ParserType.ResultType {
                 const initialCheckpoint = p.checkpoint();
 
                 inline for (elemStruct.fields) |field| {
                     // Attempt
-                    const parseResult = @field(t, field.name).parse(p);
+                    const parseResult = @field(t, field.name).parse(alloc, p);
 
                     switch (parseResult) {
                         .ok => |ok| {
@@ -368,7 +368,7 @@ test "either: rolls back state when first parser advances and fails" {
     // compact mode — the result is Result([]const u8) directly, letting us
     // call t.isOkAndEq without unwrapping a union.
     const failAfterAdvance = struct {
-        fn parse(p: *parser.State) parser.Result([]const u8) {
+        fn parse(_: std.mem.Allocator, p: *parser.State) parser.Result([]const u8) {
             p.advance(3);
             return parser.Err([]const u8, parser.ErrorCode.UnexpectedToken, "intentional fail", p.checkpoint());
         }
