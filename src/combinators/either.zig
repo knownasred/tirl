@@ -60,6 +60,18 @@ pub fn either(comptime t: anytype) EitherParserType(t) {
     const ParserType = EitherParserType(t);
     const elemStruct = extractStruct(t);
 
+    // Pre-build the "expected one of: ..." message for named eithers at comptime.
+    const named_expected_msg = comptime blk: {
+        var str: []const u8 = "";
+        for (elemStruct.fields, 0..) |field, i| {
+            if (i > 0) {
+                str = str ++ ", ";
+            }
+            str = str ++ field.name;
+        }
+        break :blk str;
+    };
+
     return .{
         .parse = struct {
             fn parse(p: *parser.State) ParserType.ResultType {
@@ -90,18 +102,12 @@ pub fn either(comptime t: anytype) EitherParserType(t) {
                 if (elemStruct.is_tuple) {
                     return parser.Err(ParserType.OutputType, parser.ErrorCode.ReadError, "Nothing matched, ex!", p.checkpoint());
                 } else {
-                    const fields = comptime blk: {
-                        var str: []const u8 = "";
-                        for (elemStruct.fields, 0..) |field, i| {
-                            if (i > 0) {
-                                str = str ++ ", ";
-                            }
-                            str = str ++ field.name;
-                        }
-
-                        break :blk str;
-                    };
-                    return parser.Err(ParserType.OutputType, parser.ErrorCode.UnexpectedToken, "Nothing matched, expected one of: " ++ fields ++ ".", p.checkpoint());
+                    return ParserType.ResultType{ .err = .{
+                        .code = parser.ErrorCode.UnexpectedToken,
+                        .desc = "Nothing matched, expected one of: " ++ named_expected_msg,
+                        .expected = "one of: " ++ named_expected_msg,
+                        .location = initialCheckpoint,
+                    } };
                 }
             }
         }.parse,
@@ -189,17 +195,8 @@ test "either with anonymous parsers of different types: first parser matches" {
     }.map);
     const combinator = comptime either(.{ p1, p2 });
 
-    const result = t.testParse(combinator, "hello");
-    switch (result) {
-        .ok => |val| switch (val) {
-            .@"0" => |inner| try std.testing.expectEqual(@as(u32, 42), inner),
-            else => return error.TestUnexpectedResult,
-        },
-        .err => |err| {
-            std.log.err("Expected ok, got: {s}", .{err.desc});
-            return error.TestUnexpectedResult;
-        },
-    }
+    var r = t.testParse(combinator, "hello");
+    try r.expectOk().expectValue(.{ .@"0" = 42 }).finish();
 }
 
 test "either with anonymous parsers of different types: second parser matches" {
@@ -218,17 +215,8 @@ test "either with anonymous parsers of different types: second parser matches" {
     }.map);
     const combinator = comptime either(.{ p1, p2 });
 
-    const result = t.testParse(combinator, "world");
-    switch (result) {
-        .ok => |val| switch (val) {
-            .@"1" => |inner| try std.testing.expectEqualStrings("world", inner),
-            else => return error.TestUnexpectedResult,
-        },
-        .err => |err| {
-            std.log.err("Expected ok, got: {s}", .{err.desc});
-            return error.TestUnexpectedResult;
-        },
-    }
+    var r = t.testParse(combinator, "world");
+    try r.expectOk().expectValue(.{ .@"1" = "world" }).finish();
 }
 
 test "either with anonymous parsers of different types: no match returns ReadError" {
@@ -247,11 +235,8 @@ test "either with anonymous parsers of different types: no match returns ReadErr
     }.map);
     const combinator = comptime either(.{ p1, p2 });
 
-    const result = t.testParse(combinator, "foobar");
-    switch (result) {
-        .ok => return error.TestUnexpectedResult,
-        .err => |err| try std.testing.expectEqual(parser.ErrorCode.ReadError, err.code),
-    }
+    var r = t.testParse(combinator, "foobar");
+    try r.expectErr().expectErrorCode(parser.ErrorCode.ReadError).finish();
 }
 
 test "either with named parsers of different types: first parser matches" {
@@ -270,17 +255,8 @@ test "either with named parsers of different types: first parser matches" {
     }.map);
     const combinator = comptime either(.{ .first = p1, .second = p2 });
 
-    const result = t.testParse(combinator, "hello");
-    switch (result) {
-        .ok => |val| switch (val) {
-            .first => |inner| try std.testing.expectEqual(@as(u32, 42), inner),
-            else => return error.TestUnexpectedResult,
-        },
-        .err => |err| {
-            std.log.err("Expected ok, got: {s}", .{err.desc});
-            return error.TestUnexpectedResult;
-        },
-    }
+    var r = t.testParse(combinator, "hello");
+    try r.expectOk().expectValue(.{ .first = 42 }).finish();
 }
 
 test "either with named parsers of different types: second parser matches" {
@@ -299,17 +275,8 @@ test "either with named parsers of different types: second parser matches" {
     }.map);
     const combinator = comptime either(.{ .first = p1, .second = p2 });
 
-    const result = t.testParse(combinator, "world");
-    switch (result) {
-        .ok => |val| switch (val) {
-            .second => |inner| try std.testing.expectEqualStrings("world", inner),
-            else => return error.TestUnexpectedResult,
-        },
-        .err => |err| {
-            std.log.err("Expected ok, got: {s}", .{err.desc});
-            return error.TestUnexpectedResult;
-        },
-    }
+    var r = t.testParse(combinator, "world");
+    try r.expectOk().expectValue(.{ .second = "world" }).finish();
 }
 
 test "either with named parsers of different types: no match returns UnexpectedToken" {
@@ -328,11 +295,8 @@ test "either with named parsers of different types: no match returns UnexpectedT
     }.map);
     const combinator = comptime either(.{ .first = p1, .second = p2 });
 
-    const result = t.testParse(combinator, "foobar");
-    switch (result) {
-        .ok => return error.TestUnexpectedResult,
-        .err => |err| try std.testing.expectEqual(parser.ErrorCode.UnexpectedToken, err.code),
-    }
+    var r = t.testParse(combinator, "foobar");
+    try r.expectErr().expectErrorCode(parser.ErrorCode.UnexpectedToken).finish();
 }
 
 test "either with anonymous same-type parsers: first matches, returns value directly" {
@@ -343,8 +307,8 @@ test "either with anonymous same-type parsers: first matches, returns value dire
     const p2 = comptime multi.takeWhile(std.ascii.isDigit).notEmpty();
     const combinator = comptime either(.{ p1, p2 });
 
-    const result = t.testParse(combinator, "hello123");
-    try t.isOkAndEq(result, "hello");
+    var r = t.testParse(combinator, "hello123");
+    try r.expectOk().expectValue("hello").finish();
 }
 
 test "either with anonymous same-type parsers: second matches when first fails" {
@@ -355,8 +319,8 @@ test "either with anonymous same-type parsers: second matches when first fails" 
     const p2 = comptime multi.takeWhile(std.ascii.isDigit).notEmpty();
     const combinator = comptime either(.{ p1, p2 });
 
-    const result = t.testParse(combinator, "123hello");
-    try t.isOkAndEq(result, "123");
+    var r = t.testParse(combinator, "123hello");
+    try r.expectOk().expectValue("123").finish();
 }
 
 test "either with anonymous same-type parsers: no match returns error" {
@@ -367,8 +331,8 @@ test "either with anonymous same-type parsers: no match returns error" {
     const p2 = comptime multi.takeWhile(std.ascii.isDigit).notEmpty();
     const combinator = comptime either(.{ p1, p2 });
 
-    const result = t.testParse(combinator, "!@#");
-    try std.testing.expect(t.isErr(result));
+    var r = t.testParse(combinator, "!@#");
+    try r.expectErr().finish();
 }
 
 test "either with named same-type parsers: first matches, returns named union variant" {
@@ -379,17 +343,8 @@ test "either with named same-type parsers: first matches, returns named union va
     const p2 = comptime multi.takeWhile(std.ascii.isDigit).notEmpty();
     const combinator = comptime either(.{ .letters = p1, .digits = p2 });
 
-    const result = t.testParse(combinator, "hello123");
-    switch (result) {
-        .ok => |val| switch (val) {
-            .letters => |s| try std.testing.expectEqualStrings("hello", s),
-            else => return error.TestUnexpectedResult,
-        },
-        .err => |err| {
-            std.log.err("Expected ok, got: {s}", .{err.desc});
-            return error.TestUnexpectedResult;
-        },
-    }
+    var r = t.testParse(combinator, "hello123");
+    try r.expectOk().expectValue(.{ .letters = "hello" }).finish();
 }
 
 test "either with named same-type parsers: second matches, returns named union variant" {
@@ -400,17 +355,8 @@ test "either with named same-type parsers: second matches, returns named union v
     const p2 = comptime multi.takeWhile(std.ascii.isDigit).notEmpty();
     const combinator = comptime either(.{ .letters = p1, .digits = p2 });
 
-    const result = t.testParse(combinator, "123hello");
-    switch (result) {
-        .ok => |val| switch (val) {
-            .digits => |s| try std.testing.expectEqualStrings("123", s),
-            else => return error.TestUnexpectedResult,
-        },
-        .err => |err| {
-            std.log.err("Expected ok, got: {s}", .{err.desc});
-            return error.TestUnexpectedResult;
-        },
-    }
+    var r = t.testParse(combinator, "123hello");
+    try r.expectOk().expectValue(.{ .digits = "123" }).finish();
 }
 
 test "either: rolls back state when first parser advances and fails" {
@@ -437,6 +383,18 @@ test "either: rolls back state when first parser advances and fails" {
 
     // p1 advances 3 bytes then errors; either must restore pos to 0 before
     // trying p2, which then matches the full "abc" from the start.
-    const result = t.testParse(combinator, "abc");
-    try t.isOkAndEq(result, "abc");
+    var r = t.testParse(combinator, "abc");
+    try r.expectOk().expectValue("abc").finish();
+}
+
+test "either with named parsers: no match includes expected field" {
+    const t = @import("utils.zig");
+    const lit = @import("litteral.zig");
+
+    const p1 = comptime lit.literal("hello").label("hello");
+    const p2 = comptime lit.literal("world").label("world");
+    const combinator = comptime either(.{ .hello = p1, .world = p2 });
+
+    var r = t.testParse(combinator, "foobar");
+    try r.expectErr().expectExpected("one of: hello, world").finish();
 }

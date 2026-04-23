@@ -1,0 +1,4 @@
+{
+  "$schema": "https://raw.githubusercontent.com/DonIsaac/zlint/refs/heads/main/zlint.schema.json",
+  "ignore": ["src/bad.zig", "src/subfolder/**"]
+}

@@ -41,7 +41,7 @@
           [
             tinymist
             typst
-            zlint
+            zig-zlint
           ]
           ++ packages.default.nativeBuildInputs
           ++ packages.default.buildInputs

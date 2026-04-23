@@ -1,7 +1,7 @@
 const parser = @import("parser.zig");
 const std = @import("std");
 
-pub fn takeWhile(pred: fn (u8) bool) parser.Parser([]const u8) {
+pub fn takeWhile(comptime pred: fn (u8) bool) parser.Parser([]const u8) {
     return .{
         .parse = struct {
             fn parse(pa: *parser.State) parser.Result([]const u8) {
@@ -13,8 +13,9 @@ pub fn takeWhile(pred: fn (u8) bool) parser.Parser([]const u8) {
 
                 // Note: The start pos is storysed in the checkpoint.
                 var currentChar = pa.peek(1).?[0];
-                while (pred(currentChar) and !pa.isEof()) {
+                while (pred(currentChar)) {
                     pa.advance(1);
+                    if (pa.isEof()) break;
                     currentChar = pa.peek(1).?[0];
                 }
                 const finalPos = pa.checkpoint();
@@ -24,15 +25,17 @@ pub fn takeWhile(pred: fn (u8) bool) parser.Parser([]const u8) {
         }.parse,
     };
 }
+
 test "Test simple takeWhile combinator" {
     const t = @import("utils.zig");
 
     const testCombinator = comptime takeWhile(std.ascii.isDigit);
 
-    const okResult = t.testParse(testCombinator, "123test");
-    try t.isOkAndEq(okResult, "123");
-    const emptyResult = t.testParse(testCombinator, "meuh");
-    try t.isOkAndEq(emptyResult, "");
+    var r1 = t.testParse(testCombinator, "123test");
+    try r1.expectOk().expectValue("123").finish();
+
+    var r2 = t.testParse(testCombinator, "meuh");
+    try r2.expectOk().expectValue("").finish();
 }
 
 test "takeWhile with the notEmpty wrapper" {
@@ -40,8 +43,9 @@ test "takeWhile with the notEmpty wrapper" {
 
     const testCombinator = comptime takeWhile(std.ascii.isDigit).notEmpty();
 
-    const okResult = t.testParse(testCombinator, "123test");
-    try t.isOkAndEq(okResult, "123");
-    const emptyResult = t.testParse(testCombinator, "meuh");
-    try std.testing.expect(t.isErr(emptyResult));
+    var r1 = t.testParse(testCombinator, "123test");
+    try r1.expectOk().expectValue("123").finish();
+
+    var r2 = t.testParse(testCombinator, "meuh");
+    try r2.expectErr().finish();
 }

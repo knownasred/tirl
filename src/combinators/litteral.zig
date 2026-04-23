@@ -19,7 +19,6 @@ pub fn literal(comptime expected: []const u8) parser.Parser(void) {
 
 test "Test simple combinator" {
     const t = @import("utils.zig");
-    const testing = std.testing;
 
     const testCombinator = comptime literal("test").map(struct {
         fn f(_: void) i32 {
@@ -27,8 +26,9 @@ test "Test simple combinator" {
         }
     }.f);
 
-    const okResult = t.testParse(testCombinator, "test");
-    try testing.expect(t.isOk(okResult));
-    const errResult = t.testParse(testCombinator, "meuh");
-    try testing.expect(t.isErr(errResult));
+    var r1 = t.testParse(testCombinator, "test");
+    try r1.expectOk().expectValue(1).finish();
+
+    var r2 = t.testParse(testCombinator, "meuh");
+    try r2.expectErr().finish();
 }
