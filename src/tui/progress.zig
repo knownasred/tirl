@@ -141,7 +141,7 @@ pub const Progress = struct {
     }
 
     pub fn setTotal(self: *Progress, total: u64) void {
-        std.debug.assert(total != null);
+        std.debug.assert(total != 0);
         self.total.store(total, .monotonic);
     }
 };

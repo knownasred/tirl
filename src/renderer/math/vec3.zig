@@ -43,8 +43,12 @@ pub const Vec3 = struct {
         return Vec3{ .pos = self.pos / other.pos };
     }
 
-    pub fn scale(self: Vec3, scalar: f32) Vec3 {
+    pub fn mul_s(self: Vec3, scalar: f32) Vec3 {
         return Vec3{ .pos = self.pos * @as(@Vector(3, f32), @splat(scalar)) };
+    }
+
+    pub fn div_s(self: Vec3, scalar: f32) Vec3 {
+        return Vec3{ .pos = self.pos / @as(@Vector(3, f32), @splat(scalar)) };
     }
 
     pub fn negate(self: Vec3) Vec3 {
@@ -64,6 +68,10 @@ pub const Vec3 = struct {
         // Use SIMD comparison to check all components at once
         const cmp = self.pos == other.pos;
         return @reduce(.And, cmp);
+    }
+
+    pub fn unit(self: Vec3) Vec3 {
+        return self.div_s(self.length());
     }
 };
 
@@ -165,7 +173,7 @@ test "Vec3 div" {
 
 test "Vec3 scale" {
     const vec = Vec3.new(2.0, 3.0, 4.0);
-    const result = vec.scale(2.5);
+    const result = vec.mul_s(2.5);
     const expected = Vec3.new(5.0, 7.5, 10.0);
     try std.testing.expect(result.equal(expected));
 }

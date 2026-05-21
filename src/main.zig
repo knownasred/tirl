@@ -1,31 +1,26 @@
 const std = @import("std");
-const zig_scene = @import("zig_scene");
 
+const zig_scene = @import("zig_scene");
 const Image = zig_scene.renderer.Image;
 const Color3 = zig_scene.renderer.math.Color3;
-pub fn main(init: std.process.Init) !void {
-    const image_width = 256;
-    const image_height = 256;
 
+inline fn toFloat(val: anytype) f32 {
+    return @as(f32, @floatFromInt(val));
+}
+
+inline fn toInt(val: anytype) usize {
+    return @as(usize, @intFromFloat(val));
+}
+
+pub fn main(init: std.process.Init) !void {
     const alloc = init.arena.allocator();
 
-    const progress = zig_scene.tui.Progress.init(alloc, image_height);
+    const progress = zig_scene.tui.Progress.init(alloc, 1);
     try progress.start(init.io);
 
-    var image = try Image.create(alloc, image_width, image_height);
-    defer image.deinit(alloc);
+    const image = try zig_scene.renderer.render(alloc, progress);
 
-    for (0..image_height) |row| {
-        for (0..image_width) |col| {
-            image.set(row, col, Color3.new(
-                @as(f32, @floatFromInt(col)) / (@as(f32, @floatFromInt(image_width)) - 1),
-                @as(f32, @floatFromInt(row)) / (@as(f32, @floatFromInt(image_height)) - 1),
-                0.0,
-            ));
-        }
-
-        progress.increment(1);
-    }
+    // Now we can render!
 
     // Write down to a file
     const cwd = std.Io.Dir.cwd();
