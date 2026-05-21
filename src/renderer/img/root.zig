@@ -9,6 +9,8 @@ pub const Image = struct {
     height: usize,
 
     pub fn create(alloc: std.mem.Allocator, width: usize, height: usize) !@This() {
+        std.debug.assert(width > 0);
+        std.debug.assert(height > 0);
         const buffer = try alloc.alloc(Color3, width * height);
         @memset(buffer, Color3.from(Vec3.zero()));
         return .{
@@ -19,10 +21,14 @@ pub const Image = struct {
     }
 
     pub fn set(self: @This(), row: usize, col: usize, color: Color3) void {
+        std.debug.assert(row < self.height);
+        std.debug.assert(col < self.width);
         self.buffer[row * self.width + col] = color;
     }
 
     pub fn get(self: @This(), row: usize, col: usize) Color3 {
+        std.debug.assert(row < self.height);
+        std.debug.assert(col < self.width);
         return self.buffer[row * self.width + col];
     }
 
@@ -39,9 +45,9 @@ pub const Image = struct {
 
         try writer.printAscii("\n255\n", .{});
 
-        for (0..self.height) |i| {
-            for (0..self.width) |j| {
-                try printColor(writer, self.buffer[i * self.width + j]);
+        for (0..self.height) |row| {
+            for (0..self.width) |col| {
+                try printColor(writer, self.buffer[row * self.width + col]);
             }
         }
     }

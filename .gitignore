@@ -8,3 +8,4 @@ zig-out/
 /docgen_tmp/
 .direnv
 zig-pkg/
+output.ppm
