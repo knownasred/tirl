@@ -1,0 +1,10 @@
+Camera "main" {
+    fov: "60",
+    near: "0.1",
+}
+
+Group "scene" {
+    Sphere "ball" {
+        radius: "1.0",
+    },
+}

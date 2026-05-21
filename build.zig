@@ -54,4 +54,24 @@ pub fn build(b: *std.Build) void {
     const test_step = b.step("test", "Run tests");
     test_step.dependOn(&run_mod_tests.step);
     test_step.dependOn(&run_exe_tests.step);
+
+    const print_ast_exe = b.addExecutable(.{
+        .name = "print_ast",
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/print_ast.zig"),
+            .target = target,
+            .optimize = optimize,
+            .imports = &.{
+                .{ .name = "zig_scene", .module = mod },
+            },
+        }),
+    });
+
+    const parse_step = b.step("parse", "Parse a scene file and print its AST");
+    const parse_cmd = b.addRunArtifact(print_ast_exe);
+    parse_step.dependOn(&parse_cmd.step);
+
+    if (b.args) |args| {
+        parse_cmd.addArgs(args);
+    }
 }

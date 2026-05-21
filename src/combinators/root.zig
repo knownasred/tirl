@@ -5,6 +5,7 @@ pub const either = eitherImport.either;
 pub const litteral = litteralImport.litteral;
 pub const takeWhile = @import("multi.zig").takeWhile;
 pub const lexme = @import("lexeme.zig").lexeme;
+pub const skipWs = @import("lexeme.zig").skipWs;
 pub const seq = @import("seq.zig").seq;
 pub const recognize = @import("recognize.zig").recognize;
 pub const satisfy = @import("satisfy.zig").satisfy;

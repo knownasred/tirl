@@ -3,7 +3,7 @@ const utils = @import("utils.zig");
 const std = @import("std");
 const takeWhile = @import("multi.zig").takeWhile;
 
-fn skipWs() parser.Parser(void) {
+pub fn skipWs() parser.Parser(void) {
     const p = parser.Parser(void);
     return .{
         .parse = struct {
