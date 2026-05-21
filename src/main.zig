@@ -4,23 +4,14 @@ const zig_scene = @import("zig_scene");
 const Image = zig_scene.renderer.Image;
 const Color3 = zig_scene.renderer.math.Color3;
 
-inline fn toFloat(val: anytype) f32 {
-    return @as(f32, @floatFromInt(val));
-}
-
-inline fn toInt(val: anytype) usize {
-    return @as(usize, @intFromFloat(val));
-}
-
 pub fn main(init: std.process.Init) !void {
     const alloc = init.arena.allocator();
 
     const progress = zig_scene.tui.Progress.init(alloc, 1);
     try progress.start(init.io);
 
-    const image = try zig_scene.renderer.render(alloc, progress);
-
     // Now we can render!
+    const image = try zig_scene.renderer.render(alloc, progress);
 
     // Write down to a file
     const cwd = std.Io.Dir.cwd();

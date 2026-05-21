@@ -55,6 +55,10 @@ pub const Vec3 = struct {
         return Vec3{ .pos = -self.pos };
     }
 
+    pub fn dot(self: Vec3, other: Vec3) f32 {
+        return @reduce(.Add, self.pos * other.pos);
+    }
+
     pub fn length(self: Vec3) f32 {
         return @sqrt(self.length_squared());
     }
