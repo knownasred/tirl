@@ -9,8 +9,12 @@ pub fn build(b: *std.Build) void {
         .target = target,
     });
 
-    const mecha = b.dependency("mecha", .{});
-    mod.addImport("mecha", mecha.module("mecha"));
+    const zigimg_dependency = b.dependency("zigimg", .{
+        .target = target,
+        .optimize = optimize,
+    });
+
+    mod.addImport("zigimg", zigimg_dependency.module("zigimg"));
 
     const exe = b.addExecutable(.{
         .name = "zig_scene",

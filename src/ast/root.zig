@@ -4,4 +4,5 @@ const Label = @import("label.zig").Label;
 comptime {
     _ = @import("label.zig");
     _ = @import("symbol.zig");
+    _ = @import("block.zig");
 }

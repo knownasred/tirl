@@ -11,7 +11,7 @@ pub fn takeWhile(comptime pred: fn (u8) bool) parser.Parser([]const u8) {
                     return parser.Ok([]const u8, &.{});
                 }
 
-                // Note: The start pos is storysed in the checkpoint.
+                // Note: The start pos is stored in the checkpoint.
                 var currentChar = pa.peek(1).?[0];
                 while (pred(currentChar)) {
                     pa.advance(1);

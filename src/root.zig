@@ -3,4 +3,5 @@ const std = @import("std");
 comptime {
     _ = @import("combinators/root.zig");
     _ = @import("ast/root.zig");
+    _ = @import("renderer/img/root.zig");
 }

@@ -4,7 +4,7 @@ const std = @import("std");
 const ascii = std.ascii;
 
 pub const Label = struct {
-    const combinator = combinators.lexme(combinators.delimited("\"", combinators.takeWhile(struct {
+    pub const combinator = combinators.lexme(combinators.delimited("\"", combinators.takeWhile(struct {
         fn pred(char: u8) bool {
             return ascii.isAlphanumeric(char) or switch (char) {
                 ',', '.', '-', '_', '$' => true,

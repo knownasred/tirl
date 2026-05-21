@@ -8,6 +8,10 @@
             .url = "git+https://github.com/Hejsil/mecha#4ee15ea13107bc504a5c17291a7de1d3bf909a32",
             .hash = "mecha-0.11.0-dVGaSNuLAQDk3kihQu0WAoRKEOaR1KUF7z55Mj33DQ6A",
         },
+        .zigimg = .{
+            .url = "git+https://github.com/zigimg/zigimg.git#0bbe201a5591219177f2444371c2897746b47774",
+            .hash = "zigimg-0.1.0-8_eo2sGbFwCrsBjkTTP-kinCH62m5vmYDHQnQcngFuwh",
+        },
     },
     .paths = .{
         "build.zig",
