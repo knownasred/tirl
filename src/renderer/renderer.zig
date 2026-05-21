@@ -12,8 +12,17 @@ const std = @import("std");
 const Progress = @import("../tui/root.zig").Progress;
 
 pub fn rayColor(ray: Ray) Color3 {
-    if (hitSphere(Point3.new(0, 0, -1), 0.5, ray)) {
-        return Color3.new(1, 0, 0);
+    const sphere_center = Point3.new(0, 0, -1);
+    if (hitSphere(sphere_center, 0.5, ray)) |t| {
+        // Normal
+        const N = ray.at(t).inner
+            .sub(sphere_center.inner)
+            .unit();
+
+        return Color3.from(
+            Vec3.new(N.getX() + 1, N.getY() + 1, N.getZ() + 1)
+                .mul_s(0.5),
+        );
     }
 
     const unit_direction = ray.direction.unit();
@@ -26,7 +35,7 @@ pub fn rayColor(ray: Ray) Color3 {
         .add(end.inner.mul_s(a)));
 }
 
-pub fn hitSphere(center: Point3, radius: f32, ray: Ray) bool {
+pub fn hitSphere(center: Point3, radius: f32, ray: Ray) ?f32 {
     const oc = center.inner.sub(ray.origin.inner);
     const a = ray.direction.dot(ray.direction);
     const b = -2 * ray.direction.dot(oc);
@@ -34,7 +43,11 @@ pub fn hitSphere(center: Point3, radius: f32, ray: Ray) bool {
 
     const discriminant = b * b - 4 * a * c;
 
-    return (discriminant >= 0);
+    if (discriminant < 0) {
+        return null;
+    } else {
+        return (-b - @sqrt(discriminant)) / (2 * a);
+    }
 }
 
 pub fn render(alloc: std.mem.Allocator, progress: *Progress) !Image {
