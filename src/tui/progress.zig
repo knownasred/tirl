@@ -22,7 +22,7 @@ fn repeatString(allocator: std.mem.Allocator, str: []const u8, count: usize) ![]
 }
 
 fn getTerminalWidth() anyerror!u16 {
-    const stdout = std.fs.File.stdout();
+    const stdout = std.Io.File.stdout();
     return switch (builtin.os.tag) {
         .windows => blk: {
             var buf: std.os.windows.CONSOLE_SCREEN_BUFFER_INFO = undefined;
@@ -52,9 +52,13 @@ fn getTerminalWidth() anyerror!u16 {
 }
 
 fn loadingBar(alloc: std.mem.Allocator, current: u64, total: u64) ![]const u8 {
+    std.debug.assert(current <= total);
+    std.debug.assert(total != 0);
+
     const percentage = @divFloor(current * 100, total);
     // Get the width of the terminal
     const width = getTerminalWidth() catch 20;
+
     const barWidth = width - 20; // Subtract the width of the percentage and brackets
     const filledWidth = @divFloor(barWidth * percentage, 100);
     const emptyWidth = barWidth - filledWidth;
@@ -66,35 +70,29 @@ fn loadingBar(alloc: std.mem.Allocator, current: u64, total: u64) ![]const u8 {
 }
 
 pub const Progress = struct {
-    mutex: std.Thread.Mutex,
-    total: u64,
-    cancel: bool,
-    threadHandle: ?std.Thread,
-    current: u64,
+    total: std.atomic.Value(u64),
+    future: ?std.Io.Future(void),
+    current: std.atomic.Value(u64),
     alloc: std.mem.Allocator,
 
     pub fn init(alloc: std.mem.Allocator, total: u64) *Progress {
         const progress = alloc.create(Progress) catch unreachable;
-        progress.total = total;
-        progress.current = 0;
-        progress.threadHandle = null;
+        progress.total = .init(total);
+        progress.current = .init(0);
+        progress.future = null;
         progress.alloc = alloc;
         return progress;
     }
 
-    fn run(self: *Progress) void {
+    fn run(self: *Progress, io: std.Io) void {
         std.debug.print(HIDE_CURSOR, .{});
         var index: usize = 0;
-        var shouldStop = false;
-        while (!shouldStop) {
-            if (self.cancel) {
-                shouldStop = true;
-            }
-
-            self.mutex.lock();
-            const total = self.total;
-            const current = self.current;
-            self.mutex.unlock();
+        mainLoop: while (true) {
+            // Note: Due to how IO is setup (https://ziglang.org/download/0.16.0/release-notes.html#Cancelation),
+            // please don't use anything related to IO here, unless you handle the cancelation (see below).
+            // Otherwise you might have a bad surprise during rendering
+            const total = self.total.load(.monotonic);
+            const current = self.current.load(.monotonic);
 
             // Reset the progress bar to the start of the line
             std.debug.print(RESET_LINE, .{});
@@ -110,44 +108,40 @@ pub const Progress = struct {
 
             index += 1;
 
-            // rerender 10 times per second
-            std.Thread.sleep(std.time.ns_per_ms * 100);
+            // rerender 10 times per second (and exit if cancelled)
+            io.sleep(.fromMilliseconds(100), .awake) catch {
+                // Cancel was requested, great!
+                break :mainLoop;
+            };
         }
 
-        self.mutex.lock();
-        const total = self.total;
-        const current = self.current;
-        self.mutex.unlock();
+        const total = self.total.load(.monotonic);
+        const current = self.current.load(.monotonic);
 
         const percentage = @divFloor(current * 100, total);
         std.debug.print(RESET_LINE, .{});
         std.debug.print("✓ {s} {d}% ({d}/{d})", .{ loadingBar(self.alloc, current, total) catch @panic("failed to allocate!"), percentage, current, total });
     }
 
-    pub fn start(self: *Progress) anyerror!void {
-        // Start starts a thread that shows in the terminal the contents
-        self.threadHandle = try std.Thread.spawn(.{}, Progress.run, .{self});
+    pub fn start(self: *Progress, io: std.Io) anyerror!void {
+        self.future = try io.concurrent(Progress.run, .{ self, io });
     }
 
     pub fn increment(self: *Progress, amount: u64) void {
-        self.mutex.lock();
-        defer self.mutex.unlock();
-        self.current += amount;
+        const val = self.current.fetchAdd(amount, .monotonic);
+        std.debug.assert((val + amount) <= self.total.load(.monotonic));
     }
 
-    pub fn finish(self: *Progress) void {
-        self.mutex.lock();
-        self.cancel = true;
-        self.mutex.unlock();
-
-        self.threadHandle.?.join();
+    pub fn finish(self: *Progress, io: std.Io) void {
+        if (self.future) |*value| {
+            value.cancel(io);
+        }
 
         std.debug.print("{s}\n", .{SHOW_CURSOR});
     }
 
     pub fn setTotal(self: *Progress, total: u64) void {
-        self.mutex.lock();
-        defer self.mutex.unlock();
-        self.total = total;
+        std.debug.assert(total != null);
+        self.total.store(total, .monotonic);
     }
 };

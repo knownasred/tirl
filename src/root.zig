@@ -2,6 +2,7 @@
 const std = @import("std");
 
 pub const renderer = @import("renderer/root.zig");
+pub const tui = @import("tui/root.zig");
 
 comptime {
     _ = @import("combinators/root.zig");

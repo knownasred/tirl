@@ -42,11 +42,17 @@
             tinymist
             typst
             zig-zlint
+            vscode-extensions.vadimcn.vscode-lldb
           ]
           ++ packages.default.nativeBuildInputs
           ++ packages.default.buildInputs
           ++ packages.default.zigWrapperBins
           ++ packages.default.zigWrapperLibs;
+
+        shellHook = ''
+          mkdir -p .zed
+          ln -sfn "${env.pkgs.vscode-extensions.vadimcn.vscode-lldb}/share/vscode/extensions/vadimcn.vscode-lldb/adapter/codelldb" .zed/codelldb
+        '';
       };
     }));
 }

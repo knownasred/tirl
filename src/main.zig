@@ -9,6 +9,9 @@ pub fn main(init: std.process.Init) !void {
 
     const alloc = init.arena.allocator();
 
+    const progress = zig_scene.tui.Progress.init(alloc, image_height);
+    try progress.start(init.io);
+
     var image = try Image.create(alloc, image_width, image_height);
     defer image.deinit(alloc);
 
@@ -20,6 +23,8 @@ pub fn main(init: std.process.Init) !void {
                 0.0,
             ));
         }
+
+        progress.increment(1);
     }
 
     // Write down to a file
@@ -36,6 +41,9 @@ pub fn main(init: std.process.Init) !void {
     try image.write(&fw.interface);
 
     try fw.flush();
+
+    // Actually finish
+    progress.finish(init.io);
 }
 
 test "simple test" {

@@ -1,7 +1,6 @@
 const std = @import("std");
 const vec3 = @import("../math/vec3.zig");
 
-
 pub const Ray = struct {
     const Self = @This();
 
@@ -9,7 +8,7 @@ pub const Ray = struct {
     direction: vec3.Vec3,
 
     pub fn new(origin: vec3.Point3, direction: vec3.Vec3) Self {
-        return Self {
+        return Self{
             .origin = origin,
             .direction = direction,
         };
@@ -20,16 +19,15 @@ pub const Ray = struct {
     }
 };
 
-
 test "Creating ray is possible" {
-    _ = Ray {
+    _ = Ray{
         .origin = vec3.Point3.new(0.0, 0.0, 0.0),
         .direction = vec3.Vec3.new(1.0, 0.0, 0.0),
     };
 }
 
 test "Ray at function returns correct point" {
-    const ray = Ray {
+    const ray = Ray{
         .origin = vec3.Point3.new(1.0, 2.0, 3.0),
         .direction = vec3.Vec3.new(0.0, 1.0, 0.0),
     };
@@ -47,7 +45,7 @@ test "Ray at function returns correct point" {
 }
 
 test "Ray at function with component access" {
-    const ray = Ray {
+    const ray = Ray{
         .origin = vec3.Point3.new(2.0, 1.0, 0.0),
         .direction = vec3.Vec3.new(1.0, 0.0, 1.0),
     };

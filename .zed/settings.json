@@ -1,0 +1,7 @@
+{
+  "dap": {
+    "CodeLLDB": {
+      "binary": ".zed/codelldb"
+    }
+  }
+}

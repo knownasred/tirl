@@ -9,3 +9,4 @@ zig-out/
 .direnv
 zig-pkg/
 output.ppm
+.zed/codelldb
