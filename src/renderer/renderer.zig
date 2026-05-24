@@ -11,16 +11,14 @@ const std = @import("std");
 // Simplify the setup
 const Progress = @import("../tui/root.zig").Progress;
 
-pub fn rayColor(ray: Ray) Color3 {
-    const sphere_center = Point3.new(0, 0, -1);
-    if (hitSphere(sphere_center, 0.5, ray)) |t| {
-        // Normal
-        const N = ray.at(t).inner
-            .sub(sphere_center.inner)
-            .unit();
+const hittables = @import("hittables/root.zig");
+const constants = @import("constants.zig");
 
+pub fn rayColor(ray: Ray, world: *const hittables.HittableList) Color3 {
+    if (world.hit(ray, 0, constants.infinity)) |t| {
         return Color3.from(
-            Vec3.new(N.getX() + 1, N.getY() + 1, N.getZ() + 1)
+            t.normal
+                .add(Vec3.new(1, 1, 1))
                 .mul_s(0.5),
         );
     }
@@ -35,21 +33,6 @@ pub fn rayColor(ray: Ray) Color3 {
         .add(end.inner.mul_s(a)));
 }
 
-pub fn hitSphere(center: Point3, radius: f32, ray: Ray) ?f32 {
-    const oc = center.inner.sub(ray.origin.inner);
-    const a = ray.direction.dot(ray.direction);
-    const b = -2 * ray.direction.dot(oc);
-    const c = oc.dot(oc) - radius * radius;
-
-    const discriminant = b * b - 4 * a * c;
-
-    if (discriminant < 0) {
-        return null;
-    } else {
-        return (-b - @sqrt(discriminant)) / (2 * a);
-    }
-}
-
 pub fn render(alloc: std.mem.Allocator, progress: *Progress) !Image {
     const aspect_ratio = 16.0 / 9.0;
     const image_width = 400;
@@ -62,6 +45,12 @@ pub fn render(alloc: std.mem.Allocator, progress: *Progress) !Image {
     progress.setTotal(image_height);
 
     var image = try Image.create(alloc, image_width, image_height);
+
+    // World
+    var world = hittables.HittableList.new(alloc);
+
+    world.addSphere(.{ .center = Point3.new(0, 0, -1), .radius = 0.5 });
+    world.addSphere(.{ .center = Point3.new(0, -100.5, -1), .radius = 100 });
 
     const focal_length = 1.0;
     const viewport_height = 2.0;
@@ -92,7 +81,7 @@ pub fn render(alloc: std.mem.Allocator, progress: *Progress) !Image {
 
             const ray = Ray.new(camera_center, pixel_center);
 
-            image.set(j, i, rayColor(ray));
+            image.set(j, i, rayColor(ray, &world));
         }
 
         progress.increment(1);

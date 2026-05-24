@@ -248,7 +248,7 @@ test "Vec3 edge cases" {
     try std.testing.expectEqual(@as(f32, 0.0), zero.length_squared());
 
     // Test scale with zero
-    const scaled_zero = Vec3.new(5.0, 10.0, 15.0).scale(0.0);
+    const scaled_zero = Vec3.new(5.0, 10.0, 15.0).mul_s(0.0);
     const expected_zero = Vec3.zero();
     try std.testing.expect(scaled_zero.equal(expected_zero));
 }
