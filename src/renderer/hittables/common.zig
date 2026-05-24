@@ -10,7 +10,7 @@ const toInt = renderer.math.toInt;
 pub const HitRecord = struct {
     p: Point3,
     normal: Vec3,
-    t: f64,
+    t: f32,
     front_face: bool,
 
     pub fn setFaceNormal(self: *@This(), ray: Ray, outward_normal: Vec3) void {

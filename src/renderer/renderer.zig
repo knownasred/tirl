@@ -15,7 +15,7 @@ const hittables = @import("hittables/root.zig");
 const constants = @import("constants.zig");
 
 pub fn rayColor(ray: Ray, world: *const hittables.HittableList) Color3 {
-    if (world.hit(ray, 0, constants.infinity)) |t| {
+    if (world.hit(ray, .{ .min = 0, .max = constants.infinity })) |t| {
         return Color3.from(
             t.normal
                 .add(Vec3.new(1, 1, 1))

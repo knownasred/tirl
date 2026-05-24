@@ -3,6 +3,7 @@ const Sphere = @import("Sphere.zig");
 
 const renderer = @import("../root.zig");
 const Ray = renderer.math.Ray;
+const Interval = renderer.math.Interval;
 
 pub const HitRecord = common.HitRecord;
 
@@ -11,9 +12,9 @@ const std = @import("std");
 pub const Hittable = union(enum) {
     sphere: Sphere,
 
-    pub fn hit(self: @This(), r: Ray, t_min: f64, t_max: f64) ?HitRecord {
+    pub fn hit(self: @This(), r: Ray, ray_t: Interval) ?HitRecord {
         return switch (self) {
-            inline else => |h| h.hit(r, t_min, t_max),
+            inline else => |h| h.hit(r, ray_t),
         };
     }
 };
@@ -30,12 +31,12 @@ pub const HittableList = struct {
         self.items.append(self.alloc, .{ .sphere = sphere }) catch unreachable;
     }
 
-    pub fn hit(self: @This(), r: Ray, t_min: f64, t_max: f64) ?HitRecord {
+    pub fn hit(self: @This(), r: Ray, ray_t: Interval) ?HitRecord {
         var temp: ?HitRecord = null;
-        var closestSoFar = t_max;
+        var closestSoFar = ray_t.max;
 
         for (self.items.items) |item| {
-            if (item.hit(r, t_min, closestSoFar)) |record| {
+            if (item.hit(r, .{ .min = ray_t.min, .max = closestSoFar })) |record| {
                 temp = record;
                 closestSoFar = record.t;
             }

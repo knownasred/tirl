@@ -4,6 +4,7 @@ const Color3 = renderer.math.Color3;
 const Point3 = renderer.math.Point3;
 const Vec3 = renderer.math.Vec3;
 const Ray = renderer.math.Ray;
+const Interval = renderer.math.Interval;
 const toFloat = renderer.math.toFloat;
 const toInt = renderer.math.toInt;
 
@@ -19,7 +20,7 @@ pub fn create(center: Point3, radius: f32) @This() {
     };
 }
 
-pub fn hit(self: @This(), ray: Ray, t_min: f64, t_max: f64) ?HitRecord {
+pub fn hit(self: @This(), ray: Ray, ray_t: Interval) ?HitRecord {
     const oc = self.center.inner.sub(ray.origin.inner);
     const a = ray.direction.length_squared();
     const h = ray.direction.dot(oc);
@@ -34,9 +35,9 @@ pub fn hit(self: @This(), ray: Ray, t_min: f64, t_max: f64) ?HitRecord {
     const sqrt_d = @sqrt(discriminant);
 
     var root = (h - sqrt_d) / a;
-    if (root <= t_min or t_max <= root) {
+    if (!ray_t.surrounds(root)) {
         root = (h + sqrt_d) / a;
-        if (root <= t_min or t_max <= root)
+        if (!ray_t.surrounds(root))
             return null;
     }
 
