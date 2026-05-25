@@ -14,8 +14,7 @@ const literal = @import("../combinators/litteral.zig").literal;
 const Symbol = @import("symbol.zig").Symbol;
 const Label = @import("label.zig").Label;
 
-// `value` is left undefined by the grammar; treat it as a quoted string for now.
-pub const Value = Label;
+pub const Value = @import("value.zig").Value;
 
 pub const Attribute = struct {
     name: Symbol,
@@ -52,7 +51,7 @@ fn parseItem(alloc: std.mem.Allocator, p: *parser.State) parser.Result(Item) {
     const after_ident = p.checkpoint();
     switch (colon.parse(alloc, p)) {
         .ok => {
-            switch (Label.combinator.parse(alloc, p)) {
+            switch (Value.combinator.parse(alloc, p)) {
                 .ok => |val| return .{ .ok = .{ .attribute = .{ .name = name, .value = val } } },
                 .err => |err| {
                     p.restore(cp);
@@ -158,7 +157,7 @@ test "item: parses an attribute" {
     const r = runItem(arena.allocator(), "foo: \"bar\"");
     const expected = Item{ .attribute = .{
         .name = .{ .value = "foo" },
-        .value = .{ .value = "bar" },
+        .value = .{ .string = .{ .value = "bar" } },
     } };
     try std.testing.expectEqualDeep(expected, r.result.ok);
     try std.testing.expect(r.state.isEof());
@@ -185,7 +184,7 @@ test "item: parses a block with one attribute" {
     const r = runItem(arena.allocator(), "foo \"l\" { a: \"b\" }");
     const expected_body = [_]Item{.{ .attribute = .{
         .name = .{ .value = "a" },
-        .value = .{ .value = "b" },
+        .value = .{ .string = .{ .value = "b" } },
     } }};
     const expected = Item{ .block = .{
         .type_name = .{ .value = "foo" },
@@ -202,9 +201,9 @@ test "item: parses a block with multiple attributes" {
 
     const r = runItem(arena.allocator(), "foo \"l\" { a: \"1\", b: \"2\", c: \"3\" }");
     const expected_body = [_]Item{
-        .{ .attribute = .{ .name = .{ .value = "a" }, .value = .{ .value = "1" } } },
-        .{ .attribute = .{ .name = .{ .value = "b" }, .value = .{ .value = "2" } } },
-        .{ .attribute = .{ .name = .{ .value = "c" }, .value = .{ .value = "3" } } },
+        .{ .attribute = .{ .name = .{ .value = "a" }, .value = .{ .string = .{ .value = "1" } } } },
+        .{ .attribute = .{ .name = .{ .value = "b" }, .value = .{ .string = .{ .value = "2" } } } },
+        .{ .attribute = .{ .name = .{ .value = "c" }, .value = .{ .string = .{ .value = "3" } } } },
     };
     const expected = Item{ .block = .{
         .type_name = .{ .value = "foo" },
@@ -221,8 +220,8 @@ test "item: allows trailing comma in block body" {
 
     const r = runItem(arena.allocator(), "foo \"l\" { a: \"1\", b: \"2\", }");
     const expected_body = [_]Item{
-        .{ .attribute = .{ .name = .{ .value = "a" }, .value = .{ .value = "1" } } },
-        .{ .attribute = .{ .name = .{ .value = "b" }, .value = .{ .value = "2" } } },
+        .{ .attribute = .{ .name = .{ .value = "a" }, .value = .{ .string = .{ .value = "1" } } } },
+        .{ .attribute = .{ .name = .{ .value = "b" }, .value = .{ .string = .{ .value = "2" } } } },
     };
     const expected = Item{ .block = .{
         .type_name = .{ .value = "foo" },
@@ -240,7 +239,7 @@ test "item: parses nested blocks" {
     const r = runItem(arena.allocator(), "outer \"o\" { inner \"i\" { x: \"y\" } }");
     const inner_body = [_]Item{.{ .attribute = .{
         .name = .{ .value = "x" },
-        .value = .{ .value = "y" },
+        .value = .{ .string = .{ .value = "y" } },
     } }};
     const outer_body = [_]Item{.{ .block = .{
         .type_name = .{ .value = "inner" },
@@ -263,13 +262,13 @@ test "item: mixes attributes and nested blocks" {
     const r = runItem(arena.allocator(), "root \"r\" { a: \"1\", sub \"s\" {}, b: \"2\" }");
     const sub_body: []const Item = &.{};
     const root_body = [_]Item{
-        .{ .attribute = .{ .name = .{ .value = "a" }, .value = .{ .value = "1" } } },
+        .{ .attribute = .{ .name = .{ .value = "a" }, .value = .{ .string = .{ .value = "1" } } } },
         .{ .block = .{
             .type_name = .{ .value = "sub" },
             .label = .{ .value = "s" },
             .body = sub_body,
         } },
-        .{ .attribute = .{ .name = .{ .value = "b" }, .value = .{ .value = "2" } } },
+        .{ .attribute = .{ .name = .{ .value = "b" }, .value = .{ .string = .{ .value = "2" } } } },
     };
     const expected = Item{ .block = .{
         .type_name = .{ .value = "root" },
@@ -292,8 +291,8 @@ test "item: skips whitespace and comments" {
         \\}
     );
     const body = [_]Item{
-        .{ .attribute = .{ .name = .{ .value = "a" }, .value = .{ .value = "1" } } },
-        .{ .attribute = .{ .name = .{ .value = "b" }, .value = .{ .value = "2" } } },
+        .{ .attribute = .{ .name = .{ .value = "a" }, .value = .{ .string = .{ .value = "1" } } } },
+        .{ .attribute = .{ .name = .{ .value = "b" }, .value = .{ .string = .{ .value = "2" } } } },
     };
     const expected = Item{ .block = .{
         .type_name = .{ .value = "foo" },
