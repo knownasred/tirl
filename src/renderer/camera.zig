@@ -15,7 +15,7 @@ imageWidth: usize = 100,
 focalLength: f32 = 1,
 aspectRatio: f32 = 16.0 / 9.0,
 samplesPerPixel: usize = 100,
-
+maxDepth: usize = 10,
 cameraState: CameraState = undefined,
 
 const Self = @This();
@@ -32,7 +32,7 @@ pub fn render(self: *const Self, alloc: std.mem.Allocator, progress: *Progress, 
 
             for (0..self.samplesPerPixel) |_| {
                 const ray = getRay(state, i, j);
-                pixel_color = pixel_color.add(rayColor(ray, world).inner);
+                pixel_color = pixel_color.add(rayColor(ray, self.maxDepth, world).inner);
             }
 
             image.set(j, i, .from(pixel_color.mul_s(state.pixelSampleScale)));
@@ -57,11 +57,15 @@ fn sampleSquare() Vec3 {
     return .new(constants.randomDouble() - 0.5, constants.randomDouble() - 0.5, 0);
 }
 
-fn rayColor(ray: Ray, world: *const hittables.HittableList) Color3 {
-    if (world.hit(ray, .{ .min = 0, .max = constants.infinity })) |t| {
+fn rayColor(ray: Ray, depth: usize, world: *const hittables.HittableList) Color3 {
+    if (depth <= 0) {
+        return .new(0, 0, 0);
+    }
+
+    if (world.hit(ray, .{ .min = 0.001, .max = constants.infinity })) |t| {
+        const direction = t.normal.add(Vec3.randomUnit());
         return Color3.from(
-            t.normal
-                .add(Vec3.new(1, 1, 1))
+            rayColor(.new(t.p, direction), depth - 1, world).inner
                 .mul_s(0.5),
         );
     }

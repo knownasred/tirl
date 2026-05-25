@@ -1,5 +1,5 @@
 const std = @import("std");
-
+const constants = @import("../constants.zig");
 pub const Vec3 = struct {
     pos: @Vector(3, f32),
 
@@ -76,6 +76,42 @@ pub const Vec3 = struct {
 
     pub fn unit(self: Vec3) Vec3 {
         return self.div_s(self.length());
+    }
+
+    pub fn random() Vec3 {
+        return .new(
+            constants.randomDouble(),
+            constants.randomDouble(),
+            constants.randomDouble(),
+        );
+    }
+
+    pub fn randomRanged(min: f32, max: f32) Vec3 {
+        return .new(
+            constants.randomDoubleRanged(min, max),
+            constants.randomDoubleRanged(min, max),
+            constants.randomDoubleRanged(min, max),
+        );
+    }
+
+    pub inline fn randomUnit() Vec3 {
+        while (true) {
+            const p = Vec3.randomRanged(-1, 1);
+            const lengthSquared = p.length_squared();
+
+            if (1e-160 <= lengthSquared and lengthSquared <= 1) {
+                return p.div_s(@sqrt(lengthSquared));
+            }
+        }
+    }
+
+    pub inline fn randomOnHemisphere(normal: Vec3) Vec3 {
+        const onUnitSphere = Vec3.randomUnit();
+        if (onUnitSphere.dot(normal) > 0.0) { // In the same hemisphere as the normal
+            return onUnitSphere;
+        } else {
+            return onUnitSphere.negate();
+        }
     }
 };
 
