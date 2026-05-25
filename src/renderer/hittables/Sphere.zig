@@ -8,10 +8,12 @@ const Interval = renderer.math.Interval;
 const toFloat = renderer.math.toFloat;
 const toInt = renderer.math.toInt;
 
+const Material = @import("../materials/root.zig").Material;
 const HitRecord = @import("root.zig").HitRecord;
 
 center: Point3,
 radius: f32,
+material: *const Material,
 
 pub fn create(center: Point3, radius: f32) @This() {
     return .{
@@ -50,6 +52,7 @@ pub fn hit(self: @This(), ray: Ray, ray_t: Interval) ?HitRecord {
             .sub(self.center.inner)
             .div_s(self.radius),
         .front_face = false,
+        .material = self.material,
     };
 
     const outward_normal = p.inner

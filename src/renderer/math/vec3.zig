@@ -1,5 +1,5 @@
 const std = @import("std");
-
+const constants = @import("../constants.zig");
 pub const Vec3 = struct {
     pos: @Vector(3, f32),
 
@@ -76,6 +76,69 @@ pub const Vec3 = struct {
 
     pub fn unit(self: Vec3) Vec3 {
         return self.div_s(self.length());
+    }
+
+    pub fn isNearZero(self: Vec3) bool {
+        const s = 1e-8;
+        return @abs(self.getX()) < s and @abs(self.getY()) < s and @abs(self.getY()) < s;
+    }
+
+    pub inline fn reflect(v: Vec3, normal: Vec3) Vec3 {
+        return v.sub(
+            normal.mul_s(2 * dot(v, normal)),
+        );
+    }
+
+    pub inline fn cross(u: Vec3, v: Vec3) Vec3 {
+        return .new(
+            u.pos[1] * v.pos[2] - u.pos[2] * v.pos[1],
+            u.pos[2] * v.pos[0] - u.pos[0] * v.pos[2],
+            u.pos[0] * v.pos[1] - u.pos[1] * v.pos[0],
+        );
+    }
+
+    pub inline fn refract(uv: Vec3, n: Vec3, etaiOverEtat: f32) Vec3 {
+        const cosTheta = @min(dot(uv.negate(), n), 1.0);
+        const rOutPerp = uv.add(n.mul_s(cosTheta)).mul_s(etaiOverEtat);
+        const rOutParallel = n.mul_s(-@sqrt(@abs(1.0 - rOutPerp.length_squared())));
+
+        return rOutPerp.add(rOutParallel);
+    }
+
+    pub fn random() Vec3 {
+        return .new(
+            constants.randomDouble(),
+            constants.randomDouble(),
+            constants.randomDouble(),
+        );
+    }
+
+    pub fn randomRanged(min: f32, max: f32) Vec3 {
+        return .new(
+            constants.randomDoubleRanged(min, max),
+            constants.randomDoubleRanged(min, max),
+            constants.randomDoubleRanged(min, max),
+        );
+    }
+
+    pub inline fn randomUnit() Vec3 {
+        while (true) {
+            const p = Vec3.randomRanged(-1, 1);
+            const lengthSquared = p.length_squared();
+
+            if (1e-160 <= lengthSquared and lengthSquared <= 1) {
+                return p.div_s(@sqrt(lengthSquared));
+            }
+        }
+    }
+
+    pub inline fn randomOnHemisphere(normal: Vec3) Vec3 {
+        const onUnitSphere = Vec3.randomUnit();
+        if (onUnitSphere.dot(normal) > 0.0) { // In the same hemisphere as the normal
+            return onUnitSphere;
+        } else {
+            return onUnitSphere.negate();
+        }
     }
 };
 

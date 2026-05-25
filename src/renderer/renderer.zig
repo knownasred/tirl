@@ -14,35 +14,32 @@ const Progress = @import("../tui/root.zig").Progress;
 const hittables = @import("hittables/root.zig");
 const constants = @import("constants.zig");
 const Camera = @import("camera.zig");
-pub fn rayColor(ray: Ray, world: *const hittables.HittableList) Color3 {
-    if (world.hit(ray, .{ .min = 0, .max = constants.infinity })) |t| {
-        return Color3.from(
-            t.normal
-                .add(Vec3.new(1, 1, 1))
-                .mul_s(0.5),
-        );
-    }
-
-    const unit_direction = ray.direction.unit();
-    // Lerp, with a being the progression
-    const a = 0.5 * (unit_direction.getY() + 1.0);
-    const start = Color3.new(1.0, 1.0, 1.0);
-    const end = Color3.new(0.5, 0.7, 1.0);
-
-    return Color3.from(start.inner.mul_s(1.0 - a)
-        .add(end.inner.mul_s(a)));
-}
 
 pub fn render(alloc: std.mem.Allocator, progress: *Progress) !Image {
     // World
     var world = hittables.HittableList.new(alloc);
 
-    world.addSphere(.{ .center = Point3.new(0, 0, -1), .radius = 0.5 });
-    world.addSphere(.{ .center = Point3.new(0, -100.5, -1), .radius = 100 });
+    const materialGround = renderer.Material.makeLambertian(.new(0.8, 0.8, 0.0));
+    const materialCenter = renderer.Material.makeLambertian(.new(0.1, 0.2, 0.5));
+    const materialLeft = renderer.Material.makeDielectric(1.50);
+    const materialBubble = renderer.Material.makeDielectric(1.00 / 1.50);
+    const materialRight = renderer.Material.makeMetal(.new(0.8, 0.6, 0.2), 1.0);
+
+    world.addSphere(.{ .center = .new(0, -100.5, -1), .radius = 100, .material = &materialGround });
+    world.addSphere(.{ .center = .new(0, 0, -1.2), .radius = 0.5, .material = &materialCenter });
+    world.addSphere(.{ .center = .new(-1, 0, -1), .radius = 0.5, .material = &materialLeft });
+    world.addSphere(.{ .center = .new(-1, 0, -1), .radius = 0.4, .material = &materialBubble });
+    world.addSphere(.{ .center = .new(1, 0, -1), .radius = 0.5, .material = &materialRight });
 
     const camera: Camera = .{
         .aspectRatio = 16.0 / 9.0,
         .imageWidth = 400,
+        .maxDepth = 50,
+        .samplesPerPixel = 30,
+        .vfov = 20,
+        .lookFrom = .new(-2, 2, 1),
+        .lookAt = .new(0, 0, -1),
+        .vup = .new(0, 1, 0),
     };
 
     return try camera.render(alloc, progress, &world);

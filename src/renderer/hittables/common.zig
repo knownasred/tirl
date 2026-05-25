@@ -1,4 +1,5 @@
 const renderer = @import("../root.zig");
+const Material = @import("../materials/root.zig").Material;
 const Image = renderer.Image;
 const Color3 = renderer.math.Color3;
 const Point3 = renderer.math.Point3;
@@ -12,6 +13,7 @@ pub const HitRecord = struct {
     normal: Vec3,
     t: f32,
     front_face: bool,
+    material: *const Material,
 
     pub fn setFaceNormal(self: *@This(), ray: Ray, outward_normal: Vec3) void {
         // Sets the hit record normal vector.

@@ -54,14 +54,32 @@ pub const Image = struct {
         }
     }
 
+    fn linear_to_gamma(linear: f32) f32 {
+        if (linear > 0) {
+            return @sqrt(linear);
+        }
+
+        return 0;
+    }
+
+    fn linearToGammaColor(color: Color3) Color3 {
+        return .new(
+            linear_to_gamma(color.getX()),
+            linear_to_gamma(color.getY()),
+            linear_to_gamma(color.getZ()),
+        );
+    }
+
     fn printColor(writer: *std.Io.Writer, color: Color3) !void {
         const intensity: Interval = .{ .min = 0.000, .max = 0.999 };
 
-        try writer.printInt(toInt(256 * intensity.clamp(color.getX())), 10, .lower, .{});
+        var gammaColor = linearToGammaColor(color);
+
+        try writer.printInt(toInt(256 * intensity.clamp(gammaColor.getX())), 10, .lower, .{});
         try writer.printAsciiChar(' ', .{});
-        try writer.printInt(toInt(256 * intensity.clamp(color.getY())), 10, .lower, .{});
+        try writer.printInt(toInt(256 * intensity.clamp(gammaColor.getY())), 10, .lower, .{});
         try writer.printAsciiChar(' ', .{});
-        try writer.printInt(toInt(256 * intensity.clamp(color.getZ())), 10, .lower, .{});
+        try writer.printInt(toInt(256 * intensity.clamp(gammaColor.getZ())), 10, .lower, .{});
         try writer.printAsciiChar('\n', .{});
     }
 };
