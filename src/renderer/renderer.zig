@@ -13,7 +13,7 @@ const Progress = @import("../tui/root.zig").Progress;
 
 const hittables = @import("hittables/root.zig");
 const constants = @import("constants.zig");
-
+const Camera = @import("camera.zig");
 pub fn rayColor(ray: Ray, world: *const hittables.HittableList) Color3 {
     if (world.hit(ray, .{ .min = 0, .max = constants.infinity })) |t| {
         return Color3.from(
@@ -34,58 +34,16 @@ pub fn rayColor(ray: Ray, world: *const hittables.HittableList) Color3 {
 }
 
 pub fn render(alloc: std.mem.Allocator, progress: *Progress) !Image {
-    const aspect_ratio = 16.0 / 9.0;
-    const image_width = 400;
-
-    const image_height: usize = @max(
-        toInt(toFloat(image_width) / aspect_ratio),
-        1,
-    );
-
-    progress.setTotal(image_height);
-
-    var image = try Image.create(alloc, image_width, image_height);
-
     // World
     var world = hittables.HittableList.new(alloc);
 
     world.addSphere(.{ .center = Point3.new(0, 0, -1), .radius = 0.5 });
     world.addSphere(.{ .center = Point3.new(0, -100.5, -1), .radius = 100 });
 
-    const focal_length = 1.0;
-    const viewport_height = 2.0;
-    const viewport_width = viewport_height * (toFloat(image.width) / toFloat(image.height));
-    const camera_center = Point3.new(0, 0, 0);
+    const camera: Camera = .{
+        .aspectRatio = 16.0 / 9.0,
+        .imageWidth = 400,
+    };
 
-    // Note to self on viewport:
-    // - V_u (viewport U) goes from the left to the right
-    // - V_v (viewport V) goes from the top to the bottom
-    const viewport_u = Vec3.new(viewport_width, 0, 0);
-    const viewport_v = Vec3.new(0, -viewport_height, 0);
-
-    const pixel_delta_u = viewport_u.div_s(image_width);
-    const pixel_delta_v = viewport_v.div_s(image_height);
-
-    const viewport_upper_left = camera_center.inner
-        .sub(Vec3.new(0, 0, focal_length))
-        .sub(viewport_u.div_s(2))
-        .sub(viewport_v.div_s(2));
-
-    const pixel00_loc = viewport_upper_left.add(pixel_delta_u.add(pixel_delta_v).mul_s(0.5));
-
-    for (0..image.height) |j| {
-        for (0..image.width) |i| {
-            const pixel_center = pixel00_loc
-                .add(pixel_delta_u.mul_s(toFloat(i)))
-                .add(pixel_delta_v.mul_s(toFloat(j)));
-
-            const ray = Ray.new(camera_center, pixel_center);
-
-            image.set(j, i, rayColor(ray, &world));
-        }
-
-        progress.increment(1);
-    }
-
-    return image;
+    return try camera.render(alloc, progress, &world);
 }
