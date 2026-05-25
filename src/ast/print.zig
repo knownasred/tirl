@@ -43,5 +43,6 @@ fn printValue(value: block_mod.Value, writer: anytype) !void {
             }
             try writer.writeAll(")");
         },
+        .reference => |r| try writer.print("@\"{s}\"", .{r.value}),
     }
 }

@@ -14,8 +14,6 @@ fn toFile(items: []block.Item) File {
 pub const combinator = parser.Parser(File){ .parse = parseFile };
 
 fn parseFile(alloc: std.mem.Allocator, p: *parser.State) parser.Result(File) {
-    // Skip any leading whitespace or comments before the first block.
-    // lexeme only handles trailing whitespace, so we do this explicitly here.
     _ = combinators.skipWs().parse(alloc, p);
     return switch (combinators.many0(block.item).parse(alloc, p)) {
         .ok => |items| .{ .ok = toFile(items) },
@@ -23,7 +21,6 @@ fn parseFile(alloc: std.mem.Allocator, p: *parser.State) parser.Result(File) {
     };
 }
 
-/// Convenience: parse a scene string without manually constructing a State.
 pub fn parse(alloc: std.mem.Allocator, input: []const u8) parser.Result(File) {
     var state = parser.State.init(input);
     return combinator.parse(alloc, &state);
