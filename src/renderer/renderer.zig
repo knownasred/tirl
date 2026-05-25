@@ -21,8 +21,8 @@ pub fn render(alloc: std.mem.Allocator, progress: *Progress) !Image {
 
     const materialGround = renderer.Material.makeLambertian(.new(0.8, 0.8, 0.0));
     const materialCenter = renderer.Material.makeLambertian(.new(0.1, 0.2, 0.5));
-    const materialLeft = renderer.Material.makeMetal(.new(0.8, 0.8, 0.8));
-    const materialRight = renderer.Material.makeLambertian(.new(0.8, 0.6, 0.2));
+    const materialLeft = renderer.Material.makeMetal(.new(0.8, 0.8, 0.8), 0.3);
+    const materialRight = renderer.Material.makeMetal(.new(0.8, 0.6, 0.2), 1.0);
 
     world.addSphere(.{ .center = Point3.new(0, -100.5, -1), .radius = 100, .material = &materialGround });
     world.addSphere(.{ .center = Point3.new(0, 0, -1.2), .radius = 0.5, .material = &materialCenter });
@@ -33,6 +33,7 @@ pub fn render(alloc: std.mem.Allocator, progress: *Progress) !Image {
         .aspectRatio = 16.0 / 9.0,
         .imageWidth = 400,
         .maxDepth = 50,
+        .samplesPerPixel = 30,
     };
 
     return try camera.render(alloc, progress, &world);

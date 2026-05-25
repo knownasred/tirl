@@ -12,12 +12,20 @@ const toInt = renderer.math.toInt;
 const common = @import("common.zig");
 
 albedo: Color3,
+fuzz: f32,
 
 pub fn scatter(self: @This(), r_in: Ray, record: HitRecord) ?common.ScatterResult {
-    const reflected = Vec3.reflect(r_in.direction, record.normal);
+    var reflected = Vec3.reflect(r_in.direction, record.normal);
+    reflected = reflected.unit()
+        .add(Vec3.randomUnit().mul_s(self.fuzz));
+    const scatteredRay: Ray = .new(record.p, reflected);
 
-    return .{
-        .scatteredRay = .new(record.p, reflected),
-        .attenuation = self.albedo,
-    };
+    if (Vec3.dot(scatteredRay.direction, record.normal) > 0) {
+        return .{
+            .scatteredRay = scatteredRay,
+            .attenuation = self.albedo,
+        };
+    } else {
+        return null;
+    }
 }

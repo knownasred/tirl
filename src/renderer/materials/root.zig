@@ -27,9 +27,9 @@ pub const Material = union(enum) {
         };
     }
 
-    pub fn makeMetal(albedo: Color3) Material {
+    pub fn makeMetal(albedo: Color3, fuzz: f32) Material {
         return .{
-            .Metal = .{ .albedo = albedo },
+            .Metal = .{ .albedo = albedo, .fuzz = fuzz },
         };
     }
 };
