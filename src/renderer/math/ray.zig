@@ -15,7 +15,7 @@ pub const Ray = struct {
     }
 
     pub fn at(self: Self, t: f32) vec3.Point3 {
-        return vec3.Point3.from(self.origin.toVec().add(self.direction.scale(t)));
+        return vec3.Point3.from(self.origin.toVec().add(self.direction.mul_s(t)));
     }
 };
 

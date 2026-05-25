@@ -1,7 +1,9 @@
 const std = @import("std");
-const vec3 = @import("../math/vec3.zig");
-const Vec3 = vec3.Vec3;
-const Color3 = vec3.Color3;
+const math = @import("../math/root.zig");
+const Interval = @import("../math/interval.zig");
+const Vec3 = math.Vec3;
+const Color3 = math.Color3;
+const toInt = math.toInt;
 
 pub const Image = struct {
     buffer: []Color3,
@@ -53,11 +55,13 @@ pub const Image = struct {
     }
 
     fn printColor(writer: *std.Io.Writer, color: Color3) !void {
-        try writer.printInt(@as(u8, @intFromFloat(color.getX() * 255.999)), 10, .lower, .{});
+        const intensity: Interval = .{ .min = 0.000, .max = 0.999 };
+
+        try writer.printInt(toInt(256 * intensity.clamp(color.getX())), 10, .lower, .{});
         try writer.printAsciiChar(' ', .{});
-        try writer.printInt(@as(u8, @intFromFloat(color.getY() * 255.999)), 10, .lower, .{});
+        try writer.printInt(toInt(256 * intensity.clamp(color.getY())), 10, .lower, .{});
         try writer.printAsciiChar(' ', .{});
-        try writer.printInt(@as(u8, @intFromFloat(color.getZ() * 255.999)), 10, .lower, .{});
+        try writer.printInt(toInt(256 * intensity.clamp(color.getZ())), 10, .lower, .{});
         try writer.printAsciiChar('\n', .{});
     }
 };
