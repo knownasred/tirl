@@ -78,6 +78,17 @@ pub const Vec3 = struct {
         return self.div_s(self.length());
     }
 
+    pub fn isNearZero(self: Vec3) bool {
+        const s = 1e-8;
+        return @abs(self.getX()) < s and @abs(self.getY()) < s and @abs(self.getY()) < s;
+    }
+
+    pub inline fn reflect(v: Vec3, normal: Vec3) Vec3 {
+        return v.sub(
+            normal.mul_s(2 * dot(v, normal)),
+        );
+    }
+
     pub fn random() Vec3 {
         return .new(
             constants.randomDouble(),

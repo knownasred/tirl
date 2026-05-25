@@ -63,11 +63,15 @@ fn rayColor(ray: Ray, depth: usize, world: *const hittables.HittableList) Color3
     }
 
     if (world.hit(ray, .{ .min = 0.001, .max = constants.infinity })) |t| {
-        const direction = t.normal.add(Vec3.randomUnit());
-        return Color3.from(
-            rayColor(.new(t.p, direction), depth - 1, world).inner
-                .mul_s(0.5),
-        );
+        if (t.material.scatter(ray, t)) |scattered| {
+            return .from(
+                scattered.attenuation.inner.mul(
+                    rayColor(scattered.scatteredRay, depth - 1, world).inner,
+                ),
+            );
+        }
+
+        return .new(0, 0, 0);
     }
 
     const unit_direction = ray.direction.unit();
