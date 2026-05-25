@@ -89,6 +89,14 @@ pub const Vec3 = struct {
         );
     }
 
+    pub inline fn cross(u: Vec3, v: Vec3) Vec3 {
+        return .new(
+            u.pos[1] * v.pos[2] - u.pos[2] * v.pos[1],
+            u.pos[2] * v.pos[0] - u.pos[0] * v.pos[2],
+            u.pos[0] * v.pos[1] - u.pos[1] * v.pos[0],
+        );
+    }
+
     pub inline fn refract(uv: Vec3, n: Vec3, etaiOverEtat: f32) Vec3 {
         const cosTheta = @min(dot(uv.negate(), n), 1.0);
         const rOutPerp = uv.add(n.mul_s(cosTheta)).mul_s(etaiOverEtat);

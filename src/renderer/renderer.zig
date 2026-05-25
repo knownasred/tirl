@@ -36,6 +36,10 @@ pub fn render(alloc: std.mem.Allocator, progress: *Progress) !Image {
         .imageWidth = 400,
         .maxDepth = 50,
         .samplesPerPixel = 30,
+        .vfov = 20,
+        .lookFrom = .new(-2, 2, 1),
+        .lookAt = .new(0, 0, -1),
+        .vup = .new(0, 1, 0),
     };
 
     return try camera.render(alloc, progress, &world);
