@@ -14,6 +14,7 @@ const std = @import("std");
 imageWidth: usize = 100,
 focalLength: f32 = 1,
 aspectRatio: f32 = 16.0 / 9.0,
+samplesPerPixel: usize = 100,
 
 cameraState: CameraState = undefined,
 
@@ -27,19 +28,33 @@ pub fn render(self: *const Self, alloc: std.mem.Allocator, progress: *Progress, 
 
     for (0..image.height) |j| {
         for (0..image.width) |i| {
-            const pixel_center = state.pixel00Loc.inner
-                .add(state.pixelDeltaU.mul_s(toFloat(i)))
-                .add(state.pixelDeltaV.mul_s(toFloat(j)));
+            var pixel_color: Vec3 = .zero();
 
-            const ray = Ray.new(state.center, pixel_center);
+            for (0..self.samplesPerPixel) |_| {
+                const ray = getRay(state, i, j);
+                pixel_color = pixel_color.add(rayColor(ray, world).inner);
+            }
 
-            image.set(j, i, rayColor(ray, world));
+            image.set(j, i, .from(pixel_color.mul_s(state.pixelSampleScale)));
         }
 
         progress.increment(1);
     }
 
     return image;
+}
+
+fn getRay(state: CameraState, i: usize, j: usize) Ray {
+    const offset = sampleSquare();
+    const pixel_sample = state.pixel00Loc.inner
+        .add(state.pixelDeltaU.mul_s(toFloat(i) + offset.getX()))
+        .add(state.pixelDeltaV.mul_s(toFloat(j) + offset.getY()));
+
+    return .new(state.center, pixel_sample.sub(state.center.inner));
+}
+
+fn sampleSquare() Vec3 {
+    return .new(constants.randomDouble() - 0.5, constants.randomDouble() - 0.5, 0);
 }
 
 fn rayColor(ray: Ray, world: *const hittables.HittableList) Color3 {
@@ -67,6 +82,7 @@ const CameraState = struct {
     pixel00Loc: Point3,
     pixelDeltaU: Vec3,
     pixelDeltaV: Vec3,
+    pixelSampleScale: f32,
 };
 
 fn initialize(self: *const Self) CameraState {
@@ -101,5 +117,6 @@ fn initialize(self: *const Self) CameraState {
         .pixel00Loc = Point3.from(pixel00_loc),
         .pixelDeltaU = pixel_delta_u,
         .pixelDeltaV = pixel_delta_v,
+        .pixelSampleScale = 1.0 / toFloat(self.samplesPerPixel),
     };
 }

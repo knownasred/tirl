@@ -24,3 +24,14 @@ pub const universe = @This(){
     .min = -constants.infinity,
     .max = constants.infinity,
 };
+
+pub fn clamp(self: @This(), x: f32) f32 {
+    if (x < self.min) {
+        return self.min;
+    }
+    if (x > self.max) {
+        return self.max;
+    }
+
+    return x;
+}
