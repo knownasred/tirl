@@ -89,6 +89,14 @@ pub const Vec3 = struct {
         );
     }
 
+    pub inline fn refract(uv: Vec3, n: Vec3, etaiOverEtat: f32) Vec3 {
+        const cosTheta = @min(dot(uv.negate(), n), 1.0);
+        const rOutPerp = uv.add(n.mul_s(cosTheta)).mul_s(etaiOverEtat);
+        const rOutParallel = n.mul_s(-@sqrt(@abs(1.0 - rOutPerp.length_squared())));
+
+        return rOutPerp.add(rOutParallel);
+    }
+
     pub fn random() Vec3 {
         return .new(
             constants.randomDouble(),

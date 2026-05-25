@@ -21,13 +21,15 @@ pub fn render(alloc: std.mem.Allocator, progress: *Progress) !Image {
 
     const materialGround = renderer.Material.makeLambertian(.new(0.8, 0.8, 0.0));
     const materialCenter = renderer.Material.makeLambertian(.new(0.1, 0.2, 0.5));
-    const materialLeft = renderer.Material.makeMetal(.new(0.8, 0.8, 0.8), 0.3);
+    const materialLeft = renderer.Material.makeDielectric(1.50);
+    const materialBubble = renderer.Material.makeDielectric(1.00 / 1.50);
     const materialRight = renderer.Material.makeMetal(.new(0.8, 0.6, 0.2), 1.0);
 
-    world.addSphere(.{ .center = Point3.new(0, -100.5, -1), .radius = 100, .material = &materialGround });
-    world.addSphere(.{ .center = Point3.new(0, 0, -1.2), .radius = 0.5, .material = &materialCenter });
-    world.addSphere(.{ .center = Point3.new(-1, 0, -1), .radius = 0.5, .material = &materialLeft });
-    world.addSphere(.{ .center = Point3.new(1, 0, -1), .radius = 0.5, .material = &materialRight });
+    world.addSphere(.{ .center = .new(0, -100.5, -1), .radius = 100, .material = &materialGround });
+    world.addSphere(.{ .center = .new(0, 0, -1.2), .radius = 0.5, .material = &materialCenter });
+    world.addSphere(.{ .center = .new(-1, 0, -1), .radius = 0.5, .material = &materialLeft });
+    world.addSphere(.{ .center = .new(-1, 0, -1), .radius = 0.4, .material = &materialBubble });
+    world.addSphere(.{ .center = .new(1, 0, -1), .radius = 0.5, .material = &materialRight });
 
     const camera: Camera = .{
         .aspectRatio = 16.0 / 9.0,

@@ -11,10 +11,12 @@ const toInt = renderer.math.toInt;
 const common = @import("common.zig");
 const Lambertian = @import("lambertian.zig");
 const Metal = @import("metal.zig");
+const Dielectric = @import("dielectric.zig");
 
 pub const Material = union(enum) {
     Lambertian: Lambertian,
     Metal: Metal,
+    Dielectric: Dielectric,
     pub fn scatter(self: @This(), ray: Ray, record: HitRecord) ?common.ScatterResult {
         return switch (self) {
             inline else => |t| t.scatter(ray, record),
@@ -30,6 +32,12 @@ pub const Material = union(enum) {
     pub fn makeMetal(albedo: Color3, fuzz: f32) Material {
         return .{
             .Metal = .{ .albedo = albedo, .fuzz = fuzz },
+        };
+    }
+
+    pub fn makeDielectric(ri: f32) Material {
+        return .{
+            .Dielectric = .{ .refractionIndex = ri },
         };
     }
 };
