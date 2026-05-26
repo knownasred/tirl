@@ -20,9 +20,6 @@ samplesPerPixel: usize = 100,
 /// Maximum number of ray bounces into scene
 maxDepth: usize = 10,
 
-/// Internal structure containing the internal data, generated from the parameters that are tweakable.
-cameraState: CameraState = undefined,
-
 /// vfov is the vertical view angle (field of view)
 vfov: f32 = 90,
 /// Point camera is looking from
@@ -31,6 +28,10 @@ lookFrom: Point3 = .new(0, 0, 0),
 lookAt: Point3 = .new(0, 0, -1),
 /// Camera relative "up" direction
 vup: Point3 = .new(0, 1, 0),
+/// Variation angle of rays through each pixel
+defocusAngle: f32 = 0,
+/// Distance from camera lookfrom point to plane of perfect focus
+focusDistance: f32 = 10,
 
 const Self = @This();
 
@@ -45,7 +46,7 @@ pub fn render(self: *const Self, alloc: std.mem.Allocator, progress: *Progress, 
             var pixel_color: Vec3 = .zero();
 
             for (0..self.samplesPerPixel) |_| {
-                const ray = getRay(state, i, j);
+                const ray = self.getRay(state, i, j);
                 pixel_color = pixel_color.add(rayColor(ray, self.maxDepth, world).inner);
             }
 
@@ -58,13 +59,23 @@ pub fn render(self: *const Self, alloc: std.mem.Allocator, progress: *Progress, 
     return image;
 }
 
-fn getRay(state: CameraState, i: usize, j: usize) Ray {
+fn getRay(self: @This(), state: CameraState, i: usize, j: usize) Ray {
     const offset = sampleSquare();
     const pixel_sample = state.pixel00Loc.inner
         .add(state.pixelDeltaU.mul_s(toFloat(i) + offset.getX()))
         .add(state.pixelDeltaV.mul_s(toFloat(j) + offset.getY()));
 
-    return .new(state.center, pixel_sample.sub(state.center.inner));
+    const rayOrigin = if (self.defocusAngle <= 0) state.center.inner else defocusDiskSample(state);
+
+    return .new(.from(rayOrigin), pixel_sample.sub(rayOrigin));
+}
+
+fn defocusDiskSample(state: CameraState) Vec3 {
+    const p = Vec3.randomOnUnitDisk();
+
+    return state.center.inner
+        .add(state.defocusDiskU.mul_s(p.getX()))
+        .add(state.defocusDiskV.mul_s(p.getY()));
 }
 
 fn sampleSquare() Vec3 {
@@ -108,6 +119,9 @@ const CameraState = struct {
     u: Vec3,
     v: Vec3,
     w: Vec3,
+
+    defocusDiskU: Vec3,
+    defocusDiskV: Vec3,
 };
 
 fn initialize(self: *const Self) CameraState {
@@ -118,9 +132,8 @@ fn initialize(self: *const Self) CameraState {
 
     const theta = constants.deg_to_rad(self.vfov);
     const h = std.math.tan(theta / 2);
-    const focal_length = (self.lookFrom.inner.sub(self.lookAt.inner)).length();
 
-    const viewport_height = 2 * h * focal_length;
+    const viewport_height = 2 * h * self.focusDistance;
     const viewport_width = viewport_height * (toFloat(self.imageWidth) / toFloat(image_height));
     const camera_center = self.lookFrom;
 
@@ -138,11 +151,13 @@ fn initialize(self: *const Self) CameraState {
     const pixel_delta_v = viewport_v.div_s(toFloat(image_height));
 
     const viewport_upper_left = camera_center.inner
-        .sub(w.mul_s(focal_length))
+        .sub(w.mul_s(self.focusDistance))
         .sub(viewport_u.div_s(2))
         .sub(viewport_v.div_s(2));
 
     const pixel00_loc = viewport_upper_left.add(pixel_delta_u.add(pixel_delta_v).mul_s(0.5));
+
+    const defocus_radius = self.focusDistance * std.math.tan(constants.deg_to_rad(self.defocusAngle / 2));
 
     return .{
         .center = camera_center,
@@ -154,5 +169,7 @@ fn initialize(self: *const Self) CameraState {
         .u = u,
         .v = v,
         .w = w,
+        .defocusDiskU = u.mul_s(defocus_radius),
+        .defocusDiskV = v.mul_s(defocus_radius),
     };
 }

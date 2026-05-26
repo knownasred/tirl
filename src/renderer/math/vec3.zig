@@ -132,6 +132,14 @@ pub const Vec3 = struct {
         }
     }
 
+    pub inline fn randomOnUnitDisk() Vec3 {
+        while (true) {
+            const p: Vec3 = .new(constants.randomDoubleRanged(-1, 1),constants.randomDoubleRanged(-1, 1),0);
+
+            if (p.length_squared() < 1)
+                        return p;
+        }
+    }
     pub inline fn randomOnHemisphere(normal: Vec3) Vec3 {
         const onUnitSphere = Vec3.randomUnit();
         if (onUnitSphere.dot(normal) > 0.0) { // In the same hemisphere as the normal

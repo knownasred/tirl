@@ -40,6 +40,9 @@ pub fn render(alloc: std.mem.Allocator, progress: *Progress) !Image {
         .lookFrom = .new(-2, 2, 1),
         .lookAt = .new(0, 0, -1),
         .vup = .new(0, 1, 0),
+
+        .defocusAngle = 10,
+        .focusDistance = 3.4,
     };
 
     return try camera.render(alloc, progress, &world);
