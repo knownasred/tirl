@@ -7,11 +7,11 @@ const Color3 = zig_scene.renderer.math.Color3;
 pub fn main(init: std.process.Init) !void {
     const alloc = init.arena.allocator();
 
-    const progress = zig_scene.tui.Progress.init(alloc, 1);
-    try progress.start(init.io);
+    const cli_progress = zig_scene.tui.CliProgress.init(alloc, 1);
+    try cli_progress.start(init.io);
 
     // Now we can render!
-    const image = try zig_scene.renderer.render(alloc, progress);
+    const image = try zig_scene.renderer.render(alloc, cli_progress.progress());
 
     // Write down to a file
     const cwd = std.Io.Dir.cwd();
@@ -29,7 +29,7 @@ pub fn main(init: std.process.Init) !void {
     try fw.flush();
 
     // Actually finish
-    progress.finish(init.io);
+    cli_progress.finish(init.io);
 }
 
 test "simple test" {

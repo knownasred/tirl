@@ -8,7 +8,6 @@ const Vec3 = renderer.math.Vec3;
 const Ray = renderer.math.Ray;
 const toFloat = renderer.math.toFloat;
 const toInt = renderer.math.toInt;
-const Progress = @import("../tui/root.zig").Progress;
 const std = @import("std");
 
 /// Rendered image width in pixel count
@@ -35,7 +34,7 @@ focusDistance: f32 = 10,
 
 const Self = @This();
 
-pub fn render(self: *const Self, alloc: std.mem.Allocator, progress: *Progress, world: *const hittables.HittableList) !Image {
+pub fn render(self: *const Self, alloc: std.mem.Allocator, progress: anytype, world: *const hittables.HittableList) !Image {
     const state = self.initialize();
     progress.setTotal(state.imageHeight);
 
@@ -45,9 +44,10 @@ pub fn render(self: *const Self, alloc: std.mem.Allocator, progress: *Progress, 
         for (0..image.width) |i| {
             var pixel_color: Vec3 = .zero();
 
-            for (0..self.samplesPerPixel) |_| {
+            for (0..self.samplesPerPixel) |s| {
                 const ray = self.getRay(state, i, j);
                 pixel_color = pixel_color.add(rayColor(ray, self.maxDepth, world).inner);
+                progress.onPixel(j, i, s + 1, .from(pixel_color.mul_s(1.0 / toFloat(s + 1))));
             }
 
             image.set(j, i, .from(pixel_color.mul_s(state.pixelSampleScale)));

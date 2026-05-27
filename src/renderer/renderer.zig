@@ -8,14 +8,12 @@ const toFloat = renderer.math.toFloat;
 const toInt = renderer.math.toInt;
 
 const std = @import("std");
-// Simplify the setup
-const Progress = @import("../tui/root.zig").Progress;
 
 const hittables = @import("hittables/root.zig");
 const constants = @import("constants.zig");
 const Camera = @import("camera.zig");
 
-pub fn render(alloc: std.mem.Allocator, progress: *Progress) !Image {
+pub fn render(alloc: std.mem.Allocator, progress: anytype) !Image {
     // World
     var world = hittables.HittableList.new(alloc);
 
@@ -35,7 +33,7 @@ pub fn render(alloc: std.mem.Allocator, progress: *Progress) !Image {
         .aspectRatio = 16.0 / 9.0,
         .imageWidth = 400,
         .maxDepth = 50,
-        .samplesPerPixel = 30,
+        .samplesPerPixel = 100,
         .vfov = 20,
         .lookFrom = .new(-2, 2, 1),
         .lookAt = .new(0, 0, -1),
