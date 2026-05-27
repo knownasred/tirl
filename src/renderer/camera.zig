@@ -1,6 +1,7 @@
 const hittables = @import("hittables/root.zig");
 const constants = @import("constants.zig");
 const renderer = @import("root.zig");
+const AccumulationBuffer = renderer.AccumulationBuffer;
 const Image = renderer.Image;
 const Color3 = renderer.math.Color3;
 const Point3 = renderer.math.Point3;
@@ -32,9 +33,19 @@ defocusAngle: f32 = 0,
 /// Distance from camera lookfrom point to plane of perfect focus
 focusDistance: f32 = 10,
 
+renderMode: RenderMode = .perPixel,
+
+pub const RenderMode = enum { perPixel, progressive };
 const Self = @This();
 
 pub fn render(self: *const Self, alloc: std.mem.Allocator, progress: anytype, world: *const hittables.HittableList) !Image {
+    return switch (self.renderMode) {
+        .perPixel => self.renderPerPixel(alloc, progress, world),
+        .progressive => self.renderProgressive(alloc, progress, world),
+    };
+}
+
+fn renderPerPixel(self: *const Self, alloc: std.mem.Allocator, progress: anytype, world: *const hittables.HittableList) !Image {
     const state = self.initialize();
     progress.setTotal(state.imageHeight);
 
@@ -51,6 +62,37 @@ pub fn render(self: *const Self, alloc: std.mem.Allocator, progress: anytype, wo
             }
 
             image.set(j, i, .from(pixel_color.mul_s(state.pixelSampleScale)));
+        }
+
+        progress.increment(1);
+    }
+
+    return image;
+}
+
+fn renderProgressive(self: *const Self, alloc: std.mem.Allocator, progress: anytype, world: *const hittables.HittableList) !Image {
+    const state = self.initialize();
+    progress.setTotal(self.samplesPerPixel);
+
+    var image = try Image.create(alloc, self.imageWidth, state.imageHeight);
+    var accum = try AccumulationBuffer.create(alloc, self.imageWidth, state.imageHeight);
+
+    for (0..self.samplesPerPixel) |s| {
+        for (0..image.height) |j| {
+            for (0..image.width) |i| {
+                const ray = self.getRay(state, i, j);
+                accum.accumulate(j, i, rayColor(ray, self.maxDepth, world).inner);
+            }
+        }
+
+        accum.incrementSamples();
+
+        for (0..image.height) |j| {
+            for (0..image.width) |i| {
+                const color = accum.averaged(j, i);
+                image.set(j, i, color);
+                progress.onPixel(j, i, s + 1, color);
+            }
         }
 
         progress.increment(1);
