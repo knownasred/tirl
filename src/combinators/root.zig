@@ -10,6 +10,8 @@ pub const seq = @import("seq.zig").seq;
 pub const recognize = @import("recognize.zig").recognize;
 pub const satisfy = @import("satisfy.zig").satisfy;
 pub const delimited = @import("delimited.zig").delimited;
+pub const separated = @import("separated.zig").separated;
+
 pub const many0 = @import("many.zig").many0;
 pub const many1 = @import("many.zig").many1;
 pub const opt = @import("opt.zig").opt;
@@ -24,6 +26,7 @@ comptime {
     _ = @import("recognize.zig");
     _ = @import("satisfy.zig");
     _ = @import("delimited.zig");
+    _ = @import("separated.zig");
     _ = @import("many.zig");
     _ = @import("opt.zig");
 }

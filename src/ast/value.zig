@@ -82,53 +82,15 @@ fn parseCall(alloc: std.mem.Allocator, p: *parser.State) parser.Result(Value) {
         .err => |e| return .{ .err = e },
     };
 
-    switch (lparen.parse(alloc, p)) {
-        .ok => {},
+    const args = switch (combinators.delimited(lparen, combinators.separated(Value.combinator, comma), rparen).parse(alloc, p)) {
+        .ok => |v| v,
         .err => |e| {
             p.restore(cp);
             return .{ .err = e };
         },
-    }
+    };
 
-    var args: std.ArrayList(Value) = .empty;
-
-    const before_first = p.checkpoint();
-    switch (parseValue(alloc, p)) {
-        .ok => |first| {
-            args.append(alloc, first) catch return parser.AllocErr(Value);
-            while (true) {
-                const before_sep = p.checkpoint();
-                switch (comma.parse(alloc, p)) {
-                    .ok => {},
-                    .err => {
-                        p.restore(before_sep);
-                        break;
-                    },
-                }
-                const before_next = p.checkpoint();
-                switch (parseValue(alloc, p)) {
-                    .ok => |v| args.append(alloc, v) catch return parser.AllocErr(Value),
-                    .err => {
-                        p.restore(before_next);
-                        break;
-                    },
-                }
-            }
-        },
-        .err => p.restore(before_first),
-    }
-
-    switch (rparen.parse(alloc, p)) {
-        .ok => {},
-        .err => |e| {
-            args.deinit(alloc);
-            p.restore(cp);
-            return .{ .err = e };
-        },
-    }
-
-    const slice = args.toOwnedSlice(alloc) catch return parser.AllocErr(Value);
-    return .{ .ok = .{ .call = .{ .name = name, .args = slice } } };
+    return .{ .ok = .{ .call = .{ .name = name, .args = args } } };
 }
 
 const lparen = combinators.lexme(literal("("));
