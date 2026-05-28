@@ -1,1 +1,1 @@
-pub const Progress = @import("progress.zig").Progress;
+pub const CliProgress = @import("progress.zig").CliProgress;

@@ -69,22 +69,28 @@ fn loadingBar(alloc: std.mem.Allocator, current: u64, total: u64) ![]const u8 {
     return std.fmt.allocPrint(alloc, "[{s}{s}]", .{ filledPart, emptyPart });
 }
 
-pub const Progress = struct {
+const renderer = @import("../renderer/root.zig");
+
+pub const CliProgress = struct {
     total: std.atomic.Value(u64),
     future: ?std.Io.Future(void),
     current: std.atomic.Value(u64),
     alloc: std.mem.Allocator,
 
-    pub fn init(alloc: std.mem.Allocator, total: u64) *Progress {
-        const progress = alloc.create(Progress) catch unreachable;
-        progress.total = .init(total);
-        progress.current = .init(0);
-        progress.future = null;
-        progress.alloc = alloc;
-        return progress;
+    pub fn init(alloc: std.mem.Allocator, total: u64) !*CliProgress {
+        const self = try alloc.create(CliProgress);
+        self.total = .init(total);
+        self.current = .init(0);
+        self.future = null;
+        self.alloc = alloc;
+        return self;
     }
 
-    fn run(self: *Progress, io: std.Io) void {
+    pub fn progress(self: *CliProgress) renderer.Progress(CliProgress) {
+        return .{ .context = self };
+    }
+
+    fn run(self: *CliProgress, io: std.Io) void {
         std.debug.print(HIDE_CURSOR, .{});
         var index: usize = 0;
         mainLoop: while (true) {
@@ -123,16 +129,17 @@ pub const Progress = struct {
         std.debug.print("✓ {s} {d}% ({d}/{d})", .{ loadingBar(self.alloc, current, total) catch @panic("failed to allocate!"), percentage, current, total });
     }
 
-    pub fn start(self: *Progress, io: std.Io) anyerror!void {
-        self.future = try io.concurrent(Progress.run, .{ self, io });
+    pub fn start(self: *CliProgress, io: std.Io) anyerror!void {
+        self.future = try io.concurrent(CliProgress.run, .{ self, io });
     }
 
-    pub fn increment(self: *Progress, amount: u64) void {
+    pub fn increment(self: *CliProgress, amount: u64) bool {
         const val = self.current.fetchAdd(amount, .monotonic);
         std.debug.assert((val + amount) <= self.total.load(.monotonic));
+        return false;
     }
 
-    pub fn finish(self: *Progress, io: std.Io) void {
+    pub fn finish(self: *CliProgress, io: std.Io) void {
         if (self.future) |*value| {
             value.cancel(io);
         }
@@ -140,7 +147,7 @@ pub const Progress = struct {
         std.debug.print("{s}\n", .{SHOW_CURSOR});
     }
 
-    pub fn setTotal(self: *Progress, total: u64) void {
+    pub fn setTotal(self: *CliProgress, total: u64) void {
         std.debug.assert(total != 0);
         self.total.store(total, .monotonic);
     }
