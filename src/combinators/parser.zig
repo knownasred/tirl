@@ -22,6 +22,19 @@ fn map(comptime parser: anytype, comptime f: anytype) Parser(utils.ReturnType(f)
     };
 }
 
+fn tryMap(comptime parser: anytype, comptime f: anytype) Parser(utils.ReturnType(f).OkType) {
+    return .{
+        .parse = struct {
+            fn parse(alloc: std.mem.Allocator, p: *State) utils.ReturnType(f) {
+                return switch (parser.parse(alloc, p)) {
+                    .ok => |val| f(val),
+                    .err => |err| .{ .err = err },
+                };
+            }
+        }.parse,
+    };
+}
+
 /// Wrap a parser so that when it fails the error carries `name` as its
 /// `expected` field.  This lets higher-level callers report *what* was
 /// being parsed (e.g. "expected a component type name").
@@ -114,7 +127,11 @@ pub fn AllocErr(comptime T: type) Result(T) {
 }
 
 pub fn Result(comptime T: type) type {
-    return union(enum) { ok: T, err: Error };
+    return union(enum) {
+        pub const OkType = T;
+        ok: T,
+        err: Error,
+    };
 }
 
 // ─── Tests for label and display ────────────────────────────────────────────
@@ -208,6 +225,7 @@ pub fn Parser(comptime Ty: type) type {
 
         // UFCS aliases — these let you write `literal("x").map(f)` as chained calls
         pub const map = combinators.map;
+        pub const tryMap = combinators.tryMap;
         pub const notEmpty = combinators.notEmpty;
         pub const label = combinators.label;
     };

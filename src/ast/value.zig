@@ -55,23 +55,21 @@ fn parseValue(alloc: std.mem.Allocator, p: *parser.State) parser.Result(Value) {
     return parseCall(alloc, p);
 }
 
+fn parseFloatResult(s: []const u8) parser.Result(f64) {
+    return .{ .ok = std.fmt.parseFloat(f64, s) catch
+        return .{ .err = .{ .code = .ValueTooBig, .desc = "invalid number", .expected = "a number", .location = null } } };
+}
+
 fn parseNumber(alloc: std.mem.Allocator, p: *parser.State) parser.Result(f64) {
-    const start = p.checkpoint();
     const raw = combinators.lexme(combinators.recognize(combinators.seq(.{
         combinators.seq(.{ combinators.satisfy(std.ascii.isDigit), combinators.takeWhile(std.ascii.isDigit) }),
         combinators.opt(combinators.seq(.{
             literal("."),
             combinators.seq(.{ combinators.satisfy(std.ascii.isDigit), combinators.takeWhile(std.ascii.isDigit) }),
         })),
-    }))).parse(alloc, p);
+    }))).tryMap(&parseFloatResult).parse(alloc, p);
 
-    switch (raw) {
-        .ok => |s| return .{ .ok = std.fmt.parseFloat(f64, s) catch {
-            p.restore(start);
-            return .{ .err = .{ .code = .ValueTooBig, .desc = "invalid number", .expected = "a number", .location = null } };
-        } },
-        .err => |e| return .{ .err = e },
-    }
+    return raw;
 }
 
 fn parseCall(alloc: std.mem.Allocator, p: *parser.State) parser.Result(Value) {
