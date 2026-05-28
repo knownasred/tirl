@@ -1,8 +1,10 @@
-const Symbol = @import("symbol.zig").Symbol;
-const Label = @import("label.zig").Label;
+pub const file = @import("file.zig");
+pub const print = @import("print.zig");
 
 comptime {
     _ = @import("label.zig");
     _ = @import("symbol.zig");
     _ = @import("block.zig");
+    _ = @import("file.zig");
+    _ = @import("print.zig");
 }

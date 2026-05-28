@@ -8,13 +8,29 @@ fn map(comptime parser: anytype, comptime f: anytype) Parser(utils.ReturnType(f)
     const T = utils.TypeOfParser(parser).OutputType;
     comptime {
         const info = @typeInfo(@TypeOf(f)).@"fn";
-        if (info.params[0].type.? != T) @compileError("expected fn(T), got wrong param type");
+
+        if (info.params[0].type) |t| {
+            if (t != T) @compileError("expected fn(T), got wrong param type");
+        }
     }
     return .{
         .parse = struct {
             fn parse(alloc: std.mem.Allocator, p: *State) Result(utils.ReturnType(f)) {
                 return switch (parser.parse(alloc, p)) {
                     .ok => |val| .{ .ok = f(val) },
+                    .err => |err| .{ .err = err },
+                };
+            }
+        }.parse,
+    };
+}
+
+fn tryMap(comptime parser: anytype, comptime f: anytype) Parser(utils.ReturnType(f).OkType) {
+    return .{
+        .parse = struct {
+            fn parse(alloc: std.mem.Allocator, p: *State) utils.ReturnType(f) {
+                return switch (parser.parse(alloc, p)) {
+                    .ok => |val| f(val),
                     .err => |err| .{ .err = err },
                 };
             }
@@ -114,7 +130,11 @@ pub fn AllocErr(comptime T: type) Result(T) {
 }
 
 pub fn Result(comptime T: type) type {
-    return union(enum) { ok: T, err: Error };
+    return union(enum) {
+        pub const OkType = T;
+        ok: T,
+        err: Error,
+    };
 }
 
 // ─── Tests for label and display ────────────────────────────────────────────
@@ -208,6 +228,7 @@ pub fn Parser(comptime Ty: type) type {
 
         // UFCS aliases — these let you write `literal("x").map(f)` as chained calls
         pub const map = combinators.map;
+        pub const tryMap = combinators.tryMap;
         pub const notEmpty = combinators.notEmpty;
         pub const label = combinators.label;
     };
