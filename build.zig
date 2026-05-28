@@ -55,6 +55,8 @@ pub fn build(b: *std.Build) void {
     test_step.dependOn(&run_mod_tests.step);
     test_step.dependOn(&run_exe_tests.step);
 
+    test_step.dependOn(&b.addInstallArtifact(mod_tests, .{ .dest_sub_path = "tsome-test" }).step);
+
     const print_ast_exe = b.addExecutable(.{
         .name = "print_ast",
         .root_module = b.createModule(.{

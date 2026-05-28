@@ -6,90 +6,88 @@ const Label = @import("label.zig").Label;
 const Symbol = @import("symbol.zig").Symbol;
 const t = @import("../combinators/utils.zig");
 
+pub const Call = struct {
+    name: Symbol,
+    args: []const Value,
+};
+
 pub const Value = union(enum) {
     string: Label,
     boolean: bool,
     number: f64,
-    call: struct {
-        name: Symbol,
-        args: []const Value,
-    },
+    call: Call,
     reference: Label,
 
-    pub const combinator = parser.Parser(Value){ .parse = parseValue };
+    // Note: This has to not just be value, otherwise we have an infinite loop which causes a build error.
+    pub const combinator = parser.Parser(Value){
+        .parse = struct {
+            fn parse(alloc: std.mem.Allocator, p: *parser.State) parser.Result(Value) {
+                return value.parse(alloc, p);
+            }
+        }.parse,
+    };
 };
 
-fn parseValue(alloc: std.mem.Allocator, p: *parser.State) parser.Result(Value) {
-    // string
-    switch (Label.combinator.parse(alloc, p)) {
-        .ok => |v| return .{ .ok = .{ .string = v } },
-        .err => {},
-    }
+const value = combinators.either(.{
+    .string = Label.combinator,
 
-    // boolean
-    switch (combinators.lexme(literal("true")).parse(alloc, p)) {
-        .ok => return .{ .ok = .{ .boolean = true } },
-        .err => {},
-    }
-    switch (combinators.lexme(literal("false")).parse(alloc, p)) {
-        .ok => return .{ .ok = .{ .boolean = false } },
-        .err => {},
-    }
+    .boolean = combinators.either(.{
+        .yay = literal("true"),
+        .nay = literal("false"),
+    }).map(struct {
+        fn map(input: anytype) bool {
+            return switch (input) {
+                .yay => true,
+                .nay => false,
+            };
+        }
+    }.map),
 
-    // number
-    switch (parseNumber(alloc, p)) {
-        .ok => |v| return .{ .ok = .{ .number = v } },
-        .err => {},
-    }
+    .number = number,
 
-    // reference (@"name")
-    switch (combinators.lexme(literal("@")).parse(alloc, p)) {
-        .ok => switch (Label.combinator.parse(alloc, p)) {
-            .ok => |v| return .{ .ok = .{ .reference = v } },
-            .err => |e| return .{ .err = e },
-        },
-        .err => {},
-    }
+    .reference = combinators.seq(.{ literal("@"), Label.combinator }).map(struct {
+        fn map(val: anytype) Label {
+            return val[1];
+        }
+    }.map),
 
-    // call (Vec3(...), Quat(...), ...)
-    return parseCall(alloc, p);
-}
+    .call = call,
+}).map(struct {
+    fn map(input: anytype) Value {
+        return switch (input) {
+            .string => |str| .{ .string = str },
+            .boolean => |boolean| .{ .boolean = boolean },
+            .number => |num| .{ .number = num },
+            .reference => |ref| .{ .reference = ref },
+            .call => |call_| .{ .call = call_ },
+        };
+    }
+}.map);
+
+const call = combinators.seq(.{
+    combinators.lexme(Symbol.combinator),
+    combinators.delimited(lparen, combinators.separated(Value.combinator, comma), rparen),
+}).map(struct {
+    fn map(input: anytype) Call {
+        return .{
+            .name = input[0],
+            .args = input[1],
+        };
+    }
+}.map);
 
 fn parseFloatResult(s: []const u8) parser.Result(f64) {
     return .{ .ok = std.fmt.parseFloat(f64, s) catch
         return .{ .err = .{ .code = .ValueTooBig, .desc = "invalid number", .expected = "a number", .location = null } } };
 }
 
-fn parseNumber(alloc: std.mem.Allocator, p: *parser.State) parser.Result(f64) {
-    const raw = combinators.lexme(combinators.recognize(combinators.seq(.{
+const number = combinators.lexme(combinators.recognize(combinators.seq(.{
+    combinators.seq(.{ combinators.satisfy(std.ascii.isDigit), combinators.takeWhile(std.ascii.isDigit) }),
+    combinators.opt(combinators.seq(.{
+        literal("."),
         combinators.seq(.{ combinators.satisfy(std.ascii.isDigit), combinators.takeWhile(std.ascii.isDigit) }),
-        combinators.opt(combinators.seq(.{
-            literal("."),
-            combinators.seq(.{ combinators.satisfy(std.ascii.isDigit), combinators.takeWhile(std.ascii.isDigit) }),
-        })),
-    }))).tryMap(&parseFloatResult).parse(alloc, p);
-
-    return raw;
-}
-
-fn parseCall(alloc: std.mem.Allocator, p: *parser.State) parser.Result(Value) {
-    const cp = p.checkpoint();
-
-    const name = switch (Symbol.combinator.parse(alloc, p)) {
-        .ok => |v| v,
-        .err => |e| return .{ .err = e },
-    };
-
-    const args = switch (combinators.delimited(lparen, combinators.separated(Value.combinator, comma), rparen).parse(alloc, p)) {
-        .ok => |v| v,
-        .err => |e| {
-            p.restore(cp);
-            return .{ .err = e };
-        },
-    };
-
-    return .{ .ok = .{ .call = .{ .name = name, .args = args } } };
-}
+    })),
+}))).tryMap(&parseFloatResult);
 
 const lparen = combinators.lexme(literal("("));
 const rparen = combinators.lexme(literal(")"));

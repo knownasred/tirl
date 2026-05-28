@@ -8,7 +8,10 @@ fn map(comptime parser: anytype, comptime f: anytype) Parser(utils.ReturnType(f)
     const T = utils.TypeOfParser(parser).OutputType;
     comptime {
         const info = @typeInfo(@TypeOf(f)).@"fn";
-        if (info.params[0].type.? != T) @compileError("expected fn(T), got wrong param type");
+
+        if (info.params[0].type) |t| {
+            if (t != T) @compileError("expected fn(T), got wrong param type");
+        }
     }
     return .{
         .parse = struct {
