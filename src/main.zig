@@ -7,11 +7,11 @@ const Color3 = zig_scene.renderer.math.Color3;
 pub fn main(init: std.process.Init) !void {
     const alloc = init.arena.allocator();
 
-    const cli_progress = zig_scene.tui.CliProgress.init(alloc, 1);
+    const cli_progress = try zig_scene.tui.CliProgress.init(alloc, 1);
     try cli_progress.start(init.io);
 
     // Now we can render!
-    const image = try zig_scene.renderer.render(alloc, cli_progress.progress());
+    const image = try zig_scene.renderer.render(alloc, cli_progress.progress(), .perPixel);
 
     // Write down to a file
     const cwd = std.Io.Dir.cwd();

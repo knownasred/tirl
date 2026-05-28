@@ -6,8 +6,8 @@ pub fn Progress(comptime T: type) type {
 
         const Self = @This();
 
-        pub fn increment(self: Self, amount: u64) void {
-            self.context.increment(amount);
+        pub fn increment(self: Self, amount: u64) bool {
+            return self.context.increment(amount);
         }
 
         pub fn setTotal(self: Self, total: u64) void {

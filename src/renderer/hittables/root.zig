@@ -27,8 +27,8 @@ pub const HittableList = struct {
         return .{ .items = .empty, .alloc = alloc };
     }
 
-    pub fn addSphere(self: *@This(), sphere: Sphere) void {
-        self.items.append(self.alloc, .{ .sphere = sphere }) catch unreachable;
+    pub fn addSphere(self: *@This(), sphere: Sphere) !void {
+        try self.items.append(self.alloc, .{ .sphere = sphere });
     }
 
     pub fn hit(self: @This(), r: Ray, ray_t: Interval) ?HitRecord {

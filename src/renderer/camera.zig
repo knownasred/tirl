@@ -64,7 +64,7 @@ fn renderPerPixel(self: *const Self, alloc: std.mem.Allocator, progress: anytype
             image.set(j, i, .from(pixel_color.mul_s(state.pixelSampleScale)));
         }
 
-        progress.increment(1);
+        if (progress.increment(1)) return image;
     }
 
     return image;
@@ -95,7 +95,7 @@ fn renderProgressive(self: *const Self, alloc: std.mem.Allocator, progress: anyt
             }
         }
 
-        progress.increment(1);
+        if (progress.increment(1)) return image;
     }
 
     return image;

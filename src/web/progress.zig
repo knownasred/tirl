@@ -5,8 +5,8 @@ pub const WebProgress = struct {
     total: std.atomic.Value(u64),
     current: std.atomic.Value(u64),
 
-    pub fn init(alloc: std.mem.Allocator) *WebProgress {
-        const self = alloc.create(WebProgress) catch unreachable;
+    pub fn init(alloc: std.mem.Allocator) !*WebProgress {
+        const self = try alloc.create(WebProgress);
         self.total = .init(0);
         self.current = .init(0);
         return self;

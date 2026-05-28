@@ -13,7 +13,7 @@ const hittables = @import("hittables/root.zig");
 const constants = @import("constants.zig");
 const Camera = @import("camera.zig");
 
-pub fn render(alloc: std.mem.Allocator, progress: anytype) !Image {
+pub fn render(alloc: std.mem.Allocator, progress: anytype, renderMode: Camera.RenderMode) !Image {
     // World
     var world = hittables.HittableList.new(alloc);
 
@@ -23,11 +23,11 @@ pub fn render(alloc: std.mem.Allocator, progress: anytype) !Image {
     const materialBubble = renderer.Material.makeDielectric(1.00 / 1.50);
     const materialRight = renderer.Material.makeMetal(.new(0.8, 0.6, 0.2), 1.0);
 
-    world.addSphere(.{ .center = .new(0, -100.5, -1), .radius = 100, .material = &materialGround });
-    world.addSphere(.{ .center = .new(0, 0, -1.2), .radius = 0.5, .material = &materialCenter });
-    world.addSphere(.{ .center = .new(-1, 0, -1), .radius = 0.5, .material = &materialLeft });
-    world.addSphere(.{ .center = .new(-1, 0, -1), .radius = 0.4, .material = &materialBubble });
-    world.addSphere(.{ .center = .new(1, 0, -1), .radius = 0.5, .material = &materialRight });
+    try world.addSphere(.{ .center = .new(0, -100.5, -1), .radius = 100, .material = &materialGround });
+    try world.addSphere(.{ .center = .new(0, 0, -1.2), .radius = 0.5, .material = &materialCenter });
+    try world.addSphere(.{ .center = .new(-1, 0, -1), .radius = 0.5, .material = &materialLeft });
+    try world.addSphere(.{ .center = .new(-1, 0, -1), .radius = 0.4, .material = &materialBubble });
+    try world.addSphere(.{ .center = .new(1, 0, -1), .radius = 0.5, .material = &materialRight });
 
     const camera: Camera = .{
         .aspectRatio = 16.0 / 9.0,
@@ -41,6 +41,7 @@ pub fn render(alloc: std.mem.Allocator, progress: anytype) !Image {
 
         .defocusAngle = 10,
         .focusDistance = 3.4,
+        .renderMode = renderMode,
     };
 
     return try camera.render(alloc, progress, &world);

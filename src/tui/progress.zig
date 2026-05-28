@@ -77,8 +77,8 @@ pub const CliProgress = struct {
     current: std.atomic.Value(u64),
     alloc: std.mem.Allocator,
 
-    pub fn init(alloc: std.mem.Allocator, total: u64) *CliProgress {
-        const self = alloc.create(CliProgress) catch unreachable;
+    pub fn init(alloc: std.mem.Allocator, total: u64) !*CliProgress {
+        const self = try alloc.create(CliProgress);
         self.total = .init(total);
         self.current = .init(0);
         self.future = null;
@@ -133,9 +133,10 @@ pub const CliProgress = struct {
         self.future = try io.concurrent(CliProgress.run, .{ self, io });
     }
 
-    pub fn increment(self: *CliProgress, amount: u64) void {
+    pub fn increment(self: *CliProgress, amount: u64) bool {
         const val = self.current.fetchAdd(amount, .monotonic);
         std.debug.assert((val + amount) <= self.total.load(.monotonic));
+        return false;
     }
 
     pub fn finish(self: *CliProgress, io: std.Io) void {

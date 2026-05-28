@@ -54,7 +54,7 @@ pub const Image = struct {
         }
     }
 
-    fn linear_to_gamma(linear: f32) f32 {
+    pub fn linear_to_gamma(linear: f32) f32 {
         if (linear > 0) {
             return @sqrt(linear);
         }

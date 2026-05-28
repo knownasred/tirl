@@ -14,8 +14,13 @@
     with env.pkgs.lib; rec {
       packages.foreign = env.package {
         src = cleanSource ./.;
-        nativeBuildInputs = with env.pkgs; [];
-        buildInputs = with env.pkgs; [];
+        nativeBuildInputs = with env.pkgs; [wayland-scanner];
+        buildInputs = with env.pkgs; [
+          wayland
+          wayland-protocols
+          libxkbcommon
+          libGL
+        ];
         zigPreferMusl = true;
       };
 
@@ -30,8 +35,8 @@
         program = "${packages.foreign}/bin/zig_scene";
       };
 
-      apps.default = env.app [] "zig build run -- \"$@\"";
-      apps.build = env.app [] "zig build \"$@\"";
+      apps.default = env.app [env.pkgs.wayland-scanner] "zig build run -- \"$@\"";
+      apps.build = env.app [env.pkgs.wayland-scanner] "zig build \"$@\"";
       apps.test = env.app [] "zig build test -- \"$@\"";
       apps.docs = env.app [] "zig build docs -- \"$@\"";
       apps.zig2nix = env.app [] "zig2nix \"$@\"";

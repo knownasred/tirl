@@ -6,14 +6,19 @@ pub const UiProgress = struct {
     display_buffer: []Color3,
     width: usize,
     height: usize,
+    current: std.atomic.Value(u64) = std.atomic.Value(u64).init(0),
+    total: std.atomic.Value(u64) = std.atomic.Value(u64).init(0),
+    cancelled: std.atomic.Value(bool) = std.atomic.Value(bool).init(false),
 
-    pub fn init(alloc: std.mem.Allocator, width: usize, height: usize) *UiProgress {
-        const self = alloc.create(UiProgress) catch unreachable;
-        const buffer = alloc.alloc(Color3, width * height) catch unreachable;
+    pub fn init(alloc: std.mem.Allocator, width: usize, height: usize) !*UiProgress {
+        const self = try alloc.create(UiProgress);
+        const buffer = try alloc.alloc(Color3, width * height);
         @memset(buffer, Color3.new(0, 0, 0));
-        self.display_buffer = buffer;
-        self.width = width;
-        self.height = height;
+        self.* = .{
+            .display_buffer = buffer,
+            .width = width,
+            .height = height,
+        };
         return self;
     }
 
@@ -21,12 +26,17 @@ pub const UiProgress = struct {
         return .{ .context = self };
     }
 
-    pub fn increment(self: *UiProgress, amount: u64) void {
-        _ = .{ self, amount };
+    pub fn increment(self: *UiProgress, amount: u64) bool {
+        _ = self.current.fetchAdd(amount, .monotonic);
+        return self.cancelled.load(.monotonic);
+    }
+
+    pub fn cancel(self: *UiProgress) void {
+        self.cancelled.store(true, .monotonic);
     }
 
     pub fn setTotal(self: *UiProgress, total: u64) void {
-        _ = .{ self, total };
+        self.total.store(total, .monotonic);
     }
 
     pub fn onPixel(self: *UiProgress, row: usize, col: usize, sample: usize, color: Color3) void {
