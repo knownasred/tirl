@@ -82,6 +82,7 @@ fn parseFloatResult(s: []const u8) parser.Result(f64) {
 }
 
 const number = combinators.lexme(combinators.recognize(combinators.seq(.{
+    combinators.opt(literal("-")),
     combinators.seq(.{ combinators.satisfy(std.ascii.isDigit), combinators.takeWhile(std.ascii.isDigit) }),
     combinators.opt(combinators.seq(.{
         literal("."),

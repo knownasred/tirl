@@ -1,5 +1,5 @@
 const common = @import("common.zig");
-const Sphere = @import("Sphere.zig");
+pub const Sphere = @import("Sphere.zig");
 
 const renderer = @import("../root.zig");
 const Ray = renderer.math.Ray;
@@ -11,6 +11,16 @@ const std = @import("std");
 
 pub const Hittable = union(enum) {
     sphere: Sphere,
+
+    pub fn from(value: anytype) Hittable {
+        const fields = @typeInfo(Hittable).@"union".fields;
+        inline for (fields) |field| {
+            if (field.type == @TypeOf(value)) {
+                return @unionInit(Hittable, field.name, value);
+            }
+        }
+        @compileError("Type " ++ @typeName(@TypeOf(value)) ++ " is not a Hittable variant");
+    }
 
     pub fn hit(self: @This(), r: Ray, ray_t: Interval) ?HitRecord {
         return switch (self) {
@@ -27,8 +37,8 @@ pub const HittableList = struct {
         return .{ .items = .empty, .alloc = alloc };
     }
 
-    pub fn addSphere(self: *@This(), sphere: Sphere) !void {
-        try self.items.append(self.alloc, .{ .sphere = sphere });
+    pub fn add(self: *@This(), hittable: Hittable) !void {
+        try self.items.append(self.alloc, hittable);
     }
 
     pub fn hit(self: @This(), r: Ray, ray_t: Interval) ?HitRecord {

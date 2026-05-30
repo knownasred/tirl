@@ -9,35 +9,28 @@ const Interval = renderer.math.Interval;
 const toFloat = renderer.math.toFloat;
 const toInt = renderer.math.toInt;
 const common = @import("common.zig");
-const Lambertian = @import("lambertian.zig");
-const Metal = @import("metal.zig");
-const Dielectric = @import("dielectric.zig");
+pub const Lambertian = @import("lambertian.zig");
+pub const Metal = @import("metal.zig");
+pub const Dielectric = @import("dielectric.zig");
 
 pub const Material = union(enum) {
     Lambertian: Lambertian,
     Metal: Metal,
     Dielectric: Dielectric,
+
+    pub fn from(value: anytype) Material {
+        const fields = @typeInfo(Material).@"union".fields;
+        inline for (fields) |field| {
+            if (field.type == @TypeOf(value)) {
+                return @unionInit(Material, field.name, value);
+            }
+        }
+        @compileError("Type " ++ @typeName(@TypeOf(value)) ++ " is not a Material variant");
+    }
+
     pub fn scatter(self: @This(), ray: Ray, record: HitRecord) ?common.ScatterResult {
         return switch (self) {
             inline else => |t| t.scatter(ray, record),
-        };
-    }
-
-    pub fn makeLambertian(albedo: Color3) Material {
-        return .{
-            .Lambertian = .{ .albedo = albedo },
-        };
-    }
-
-    pub fn makeMetal(albedo: Color3, fuzz: f32) Material {
-        return .{
-            .Metal = .{ .albedo = albedo, .fuzz = fuzz },
-        };
-    }
-
-    pub fn makeDielectric(ri: f32) Material {
-        return .{
-            .Dielectric = .{ .refractionIndex = ri },
         };
     }
 };

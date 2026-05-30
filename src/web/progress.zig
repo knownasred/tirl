@@ -16,8 +16,9 @@ pub const WebProgress = struct {
         return .{ .context = self };
     }
 
-    pub fn increment(self: *WebProgress, amount: u64) void {
+    pub fn increment(self: *WebProgress, amount: u64) bool {
         _ = self.current.fetchAdd(amount, .monotonic);
+        return false;
     }
 
     pub fn setTotal(self: *WebProgress, total: u64) void {

@@ -1,4 +1,5 @@
 pub const file = @import("file.zig");
+pub const block = @import("block.zig");
 pub const print = @import("print.zig");
 
 comptime {

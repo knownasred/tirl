@@ -10,6 +10,8 @@ const toInt = renderer.math.toInt;
 const std = @import("std");
 
 const hittables = @import("hittables/root.zig");
+const materials = @import("materials/root.zig");
+const Material = materials.Material;
 const constants = @import("constants.zig");
 const Camera = @import("camera.zig");
 
@@ -17,30 +19,30 @@ pub fn render(alloc: std.mem.Allocator, progress: anytype, renderMode: Camera.Re
     // World
     var world = hittables.HittableList.new(alloc);
 
-    const materialGround = renderer.Material.makeLambertian(.new(0.8, 0.8, 0.0));
-    const materialCenter = renderer.Material.makeLambertian(.new(0.1, 0.2, 0.5));
-    const materialLeft = renderer.Material.makeDielectric(1.50);
-    const materialBubble = renderer.Material.makeDielectric(1.00 / 1.50);
-    const materialRight = renderer.Material.makeMetal(.new(0.8, 0.6, 0.2), 1.0);
+    const materialGround = Material.from(materials.Lambertian{ .albedo = .new(0.8, 0.8, 0.0) });
+    const materialCenter = Material.from(materials.Lambertian{ .albedo = .new(0.1, 0.2, 0.5) });
+    const materialLeft = Material.from(materials.Dielectric{ .refractionIndex = 1.50 });
+    const materialBubble = Material.from(materials.Dielectric{ .refractionIndex = 1.00 / 1.50 });
+    const materialRight = Material.from(materials.Metal{ .albedo = .new(0.8, 0.6, 0.2), .fuzz = 1.0 });
 
-    try world.addSphere(.{ .center = .new(0, -100.5, -1), .radius = 100, .material = &materialGround });
-    try world.addSphere(.{ .center = .new(0, 0, -1.2), .radius = 0.5, .material = &materialCenter });
-    try world.addSphere(.{ .center = .new(-1, 0, -1), .radius = 0.5, .material = &materialLeft });
-    try world.addSphere(.{ .center = .new(-1, 0, -1), .radius = 0.4, .material = &materialBubble });
-    try world.addSphere(.{ .center = .new(1, 0, -1), .radius = 0.5, .material = &materialRight });
+    try world.add(.{ .sphere = .{ .position = .new(0, -100.5, -1), .radius = 100, .material = &materialGround } });
+    try world.add(.{ .sphere = .{ .position = .new(0, 0, -1.2), .radius = 0.5, .material = &materialCenter } });
+    try world.add(.{ .sphere = .{ .position = .new(-1, 0, -1), .radius = 0.5, .material = &materialLeft } });
+    try world.add(.{ .sphere = .{ .position = .new(-1, 0, -1), .radius = 0.4, .material = &materialBubble } });
+    try world.add(.{ .sphere = .{ .position = .new(1, 0, -1), .radius = 0.5, .material = &materialRight } });
 
     const camera: Camera = .{
         .aspectRatio = 16.0 / 9.0,
         .imageWidth = 400,
         .maxDepth = 50,
         .samplesPerPixel = 100,
-        .vfov = 20,
-        .lookFrom = .new(-2, 2, 1),
+        .vfov = 90,
+        .lookFrom = .new(0, 0, 0),
         .lookAt = .new(0, 0, -1),
         .vup = .new(0, 1, 0),
 
-        .defocusAngle = 10,
-        .focusDistance = 3.4,
+        .defocusAngle = 4,
+        .focusDistance = 1,
         .renderMode = renderMode,
     };
 

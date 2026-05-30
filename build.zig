@@ -104,4 +104,27 @@ pub fn build(b: *std.Build) void {
     if (b.args) |args| {
         parse_cmd.addArgs(args);
     }
+
+    const web_exe = b.addExecutable(.{
+        .name = "zig_scene_web",
+        .root_module = b.createModule(.{
+            .root_source_file = b.path("src/web_main.zig"),
+            .target = target,
+            .optimize = optimize,
+            .imports = &.{
+                .{ .name = "zig_scene", .module = mod },
+            },
+        }),
+    });
+
+    b.installArtifact(web_exe);
+
+    const run_web_step = b.step("run-web", "Run the web server");
+    const run_web_cmd = b.addRunArtifact(web_exe);
+    run_web_step.dependOn(&run_web_cmd.step);
+    run_web_cmd.step.dependOn(b.getInstallStep());
+
+    if (b.args) |args| {
+        run_web_cmd.addArgs(args);
+    }
 }

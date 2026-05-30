@@ -36,6 +36,7 @@ focusDistance: f32 = 10,
 renderMode: RenderMode = .perPixel,
 
 pub const RenderMode = enum { perPixel, progressive };
+pub const _ignore = .{"renderMode"};
 const Self = @This();
 
 pub fn render(self: *const Self, alloc: std.mem.Allocator, progress: anytype, world: *const hittables.HittableList) !Image {

@@ -1,4 +1,63 @@
 Camera "Camera" {
-    position: Vec3(0.0, 0.0, 0.0),
-    rotation: Quat(0.0, 0.0, 0.0, 1.0),
+    lookFrom: Vec3(0, 0, 0),
+    lookAt: Vec3(0, 0, -1),
+    vup: Vec3(0, 1, 0),
+    vfov: 90,
+    aspectRatio: 1.77,
+    imageWidth: 400,
+    samplesPerPixel: 100,
+    maxDepth: 50,
+    defocusAngle: 4,
+    focusDistance: 1,
+}
+
+LambertianMaterial "Ground" {
+    albedo: Color3(0.8, 0.8, 0.0),
+}
+
+LambertianMaterial "Center" {
+    albedo: Color3(0.1, 0.2, 0.5),
+}
+
+DielectricMaterial "Glass" {
+    refractionIndex: 1.50,
+}
+
+DielectricMaterial "Bubble" {
+    refractionIndex: 0.6667,
+}
+
+MetalMaterial "Copper" {
+    albedo: Color3(0.8, 0.6, 0.2),
+    fuzz: 1.0,
+}
+
+Sphere "ground" {
+    position: Vec3(0, -100.5, -1),
+    radius: 100,
+    material: @"Ground",
+}
+
+Sphere "center" {
+    position: Vec3(0, 0, -1.2),
+    radius: 0.5,
+    material: @"Center",
+}
+
+Sphere "left" {
+    position: Vec3(-1, 0, -1),
+    radius: 0.5,
+    material: @"Glass",
+}
+
+Sphere "bubble" {
+    position: Vec3(-1, 0, -1),
+    radius: 0.4,
+    material: @"Bubble",
+}
+
+Sphere "right" {
+    position: Vec3(1, 0, -1),
+    radius: 0.5,
+    material: @"Copper",
 }
