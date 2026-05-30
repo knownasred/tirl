@@ -13,13 +13,14 @@ const common = @import("common.zig");
 
 const std = @import("std");
 
-const constants = @import("../constants.zig");
 
 /// Refractive index in vaccum or air, or the ratio of the material's refractive index over the refractive
 /// index of the enclosing media.
 refractionIndex: f32,
 
-pub fn scatter(self: @This(), r_in: Ray, record: HitRecord) ?common.ScatterResult {
+const std_lib = @import("std");
+
+pub fn scatter(self: @This(), r_in: Ray, record: HitRecord, rng: std_lib.Random) ?common.ScatterResult {
     const ri = if (record.front_face) 1 / self.refractionIndex else self.refractionIndex;
 
     const unitDirection = r_in.direction.unit();
@@ -27,7 +28,7 @@ pub fn scatter(self: @This(), r_in: Ray, record: HitRecord) ?common.ScatterResul
     const sinTheta = @sqrt(1 - cosTheta * cosTheta);
 
     const refracted =
-        if (ri * sinTheta > 1.0 or reflectance(cosTheta, ri) > constants.randomDouble())
+        if (ri * sinTheta > 1.0 or reflectance(cosTheta, ri) > rng.float(f32))
             Vec3.reflect(unitDirection, record.normal)
         else
             Vec3.refract(unitDirection, record.normal, ri);

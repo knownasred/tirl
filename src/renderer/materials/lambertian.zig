@@ -13,8 +13,10 @@ const common = @import("common.zig");
 
 albedo: Color3,
 
-pub fn scatter(self: @This(), _: Ray, record: HitRecord) ?common.ScatterResult {
-    var scatterDirection = record.normal.add(Vec3.randomUnit());
+const std = @import("std");
+
+pub fn scatter(self: @This(), _: Ray, record: HitRecord, rng: std.Random) ?common.ScatterResult {
+    var scatterDirection = record.normal.add(Vec3.randomUnit(rng));
 
     if (scatterDirection.isNearZero()) {
         scatterDirection = record.normal;

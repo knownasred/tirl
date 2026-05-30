@@ -19,5 +19,17 @@ pub fn Progress(comptime T: type) type {
                 self.context.onPixel(row, col, sample, color);
             }
         }
+
+        pub fn onTileStart(self: Self, tileIdx: usize) void {
+            if (comptime @hasDecl(T, "onTileStart")) {
+                self.context.onTileStart(tileIdx);
+            }
+        }
+
+        pub fn onTileEnd(self: Self, tileIdx: usize) void {
+            if (comptime @hasDecl(T, "onTileEnd")) {
+                self.context.onTileEnd(tileIdx);
+            }
+        }
     };
 }

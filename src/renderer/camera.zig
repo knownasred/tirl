@@ -35,11 +35,23 @@ focusDistance: f32 = 10,
 
 renderMode: RenderMode = .perPixel,
 
+/// Number of threads for tiled rendering (null = CPU core count)
+threadCount: ?usize = null,
+
+pub const TILE_SIZE: usize = 128;
+
 pub const RenderMode = enum { perPixel, progressive };
-pub const _ignore = .{"renderMode"};
+pub const _ignore = .{ "renderMode", "threadCount" };
 const Self = @This();
 
 pub fn render(self: *const Self, alloc: std.mem.Allocator, progress: anytype, world: *const hittables.HittableList) !Image {
+    const numThreads = self.threadCount orelse (std.Thread.getCpuCount() catch 1);
+    if (numThreads > 1) {
+        return switch (self.renderMode) {
+            .perPixel => self.renderTiled(alloc, progress, world, numThreads),
+            .progressive => self.renderTiledProgressive(alloc, progress, world, numThreads),
+        };
+    }
     return switch (self.renderMode) {
         .perPixel => self.renderPerPixel(alloc, progress, world),
         .progressive => self.renderProgressive(alloc, progress, world),
@@ -51,14 +63,16 @@ fn renderPerPixel(self: *const Self, alloc: std.mem.Allocator, progress: anytype
     progress.setTotal(state.imageHeight);
 
     var image = try Image.create(alloc, self.imageWidth, state.imageHeight);
+    var prng: std.Random.DefaultPrng = .init(constants.SEED);
+    const rng = prng.random();
 
     for (0..image.height) |j| {
         for (0..image.width) |i| {
             var pixel_color: Vec3 = .zero();
 
             for (0..self.samplesPerPixel) |s| {
-                const ray = self.getRay(state, i, j);
-                pixel_color = pixel_color.add(rayColor(ray, self.maxDepth, world).inner);
+                const ray = self.getRay(state, i, j, rng);
+                pixel_color = pixel_color.add(rayColor(ray, self.maxDepth, world, rng).inner);
                 progress.onPixel(j, i, s + 1, .from(pixel_color.mul_s(1.0 / toFloat(s + 1))));
             }
 
@@ -77,12 +91,14 @@ fn renderProgressive(self: *const Self, alloc: std.mem.Allocator, progress: anyt
 
     var image = try Image.create(alloc, self.imageWidth, state.imageHeight);
     var accum = try AccumulationBuffer.create(alloc, self.imageWidth, state.imageHeight);
+    var prng: std.Random.DefaultPrng = .init(constants.SEED);
+    const rng = prng.random();
 
     for (0..self.samplesPerPixel) |s| {
         for (0..image.height) |j| {
             for (0..image.width) |i| {
-                const ray = self.getRay(state, i, j);
-                accum.accumulate(j, i, rayColor(ray, self.maxDepth, world).inner);
+                const ray = self.getRay(state, i, j, rng);
+                accum.accumulate(j, i, rayColor(ray, self.maxDepth, world, rng).inner);
             }
         }
 
@@ -102,39 +118,214 @@ fn renderProgressive(self: *const Self, alloc: std.mem.Allocator, progress: anyt
     return image;
 }
 
-fn getRay(self: @This(), state: CameraState, i: usize, j: usize) Ray {
-    const offset = sampleSquare();
+fn renderTiled(self: *const Self, alloc: std.mem.Allocator, progress: anytype, world: *const hittables.HittableList, numThreads: usize) !Image {
+    const state = self.initialize();
+    const tilesX = (self.imageWidth + TILE_SIZE - 1) / TILE_SIZE;
+    const tilesY = (state.imageHeight + TILE_SIZE - 1) / TILE_SIZE;
+    const totalTiles = tilesX * tilesY;
+
+    progress.setTotal(totalTiles);
+
+    var image = try Image.create(alloc, self.imageWidth, state.imageHeight);
+
+    const threads = try alloc.alloc(std.Thread, numThreads);
+
+    for (0..numThreads) |threadIdx| {
+        threads[threadIdx] = try std.Thread.spawn(.{}, tileWorker, .{
+            self,
+            state,
+            world,
+            progress,
+            &image,
+            threadIdx,
+            numThreads,
+            tilesX,
+            tilesY,
+            totalTiles,
+        });
+    }
+
+    for (threads) |thread| {
+        thread.join();
+    }
+
+    return image;
+}
+
+fn tileWorker(
+    self: *const Self,
+    state: CameraState,
+    world: *const hittables.HittableList,
+    progress: anytype,
+    image: *Image,
+    threadIdx: usize,
+    numThreads: usize,
+    tilesX: usize,
+    tilesY: usize,
+    totalTiles: usize,
+) void {
+    _ = tilesY;
+    var tileIdx = threadIdx;
+    while (tileIdx < totalTiles) : (tileIdx += numThreads) {
+        progress.onTileStart(tileIdx);
+        var prng: std.Random.DefaultPrng = .init(constants.SEED ^ @as(u64, tileIdx));
+        const rng = prng.random();
+
+        const tileX = tileIdx % tilesX;
+        const tileY = tileIdx / tilesX;
+        const startCol = tileX * TILE_SIZE;
+        const startRow = tileY * TILE_SIZE;
+        const endCol = @min(startCol + TILE_SIZE, self.imageWidth);
+        const endRow = @min(startRow + TILE_SIZE, state.imageHeight);
+
+        for (startRow..endRow) |j| {
+            for (startCol..endCol) |i| {
+                var pixel_color: Vec3 = .zero();
+                for (0..self.samplesPerPixel) |s| {
+                    const ray = self.getRay(state, i, j, rng);
+                    pixel_color = pixel_color.add(rayColor(ray, self.maxDepth, world, rng).inner);
+                    progress.onPixel(j, i, s + 1, .from(pixel_color.mul_s(1.0 / toFloat(s + 1))));
+                }
+                image.set(j, i, .from(pixel_color.mul_s(state.pixelSampleScale)));
+            }
+        }
+
+        progress.onTileEnd(tileIdx);
+        if (progress.increment(1)) return;
+    }
+}
+
+fn renderTiledProgressive(self: *const Self, alloc: std.mem.Allocator, progress: anytype, world: *const hittables.HittableList, numThreads: usize) !Image {
+    const state = self.initialize();
+    const tilesX = (self.imageWidth + TILE_SIZE - 1) / TILE_SIZE;
+    const tilesY = (state.imageHeight + TILE_SIZE - 1) / TILE_SIZE;
+    const totalTiles = tilesX * tilesY;
+
+    progress.setTotal(self.samplesPerPixel);
+
+    var image = try Image.create(alloc, self.imageWidth, state.imageHeight);
+    const accumBuffer = try alloc.alloc(Vec3, self.imageWidth * state.imageHeight);
+    @memset(accumBuffer, Vec3.zero());
+
+    var barrierCount = std.atomic.Value(usize).init(0);
+    var barrierGeneration = std.atomic.Value(usize).init(0);
+
+    const threads = try alloc.alloc(std.Thread, numThreads);
+
+    for (0..numThreads) |threadIdx| {
+        threads[threadIdx] = try std.Thread.spawn(.{}, progressiveTileWorker, .{
+            self,
+            state,
+            world,
+            progress,
+            &image,
+            accumBuffer,
+            threadIdx,
+            numThreads,
+            tilesX,
+            totalTiles,
+            &barrierCount,
+            &barrierGeneration,
+        });
+    }
+
+    for (threads) |thread| {
+        thread.join();
+    }
+
+    return image;
+}
+
+fn progressiveTileWorker(
+    self: *const Self,
+    state: CameraState,
+    world: *const hittables.HittableList,
+    progress: anytype,
+    image: *Image,
+    accumBuffer: []Vec3,
+    threadIdx: usize,
+    numThreads: usize,
+    tilesX: usize,
+    totalTiles: usize,
+    barrierCount: *std.atomic.Value(usize),
+    barrierGeneration: *std.atomic.Value(usize),
+) void {
+    for (0..self.samplesPerPixel) |s| {
+        var tileIdx = threadIdx;
+        while (tileIdx < totalTiles) : (tileIdx += numThreads) {
+            progress.onTileStart(tileIdx);
+            var prng: std.Random.DefaultPrng = .init(constants.SEED ^ @as(u64, tileIdx) ^ (@as(u64, s) << 32));
+            const rng = prng.random();
+
+            const tileX = tileIdx % tilesX;
+            const tileY = tileIdx / tilesX;
+            const startCol = tileX * TILE_SIZE;
+            const startRow = tileY * TILE_SIZE;
+            const endCol = @min(startCol + TILE_SIZE, self.imageWidth);
+            const endRow = @min(startRow + TILE_SIZE, state.imageHeight);
+
+            const scale = 1.0 / toFloat(s + 1);
+            for (startRow..endRow) |j| {
+                for (startCol..endCol) |i| {
+                    const idx = j * self.imageWidth + i;
+                    const ray = self.getRay(state, i, j, rng);
+                    accumBuffer[idx] = accumBuffer[idx].add(rayColor(ray, self.maxDepth, world, rng).inner);
+                    const color: Color3 = .from(accumBuffer[idx].mul_s(scale));
+                    image.set(j, i, color);
+                    progress.onPixel(j, i, s + 1, color);
+                }
+            }
+            progress.onTileEnd(tileIdx);
+        }
+
+        // Spin barrier: last thread to arrive advances the generation
+        const gen = barrierGeneration.load(.acquire);
+        const arrived = barrierCount.fetchAdd(1, .acq_rel) + 1;
+        if (arrived == numThreads) {
+            if (progress.increment(1)) return;
+            barrierCount.store(0, .release);
+            barrierGeneration.store(gen + 1, .release);
+        } else {
+            while (barrierGeneration.load(.acquire) == gen) {
+                std.atomic.spinLoopHint();
+            }
+        }
+    }
+}
+
+fn getRay(self: @This(), state: CameraState, i: usize, j: usize, rng: std.Random) Ray {
+    const offset = sampleSquare(rng);
     const pixel_sample = state.pixel00Loc.inner
         .add(state.pixelDeltaU.mul_s(toFloat(i) + offset.getX()))
         .add(state.pixelDeltaV.mul_s(toFloat(j) + offset.getY()));
 
-    const rayOrigin = if (self.defocusAngle <= 0) state.center.inner else defocusDiskSample(state);
+    const rayOrigin = if (self.defocusAngle <= 0) state.center.inner else defocusDiskSample(state, rng);
 
     return .new(.from(rayOrigin), pixel_sample.sub(rayOrigin));
 }
 
-fn defocusDiskSample(state: CameraState) Vec3 {
-    const p = Vec3.randomOnUnitDisk();
+fn defocusDiskSample(state: CameraState, rng: std.Random) Vec3 {
+    const p = Vec3.randomOnUnitDisk(rng);
 
     return state.center.inner
         .add(state.defocusDiskU.mul_s(p.getX()))
         .add(state.defocusDiskV.mul_s(p.getY()));
 }
 
-fn sampleSquare() Vec3 {
-    return .new(constants.randomDouble() - 0.5, constants.randomDouble() - 0.5, 0);
+fn sampleSquare(rng: std.Random) Vec3 {
+    return .new(rng.float(f32) - 0.5, rng.float(f32) - 0.5, 0);
 }
 
-fn rayColor(ray: Ray, depth: usize, world: *const hittables.HittableList) Color3 {
+fn rayColor(ray: Ray, depth: usize, world: *const hittables.HittableList, rng: std.Random) Color3 {
     if (depth <= 0) {
         return .new(0, 0, 0);
     }
 
     if (world.hit(ray, .{ .min = 0.001, .max = constants.infinity })) |t| {
-        if (t.material.scatter(ray, t)) |scattered| {
+        if (t.material.scatter(ray, t, rng)) |scattered| {
             return .from(
                 scattered.attenuation.inner.mul(
-                    rayColor(scattered.scatteredRay, depth - 1, world).inner,
+                    rayColor(scattered.scatteredRay, depth - 1, world, rng).inner,
                 ),
             );
         }
@@ -143,7 +334,6 @@ fn rayColor(ray: Ray, depth: usize, world: *const hittables.HittableList) Color3
     }
 
     const unit_direction = ray.direction.unit();
-    // Lerp, with a being the progression
     const a = 0.5 * (unit_direction.getY() + 1.0);
     const start = Color3.new(1.0, 1.0, 1.0);
     const end = Color3.new(0.5, 0.7, 1.0);
@@ -184,9 +374,6 @@ fn initialize(self: *const Self) CameraState {
     const u = Vec3.unit(Vec3.cross(self.vup.inner, w));
     const v = Vec3.cross(w, u);
 
-    // Note to self on viewport:
-    // - V_u (viewport U) goes from the left to the right
-    // - V_v (viewport V) goes from the top to the bottom
     const viewport_u = u.mul_s(viewport_width);
     const viewport_v = v.negate().mul_s(viewport_height);
 

@@ -28,9 +28,11 @@ pub const Material = union(enum) {
         @compileError("Type " ++ @typeName(@TypeOf(value)) ++ " is not a Material variant");
     }
 
-    pub fn scatter(self: @This(), ray: Ray, record: HitRecord) ?common.ScatterResult {
+    const std = @import("std");
+
+    pub fn scatter(self: @This(), ray: Ray, record: HitRecord, rng: std.Random) ?common.ScatterResult {
         return switch (self) {
-            inline else => |t| t.scatter(ray, record),
+            inline else => |t| t.scatter(ray, record, rng),
         };
     }
 };

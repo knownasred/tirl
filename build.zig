@@ -64,6 +64,9 @@ pub fn build(b: *std.Build) void {
 
     const run_gui_step = b.step("run-gui", "Run the GUI app");
     const run_gui_cmd = b.addRunArtifact(gui_exe);
+    if (b.args) |args| {
+        run_gui_cmd.addArgs(args);
+    }
     run_gui_step.dependOn(&run_gui_cmd.step);
     run_gui_cmd.step.dependOn(b.getInstallStep());
 

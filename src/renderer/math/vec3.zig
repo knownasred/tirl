@@ -1,5 +1,4 @@
 const std = @import("std");
-const constants = @import("../constants.zig");
 pub const Vec3 = struct {
     pos: @Vector(3, f32),
 
@@ -105,25 +104,22 @@ pub const Vec3 = struct {
         return rOutPerp.add(rOutParallel);
     }
 
-    pub fn random() Vec3 {
+    pub fn random(rng: std.Random) Vec3 {
+        return .new(rng.float(f32), rng.float(f32), rng.float(f32));
+    }
+
+    pub fn randomRanged(rng: std.Random, min: f32, max: f32) Vec3 {
+        const range = max - min;
         return .new(
-            constants.randomDouble(),
-            constants.randomDouble(),
-            constants.randomDouble(),
+            min + range * rng.float(f32),
+            min + range * rng.float(f32),
+            min + range * rng.float(f32),
         );
     }
 
-    pub fn randomRanged(min: f32, max: f32) Vec3 {
-        return .new(
-            constants.randomDoubleRanged(min, max),
-            constants.randomDoubleRanged(min, max),
-            constants.randomDoubleRanged(min, max),
-        );
-    }
-
-    pub inline fn randomUnit() Vec3 {
+    pub inline fn randomUnit(rng: std.Random) Vec3 {
         while (true) {
-            const p = Vec3.randomRanged(-1, 1);
+            const p = Vec3.randomRanged(rng, -1, 1);
             const lengthSquared = p.length_squared();
 
             if (1e-160 <= lengthSquared and lengthSquared <= 1) {
@@ -132,17 +128,21 @@ pub const Vec3 = struct {
         }
     }
 
-    pub inline fn randomOnUnitDisk() Vec3 {
+    pub inline fn randomOnUnitDisk(rng: std.Random) Vec3 {
         while (true) {
-            const p: Vec3 = .new(constants.randomDoubleRanged(-1, 1),constants.randomDoubleRanged(-1, 1),0);
-
-            if (p.length_squared() < 1)
-                        return p;
+            const range = @as(f32, 2.0);
+            const p: Vec3 = .new(
+                -1 + range * rng.float(f32),
+                -1 + range * rng.float(f32),
+                0,
+            );
+            if (p.length_squared() < 1) return p;
         }
     }
-    pub inline fn randomOnHemisphere(normal: Vec3) Vec3 {
-        const onUnitSphere = Vec3.randomUnit();
-        if (onUnitSphere.dot(normal) > 0.0) { // In the same hemisphere as the normal
+
+    pub inline fn randomOnHemisphere(rng: std.Random, normal: Vec3) Vec3 {
+        const onUnitSphere = Vec3.randomUnit(rng);
+        if (onUnitSphere.dot(normal) > 0.0) {
             return onUnitSphere;
         } else {
             return onUnitSphere.negate();

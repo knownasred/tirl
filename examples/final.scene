@@ -1,0 +1,4932 @@
+Camera "Camera" {
+    lookFrom: Vec3(13, 2, 3),
+    lookAt: Vec3(0, 0, 0),
+    vup: Vec3(0, 1, 0),
+    vfov: 20,
+    aspectRatio: 1.77778,
+    imageWidth: 1200,
+    samplesPerPixel: 500,
+    maxDepth: 50,
+    defocusAngle: 0.6,
+    focusDistance: 10.0,
+}
+
+LambertianMaterial "GroundMat" {
+    albedo: Color3(0.5, 0.5, 0.5),
+}
+
+Sphere "Ground" {
+    position: Vec3(0, -1000, 0),
+    radius: 1000,
+    material: @"GroundMat",
+}
+
+LambertianMaterial "mat_0" {
+    albedo: Color3(0.1644, 0.6037, 0.0367),
+}
+
+Sphere "small_0" {
+    position: Vec3(-10.9775, 0.2000, -10.7525),
+    radius: 0.2,
+    material: @"mat_0",
+}
+
+LambertianMaterial "mat_1" {
+    albedo: Color3(0.0053, 0.3541, 0.1299),
+}
+
+Sphere "small_1" {
+    position: Vec3(-10.8032, 0.2000, -9.5452),
+    radius: 0.2,
+    material: @"mat_1",
+}
+
+MetalMaterial "mat_2" {
+    albedo: Color3(0.8491, 0.6701, 0.5777),
+    fuzz: 0.4786,
+}
+
+Sphere "small_2" {
+    position: Vec3(-10.9942, 0.2000, -8.2748),
+    radius: 0.2,
+    material: @"mat_2",
+}
+
+LambertianMaterial "mat_3" {
+    albedo: Color3(0.5117, 0.5890, 0.5218),
+}
+
+Sphere "small_3" {
+    position: Vec3(-10.9165, 0.2000, -7.9130),
+    radius: 0.2,
+    material: @"mat_3",
+}
+
+LambertianMaterial "mat_4" {
+    albedo: Color3(0.5330, 0.4068, 0.0104),
+}
+
+Sphere "small_4" {
+    position: Vec3(-10.5032, 0.2000, -6.2535),
+    radius: 0.2,
+    material: @"mat_4",
+}
+
+LambertianMaterial "mat_5" {
+    albedo: Color3(0.0281, 0.2319, 0.0776),
+}
+
+Sphere "small_5" {
+    position: Vec3(-10.9282, 0.2000, -5.7905),
+    radius: 0.2,
+    material: @"mat_5",
+}
+
+LambertianMaterial "mat_6" {
+    albedo: Color3(0.1042, 0.1191, 0.3755),
+}
+
+Sphere "small_6" {
+    position: Vec3(-10.1570, 0.2000, -4.4168),
+    radius: 0.2,
+    material: @"mat_6",
+}
+
+LambertianMaterial "mat_7" {
+    albedo: Color3(0.6541, 0.0074, 0.0845),
+}
+
+Sphere "small_7" {
+    position: Vec3(-10.4987, 0.2000, -3.3838),
+    radius: 0.2,
+    material: @"mat_7",
+}
+
+LambertianMaterial "mat_8" {
+    albedo: Color3(0.2063, 0.3618, 0.1215),
+}
+
+Sphere "small_8" {
+    position: Vec3(-10.1514, 0.2000, -2.2113),
+    radius: 0.2,
+    material: @"mat_8",
+}
+
+LambertianMaterial "mat_9" {
+    albedo: Color3(0.5249, 0.0876, 0.5083),
+}
+
+Sphere "small_9" {
+    position: Vec3(-10.4948, 0.2000, -1.7635),
+    radius: 0.2,
+    material: @"mat_9",
+}
+
+LambertianMaterial "mat_10" {
+    albedo: Color3(0.4970, 0.0268, 0.3801),
+}
+
+Sphere "small_10" {
+    position: Vec3(-10.9576, 0.2000, -0.9013),
+    radius: 0.2,
+    material: @"mat_10",
+}
+
+LambertianMaterial "mat_11" {
+    albedo: Color3(0.0083, 0.3661, 0.1710),
+}
+
+Sphere "small_11" {
+    position: Vec3(-10.1260, 0.2000, 0.7747),
+    radius: 0.2,
+    material: @"mat_11",
+}
+
+LambertianMaterial "mat_12" {
+    albedo: Color3(0.8354, 0.1318, 0.1630),
+}
+
+Sphere "small_12" {
+    position: Vec3(-10.6087, 0.2000, 1.4084),
+    radius: 0.2,
+    material: @"mat_12",
+}
+
+MetalMaterial "mat_13" {
+    albedo: Color3(0.8045, 0.5764, 0.8813),
+    fuzz: 0.2697,
+}
+
+Sphere "small_13" {
+    position: Vec3(-10.7314, 0.2000, 2.5751),
+    radius: 0.2,
+    material: @"mat_13",
+}
+
+LambertianMaterial "mat_14" {
+    albedo: Color3(0.0063, 0.8164, 0.2557),
+}
+
+Sphere "small_14" {
+    position: Vec3(-10.5227, 0.2000, 3.0005),
+    radius: 0.2,
+    material: @"mat_14",
+}
+
+LambertianMaterial "mat_15" {
+    albedo: Color3(0.0416, 0.0526, 0.0983),
+}
+
+Sphere "small_15" {
+    position: Vec3(-10.2098, 0.2000, 4.8523),
+    radius: 0.2,
+    material: @"mat_15",
+}
+
+LambertianMaterial "mat_16" {
+    albedo: Color3(0.3692, 0.1142, 0.1468),
+}
+
+Sphere "small_16" {
+    position: Vec3(-10.5052, 0.2000, 5.2386),
+    radius: 0.2,
+    material: @"mat_16",
+}
+
+LambertianMaterial "mat_17" {
+    albedo: Color3(0.2268, 0.0272, 0.1989),
+}
+
+Sphere "small_17" {
+    position: Vec3(-10.1044, 0.2000, 6.5849),
+    radius: 0.2,
+    material: @"mat_17",
+}
+
+LambertianMaterial "mat_18" {
+    albedo: Color3(0.1445, 0.7783, 0.0169),
+}
+
+Sphere "small_18" {
+    position: Vec3(-10.8018, 0.2000, 7.0639),
+    radius: 0.2,
+    material: @"mat_18",
+}
+
+LambertianMaterial "mat_19" {
+    albedo: Color3(0.5342, 0.3709, 0.1538),
+}
+
+Sphere "small_19" {
+    position: Vec3(-10.8072, 0.2000, 8.1191),
+    radius: 0.2,
+    material: @"mat_19",
+}
+
+LambertianMaterial "mat_20" {
+    albedo: Color3(0.3405, 0.6627, 0.0396),
+}
+
+Sphere "small_20" {
+    position: Vec3(-10.6121, 0.2000, 9.3812),
+    radius: 0.2,
+    material: @"mat_20",
+}
+
+LambertianMaterial "mat_21" {
+    albedo: Color3(0.0853, 0.1175, 0.2306),
+}
+
+Sphere "small_21" {
+    position: Vec3(-10.2245, 0.2000, 10.2238),
+    radius: 0.2,
+    material: @"mat_21",
+}
+
+LambertianMaterial "mat_22" {
+    albedo: Color3(0.0506, 0.8101, 0.7862),
+}
+
+Sphere "small_22" {
+    position: Vec3(-9.2248, 0.2000, -10.5047),
+    radius: 0.2,
+    material: @"mat_22",
+}
+
+LambertianMaterial "mat_23" {
+    albedo: Color3(0.0235, 0.3734, 0.2079),
+}
+
+Sphere "small_23" {
+    position: Vec3(-9.5629, 0.2000, -9.8076),
+    radius: 0.2,
+    material: @"mat_23",
+}
+
+LambertianMaterial "mat_24" {
+    albedo: Color3(0.5532, 0.1112, 0.2874),
+}
+
+Sphere "small_24" {
+    position: Vec3(-9.6193, 0.2000, -8.1384),
+    radius: 0.2,
+    material: @"mat_24",
+}
+
+LambertianMaterial "mat_25" {
+    albedo: Color3(0.0334, 0.4288, 0.1513),
+}
+
+Sphere "small_25" {
+    position: Vec3(-9.5120, 0.2000, -7.3268),
+    radius: 0.2,
+    material: @"mat_25",
+}
+
+LambertianMaterial "mat_26" {
+    albedo: Color3(0.1588, 0.1067, 0.1464),
+}
+
+Sphere "small_26" {
+    position: Vec3(-9.8328, 0.2000, -6.4645),
+    radius: 0.2,
+    material: @"mat_26",
+}
+
+LambertianMaterial "mat_27" {
+    albedo: Color3(0.4886, 0.1463, 0.0945),
+}
+
+Sphere "small_27" {
+    position: Vec3(-9.6227, 0.2000, -5.4747),
+    radius: 0.2,
+    material: @"mat_27",
+}
+
+LambertianMaterial "mat_28" {
+    albedo: Color3(0.0545, 0.4576, 0.0730),
+}
+
+Sphere "small_28" {
+    position: Vec3(-9.7300, 0.2000, -4.7154),
+    radius: 0.2,
+    material: @"mat_28",
+}
+
+LambertianMaterial "mat_29" {
+    albedo: Color3(0.7745, 0.0583, 0.5866),
+}
+
+Sphere "small_29" {
+    position: Vec3(-9.7613, 0.2000, -3.1601),
+    radius: 0.2,
+    material: @"mat_29",
+}
+
+LambertianMaterial "mat_30" {
+    albedo: Color3(0.0064, 0.1986, 0.1261),
+}
+
+Sphere "small_30" {
+    position: Vec3(-9.1115, 0.2000, -2.4114),
+    radius: 0.2,
+    material: @"mat_30",
+}
+
+LambertianMaterial "mat_31" {
+    albedo: Color3(0.1647, 0.1461, 0.1674),
+}
+
+Sphere "small_31" {
+    position: Vec3(-9.9037, 0.2000, -1.5021),
+    radius: 0.2,
+    material: @"mat_31",
+}
+
+LambertianMaterial "mat_32" {
+    albedo: Color3(0.0391, 0.0010, 0.4913),
+}
+
+Sphere "small_32" {
+    position: Vec3(-9.1852, 0.2000, -0.2385),
+    radius: 0.2,
+    material: @"mat_32",
+}
+
+LambertianMaterial "mat_33" {
+    albedo: Color3(0.0041, 0.0664, 0.4932),
+}
+
+Sphere "small_33" {
+    position: Vec3(-9.3329, 0.2000, 0.4965),
+    radius: 0.2,
+    material: @"mat_33",
+}
+
+MetalMaterial "mat_34" {
+    albedo: Color3(0.5637, 0.6541, 0.9495),
+    fuzz: 0.3981,
+}
+
+Sphere "small_34" {
+    position: Vec3(-9.4757, 0.2000, 1.1333),
+    radius: 0.2,
+    material: @"mat_34",
+}
+
+MetalMaterial "mat_35" {
+    albedo: Color3(0.6248, 0.5514, 0.8901),
+    fuzz: 0.4421,
+}
+
+Sphere "small_35" {
+    position: Vec3(-9.1910, 0.2000, 2.1891),
+    radius: 0.2,
+    material: @"mat_35",
+}
+
+LambertianMaterial "mat_36" {
+    albedo: Color3(0.8040, 0.7915, 0.0218),
+}
+
+Sphere "small_36" {
+    position: Vec3(-9.4414, 0.2000, 3.1391),
+    radius: 0.2,
+    material: @"mat_36",
+}
+
+LambertianMaterial "mat_37" {
+    albedo: Color3(0.6932, 0.2163, 0.0851),
+}
+
+Sphere "small_37" {
+    position: Vec3(-9.7010, 0.2000, 4.8377),
+    radius: 0.2,
+    material: @"mat_37",
+}
+
+MetalMaterial "mat_38" {
+    albedo: Color3(0.9083, 0.7302, 0.6526),
+    fuzz: 0.3977,
+}
+
+Sphere "small_38" {
+    position: Vec3(-9.2273, 0.2000, 5.2002),
+    radius: 0.2,
+    material: @"mat_38",
+}
+
+LambertianMaterial "mat_39" {
+    albedo: Color3(0.2837, 0.2699, 0.2564),
+}
+
+Sphere "small_39" {
+    position: Vec3(-9.9787, 0.2000, 6.1738),
+    radius: 0.2,
+    material: @"mat_39",
+}
+
+DielectricMaterial "mat_40" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_40" {
+    position: Vec3(-9.5174, 0.2000, 7.8453),
+    radius: 0.2,
+    material: @"mat_40",
+}
+
+LambertianMaterial "mat_41" {
+    albedo: Color3(0.2555, 0.0471, 0.2285),
+}
+
+Sphere "small_41" {
+    position: Vec3(-9.1266, 0.2000, 8.1607),
+    radius: 0.2,
+    material: @"mat_41",
+}
+
+LambertianMaterial "mat_42" {
+    albedo: Color3(0.1469, 0.0012, 0.4984),
+}
+
+Sphere "small_42" {
+    position: Vec3(-9.5397, 0.2000, 9.3467),
+    radius: 0.2,
+    material: @"mat_42",
+}
+
+LambertianMaterial "mat_43" {
+    albedo: Color3(0.0255, 0.2193, 0.2662),
+}
+
+Sphere "small_43" {
+    position: Vec3(-9.3322, 0.2000, 10.6036),
+    radius: 0.2,
+    material: @"mat_43",
+}
+
+LambertianMaterial "mat_44" {
+    albedo: Color3(0.1643, 0.0376, 0.3954),
+}
+
+Sphere "small_44" {
+    position: Vec3(-8.7297, 0.2000, -10.7216),
+    radius: 0.2,
+    material: @"mat_44",
+}
+
+LambertianMaterial "mat_45" {
+    albedo: Color3(0.1649, 0.0001, 0.2493),
+}
+
+Sphere "small_45" {
+    position: Vec3(-8.1875, 0.2000, -9.4460),
+    radius: 0.2,
+    material: @"mat_45",
+}
+
+LambertianMaterial "mat_46" {
+    albedo: Color3(0.1011, 0.7174, 0.0144),
+}
+
+Sphere "small_46" {
+    position: Vec3(-8.5815, 0.2000, -8.6021),
+    radius: 0.2,
+    material: @"mat_46",
+}
+
+LambertianMaterial "mat_47" {
+    albedo: Color3(0.6147, 0.1511, 0.0049),
+}
+
+Sphere "small_47" {
+    position: Vec3(-8.4304, 0.2000, -7.6983),
+    radius: 0.2,
+    material: @"mat_47",
+}
+
+LambertianMaterial "mat_48" {
+    albedo: Color3(0.0302, 0.1224, 0.3443),
+}
+
+Sphere "small_48" {
+    position: Vec3(-8.5724, 0.2000, -6.2352),
+    radius: 0.2,
+    material: @"mat_48",
+}
+
+LambertianMaterial "mat_49" {
+    albedo: Color3(0.5783, 0.0453, 0.1685),
+}
+
+Sphere "small_49" {
+    position: Vec3(-8.4095, 0.2000, -5.9950),
+    radius: 0.2,
+    material: @"mat_49",
+}
+
+LambertianMaterial "mat_50" {
+    albedo: Color3(0.3872, 0.5350, 0.5882),
+}
+
+Sphere "small_50" {
+    position: Vec3(-8.9548, 0.2000, -4.7757),
+    radius: 0.2,
+    material: @"mat_50",
+}
+
+DielectricMaterial "mat_51" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_51" {
+    position: Vec3(-8.1977, 0.2000, -3.4486),
+    radius: 0.2,
+    material: @"mat_51",
+}
+
+LambertianMaterial "mat_52" {
+    albedo: Color3(0.4916, 0.3530, 0.0641),
+}
+
+Sphere "small_52" {
+    position: Vec3(-8.5457, 0.2000, -2.2525),
+    radius: 0.2,
+    material: @"mat_52",
+}
+
+LambertianMaterial "mat_53" {
+    albedo: Color3(0.1721, 0.0221, 0.0869),
+}
+
+Sphere "small_53" {
+    position: Vec3(-8.3108, 0.2000, -1.5308),
+    radius: 0.2,
+    material: @"mat_53",
+}
+
+LambertianMaterial "mat_54" {
+    albedo: Color3(0.4902, 0.0262, 0.2256),
+}
+
+Sphere "small_54" {
+    position: Vec3(-8.8755, 0.2000, -0.7919),
+    radius: 0.2,
+    material: @"mat_54",
+}
+
+LambertianMaterial "mat_55" {
+    albedo: Color3(0.4062, 0.6559, 0.0022),
+}
+
+Sphere "small_55" {
+    position: Vec3(-8.6219, 0.2000, 0.8144),
+    radius: 0.2,
+    material: @"mat_55",
+}
+
+LambertianMaterial "mat_56" {
+    albedo: Color3(0.3995, 0.4082, 0.1330),
+}
+
+Sphere "small_56" {
+    position: Vec3(-8.3219, 0.2000, 1.7681),
+    radius: 0.2,
+    material: @"mat_56",
+}
+
+LambertianMaterial "mat_57" {
+    albedo: Color3(0.2283, 0.0667, 0.0597),
+}
+
+Sphere "small_57" {
+    position: Vec3(-8.6077, 0.2000, 2.0261),
+    radius: 0.2,
+    material: @"mat_57",
+}
+
+LambertianMaterial "mat_58" {
+    albedo: Color3(0.0153, 0.0872, 0.0232),
+}
+
+Sphere "small_58" {
+    position: Vec3(-8.9757, 0.2000, 3.3546),
+    radius: 0.2,
+    material: @"mat_58",
+}
+
+LambertianMaterial "mat_59" {
+    albedo: Color3(0.2886, 0.6256, 0.0207),
+}
+
+Sphere "small_59" {
+    position: Vec3(-8.8095, 0.2000, 4.2942),
+    radius: 0.2,
+    material: @"mat_59",
+}
+
+LambertianMaterial "mat_60" {
+    albedo: Color3(0.2275, 0.5092, 0.7162),
+}
+
+Sphere "small_60" {
+    position: Vec3(-8.5145, 0.2000, 5.8999),
+    radius: 0.2,
+    material: @"mat_60",
+}
+
+LambertianMaterial "mat_61" {
+    albedo: Color3(0.0845, 0.1229, 0.5364),
+}
+
+Sphere "small_61" {
+    position: Vec3(-8.9817, 0.2000, 6.1371),
+    radius: 0.2,
+    material: @"mat_61",
+}
+
+LambertianMaterial "mat_62" {
+    albedo: Color3(0.0938, 0.1043, 0.0080),
+}
+
+Sphere "small_62" {
+    position: Vec3(-8.4535, 0.2000, 7.6731),
+    radius: 0.2,
+    material: @"mat_62",
+}
+
+LambertianMaterial "mat_63" {
+    albedo: Color3(0.0543, 0.4332, 0.0787),
+}
+
+Sphere "small_63" {
+    position: Vec3(-8.1376, 0.2000, 8.3570),
+    radius: 0.2,
+    material: @"mat_63",
+}
+
+MetalMaterial "mat_64" {
+    albedo: Color3(0.9919, 0.8913, 0.6736),
+    fuzz: 0.2142,
+}
+
+Sphere "small_64" {
+    position: Vec3(-8.4596, 0.2000, 9.1089),
+    radius: 0.2,
+    material: @"mat_64",
+}
+
+LambertianMaterial "mat_65" {
+    albedo: Color3(0.6986, 0.1014, 0.5267),
+}
+
+Sphere "small_65" {
+    position: Vec3(-8.5446, 0.2000, 10.3071),
+    radius: 0.2,
+    material: @"mat_65",
+}
+
+LambertianMaterial "mat_66" {
+    albedo: Color3(0.2608, 0.4350, 0.2106),
+}
+
+Sphere "small_66" {
+    position: Vec3(-7.6081, 0.2000, -10.3396),
+    radius: 0.2,
+    material: @"mat_66",
+}
+
+LambertianMaterial "mat_67" {
+    albedo: Color3(0.0720, 0.2150, 0.2836),
+}
+
+Sphere "small_67" {
+    position: Vec3(-7.7584, 0.2000, -9.2335),
+    radius: 0.2,
+    material: @"mat_67",
+}
+
+LambertianMaterial "mat_68" {
+    albedo: Color3(0.0386, 0.2715, 0.6173),
+}
+
+Sphere "small_68" {
+    position: Vec3(-7.9742, 0.2000, -8.2341),
+    radius: 0.2,
+    material: @"mat_68",
+}
+
+LambertianMaterial "mat_69" {
+    albedo: Color3(0.0616, 0.3704, 0.4461),
+}
+
+Sphere "small_69" {
+    position: Vec3(-7.9909, 0.2000, -7.1467),
+    radius: 0.2,
+    material: @"mat_69",
+}
+
+LambertianMaterial "mat_70" {
+    albedo: Color3(0.1533, 0.1781, 0.2513),
+}
+
+Sphere "small_70" {
+    position: Vec3(-7.2864, 0.2000, -6.9163),
+    radius: 0.2,
+    material: @"mat_70",
+}
+
+LambertianMaterial "mat_71" {
+    albedo: Color3(0.1904, 0.0303, 0.0230),
+}
+
+Sphere "small_71" {
+    position: Vec3(-7.3287, 0.2000, -5.7023),
+    radius: 0.2,
+    material: @"mat_71",
+}
+
+LambertianMaterial "mat_72" {
+    albedo: Color3(0.1048, 0.7076, 0.1485),
+}
+
+Sphere "small_72" {
+    position: Vec3(-7.3140, 0.2000, -4.8334),
+    radius: 0.2,
+    material: @"mat_72",
+}
+
+LambertianMaterial "mat_73" {
+    albedo: Color3(0.0025, 0.1465, 0.5391),
+}
+
+Sphere "small_73" {
+    position: Vec3(-7.8253, 0.2000, -3.7953),
+    radius: 0.2,
+    material: @"mat_73",
+}
+
+LambertianMaterial "mat_74" {
+    albedo: Color3(0.4284, 0.2695, 0.0812),
+}
+
+Sphere "small_74" {
+    position: Vec3(-7.8863, 0.2000, -2.2184),
+    radius: 0.2,
+    material: @"mat_74",
+}
+
+LambertianMaterial "mat_75" {
+    albedo: Color3(0.3294, 0.0466, 0.0080),
+}
+
+Sphere "small_75" {
+    position: Vec3(-7.1530, 0.2000, -1.5700),
+    radius: 0.2,
+    material: @"mat_75",
+}
+
+LambertianMaterial "mat_76" {
+    albedo: Color3(0.0905, 0.4794, 0.1179),
+}
+
+Sphere "small_76" {
+    position: Vec3(-7.7265, 0.2000, -0.1055),
+    radius: 0.2,
+    material: @"mat_76",
+}
+
+LambertianMaterial "mat_77" {
+    albedo: Color3(0.3023, 0.3786, 0.7013),
+}
+
+Sphere "small_77" {
+    position: Vec3(-7.6016, 0.2000, 0.7741),
+    radius: 0.2,
+    material: @"mat_77",
+}
+
+LambertianMaterial "mat_78" {
+    albedo: Color3(0.0273, 0.0002, 0.2675),
+}
+
+Sphere "small_78" {
+    position: Vec3(-7.8101, 0.2000, 1.5944),
+    radius: 0.2,
+    material: @"mat_78",
+}
+
+LambertianMaterial "mat_79" {
+    albedo: Color3(0.3192, 0.6351, 0.4924),
+}
+
+Sphere "small_79" {
+    position: Vec3(-7.7917, 0.2000, 2.6363),
+    radius: 0.2,
+    material: @"mat_79",
+}
+
+LambertianMaterial "mat_80" {
+    albedo: Color3(0.3527, 0.7509, 0.0118),
+}
+
+Sphere "small_80" {
+    position: Vec3(-7.1597, 0.2000, 3.3826),
+    radius: 0.2,
+    material: @"mat_80",
+}
+
+LambertianMaterial "mat_81" {
+    albedo: Color3(0.0359, 0.4819, 0.4718),
+}
+
+Sphere "small_81" {
+    position: Vec3(-7.3259, 0.2000, 4.5123),
+    radius: 0.2,
+    material: @"mat_81",
+}
+
+LambertianMaterial "mat_82" {
+    albedo: Color3(0.1393, 0.0229, 0.8041),
+}
+
+Sphere "small_82" {
+    position: Vec3(-7.9276, 0.2000, 5.0359),
+    radius: 0.2,
+    material: @"mat_82",
+}
+
+LambertianMaterial "mat_83" {
+    albedo: Color3(0.1812, 0.0304, 0.3065),
+}
+
+Sphere "small_83" {
+    position: Vec3(-7.1443, 0.2000, 6.8996),
+    radius: 0.2,
+    material: @"mat_83",
+}
+
+MetalMaterial "mat_84" {
+    albedo: Color3(0.8174, 0.7459, 0.5456),
+    fuzz: 0.1740,
+}
+
+Sphere "small_84" {
+    position: Vec3(-7.8367, 0.2000, 7.5268),
+    radius: 0.2,
+    material: @"mat_84",
+}
+
+LambertianMaterial "mat_85" {
+    albedo: Color3(0.2288, 0.2724, 0.4475),
+}
+
+Sphere "small_85" {
+    position: Vec3(-7.3969, 0.2000, 8.7720),
+    radius: 0.2,
+    material: @"mat_85",
+}
+
+LambertianMaterial "mat_86" {
+    albedo: Color3(0.3921, 0.5085, 0.3568),
+}
+
+Sphere "small_86" {
+    position: Vec3(-7.7169, 0.2000, 9.2909),
+    radius: 0.2,
+    material: @"mat_86",
+}
+
+LambertianMaterial "mat_87" {
+    albedo: Color3(0.4731, 0.1547, 0.5095),
+}
+
+Sphere "small_87" {
+    position: Vec3(-7.8312, 0.2000, 10.3256),
+    radius: 0.2,
+    material: @"mat_87",
+}
+
+LambertianMaterial "mat_88" {
+    albedo: Color3(0.5925, 0.0379, 0.3042),
+}
+
+Sphere "small_88" {
+    position: Vec3(-6.3716, 0.2000, -10.8907),
+    radius: 0.2,
+    material: @"mat_88",
+}
+
+LambertianMaterial "mat_89" {
+    albedo: Color3(0.0542, 0.4147, 0.3647),
+}
+
+Sphere "small_89" {
+    position: Vec3(-6.1070, 0.2000, -9.1784),
+    radius: 0.2,
+    material: @"mat_89",
+}
+
+LambertianMaterial "mat_90" {
+    albedo: Color3(0.1344, 0.3536, 0.4469),
+}
+
+Sphere "small_90" {
+    position: Vec3(-6.2487, 0.2000, -8.1178),
+    radius: 0.2,
+    material: @"mat_90",
+}
+
+MetalMaterial "mat_91" {
+    albedo: Color3(0.7075, 0.9671, 0.7539),
+    fuzz: 0.4103,
+}
+
+Sphere "small_91" {
+    position: Vec3(-6.7514, 0.2000, -7.2890),
+    radius: 0.2,
+    material: @"mat_91",
+}
+
+LambertianMaterial "mat_92" {
+    albedo: Color3(0.4891, 0.0800, 0.1905),
+}
+
+Sphere "small_92" {
+    position: Vec3(-6.7313, 0.2000, -6.4718),
+    radius: 0.2,
+    material: @"mat_92",
+}
+
+LambertianMaterial "mat_93" {
+    albedo: Color3(0.1316, 0.1336, 0.0339),
+}
+
+Sphere "small_93" {
+    position: Vec3(-6.5902, 0.2000, -5.7104),
+    radius: 0.2,
+    material: @"mat_93",
+}
+
+LambertianMaterial "mat_94" {
+    albedo: Color3(0.2562, 0.8050, 0.0183),
+}
+
+Sphere "small_94" {
+    position: Vec3(-6.3653, 0.2000, -4.2697),
+    radius: 0.2,
+    material: @"mat_94",
+}
+
+LambertianMaterial "mat_95" {
+    albedo: Color3(0.3849, 0.2403, 0.2962),
+}
+
+Sphere "small_95" {
+    position: Vec3(-6.4688, 0.2000, -3.2173),
+    radius: 0.2,
+    material: @"mat_95",
+}
+
+LambertianMaterial "mat_96" {
+    albedo: Color3(0.3281, 0.4501, 0.7260),
+}
+
+Sphere "small_96" {
+    position: Vec3(-6.8611, 0.2000, -2.5775),
+    radius: 0.2,
+    material: @"mat_96",
+}
+
+MetalMaterial "mat_97" {
+    albedo: Color3(0.8594, 0.8797, 0.9362),
+    fuzz: 0.0179,
+}
+
+Sphere "small_97" {
+    position: Vec3(-6.6580, 0.2000, -1.7150),
+    radius: 0.2,
+    material: @"mat_97",
+}
+
+LambertianMaterial "mat_98" {
+    albedo: Color3(0.7448, 0.0427, 0.5530),
+}
+
+Sphere "small_98" {
+    position: Vec3(-6.4320, 0.2000, -0.1712),
+    radius: 0.2,
+    material: @"mat_98",
+}
+
+LambertianMaterial "mat_99" {
+    albedo: Color3(0.0366, 0.1100, 0.0773),
+}
+
+Sphere "small_99" {
+    position: Vec3(-6.3754, 0.2000, 0.8131),
+    radius: 0.2,
+    material: @"mat_99",
+}
+
+LambertianMaterial "mat_100" {
+    albedo: Color3(0.0688, 0.1492, 0.1306),
+}
+
+Sphere "small_100" {
+    position: Vec3(-6.2867, 0.2000, 1.1530),
+    radius: 0.2,
+    material: @"mat_100",
+}
+
+LambertianMaterial "mat_101" {
+    albedo: Color3(0.0076, 0.6107, 0.0698),
+}
+
+Sphere "small_101" {
+    position: Vec3(-6.7714, 0.2000, 2.2298),
+    radius: 0.2,
+    material: @"mat_101",
+}
+
+LambertianMaterial "mat_102" {
+    albedo: Color3(0.1061, 0.1684, 0.1859),
+}
+
+Sphere "small_102" {
+    position: Vec3(-6.4712, 0.2000, 3.5750),
+    radius: 0.2,
+    material: @"mat_102",
+}
+
+LambertianMaterial "mat_103" {
+    albedo: Color3(0.2931, 0.6437, 0.1553),
+}
+
+Sphere "small_103" {
+    position: Vec3(-6.4853, 0.2000, 4.5173),
+    radius: 0.2,
+    material: @"mat_103",
+}
+
+LambertianMaterial "mat_104" {
+    albedo: Color3(0.3012, 0.2588, 0.4850),
+}
+
+Sphere "small_104" {
+    position: Vec3(-6.3298, 0.2000, 5.0441),
+    radius: 0.2,
+    material: @"mat_104",
+}
+
+LambertianMaterial "mat_105" {
+    albedo: Color3(0.4886, 0.5526, 0.5676),
+}
+
+Sphere "small_105" {
+    position: Vec3(-6.4270, 0.2000, 6.5588),
+    radius: 0.2,
+    material: @"mat_105",
+}
+
+LambertianMaterial "mat_106" {
+    albedo: Color3(0.4245, 0.0266, 0.1313),
+}
+
+Sphere "small_106" {
+    position: Vec3(-6.7220, 0.2000, 7.3967),
+    radius: 0.2,
+    material: @"mat_106",
+}
+
+LambertianMaterial "mat_107" {
+    albedo: Color3(0.4849, 0.2134, 0.3974),
+}
+
+Sphere "small_107" {
+    position: Vec3(-6.5145, 0.2000, 8.8743),
+    radius: 0.2,
+    material: @"mat_107",
+}
+
+MetalMaterial "mat_108" {
+    albedo: Color3(0.5576, 0.9814, 0.5704),
+    fuzz: 0.4833,
+}
+
+Sphere "small_108" {
+    position: Vec3(-6.3281, 0.2000, 9.3048),
+    radius: 0.2,
+    material: @"mat_108",
+}
+
+MetalMaterial "mat_109" {
+    albedo: Color3(0.9836, 0.9023, 0.6829),
+    fuzz: 0.3953,
+}
+
+Sphere "small_109" {
+    position: Vec3(-6.3482, 0.2000, 10.8819),
+    radius: 0.2,
+    material: @"mat_109",
+}
+
+LambertianMaterial "mat_110" {
+    albedo: Color3(0.4524, 0.4808, 0.1019),
+}
+
+Sphere "small_110" {
+    position: Vec3(-5.5171, 0.2000, -10.5907),
+    radius: 0.2,
+    material: @"mat_110",
+}
+
+LambertianMaterial "mat_111" {
+    albedo: Color3(0.5138, 0.0140, 0.7492),
+}
+
+Sphere "small_111" {
+    position: Vec3(-5.9775, 0.2000, -9.2042),
+    radius: 0.2,
+    material: @"mat_111",
+}
+
+LambertianMaterial "mat_112" {
+    albedo: Color3(0.2880, 0.0479, 0.1204),
+}
+
+Sphere "small_112" {
+    position: Vec3(-5.6325, 0.2000, -8.8742),
+    radius: 0.2,
+    material: @"mat_112",
+}
+
+LambertianMaterial "mat_113" {
+    albedo: Color3(0.3965, 0.1147, 0.0411),
+}
+
+Sphere "small_113" {
+    position: Vec3(-5.3966, 0.2000, -7.3312),
+    radius: 0.2,
+    material: @"mat_113",
+}
+
+LambertianMaterial "mat_114" {
+    albedo: Color3(0.0121, 0.4215, 0.0850),
+}
+
+Sphere "small_114" {
+    position: Vec3(-5.6327, 0.2000, -6.1436),
+    radius: 0.2,
+    material: @"mat_114",
+}
+
+LambertianMaterial "mat_115" {
+    albedo: Color3(0.1428, 0.0232, 0.3856),
+}
+
+Sphere "small_115" {
+    position: Vec3(-5.5100, 0.2000, -5.1199),
+    radius: 0.2,
+    material: @"mat_115",
+}
+
+LambertianMaterial "mat_116" {
+    albedo: Color3(0.0168, 0.0307, 0.0387),
+}
+
+Sphere "small_116" {
+    position: Vec3(-5.4225, 0.2000, -4.4626),
+    radius: 0.2,
+    material: @"mat_116",
+}
+
+LambertianMaterial "mat_117" {
+    albedo: Color3(0.2857, 0.1329, 0.0024),
+}
+
+Sphere "small_117" {
+    position: Vec3(-5.8136, 0.2000, -3.8056),
+    radius: 0.2,
+    material: @"mat_117",
+}
+
+LambertianMaterial "mat_118" {
+    albedo: Color3(0.1154, 0.0004, 0.1880),
+}
+
+Sphere "small_118" {
+    position: Vec3(-5.8830, 0.2000, -2.7744),
+    radius: 0.2,
+    material: @"mat_118",
+}
+
+LambertianMaterial "mat_119" {
+    albedo: Color3(0.3902, 0.3551, 0.3993),
+}
+
+Sphere "small_119" {
+    position: Vec3(-5.8432, 0.2000, -1.9528),
+    radius: 0.2,
+    material: @"mat_119",
+}
+
+LambertianMaterial "mat_120" {
+    albedo: Color3(0.0340, 0.4521, 0.4416),
+}
+
+Sphere "small_120" {
+    position: Vec3(-5.5465, 0.2000, -0.1491),
+    radius: 0.2,
+    material: @"mat_120",
+}
+
+LambertianMaterial "mat_121" {
+    albedo: Color3(0.3364, 0.0669, 0.0491),
+}
+
+Sphere "small_121" {
+    position: Vec3(-5.5689, 0.2000, 0.3615),
+    radius: 0.2,
+    material: @"mat_121",
+}
+
+LambertianMaterial "mat_122" {
+    albedo: Color3(0.1783, 0.5277, 0.2747),
+}
+
+Sphere "small_122" {
+    position: Vec3(-5.7525, 0.2000, 1.5698),
+    radius: 0.2,
+    material: @"mat_122",
+}
+
+LambertianMaterial "mat_123" {
+    albedo: Color3(0.5005, 0.1550, 0.1032),
+}
+
+Sphere "small_123" {
+    position: Vec3(-5.3684, 0.2000, 2.7675),
+    radius: 0.2,
+    material: @"mat_123",
+}
+
+LambertianMaterial "mat_124" {
+    albedo: Color3(0.0406, 0.2490, 0.1409),
+}
+
+Sphere "small_124" {
+    position: Vec3(-5.5919, 0.2000, 3.3744),
+    radius: 0.2,
+    material: @"mat_124",
+}
+
+LambertianMaterial "mat_125" {
+    albedo: Color3(0.0713, 0.4516, 0.3294),
+}
+
+Sphere "small_125" {
+    position: Vec3(-5.2514, 0.2000, 4.0839),
+    radius: 0.2,
+    material: @"mat_125",
+}
+
+LambertianMaterial "mat_126" {
+    albedo: Color3(0.4992, 0.6259, 0.5814),
+}
+
+Sphere "small_126" {
+    position: Vec3(-5.8900, 0.2000, 5.3182),
+    radius: 0.2,
+    material: @"mat_126",
+}
+
+LambertianMaterial "mat_127" {
+    albedo: Color3(0.1473, 0.0915, 0.2803),
+}
+
+Sphere "small_127" {
+    position: Vec3(-5.4799, 0.2000, 6.1915),
+    radius: 0.2,
+    material: @"mat_127",
+}
+
+LambertianMaterial "mat_128" {
+    albedo: Color3(0.7976, 0.3943, 0.0244),
+}
+
+Sphere "small_128" {
+    position: Vec3(-5.2735, 0.2000, 7.7606),
+    radius: 0.2,
+    material: @"mat_128",
+}
+
+MetalMaterial "mat_129" {
+    albedo: Color3(0.8513, 0.6545, 0.6699),
+    fuzz: 0.0031,
+}
+
+Sphere "small_129" {
+    position: Vec3(-5.7593, 0.2000, 8.1624),
+    radius: 0.2,
+    material: @"mat_129",
+}
+
+MetalMaterial "mat_130" {
+    albedo: Color3(0.5709, 0.8166, 0.5153),
+    fuzz: 0.3731,
+}
+
+Sphere "small_130" {
+    position: Vec3(-5.4903, 0.2000, 9.3607),
+    radius: 0.2,
+    material: @"mat_130",
+}
+
+LambertianMaterial "mat_131" {
+    albedo: Color3(0.2670, 0.4409, 0.0045),
+}
+
+Sphere "small_131" {
+    position: Vec3(-5.6222, 0.2000, 10.3068),
+    radius: 0.2,
+    material: @"mat_131",
+}
+
+LambertianMaterial "mat_132" {
+    albedo: Color3(0.1801, 0.2147, 0.2062),
+}
+
+Sphere "small_132" {
+    position: Vec3(-4.4439, 0.2000, -10.3934),
+    radius: 0.2,
+    material: @"mat_132",
+}
+
+LambertianMaterial "mat_133" {
+    albedo: Color3(0.3302, 0.0303, 0.2369),
+}
+
+Sphere "small_133" {
+    position: Vec3(-4.6131, 0.2000, -9.7451),
+    radius: 0.2,
+    material: @"mat_133",
+}
+
+LambertianMaterial "mat_134" {
+    albedo: Color3(0.0351, 0.0025, 0.1312),
+}
+
+Sphere "small_134" {
+    position: Vec3(-4.7287, 0.2000, -8.8099),
+    radius: 0.2,
+    material: @"mat_134",
+}
+
+LambertianMaterial "mat_135" {
+    albedo: Color3(0.6719, 0.0621, 0.0008),
+}
+
+Sphere "small_135" {
+    position: Vec3(-4.3667, 0.2000, -7.5498),
+    radius: 0.2,
+    material: @"mat_135",
+}
+
+MetalMaterial "mat_136" {
+    albedo: Color3(0.7867, 0.8547, 0.7088),
+    fuzz: 0.0576,
+}
+
+Sphere "small_136" {
+    position: Vec3(-4.2241, 0.2000, -6.4818),
+    radius: 0.2,
+    material: @"mat_136",
+}
+
+LambertianMaterial "mat_137" {
+    albedo: Color3(0.5143, 0.0811, 0.2055),
+}
+
+Sphere "small_137" {
+    position: Vec3(-4.7077, 0.2000, -5.2788),
+    radius: 0.2,
+    material: @"mat_137",
+}
+
+LambertianMaterial "mat_138" {
+    albedo: Color3(0.1053, 0.0560, 0.0582),
+}
+
+Sphere "small_138" {
+    position: Vec3(-4.5284, 0.2000, -4.6438),
+    radius: 0.2,
+    material: @"mat_138",
+}
+
+LambertianMaterial "mat_139" {
+    albedo: Color3(0.5957, 0.1926, 0.0289),
+}
+
+Sphere "small_139" {
+    position: Vec3(-4.1847, 0.2000, -3.6856),
+    radius: 0.2,
+    material: @"mat_139",
+}
+
+LambertianMaterial "mat_140" {
+    albedo: Color3(0.1369, 0.3728, 0.3411),
+}
+
+Sphere "small_140" {
+    position: Vec3(-4.3158, 0.2000, -2.4100),
+    radius: 0.2,
+    material: @"mat_140",
+}
+
+MetalMaterial "mat_141" {
+    albedo: Color3(0.8123, 0.9321, 0.8136),
+    fuzz: 0.0755,
+}
+
+Sphere "small_141" {
+    position: Vec3(-4.4920, 0.2000, -1.4282),
+    radius: 0.2,
+    material: @"mat_141",
+}
+
+LambertianMaterial "mat_142" {
+    albedo: Color3(0.0154, 0.1575, 0.0257),
+}
+
+Sphere "small_142" {
+    position: Vec3(-4.6020, 0.2000, -0.7275),
+    radius: 0.2,
+    material: @"mat_142",
+}
+
+MetalMaterial "mat_143" {
+    albedo: Color3(0.9276, 0.8075, 0.7535),
+    fuzz: 0.2314,
+}
+
+Sphere "small_143" {
+    position: Vec3(-4.9309, 0.2000, 0.7778),
+    radius: 0.2,
+    material: @"mat_143",
+}
+
+LambertianMaterial "mat_144" {
+    albedo: Color3(0.3642, 0.2096, 0.0718),
+}
+
+Sphere "small_144" {
+    position: Vec3(-4.2874, 0.2000, 1.8063),
+    radius: 0.2,
+    material: @"mat_144",
+}
+
+LambertianMaterial "mat_145" {
+    albedo: Color3(0.2453, 0.0871, 0.1085),
+}
+
+Sphere "small_145" {
+    position: Vec3(-4.9068, 0.2000, 2.8092),
+    radius: 0.2,
+    material: @"mat_145",
+}
+
+LambertianMaterial "mat_146" {
+    albedo: Color3(0.1055, 0.1383, 0.4719),
+}
+
+Sphere "small_146" {
+    position: Vec3(-4.5295, 0.2000, 3.1429),
+    radius: 0.2,
+    material: @"mat_146",
+}
+
+LambertianMaterial "mat_147" {
+    albedo: Color3(0.1928, 0.4752, 0.7915),
+}
+
+Sphere "small_147" {
+    position: Vec3(-4.9407, 0.2000, 4.0851),
+    radius: 0.2,
+    material: @"mat_147",
+}
+
+LambertianMaterial "mat_148" {
+    albedo: Color3(0.3385, 0.2738, 0.5581),
+}
+
+Sphere "small_148" {
+    position: Vec3(-4.4755, 0.2000, 5.1273),
+    radius: 0.2,
+    material: @"mat_148",
+}
+
+LambertianMaterial "mat_149" {
+    albedo: Color3(0.5449, 0.6124, 0.3608),
+}
+
+Sphere "small_149" {
+    position: Vec3(-4.6610, 0.2000, 6.7125),
+    radius: 0.2,
+    material: @"mat_149",
+}
+
+LambertianMaterial "mat_150" {
+    albedo: Color3(0.0654, 0.2030, 0.1102),
+}
+
+Sphere "small_150" {
+    position: Vec3(-4.6189, 0.2000, 7.3256),
+    radius: 0.2,
+    material: @"mat_150",
+}
+
+LambertianMaterial "mat_151" {
+    albedo: Color3(0.0780, 0.7380, 0.0127),
+}
+
+Sphere "small_151" {
+    position: Vec3(-4.9306, 0.2000, 8.7600),
+    radius: 0.2,
+    material: @"mat_151",
+}
+
+LambertianMaterial "mat_152" {
+    albedo: Color3(0.1349, 0.6239, 0.0725),
+}
+
+Sphere "small_152" {
+    position: Vec3(-4.8821, 0.2000, 9.3390),
+    radius: 0.2,
+    material: @"mat_152",
+}
+
+LambertianMaterial "mat_153" {
+    albedo: Color3(0.1266, 0.3360, 0.1653),
+}
+
+Sphere "small_153" {
+    position: Vec3(-4.3913, 0.2000, 10.2138),
+    radius: 0.2,
+    material: @"mat_153",
+}
+
+MetalMaterial "mat_154" {
+    albedo: Color3(0.6839, 0.9736, 0.9922),
+    fuzz: 0.2308,
+}
+
+Sphere "small_154" {
+    position: Vec3(-3.5779, 0.2000, -10.2484),
+    radius: 0.2,
+    material: @"mat_154",
+}
+
+LambertianMaterial "mat_155" {
+    albedo: Color3(0.7893, 0.1109, 0.1603),
+}
+
+Sphere "small_155" {
+    position: Vec3(-3.6563, 0.2000, -9.5253),
+    radius: 0.2,
+    material: @"mat_155",
+}
+
+MetalMaterial "mat_156" {
+    albedo: Color3(0.9229, 0.9256, 0.6425),
+    fuzz: 0.3816,
+}
+
+Sphere "small_156" {
+    position: Vec3(-3.5009, 0.2000, -8.9077),
+    radius: 0.2,
+    material: @"mat_156",
+}
+
+LambertianMaterial "mat_157" {
+    albedo: Color3(0.4140, 0.1002, 0.0093),
+}
+
+Sphere "small_157" {
+    position: Vec3(-3.1852, 0.2000, -7.8674),
+    radius: 0.2,
+    material: @"mat_157",
+}
+
+LambertianMaterial "mat_158" {
+    albedo: Color3(0.3729, 0.0262, 0.5454),
+}
+
+Sphere "small_158" {
+    position: Vec3(-3.5482, 0.2000, -6.7878),
+    radius: 0.2,
+    material: @"mat_158",
+}
+
+LambertianMaterial "mat_159" {
+    albedo: Color3(0.5776, 0.0979, 0.0024),
+}
+
+Sphere "small_159" {
+    position: Vec3(-3.8762, 0.2000, -5.7418),
+    radius: 0.2,
+    material: @"mat_159",
+}
+
+LambertianMaterial "mat_160" {
+    albedo: Color3(0.3991, 0.0587, 0.0868),
+}
+
+Sphere "small_160" {
+    position: Vec3(-3.7697, 0.2000, -4.2485),
+    radius: 0.2,
+    material: @"mat_160",
+}
+
+LambertianMaterial "mat_161" {
+    albedo: Color3(0.0507, 0.5401, 0.0085),
+}
+
+Sphere "small_161" {
+    position: Vec3(-3.6222, 0.2000, -3.2855),
+    radius: 0.2,
+    material: @"mat_161",
+}
+
+LambertianMaterial "mat_162" {
+    albedo: Color3(0.1479, 0.2768, 0.0834),
+}
+
+Sphere "small_162" {
+    position: Vec3(-3.8708, 0.2000, -2.6137),
+    radius: 0.2,
+    material: @"mat_162",
+}
+
+LambertianMaterial "mat_163" {
+    albedo: Color3(0.5477, 0.1836, 0.6236),
+}
+
+Sphere "small_163" {
+    position: Vec3(-3.5265, 0.2000, -1.5434),
+    radius: 0.2,
+    material: @"mat_163",
+}
+
+LambertianMaterial "mat_164" {
+    albedo: Color3(0.2527, 0.4847, 0.2445),
+}
+
+Sphere "small_164" {
+    position: Vec3(-3.9854, 0.2000, -0.2903),
+    radius: 0.2,
+    material: @"mat_164",
+}
+
+LambertianMaterial "mat_165" {
+    albedo: Color3(0.1364, 0.3231, 0.5127),
+}
+
+Sphere "small_165" {
+    position: Vec3(-3.5086, 0.2000, 0.7322),
+    radius: 0.2,
+    material: @"mat_165",
+}
+
+LambertianMaterial "mat_166" {
+    albedo: Color3(0.0129, 0.0084, 0.4810),
+}
+
+Sphere "small_166" {
+    position: Vec3(-3.3014, 0.2000, 1.4119),
+    radius: 0.2,
+    material: @"mat_166",
+}
+
+DielectricMaterial "mat_167" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_167" {
+    position: Vec3(-3.5113, 0.2000, 2.2280),
+    radius: 0.2,
+    material: @"mat_167",
+}
+
+LambertianMaterial "mat_168" {
+    albedo: Color3(0.6761, 0.0413, 0.3273),
+}
+
+Sphere "small_168" {
+    position: Vec3(-3.8280, 0.2000, 3.3213),
+    radius: 0.2,
+    material: @"mat_168",
+}
+
+LambertianMaterial "mat_169" {
+    albedo: Color3(0.4832, 0.4599, 0.4160),
+}
+
+Sphere "small_169" {
+    position: Vec3(-3.1948, 0.2000, 4.3480),
+    radius: 0.2,
+    material: @"mat_169",
+}
+
+LambertianMaterial "mat_170" {
+    albedo: Color3(0.4486, 0.0257, 0.2026),
+}
+
+Sphere "small_170" {
+    position: Vec3(-3.9290, 0.2000, 5.5422),
+    radius: 0.2,
+    material: @"mat_170",
+}
+
+LambertianMaterial "mat_171" {
+    albedo: Color3(0.0149, 0.3067, 0.2740),
+}
+
+Sphere "small_171" {
+    position: Vec3(-3.6165, 0.2000, 6.6208),
+    radius: 0.2,
+    material: @"mat_171",
+}
+
+DielectricMaterial "mat_172" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_172" {
+    position: Vec3(-3.1469, 0.2000, 7.0675),
+    radius: 0.2,
+    material: @"mat_172",
+}
+
+LambertianMaterial "mat_173" {
+    albedo: Color3(0.6473, 0.0867, 0.0272),
+}
+
+Sphere "small_173" {
+    position: Vec3(-3.6730, 0.2000, 8.7210),
+    radius: 0.2,
+    material: @"mat_173",
+}
+
+LambertianMaterial "mat_174" {
+    albedo: Color3(0.2172, 0.4109, 0.3530),
+}
+
+Sphere "small_174" {
+    position: Vec3(-3.2993, 0.2000, 9.3297),
+    radius: 0.2,
+    material: @"mat_174",
+}
+
+LambertianMaterial "mat_175" {
+    albedo: Color3(0.2585, 0.0283, 0.3671),
+}
+
+Sphere "small_175" {
+    position: Vec3(-3.4835, 0.2000, 10.4765),
+    radius: 0.2,
+    material: @"mat_175",
+}
+
+LambertianMaterial "mat_176" {
+    albedo: Color3(0.1162, 0.2845, 0.4502),
+}
+
+Sphere "small_176" {
+    position: Vec3(-2.4945, 0.2000, -10.7644),
+    radius: 0.2,
+    material: @"mat_176",
+}
+
+LambertianMaterial "mat_177" {
+    albedo: Color3(0.4000, 0.0599, 0.2702),
+}
+
+Sphere "small_177" {
+    position: Vec3(-2.2325, 0.2000, -9.5932),
+    radius: 0.2,
+    material: @"mat_177",
+}
+
+LambertianMaterial "mat_178" {
+    albedo: Color3(0.7588, 0.6601, 0.5061),
+}
+
+Sphere "small_178" {
+    position: Vec3(-2.9416, 0.2000, -8.5120),
+    radius: 0.2,
+    material: @"mat_178",
+}
+
+LambertianMaterial "mat_179" {
+    albedo: Color3(0.1098, 0.0146, 0.2965),
+}
+
+Sphere "small_179" {
+    position: Vec3(-2.8908, 0.2000, -7.8191),
+    radius: 0.2,
+    material: @"mat_179",
+}
+
+LambertianMaterial "mat_180" {
+    albedo: Color3(0.3092, 0.3779, 0.6333),
+}
+
+Sphere "small_180" {
+    position: Vec3(-2.4492, 0.2000, -6.9224),
+    radius: 0.2,
+    material: @"mat_180",
+}
+
+LambertianMaterial "mat_181" {
+    albedo: Color3(0.3060, 0.3025, 0.4992),
+}
+
+Sphere "small_181" {
+    position: Vec3(-2.1249, 0.2000, -5.4219),
+    radius: 0.2,
+    material: @"mat_181",
+}
+
+LambertianMaterial "mat_182" {
+    albedo: Color3(0.0505, 0.0190, 0.0531),
+}
+
+Sphere "small_182" {
+    position: Vec3(-2.1304, 0.2000, -4.6106),
+    radius: 0.2,
+    material: @"mat_182",
+}
+
+LambertianMaterial "mat_183" {
+    albedo: Color3(0.7570, 0.1591, 0.0689),
+}
+
+Sphere "small_183" {
+    position: Vec3(-2.6886, 0.2000, -3.1532),
+    radius: 0.2,
+    material: @"mat_183",
+}
+
+LambertianMaterial "mat_184" {
+    albedo: Color3(0.1588, 0.1016, 0.4361),
+}
+
+Sphere "small_184" {
+    position: Vec3(-2.5199, 0.2000, -2.5477),
+    radius: 0.2,
+    material: @"mat_184",
+}
+
+MetalMaterial "mat_185" {
+    albedo: Color3(0.5142, 0.5227, 0.8207),
+    fuzz: 0.2884,
+}
+
+Sphere "small_185" {
+    position: Vec3(-2.4927, 0.2000, -1.2573),
+    radius: 0.2,
+    material: @"mat_185",
+}
+
+LambertianMaterial "mat_186" {
+    albedo: Color3(0.3182, 0.1817, 0.4620),
+}
+
+Sphere "small_186" {
+    position: Vec3(-2.3097, 0.2000, -0.6251),
+    radius: 0.2,
+    material: @"mat_186",
+}
+
+MetalMaterial "mat_187" {
+    albedo: Color3(0.5365, 0.5300, 0.7198),
+    fuzz: 0.2421,
+}
+
+Sphere "small_187" {
+    position: Vec3(-2.3835, 0.2000, 0.2677),
+    radius: 0.2,
+    material: @"mat_187",
+}
+
+LambertianMaterial "mat_188" {
+    albedo: Color3(0.5274, 0.8396, 0.0485),
+}
+
+Sphere "small_188" {
+    position: Vec3(-2.4540, 0.2000, 1.2813),
+    radius: 0.2,
+    material: @"mat_188",
+}
+
+LambertianMaterial "mat_189" {
+    albedo: Color3(0.0663, 0.0281, 0.2364),
+}
+
+Sphere "small_189" {
+    position: Vec3(-2.7128, 0.2000, 2.4198),
+    radius: 0.2,
+    material: @"mat_189",
+}
+
+LambertianMaterial "mat_190" {
+    albedo: Color3(0.1892, 0.2386, 0.2565),
+}
+
+Sphere "small_190" {
+    position: Vec3(-2.2212, 0.2000, 3.1437),
+    radius: 0.2,
+    material: @"mat_190",
+}
+
+LambertianMaterial "mat_191" {
+    albedo: Color3(0.4778, 0.2080, 0.0178),
+}
+
+Sphere "small_191" {
+    position: Vec3(-2.7223, 0.2000, 4.0209),
+    radius: 0.2,
+    material: @"mat_191",
+}
+
+LambertianMaterial "mat_192" {
+    albedo: Color3(0.2526, 0.3651, 0.6420),
+}
+
+Sphere "small_192" {
+    position: Vec3(-2.2059, 0.2000, 5.5888),
+    radius: 0.2,
+    material: @"mat_192",
+}
+
+LambertianMaterial "mat_193" {
+    albedo: Color3(0.1110, 0.0407, 0.3855),
+}
+
+Sphere "small_193" {
+    position: Vec3(-2.6707, 0.2000, 6.3605),
+    radius: 0.2,
+    material: @"mat_193",
+}
+
+LambertianMaterial "mat_194" {
+    albedo: Color3(0.1159, 0.3131, 0.3184),
+}
+
+Sphere "small_194" {
+    position: Vec3(-2.1098, 0.2000, 7.6124),
+    radius: 0.2,
+    material: @"mat_194",
+}
+
+LambertianMaterial "mat_195" {
+    albedo: Color3(0.0227, 0.0456, 0.2165),
+}
+
+Sphere "small_195" {
+    position: Vec3(-2.8208, 0.2000, 8.4582),
+    radius: 0.2,
+    material: @"mat_195",
+}
+
+LambertianMaterial "mat_196" {
+    albedo: Color3(0.0996, 0.7324, 0.1007),
+}
+
+Sphere "small_196" {
+    position: Vec3(-2.5360, 0.2000, 9.2952),
+    radius: 0.2,
+    material: @"mat_196",
+}
+
+MetalMaterial "mat_197" {
+    albedo: Color3(0.6499, 0.9079, 0.6842),
+    fuzz: 0.3369,
+}
+
+Sphere "small_197" {
+    position: Vec3(-2.5209, 0.2000, 10.6379),
+    radius: 0.2,
+    material: @"mat_197",
+}
+
+DielectricMaterial "mat_198" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_198" {
+    position: Vec3(-1.4747, 0.2000, -10.2829),
+    radius: 0.2,
+    material: @"mat_198",
+}
+
+LambertianMaterial "mat_199" {
+    albedo: Color3(0.4590, 0.6077, 0.4167),
+}
+
+Sphere "small_199" {
+    position: Vec3(-1.3808, 0.2000, -9.9760),
+    radius: 0.2,
+    material: @"mat_199",
+}
+
+LambertianMaterial "mat_200" {
+    albedo: Color3(0.5213, 0.1006, 0.0299),
+}
+
+Sphere "small_200" {
+    position: Vec3(-1.8465, 0.2000, -8.4339),
+    radius: 0.2,
+    material: @"mat_200",
+}
+
+LambertianMaterial "mat_201" {
+    albedo: Color3(0.1046, 0.3180, 0.8034),
+}
+
+Sphere "small_201" {
+    position: Vec3(-1.9830, 0.2000, -7.7177),
+    radius: 0.2,
+    material: @"mat_201",
+}
+
+LambertianMaterial "mat_202" {
+    albedo: Color3(0.0674, 0.3480, 0.0543),
+}
+
+Sphere "small_202" {
+    position: Vec3(-1.9439, 0.2000, -6.8757),
+    radius: 0.2,
+    material: @"mat_202",
+}
+
+MetalMaterial "mat_203" {
+    albedo: Color3(0.8860, 0.8605, 0.8217),
+    fuzz: 0.3467,
+}
+
+Sphere "small_203" {
+    position: Vec3(-1.6919, 0.2000, -5.6811),
+    radius: 0.2,
+    material: @"mat_203",
+}
+
+LambertianMaterial "mat_204" {
+    albedo: Color3(0.1255, 0.2896, 0.0599),
+}
+
+Sphere "small_204" {
+    position: Vec3(-1.8270, 0.2000, -4.7781),
+    radius: 0.2,
+    material: @"mat_204",
+}
+
+LambertianMaterial "mat_205" {
+    albedo: Color3(0.7427, 0.0333, 0.2569),
+}
+
+Sphere "small_205" {
+    position: Vec3(-1.7147, 0.2000, -3.6861),
+    radius: 0.2,
+    material: @"mat_205",
+}
+
+DielectricMaterial "mat_206" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_206" {
+    position: Vec3(-1.2635, 0.2000, -2.1409),
+    radius: 0.2,
+    material: @"mat_206",
+}
+
+MetalMaterial "mat_207" {
+    albedo: Color3(0.8571, 0.6732, 0.7212),
+    fuzz: 0.1282,
+}
+
+Sphere "small_207" {
+    position: Vec3(-1.7386, 0.2000, -1.7411),
+    radius: 0.2,
+    material: @"mat_207",
+}
+
+LambertianMaterial "mat_208" {
+    albedo: Color3(0.6495, 0.0845, 0.1423),
+}
+
+Sphere "small_208" {
+    position: Vec3(-1.8181, 0.2000, -0.5153),
+    radius: 0.2,
+    material: @"mat_208",
+}
+
+LambertianMaterial "mat_209" {
+    albedo: Color3(0.0217, 0.0721, 0.0040),
+}
+
+Sphere "small_209" {
+    position: Vec3(-1.5221, 0.2000, 0.5742),
+    radius: 0.2,
+    material: @"mat_209",
+}
+
+LambertianMaterial "mat_210" {
+    albedo: Color3(0.8213, 0.0952, 0.3096),
+}
+
+Sphere "small_210" {
+    position: Vec3(-1.1638, 0.2000, 1.3662),
+    radius: 0.2,
+    material: @"mat_210",
+}
+
+LambertianMaterial "mat_211" {
+    albedo: Color3(0.3072, 0.6773, 0.1599),
+}
+
+Sphere "small_211" {
+    position: Vec3(-1.1829, 0.2000, 2.0805),
+    radius: 0.2,
+    material: @"mat_211",
+}
+
+MetalMaterial "mat_212" {
+    albedo: Color3(0.9986, 0.6985, 0.7477),
+    fuzz: 0.4683,
+}
+
+Sphere "small_212" {
+    position: Vec3(-1.8418, 0.2000, 3.8277),
+    radius: 0.2,
+    material: @"mat_212",
+}
+
+DielectricMaterial "mat_213" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_213" {
+    position: Vec3(-1.1666, 0.2000, 4.7891),
+    radius: 0.2,
+    material: @"mat_213",
+}
+
+LambertianMaterial "mat_214" {
+    albedo: Color3(0.2797, 0.5374, 0.4636),
+}
+
+Sphere "small_214" {
+    position: Vec3(-1.4888, 0.2000, 5.0966),
+    radius: 0.2,
+    material: @"mat_214",
+}
+
+MetalMaterial "mat_215" {
+    albedo: Color3(0.5563, 0.5812, 0.7295),
+    fuzz: 0.1286,
+}
+
+Sphere "small_215" {
+    position: Vec3(-1.5788, 0.2000, 6.1735),
+    radius: 0.2,
+    material: @"mat_215",
+}
+
+LambertianMaterial "mat_216" {
+    albedo: Color3(0.4300, 0.1502, 0.7418),
+}
+
+Sphere "small_216" {
+    position: Vec3(-1.3370, 0.2000, 7.7117),
+    radius: 0.2,
+    material: @"mat_216",
+}
+
+LambertianMaterial "mat_217" {
+    albedo: Color3(0.0260, 0.0803, 0.0614),
+}
+
+Sphere "small_217" {
+    position: Vec3(-1.9219, 0.2000, 8.6023),
+    radius: 0.2,
+    material: @"mat_217",
+}
+
+LambertianMaterial "mat_218" {
+    albedo: Color3(0.0083, 0.4529, 0.0073),
+}
+
+Sphere "small_218" {
+    position: Vec3(-1.1414, 0.2000, 9.2718),
+    radius: 0.2,
+    material: @"mat_218",
+}
+
+LambertianMaterial "mat_219" {
+    albedo: Color3(0.6298, 0.0365, 0.2703),
+}
+
+Sphere "small_219" {
+    position: Vec3(-1.6351, 0.2000, 10.4523),
+    radius: 0.2,
+    material: @"mat_219",
+}
+
+LambertianMaterial "mat_220" {
+    albedo: Color3(0.1145, 0.2519, 0.2586),
+}
+
+Sphere "small_220" {
+    position: Vec3(-0.8028, 0.2000, -10.8798),
+    radius: 0.2,
+    material: @"mat_220",
+}
+
+LambertianMaterial "mat_221" {
+    albedo: Color3(0.1868, 0.0715, 0.3144),
+}
+
+Sphere "small_221" {
+    position: Vec3(-0.4023, 0.2000, -9.8034),
+    radius: 0.2,
+    material: @"mat_221",
+}
+
+LambertianMaterial "mat_222" {
+    albedo: Color3(0.2768, 0.0858, 0.1707),
+}
+
+Sphere "small_222" {
+    position: Vec3(-0.4922, 0.2000, -8.9444),
+    radius: 0.2,
+    material: @"mat_222",
+}
+
+LambertianMaterial "mat_223" {
+    albedo: Color3(0.0464, 0.3667, 0.2345),
+}
+
+Sphere "small_223" {
+    position: Vec3(-0.8151, 0.2000, -7.4752),
+    radius: 0.2,
+    material: @"mat_223",
+}
+
+LambertianMaterial "mat_224" {
+    albedo: Color3(0.2864, 0.6089, 0.0262),
+}
+
+Sphere "small_224" {
+    position: Vec3(-0.5839, 0.2000, -6.2738),
+    radius: 0.2,
+    material: @"mat_224",
+}
+
+LambertianMaterial "mat_225" {
+    albedo: Color3(0.0645, 0.0296, 0.3144),
+}
+
+Sphere "small_225" {
+    position: Vec3(-0.9426, 0.2000, -5.1053),
+    radius: 0.2,
+    material: @"mat_225",
+}
+
+LambertianMaterial "mat_226" {
+    albedo: Color3(0.4174, 0.3326, 0.3406),
+}
+
+Sphere "small_226" {
+    position: Vec3(-0.1195, 0.2000, -4.4187),
+    radius: 0.2,
+    material: @"mat_226",
+}
+
+LambertianMaterial "mat_227" {
+    albedo: Color3(0.2273, 0.0959, 0.3849),
+}
+
+Sphere "small_227" {
+    position: Vec3(-0.4044, 0.2000, -3.5146),
+    radius: 0.2,
+    material: @"mat_227",
+}
+
+LambertianMaterial "mat_228" {
+    albedo: Color3(0.2009, 0.2896, 0.2038),
+}
+
+Sphere "small_228" {
+    position: Vec3(-0.9969, 0.2000, -2.9795),
+    radius: 0.2,
+    material: @"mat_228",
+}
+
+LambertianMaterial "mat_229" {
+    albedo: Color3(0.0818, 0.3394, 0.6770),
+}
+
+Sphere "small_229" {
+    position: Vec3(-0.7519, 0.2000, -1.1563),
+    radius: 0.2,
+    material: @"mat_229",
+}
+
+LambertianMaterial "mat_230" {
+    albedo: Color3(0.0201, 0.0342, 0.2979),
+}
+
+Sphere "small_230" {
+    position: Vec3(-0.8145, 0.2000, -0.9092),
+    radius: 0.2,
+    material: @"mat_230",
+}
+
+LambertianMaterial "mat_231" {
+    albedo: Color3(0.0284, 0.2360, 0.2333),
+}
+
+Sphere "small_231" {
+    position: Vec3(-0.8045, 0.2000, 0.7774),
+    radius: 0.2,
+    material: @"mat_231",
+}
+
+LambertianMaterial "mat_232" {
+    albedo: Color3(0.0432, 0.1459, 0.0183),
+}
+
+Sphere "small_232" {
+    position: Vec3(-0.3947, 0.2000, 1.2886),
+    radius: 0.2,
+    material: @"mat_232",
+}
+
+MetalMaterial "mat_233" {
+    albedo: Color3(0.8130, 0.7136, 0.7478),
+    fuzz: 0.4861,
+}
+
+Sphere "small_233" {
+    position: Vec3(-0.2083, 0.2000, 2.8204),
+    radius: 0.2,
+    material: @"mat_233",
+}
+
+MetalMaterial "mat_234" {
+    albedo: Color3(0.6594, 0.7082, 0.5746),
+    fuzz: 0.1882,
+}
+
+Sphere "small_234" {
+    position: Vec3(-0.3958, 0.2000, 3.7072),
+    radius: 0.2,
+    material: @"mat_234",
+}
+
+LambertianMaterial "mat_235" {
+    albedo: Color3(0.2128, 0.7371, 0.5443),
+}
+
+Sphere "small_235" {
+    position: Vec3(-0.5738, 0.2000, 4.7644),
+    radius: 0.2,
+    material: @"mat_235",
+}
+
+LambertianMaterial "mat_236" {
+    albedo: Color3(0.1315, 0.7812, 0.0670),
+}
+
+Sphere "small_236" {
+    position: Vec3(-0.8793, 0.2000, 5.2186),
+    radius: 0.2,
+    material: @"mat_236",
+}
+
+LambertianMaterial "mat_237" {
+    albedo: Color3(0.5267, 0.1433, 0.4048),
+}
+
+Sphere "small_237" {
+    position: Vec3(-0.7584, 0.2000, 6.6063),
+    radius: 0.2,
+    material: @"mat_237",
+}
+
+LambertianMaterial "mat_238" {
+    albedo: Color3(0.0147, 0.9016, 0.1173),
+}
+
+Sphere "small_238" {
+    position: Vec3(-0.2175, 0.2000, 7.2997),
+    radius: 0.2,
+    material: @"mat_238",
+}
+
+LambertianMaterial "mat_239" {
+    albedo: Color3(0.1872, 0.4281, 0.2031),
+}
+
+Sphere "small_239" {
+    position: Vec3(-0.7817, 0.2000, 8.5440),
+    radius: 0.2,
+    material: @"mat_239",
+}
+
+LambertianMaterial "mat_240" {
+    albedo: Color3(0.0490, 0.4607, 0.7678),
+}
+
+Sphere "small_240" {
+    position: Vec3(-0.7646, 0.2000, 9.4615),
+    radius: 0.2,
+    material: @"mat_240",
+}
+
+LambertianMaterial "mat_241" {
+    albedo: Color3(0.0323, 0.2438, 0.2418),
+}
+
+Sphere "small_241" {
+    position: Vec3(-0.6275, 0.2000, 10.5063),
+    radius: 0.2,
+    material: @"mat_241",
+}
+
+LambertianMaterial "mat_242" {
+    albedo: Color3(0.4161, 0.4483, 0.2114),
+}
+
+Sphere "small_242" {
+    position: Vec3(0.2969, 0.2000, -10.6581),
+    radius: 0.2,
+    material: @"mat_242",
+}
+
+DielectricMaterial "mat_243" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_243" {
+    position: Vec3(0.5775, 0.2000, -9.5585),
+    radius: 0.2,
+    material: @"mat_243",
+}
+
+LambertianMaterial "mat_244" {
+    albedo: Color3(0.3517, 0.4971, 0.0377),
+}
+
+Sphere "small_244" {
+    position: Vec3(0.7155, 0.2000, -8.8477),
+    radius: 0.2,
+    material: @"mat_244",
+}
+
+LambertianMaterial "mat_245" {
+    albedo: Color3(0.5107, 0.3475, 0.1637),
+}
+
+Sphere "small_245" {
+    position: Vec3(0.7620, 0.2000, -7.1493),
+    radius: 0.2,
+    material: @"mat_245",
+}
+
+LambertianMaterial "mat_246" {
+    albedo: Color3(0.4119, 0.2979, 0.0032),
+}
+
+Sphere "small_246" {
+    position: Vec3(0.4552, 0.2000, -6.6641),
+    radius: 0.2,
+    material: @"mat_246",
+}
+
+LambertianMaterial "mat_247" {
+    albedo: Color3(0.2686, 0.0139, 0.5434),
+}
+
+Sphere "small_247" {
+    position: Vec3(0.0107, 0.2000, -5.5235),
+    radius: 0.2,
+    material: @"mat_247",
+}
+
+MetalMaterial "mat_248" {
+    albedo: Color3(0.5744, 0.5960, 0.7632),
+    fuzz: 0.4076,
+}
+
+Sphere "small_248" {
+    position: Vec3(0.0963, 0.2000, -4.9133),
+    radius: 0.2,
+    material: @"mat_248",
+}
+
+LambertianMaterial "mat_249" {
+    albedo: Color3(0.2294, 0.2237, 0.5800),
+}
+
+Sphere "small_249" {
+    position: Vec3(0.3572, 0.2000, -3.6643),
+    radius: 0.2,
+    material: @"mat_249",
+}
+
+LambertianMaterial "mat_250" {
+    albedo: Color3(0.0355, 0.0310, 0.0016),
+}
+
+Sphere "small_250" {
+    position: Vec3(0.7724, 0.2000, -2.3164),
+    radius: 0.2,
+    material: @"mat_250",
+}
+
+LambertianMaterial "mat_251" {
+    albedo: Color3(0.4855, 0.0504, 0.0090),
+}
+
+Sphere "small_251" {
+    position: Vec3(0.3905, 0.2000, -1.2941),
+    radius: 0.2,
+    material: @"mat_251",
+}
+
+MetalMaterial "mat_252" {
+    albedo: Color3(0.5233, 0.5372, 0.9628),
+    fuzz: 0.4497,
+}
+
+Sphere "small_252" {
+    position: Vec3(0.7988, 0.2000, -0.5720),
+    radius: 0.2,
+    material: @"mat_252",
+}
+
+LambertianMaterial "mat_253" {
+    albedo: Color3(0.3024, 0.4416, 0.2839),
+}
+
+Sphere "small_253" {
+    position: Vec3(0.0296, 0.2000, 0.8359),
+    radius: 0.2,
+    material: @"mat_253",
+}
+
+LambertianMaterial "mat_254" {
+    albedo: Color3(0.3248, 0.2974, 0.1057),
+}
+
+Sphere "small_254" {
+    position: Vec3(0.1462, 0.2000, 1.2164),
+    radius: 0.2,
+    material: @"mat_254",
+}
+
+DielectricMaterial "mat_255" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_255" {
+    position: Vec3(0.6517, 0.2000, 2.4507),
+    radius: 0.2,
+    material: @"mat_255",
+}
+
+DielectricMaterial "mat_256" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_256" {
+    position: Vec3(0.0483, 0.2000, 3.3934),
+    radius: 0.2,
+    material: @"mat_256",
+}
+
+MetalMaterial "mat_257" {
+    albedo: Color3(0.9774, 0.6984, 0.8868),
+    fuzz: 0.0148,
+}
+
+Sphere "small_257" {
+    position: Vec3(0.3065, 0.2000, 4.6921),
+    radius: 0.2,
+    material: @"mat_257",
+}
+
+LambertianMaterial "mat_258" {
+    albedo: Color3(0.3349, 0.2935, 0.0566),
+}
+
+Sphere "small_258" {
+    position: Vec3(0.8933, 0.2000, 5.4415),
+    radius: 0.2,
+    material: @"mat_258",
+}
+
+LambertianMaterial "mat_259" {
+    albedo: Color3(0.0127, 0.4511, 0.2342),
+}
+
+Sphere "small_259" {
+    position: Vec3(0.7182, 0.2000, 6.6418),
+    radius: 0.2,
+    material: @"mat_259",
+}
+
+LambertianMaterial "mat_260" {
+    albedo: Color3(0.0971, 0.0248, 0.2490),
+}
+
+Sphere "small_260" {
+    position: Vec3(0.0047, 0.2000, 7.2774),
+    radius: 0.2,
+    material: @"mat_260",
+}
+
+LambertianMaterial "mat_261" {
+    albedo: Color3(0.0557, 0.1250, 0.1132),
+}
+
+Sphere "small_261" {
+    position: Vec3(0.0236, 0.2000, 8.3185),
+    radius: 0.2,
+    material: @"mat_261",
+}
+
+LambertianMaterial "mat_262" {
+    albedo: Color3(0.5595, 0.0646, 0.0418),
+}
+
+Sphere "small_262" {
+    position: Vec3(0.8110, 0.2000, 9.8147),
+    radius: 0.2,
+    material: @"mat_262",
+}
+
+LambertianMaterial "mat_263" {
+    albedo: Color3(0.2039, 0.0194, 0.1541),
+}
+
+Sphere "small_263" {
+    position: Vec3(0.0569, 0.2000, 10.3912),
+    radius: 0.2,
+    material: @"mat_263",
+}
+
+LambertianMaterial "mat_264" {
+    albedo: Color3(0.2891, 0.2060, 0.2650),
+}
+
+Sphere "small_264" {
+    position: Vec3(1.1760, 0.2000, -10.9037),
+    radius: 0.2,
+    material: @"mat_264",
+}
+
+LambertianMaterial "mat_265" {
+    albedo: Color3(0.1326, 0.3038, 0.0631),
+}
+
+Sphere "small_265" {
+    position: Vec3(1.7339, 0.2000, -9.2264),
+    radius: 0.2,
+    material: @"mat_265",
+}
+
+DielectricMaterial "mat_266" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_266" {
+    position: Vec3(1.8719, 0.2000, -8.7377),
+    radius: 0.2,
+    material: @"mat_266",
+}
+
+LambertianMaterial "mat_267" {
+    albedo: Color3(0.0912, 0.3208, 0.0642),
+}
+
+Sphere "small_267" {
+    position: Vec3(1.4419, 0.2000, -7.4817),
+    radius: 0.2,
+    material: @"mat_267",
+}
+
+LambertianMaterial "mat_268" {
+    albedo: Color3(0.5242, 0.3270, 0.1277),
+}
+
+Sphere "small_268" {
+    position: Vec3(1.4911, 0.2000, -6.3865),
+    radius: 0.2,
+    material: @"mat_268",
+}
+
+LambertianMaterial "mat_269" {
+    albedo: Color3(0.2043, 0.1533, 0.4711),
+}
+
+Sphere "small_269" {
+    position: Vec3(1.7371, 0.2000, -5.2839),
+    radius: 0.2,
+    material: @"mat_269",
+}
+
+LambertianMaterial "mat_270" {
+    albedo: Color3(0.1921, 0.4663, 0.3760),
+}
+
+Sphere "small_270" {
+    position: Vec3(1.0666, 0.2000, -4.1084),
+    radius: 0.2,
+    material: @"mat_270",
+}
+
+LambertianMaterial "mat_271" {
+    albedo: Color3(0.3426, 0.0653, 0.2335),
+}
+
+Sphere "small_271" {
+    position: Vec3(1.3236, 0.2000, -3.1940),
+    radius: 0.2,
+    material: @"mat_271",
+}
+
+LambertianMaterial "mat_272" {
+    albedo: Color3(0.2707, 0.7269, 0.0045),
+}
+
+Sphere "small_272" {
+    position: Vec3(1.0399, 0.2000, -2.1148),
+    radius: 0.2,
+    material: @"mat_272",
+}
+
+LambertianMaterial "mat_273" {
+    albedo: Color3(0.3339, 0.1744, 0.4546),
+}
+
+Sphere "small_273" {
+    position: Vec3(1.4596, 0.2000, -1.5331),
+    radius: 0.2,
+    material: @"mat_273",
+}
+
+LambertianMaterial "mat_274" {
+    albedo: Color3(0.0435, 0.1116, 0.1333),
+}
+
+Sphere "small_274" {
+    position: Vec3(1.3105, 0.2000, -0.9779),
+    radius: 0.2,
+    material: @"mat_274",
+}
+
+LambertianMaterial "mat_275" {
+    albedo: Color3(0.2300, 0.3053, 0.0958),
+}
+
+Sphere "small_275" {
+    position: Vec3(1.4098, 0.2000, 0.1862),
+    radius: 0.2,
+    material: @"mat_275",
+}
+
+MetalMaterial "mat_276" {
+    albedo: Color3(0.8240, 0.8386, 0.5822),
+    fuzz: 0.4920,
+}
+
+Sphere "small_276" {
+    position: Vec3(1.1036, 0.2000, 1.7643),
+    radius: 0.2,
+    material: @"mat_276",
+}
+
+LambertianMaterial "mat_277" {
+    albedo: Color3(0.5366, 0.0939, 0.1181),
+}
+
+Sphere "small_277" {
+    position: Vec3(1.1570, 0.2000, 2.1441),
+    radius: 0.2,
+    material: @"mat_277",
+}
+
+LambertianMaterial "mat_278" {
+    albedo: Color3(0.1169, 0.2740, 0.1548),
+}
+
+Sphere "small_278" {
+    position: Vec3(1.0263, 0.2000, 3.5527),
+    radius: 0.2,
+    material: @"mat_278",
+}
+
+MetalMaterial "mat_279" {
+    albedo: Color3(0.9360, 0.5935, 0.6630),
+    fuzz: 0.2288,
+}
+
+Sphere "small_279" {
+    position: Vec3(1.0563, 0.2000, 4.0916),
+    radius: 0.2,
+    material: @"mat_279",
+}
+
+LambertianMaterial "mat_280" {
+    albedo: Color3(0.3815, 0.3588, 0.2942),
+}
+
+Sphere "small_280" {
+    position: Vec3(1.7764, 0.2000, 5.4749),
+    radius: 0.2,
+    material: @"mat_280",
+}
+
+LambertianMaterial "mat_281" {
+    albedo: Color3(0.1828, 0.0114, 0.0360),
+}
+
+Sphere "small_281" {
+    position: Vec3(1.7324, 0.2000, 6.6354),
+    radius: 0.2,
+    material: @"mat_281",
+}
+
+LambertianMaterial "mat_282" {
+    albedo: Color3(0.0577, 0.0713, 0.4407),
+}
+
+Sphere "small_282" {
+    position: Vec3(1.6241, 0.2000, 7.4597),
+    radius: 0.2,
+    material: @"mat_282",
+}
+
+LambertianMaterial "mat_283" {
+    albedo: Color3(0.0687, 0.1419, 0.0192),
+}
+
+Sphere "small_283" {
+    position: Vec3(1.8999, 0.2000, 8.4994),
+    radius: 0.2,
+    material: @"mat_283",
+}
+
+LambertianMaterial "mat_284" {
+    albedo: Color3(0.4872, 0.3389, 0.3491),
+}
+
+Sphere "small_284" {
+    position: Vec3(1.1229, 0.2000, 9.7337),
+    radius: 0.2,
+    material: @"mat_284",
+}
+
+LambertianMaterial "mat_285" {
+    albedo: Color3(0.2223, 0.1478, 0.0769),
+}
+
+Sphere "small_285" {
+    position: Vec3(1.0744, 0.2000, 10.0278),
+    radius: 0.2,
+    material: @"mat_285",
+}
+
+LambertianMaterial "mat_286" {
+    albedo: Color3(0.0129, 0.6381, 0.3018),
+}
+
+Sphere "small_286" {
+    position: Vec3(2.6893, 0.2000, -10.5052),
+    radius: 0.2,
+    material: @"mat_286",
+}
+
+LambertianMaterial "mat_287" {
+    albedo: Color3(0.1014, 0.6237, 0.2975),
+}
+
+Sphere "small_287" {
+    position: Vec3(2.6471, 0.2000, -9.5083),
+    radius: 0.2,
+    material: @"mat_287",
+}
+
+LambertianMaterial "mat_288" {
+    albedo: Color3(0.4364, 0.1838, 0.4766),
+}
+
+Sphere "small_288" {
+    position: Vec3(2.3137, 0.2000, -8.2649),
+    radius: 0.2,
+    material: @"mat_288",
+}
+
+LambertianMaterial "mat_289" {
+    albedo: Color3(0.0231, 0.0428, 0.0208),
+}
+
+Sphere "small_289" {
+    position: Vec3(2.6397, 0.2000, -7.4305),
+    radius: 0.2,
+    material: @"mat_289",
+}
+
+LambertianMaterial "mat_290" {
+    albedo: Color3(0.2037, 0.2294, 0.6694),
+}
+
+Sphere "small_290" {
+    position: Vec3(2.4849, 0.2000, -6.7087),
+    radius: 0.2,
+    material: @"mat_290",
+}
+
+LambertianMaterial "mat_291" {
+    albedo: Color3(0.9119, 0.1100, 0.2162),
+}
+
+Sphere "small_291" {
+    position: Vec3(2.8665, 0.2000, -5.2929),
+    radius: 0.2,
+    material: @"mat_291",
+}
+
+LambertianMaterial "mat_292" {
+    albedo: Color3(0.3310, 0.1552, 0.1872),
+}
+
+Sphere "small_292" {
+    position: Vec3(2.7456, 0.2000, -4.3147),
+    radius: 0.2,
+    material: @"mat_292",
+}
+
+LambertianMaterial "mat_293" {
+    albedo: Color3(0.1435, 0.3456, 0.3110),
+}
+
+Sphere "small_293" {
+    position: Vec3(2.7921, 0.2000, -3.9162),
+    radius: 0.2,
+    material: @"mat_293",
+}
+
+LambertianMaterial "mat_294" {
+    albedo: Color3(0.3351, 0.2379, 0.0338),
+}
+
+Sphere "small_294" {
+    position: Vec3(2.6967, 0.2000, -2.3405),
+    radius: 0.2,
+    material: @"mat_294",
+}
+
+LambertianMaterial "mat_295" {
+    albedo: Color3(0.2224, 0.1952, 0.2748),
+}
+
+Sphere "small_295" {
+    position: Vec3(2.3867, 0.2000, -1.8093),
+    radius: 0.2,
+    material: @"mat_295",
+}
+
+LambertianMaterial "mat_296" {
+    albedo: Color3(0.0781, 0.0571, 0.3785),
+}
+
+Sphere "small_296" {
+    position: Vec3(2.6143, 0.2000, -0.9564),
+    radius: 0.2,
+    material: @"mat_296",
+}
+
+LambertianMaterial "mat_297" {
+    albedo: Color3(0.0908, 0.1033, 0.2556),
+}
+
+Sphere "small_297" {
+    position: Vec3(2.8622, 0.2000, 0.1821),
+    radius: 0.2,
+    material: @"mat_297",
+}
+
+LambertianMaterial "mat_298" {
+    albedo: Color3(0.1496, 0.1211, 0.1638),
+}
+
+Sphere "small_298" {
+    position: Vec3(2.2254, 0.2000, 1.3347),
+    radius: 0.2,
+    material: @"mat_298",
+}
+
+LambertianMaterial "mat_299" {
+    albedo: Color3(0.0633, 0.1538, 0.0065),
+}
+
+Sphere "small_299" {
+    position: Vec3(2.6333, 0.2000, 2.0010),
+    radius: 0.2,
+    material: @"mat_299",
+}
+
+MetalMaterial "mat_300" {
+    albedo: Color3(0.5661, 0.5354, 0.6915),
+    fuzz: 0.3654,
+}
+
+Sphere "small_300" {
+    position: Vec3(2.8893, 0.2000, 3.3801),
+    radius: 0.2,
+    material: @"mat_300",
+}
+
+LambertianMaterial "mat_301" {
+    albedo: Color3(0.1061, 0.1003, 0.1418),
+}
+
+Sphere "small_301" {
+    position: Vec3(2.2820, 0.2000, 4.7929),
+    radius: 0.2,
+    material: @"mat_301",
+}
+
+LambertianMaterial "mat_302" {
+    albedo: Color3(0.3179, 0.0951, 0.2827),
+}
+
+Sphere "small_302" {
+    position: Vec3(2.0076, 0.2000, 5.5850),
+    radius: 0.2,
+    material: @"mat_302",
+}
+
+MetalMaterial "mat_303" {
+    albedo: Color3(0.8762, 0.7948, 0.6920),
+    fuzz: 0.4816,
+}
+
+Sphere "small_303" {
+    position: Vec3(2.0780, 0.2000, 6.0904),
+    radius: 0.2,
+    material: @"mat_303",
+}
+
+LambertianMaterial "mat_304" {
+    albedo: Color3(0.0466, 0.3646, 0.5379),
+}
+
+Sphere "small_304" {
+    position: Vec3(2.1258, 0.2000, 7.2493),
+    radius: 0.2,
+    material: @"mat_304",
+}
+
+MetalMaterial "mat_305" {
+    albedo: Color3(0.7589, 0.7548, 0.8739),
+    fuzz: 0.1478,
+}
+
+Sphere "small_305" {
+    position: Vec3(2.5926, 0.2000, 8.2715),
+    radius: 0.2,
+    material: @"mat_305",
+}
+
+LambertianMaterial "mat_306" {
+    albedo: Color3(0.0558, 0.2967, 0.5165),
+}
+
+Sphere "small_306" {
+    position: Vec3(2.8081, 0.2000, 9.8592),
+    radius: 0.2,
+    material: @"mat_306",
+}
+
+DielectricMaterial "mat_307" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_307" {
+    position: Vec3(2.8405, 0.2000, 10.1188),
+    radius: 0.2,
+    material: @"mat_307",
+}
+
+MetalMaterial "mat_308" {
+    albedo: Color3(0.8415, 0.8814, 0.9772),
+    fuzz: 0.3852,
+}
+
+Sphere "small_308" {
+    position: Vec3(3.5115, 0.2000, -10.6711),
+    radius: 0.2,
+    material: @"mat_308",
+}
+
+LambertianMaterial "mat_309" {
+    albedo: Color3(0.0024, 0.3999, 0.3149),
+}
+
+Sphere "small_309" {
+    position: Vec3(3.0608, 0.2000, -9.7640),
+    radius: 0.2,
+    material: @"mat_309",
+}
+
+LambertianMaterial "mat_310" {
+    albedo: Color3(0.3305, 0.0860, 0.1039),
+}
+
+Sphere "small_310" {
+    position: Vec3(3.6316, 0.2000, -8.9258),
+    radius: 0.2,
+    material: @"mat_310",
+}
+
+MetalMaterial "mat_311" {
+    albedo: Color3(0.8171, 0.9173, 0.8405),
+    fuzz: 0.0331,
+}
+
+Sphere "small_311" {
+    position: Vec3(3.4828, 0.2000, -7.6483),
+    radius: 0.2,
+    material: @"mat_311",
+}
+
+LambertianMaterial "mat_312" {
+    albedo: Color3(0.0050, 0.1970, 0.1883),
+}
+
+Sphere "small_312" {
+    position: Vec3(3.6570, 0.2000, -6.2382),
+    radius: 0.2,
+    material: @"mat_312",
+}
+
+LambertianMaterial "mat_313" {
+    albedo: Color3(0.4966, 0.1561, 0.4095),
+}
+
+Sphere "small_313" {
+    position: Vec3(3.6666, 0.2000, -5.8925),
+    radius: 0.2,
+    material: @"mat_313",
+}
+
+LambertianMaterial "mat_314" {
+    albedo: Color3(0.2099, 0.6838, 0.0237),
+}
+
+Sphere "small_314" {
+    position: Vec3(3.1503, 0.2000, -4.8858),
+    radius: 0.2,
+    material: @"mat_314",
+}
+
+LambertianMaterial "mat_315" {
+    albedo: Color3(0.0444, 0.1639, 0.2832),
+}
+
+Sphere "small_315" {
+    position: Vec3(3.0575, 0.2000, -3.3589),
+    radius: 0.2,
+    material: @"mat_315",
+}
+
+LambertianMaterial "mat_316" {
+    albedo: Color3(0.4148, 0.1162, 0.0380),
+}
+
+Sphere "small_316" {
+    position: Vec3(3.2296, 0.2000, -2.9074),
+    radius: 0.2,
+    material: @"mat_316",
+}
+
+LambertianMaterial "mat_317" {
+    albedo: Color3(0.1398, 0.4741, 0.6769),
+}
+
+Sphere "small_317" {
+    position: Vec3(3.4246, 0.2000, -1.6553),
+    radius: 0.2,
+    material: @"mat_317",
+}
+
+LambertianMaterial "mat_318" {
+    albedo: Color3(0.1954, 0.0290, 0.4528),
+}
+
+Sphere "small_318" {
+    position: Vec3(3.2896, 0.2000, -0.6254),
+    radius: 0.2,
+    material: @"mat_318",
+}
+
+LambertianMaterial "mat_319" {
+    albedo: Color3(0.0658, 0.1313, 0.2765),
+}
+
+Sphere "small_319" {
+    position: Vec3(3.7239, 0.2000, 0.8833),
+    radius: 0.2,
+    material: @"mat_319",
+}
+
+LambertianMaterial "mat_320" {
+    albedo: Color3(0.1713, 0.2889, 0.2919),
+}
+
+Sphere "small_320" {
+    position: Vec3(3.0072, 0.2000, 1.1806),
+    radius: 0.2,
+    material: @"mat_320",
+}
+
+LambertianMaterial "mat_321" {
+    albedo: Color3(0.1864, 0.0026, 0.0807),
+}
+
+Sphere "small_321" {
+    position: Vec3(3.1759, 0.2000, 2.8104),
+    radius: 0.2,
+    material: @"mat_321",
+}
+
+MetalMaterial "mat_322" {
+    albedo: Color3(0.5007, 0.8287, 0.9245),
+    fuzz: 0.3636,
+}
+
+Sphere "small_322" {
+    position: Vec3(3.7895, 0.2000, 3.8559),
+    radius: 0.2,
+    material: @"mat_322",
+}
+
+LambertianMaterial "mat_323" {
+    albedo: Color3(0.0295, 0.7095, 0.0857),
+}
+
+Sphere "small_323" {
+    position: Vec3(3.4768, 0.2000, 4.2144),
+    radius: 0.2,
+    material: @"mat_323",
+}
+
+MetalMaterial "mat_324" {
+    albedo: Color3(0.6862, 0.9873, 0.5425),
+    fuzz: 0.0478,
+}
+
+Sphere "small_324" {
+    position: Vec3(3.4678, 0.2000, 5.6308),
+    radius: 0.2,
+    material: @"mat_324",
+}
+
+LambertianMaterial "mat_325" {
+    albedo: Color3(0.2470, 0.2283, 0.0822),
+}
+
+Sphere "small_325" {
+    position: Vec3(3.7380, 0.2000, 6.0673),
+    radius: 0.2,
+    material: @"mat_325",
+}
+
+MetalMaterial "mat_326" {
+    albedo: Color3(0.6590, 0.6360, 0.5373),
+    fuzz: 0.1014,
+}
+
+Sphere "small_326" {
+    position: Vec3(3.6307, 0.2000, 7.6618),
+    radius: 0.2,
+    material: @"mat_326",
+}
+
+LambertianMaterial "mat_327" {
+    albedo: Color3(0.0766, 0.2179, 0.2003),
+}
+
+Sphere "small_327" {
+    position: Vec3(3.5262, 0.2000, 8.1399),
+    radius: 0.2,
+    material: @"mat_327",
+}
+
+LambertianMaterial "mat_328" {
+    albedo: Color3(0.1081, 0.5759, 0.0337),
+}
+
+Sphere "small_328" {
+    position: Vec3(3.2385, 0.2000, 9.1079),
+    radius: 0.2,
+    material: @"mat_328",
+}
+
+LambertianMaterial "mat_329" {
+    albedo: Color3(0.1827, 0.1762, 0.0308),
+}
+
+Sphere "small_329" {
+    position: Vec3(3.0821, 0.2000, 10.2234),
+    radius: 0.2,
+    material: @"mat_329",
+}
+
+LambertianMaterial "mat_330" {
+    albedo: Color3(0.1154, 0.1124, 0.0099),
+}
+
+Sphere "small_330" {
+    position: Vec3(4.4070, 0.2000, -10.3267),
+    radius: 0.2,
+    material: @"mat_330",
+}
+
+DielectricMaterial "mat_331" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_331" {
+    position: Vec3(4.1176, 0.2000, -9.2587),
+    radius: 0.2,
+    material: @"mat_331",
+}
+
+LambertianMaterial "mat_332" {
+    albedo: Color3(0.1507, 0.0177, 0.0582),
+}
+
+Sphere "small_332" {
+    position: Vec3(4.5673, 0.2000, -8.4198),
+    radius: 0.2,
+    material: @"mat_332",
+}
+
+LambertianMaterial "mat_333" {
+    albedo: Color3(0.2750, 0.0197, 0.0964),
+}
+
+Sphere "small_333" {
+    position: Vec3(4.1159, 0.2000, -7.1854),
+    radius: 0.2,
+    material: @"mat_333",
+}
+
+MetalMaterial "mat_334" {
+    albedo: Color3(0.8416, 0.5864, 0.6074),
+    fuzz: 0.0936,
+}
+
+Sphere "small_334" {
+    position: Vec3(4.3555, 0.2000, -6.9735),
+    radius: 0.2,
+    material: @"mat_334",
+}
+
+LambertianMaterial "mat_335" {
+    albedo: Color3(0.1522, 0.1216, 0.0336),
+}
+
+Sphere "small_335" {
+    position: Vec3(4.7951, 0.2000, -5.9688),
+    radius: 0.2,
+    material: @"mat_335",
+}
+
+LambertianMaterial "mat_336" {
+    albedo: Color3(0.4652, 0.5060, 0.7864),
+}
+
+Sphere "small_336" {
+    position: Vec3(4.1235, 0.2000, -4.8205),
+    radius: 0.2,
+    material: @"mat_336",
+}
+
+LambertianMaterial "mat_337" {
+    albedo: Color3(0.4424, 0.1951, 0.0573),
+}
+
+Sphere "small_337" {
+    position: Vec3(4.3232, 0.2000, -3.5099),
+    radius: 0.2,
+    material: @"mat_337",
+}
+
+LambertianMaterial "mat_338" {
+    albedo: Color3(0.0581, 0.4060, 0.9736),
+}
+
+Sphere "small_338" {
+    position: Vec3(4.8062, 0.2000, -2.2993),
+    radius: 0.2,
+    material: @"mat_338",
+}
+
+LambertianMaterial "mat_339" {
+    albedo: Color3(0.7487, 0.0557, 0.1857),
+}
+
+Sphere "small_339" {
+    position: Vec3(4.5912, 0.2000, -1.7601),
+    radius: 0.2,
+    material: @"mat_339",
+}
+
+MetalMaterial "mat_340" {
+    albedo: Color3(0.5141, 0.8503, 0.9738),
+    fuzz: 0.2818,
+}
+
+Sphere "small_340" {
+    position: Vec3(4.6279, 0.2000, 1.8226),
+    radius: 0.2,
+    material: @"mat_340",
+}
+
+LambertianMaterial "mat_341" {
+    albedo: Color3(0.4340, 0.1516, 0.0210),
+}
+
+Sphere "small_341" {
+    position: Vec3(4.1694, 0.2000, 2.8892),
+    radius: 0.2,
+    material: @"mat_341",
+}
+
+LambertianMaterial "mat_342" {
+    albedo: Color3(0.1849, 0.0936, 0.7757),
+}
+
+Sphere "small_342" {
+    position: Vec3(4.4738, 0.2000, 3.0006),
+    radius: 0.2,
+    material: @"mat_342",
+}
+
+LambertianMaterial "mat_343" {
+    albedo: Color3(0.7103, 0.7285, 0.3589),
+}
+
+Sphere "small_343" {
+    position: Vec3(4.0197, 0.2000, 4.5279),
+    radius: 0.2,
+    material: @"mat_343",
+}
+
+MetalMaterial "mat_344" {
+    albedo: Color3(0.6509, 0.5682, 0.5788),
+    fuzz: 0.4743,
+}
+
+Sphere "small_344" {
+    position: Vec3(4.3560, 0.2000, 5.0909),
+    radius: 0.2,
+    material: @"mat_344",
+}
+
+LambertianMaterial "mat_345" {
+    albedo: Color3(0.1688, 0.6442, 0.1757),
+}
+
+Sphere "small_345" {
+    position: Vec3(4.8646, 0.2000, 6.5843),
+    radius: 0.2,
+    material: @"mat_345",
+}
+
+LambertianMaterial "mat_346" {
+    albedo: Color3(0.0877, 0.6915, 0.3715),
+}
+
+Sphere "small_346" {
+    position: Vec3(4.1578, 0.2000, 7.2761),
+    radius: 0.2,
+    material: @"mat_346",
+}
+
+DielectricMaterial "mat_347" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_347" {
+    position: Vec3(4.8687, 0.2000, 8.0291),
+    radius: 0.2,
+    material: @"mat_347",
+}
+
+LambertianMaterial "mat_348" {
+    albedo: Color3(0.1249, 0.1317, 0.1774),
+}
+
+Sphere "small_348" {
+    position: Vec3(4.8289, 0.2000, 9.8708),
+    radius: 0.2,
+    material: @"mat_348",
+}
+
+DielectricMaterial "mat_349" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_349" {
+    position: Vec3(4.1511, 0.2000, 10.7968),
+    radius: 0.2,
+    material: @"mat_349",
+}
+
+LambertianMaterial "mat_350" {
+    albedo: Color3(0.3960, 0.0662, 0.0174),
+}
+
+Sphere "small_350" {
+    position: Vec3(5.6381, 0.2000, -10.4248),
+    radius: 0.2,
+    material: @"mat_350",
+}
+
+LambertianMaterial "mat_351" {
+    albedo: Color3(0.7099, 0.4362, 0.2068),
+}
+
+Sphere "small_351" {
+    position: Vec3(5.0012, 0.2000, -9.6527),
+    radius: 0.2,
+    material: @"mat_351",
+}
+
+LambertianMaterial "mat_352" {
+    albedo: Color3(0.4473, 0.0120, 0.2494),
+}
+
+Sphere "small_352" {
+    position: Vec3(5.4315, 0.2000, -8.2224),
+    radius: 0.2,
+    material: @"mat_352",
+}
+
+LambertianMaterial "mat_353" {
+    albedo: Color3(0.0639, 0.4004, 0.0836),
+}
+
+Sphere "small_353" {
+    position: Vec3(5.8565, 0.2000, -7.9332),
+    radius: 0.2,
+    material: @"mat_353",
+}
+
+LambertianMaterial "mat_354" {
+    albedo: Color3(0.0292, 0.1468, 0.0159),
+}
+
+Sphere "small_354" {
+    position: Vec3(5.5523, 0.2000, -6.5655),
+    radius: 0.2,
+    material: @"mat_354",
+}
+
+LambertianMaterial "mat_355" {
+    albedo: Color3(0.5271, 0.0747, 0.0118),
+}
+
+Sphere "small_355" {
+    position: Vec3(5.1710, 0.2000, -5.3725),
+    radius: 0.2,
+    material: @"mat_355",
+}
+
+LambertianMaterial "mat_356" {
+    albedo: Color3(0.1543, 0.1950, 0.1198),
+}
+
+Sphere "small_356" {
+    position: Vec3(5.7559, 0.2000, -4.8618),
+    radius: 0.2,
+    material: @"mat_356",
+}
+
+LambertianMaterial "mat_357" {
+    albedo: Color3(0.0691, 0.1226, 0.3233),
+}
+
+Sphere "small_357" {
+    position: Vec3(5.1537, 0.2000, -3.7374),
+    radius: 0.2,
+    material: @"mat_357",
+}
+
+LambertianMaterial "mat_358" {
+    albedo: Color3(0.3271, 0.1174, 0.1052),
+}
+
+Sphere "small_358" {
+    position: Vec3(5.4897, 0.2000, -2.8336),
+    radius: 0.2,
+    material: @"mat_358",
+}
+
+LambertianMaterial "mat_359" {
+    albedo: Color3(0.0572, 0.1861, 0.5725),
+}
+
+Sphere "small_359" {
+    position: Vec3(5.0555, 0.2000, -1.3230),
+    radius: 0.2,
+    material: @"mat_359",
+}
+
+LambertianMaterial "mat_360" {
+    albedo: Color3(0.2242, 0.4116, 0.4199),
+}
+
+Sphere "small_360" {
+    position: Vec3(5.7567, 0.2000, -0.2634),
+    radius: 0.2,
+    material: @"mat_360",
+}
+
+LambertianMaterial "mat_361" {
+    albedo: Color3(0.4521, 0.5423, 0.0746),
+}
+
+Sphere "small_361" {
+    position: Vec3(5.8125, 0.2000, 0.6429),
+    radius: 0.2,
+    material: @"mat_361",
+}
+
+LambertianMaterial "mat_362" {
+    albedo: Color3(0.7860, 0.0534, 0.4303),
+}
+
+Sphere "small_362" {
+    position: Vec3(5.1556, 0.2000, 1.8859),
+    radius: 0.2,
+    material: @"mat_362",
+}
+
+DielectricMaterial "mat_363" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_363" {
+    position: Vec3(5.5645, 0.2000, 2.7507),
+    radius: 0.2,
+    material: @"mat_363",
+}
+
+LambertianMaterial "mat_364" {
+    albedo: Color3(0.0260, 0.1296, 0.1265),
+}
+
+Sphere "small_364" {
+    position: Vec3(5.8197, 0.2000, 3.8228),
+    radius: 0.2,
+    material: @"mat_364",
+}
+
+MetalMaterial "mat_365" {
+    albedo: Color3(0.7613, 0.7098, 0.7072),
+    fuzz: 0.0741,
+}
+
+Sphere "small_365" {
+    position: Vec3(5.7079, 0.2000, 4.5608),
+    radius: 0.2,
+    material: @"mat_365",
+}
+
+LambertianMaterial "mat_366" {
+    albedo: Color3(0.5204, 0.0289, 0.1842),
+}
+
+Sphere "small_366" {
+    position: Vec3(5.6825, 0.2000, 5.8457),
+    radius: 0.2,
+    material: @"mat_366",
+}
+
+LambertianMaterial "mat_367" {
+    albedo: Color3(0.0228, 0.0396, 0.4222),
+}
+
+Sphere "small_367" {
+    position: Vec3(5.3447, 0.2000, 6.4370),
+    radius: 0.2,
+    material: @"mat_367",
+}
+
+LambertianMaterial "mat_368" {
+    albedo: Color3(0.1772, 0.8260, 0.0165),
+}
+
+Sphere "small_368" {
+    position: Vec3(5.8006, 0.2000, 7.2983),
+    radius: 0.2,
+    material: @"mat_368",
+}
+
+LambertianMaterial "mat_369" {
+    albedo: Color3(0.0684, 0.1168, 0.4317),
+}
+
+Sphere "small_369" {
+    position: Vec3(5.2523, 0.2000, 8.4425),
+    radius: 0.2,
+    material: @"mat_369",
+}
+
+MetalMaterial "mat_370" {
+    albedo: Color3(0.8228, 0.5940, 0.6057),
+    fuzz: 0.4120,
+}
+
+Sphere "small_370" {
+    position: Vec3(5.2425, 0.2000, 9.3751),
+    radius: 0.2,
+    material: @"mat_370",
+}
+
+LambertianMaterial "mat_371" {
+    albedo: Color3(0.4230, 0.0495, 0.0687),
+}
+
+Sphere "small_371" {
+    position: Vec3(5.6835, 0.2000, 10.7805),
+    radius: 0.2,
+    material: @"mat_371",
+}
+
+MetalMaterial "mat_372" {
+    albedo: Color3(0.5964, 0.9165, 0.9185),
+    fuzz: 0.1247,
+}
+
+Sphere "small_372" {
+    position: Vec3(6.7914, 0.2000, -10.9739),
+    radius: 0.2,
+    material: @"mat_372",
+}
+
+LambertianMaterial "mat_373" {
+    albedo: Color3(0.2256, 0.3210, 0.0038),
+}
+
+Sphere "small_373" {
+    position: Vec3(6.8262, 0.2000, -9.3658),
+    radius: 0.2,
+    material: @"mat_373",
+}
+
+LambertianMaterial "mat_374" {
+    albedo: Color3(0.5109, 0.0572, 0.6699),
+}
+
+Sphere "small_374" {
+    position: Vec3(6.5346, 0.2000, -8.8402),
+    radius: 0.2,
+    material: @"mat_374",
+}
+
+LambertianMaterial "mat_375" {
+    albedo: Color3(0.0932, 0.8270, 0.4387),
+}
+
+Sphere "small_375" {
+    position: Vec3(6.2566, 0.2000, -7.6521),
+    radius: 0.2,
+    material: @"mat_375",
+}
+
+LambertianMaterial "mat_376" {
+    albedo: Color3(0.5989, 0.0081, 0.3892),
+}
+
+Sphere "small_376" {
+    position: Vec3(6.3686, 0.2000, -6.9820),
+    radius: 0.2,
+    material: @"mat_376",
+}
+
+LambertianMaterial "mat_377" {
+    albedo: Color3(0.2954, 0.2724, 0.1313),
+}
+
+Sphere "small_377" {
+    position: Vec3(6.2272, 0.2000, -5.2754),
+    radius: 0.2,
+    material: @"mat_377",
+}
+
+LambertianMaterial "mat_378" {
+    albedo: Color3(0.3274, 0.0523, 0.5586),
+}
+
+Sphere "small_378" {
+    position: Vec3(6.4200, 0.2000, -4.3905),
+    radius: 0.2,
+    material: @"mat_378",
+}
+
+LambertianMaterial "mat_379" {
+    albedo: Color3(0.0323, 0.0631, 0.5519),
+}
+
+Sphere "small_379" {
+    position: Vec3(6.5826, 0.2000, -3.4519),
+    radius: 0.2,
+    material: @"mat_379",
+}
+
+LambertianMaterial "mat_380" {
+    albedo: Color3(0.0448, 0.6887, 0.6462),
+}
+
+Sphere "small_380" {
+    position: Vec3(6.6400, 0.2000, -2.1969),
+    radius: 0.2,
+    material: @"mat_380",
+}
+
+LambertianMaterial "mat_381" {
+    albedo: Color3(0.4727, 0.2588, 0.1625),
+}
+
+Sphere "small_381" {
+    position: Vec3(6.5945, 0.2000, -1.3873),
+    radius: 0.2,
+    material: @"mat_381",
+}
+
+LambertianMaterial "mat_382" {
+    albedo: Color3(0.1380, 0.1189, 0.7115),
+}
+
+Sphere "small_382" {
+    position: Vec3(6.6373, 0.2000, -0.4852),
+    radius: 0.2,
+    material: @"mat_382",
+}
+
+LambertianMaterial "mat_383" {
+    albedo: Color3(0.7368, 0.0177, 0.0331),
+}
+
+Sphere "small_383" {
+    position: Vec3(6.4566, 0.2000, 0.7609),
+    radius: 0.2,
+    material: @"mat_383",
+}
+
+MetalMaterial "mat_384" {
+    albedo: Color3(0.8399, 0.6678, 0.5446),
+    fuzz: 0.1776,
+}
+
+Sphere "small_384" {
+    position: Vec3(6.6866, 0.2000, 1.1648),
+    radius: 0.2,
+    material: @"mat_384",
+}
+
+LambertianMaterial "mat_385" {
+    albedo: Color3(0.0863, 0.2503, 0.4077),
+}
+
+Sphere "small_385" {
+    position: Vec3(6.2764, 0.2000, 2.7093),
+    radius: 0.2,
+    material: @"mat_385",
+}
+
+LambertianMaterial "mat_386" {
+    albedo: Color3(0.4451, 0.3311, 0.0161),
+}
+
+Sphere "small_386" {
+    position: Vec3(6.8499, 0.2000, 3.0641),
+    radius: 0.2,
+    material: @"mat_386",
+}
+
+MetalMaterial "mat_387" {
+    albedo: Color3(0.7046, 0.7847, 0.9533),
+    fuzz: 0.2288,
+}
+
+Sphere "small_387" {
+    position: Vec3(6.1236, 0.2000, 4.1803),
+    radius: 0.2,
+    material: @"mat_387",
+}
+
+LambertianMaterial "mat_388" {
+    albedo: Color3(0.3077, 0.1122, 0.0013),
+}
+
+Sphere "small_388" {
+    position: Vec3(6.6441, 0.2000, 5.7010),
+    radius: 0.2,
+    material: @"mat_388",
+}
+
+LambertianMaterial "mat_389" {
+    albedo: Color3(0.3738, 0.0541, 0.2555),
+}
+
+Sphere "small_389" {
+    position: Vec3(6.1517, 0.2000, 6.6880),
+    radius: 0.2,
+    material: @"mat_389",
+}
+
+DielectricMaterial "mat_390" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_390" {
+    position: Vec3(6.3450, 0.2000, 7.0340),
+    radius: 0.2,
+    material: @"mat_390",
+}
+
+LambertianMaterial "mat_391" {
+    albedo: Color3(0.2685, 0.1290, 0.1559),
+}
+
+Sphere "small_391" {
+    position: Vec3(6.3358, 0.2000, 8.0127),
+    radius: 0.2,
+    material: @"mat_391",
+}
+
+LambertianMaterial "mat_392" {
+    albedo: Color3(0.2258, 0.1376, 0.0867),
+}
+
+Sphere "small_392" {
+    position: Vec3(6.3099, 0.2000, 9.1160),
+    radius: 0.2,
+    material: @"mat_392",
+}
+
+LambertianMaterial "mat_393" {
+    albedo: Color3(0.8840, 0.3089, 0.0677),
+}
+
+Sphere "small_393" {
+    position: Vec3(6.5367, 0.2000, 10.3041),
+    radius: 0.2,
+    material: @"mat_393",
+}
+
+MetalMaterial "mat_394" {
+    albedo: Color3(0.6142, 0.8636, 0.5656),
+    fuzz: 0.3670,
+}
+
+Sphere "small_394" {
+    position: Vec3(7.8264, 0.2000, -10.6369),
+    radius: 0.2,
+    material: @"mat_394",
+}
+
+LambertianMaterial "mat_395" {
+    albedo: Color3(0.0243, 0.2242, 0.0260),
+}
+
+Sphere "small_395" {
+    position: Vec3(7.1521, 0.2000, -9.6701),
+    radius: 0.2,
+    material: @"mat_395",
+}
+
+DielectricMaterial "mat_396" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_396" {
+    position: Vec3(7.5958, 0.2000, -8.4118),
+    radius: 0.2,
+    material: @"mat_396",
+}
+
+LambertianMaterial "mat_397" {
+    albedo: Color3(0.2081, 0.0726, 0.4382),
+}
+
+Sphere "small_397" {
+    position: Vec3(7.6208, 0.2000, -7.6249),
+    radius: 0.2,
+    material: @"mat_397",
+}
+
+LambertianMaterial "mat_398" {
+    albedo: Color3(0.1635, 0.1139, 0.0754),
+}
+
+Sphere "small_398" {
+    position: Vec3(7.5955, 0.2000, -6.4038),
+    radius: 0.2,
+    material: @"mat_398",
+}
+
+LambertianMaterial "mat_399" {
+    albedo: Color3(0.0397, 0.1376, 0.1419),
+}
+
+Sphere "small_399" {
+    position: Vec3(7.1026, 0.2000, -5.9044),
+    radius: 0.2,
+    material: @"mat_399",
+}
+
+LambertianMaterial "mat_400" {
+    albedo: Color3(0.1938, 0.0009, 0.6091),
+}
+
+Sphere "small_400" {
+    position: Vec3(7.0355, 0.2000, -4.5533),
+    radius: 0.2,
+    material: @"mat_400",
+}
+
+MetalMaterial "mat_401" {
+    albedo: Color3(0.5450, 0.7559, 0.8618),
+    fuzz: 0.0506,
+}
+
+Sphere "small_401" {
+    position: Vec3(7.6021, 0.2000, -3.8658),
+    radius: 0.2,
+    material: @"mat_401",
+}
+
+LambertianMaterial "mat_402" {
+    albedo: Color3(0.1374, 0.0174, 0.0115),
+}
+
+Sphere "small_402" {
+    position: Vec3(7.2080, 0.2000, -2.1102),
+    radius: 0.2,
+    material: @"mat_402",
+}
+
+MetalMaterial "mat_403" {
+    albedo: Color3(0.5475, 0.8791, 0.5229),
+    fuzz: 0.4260,
+}
+
+Sphere "small_403" {
+    position: Vec3(7.2814, 0.2000, -1.3353),
+    radius: 0.2,
+    material: @"mat_403",
+}
+
+LambertianMaterial "mat_404" {
+    albedo: Color3(0.2722, 0.0817, 0.1490),
+}
+
+Sphere "small_404" {
+    position: Vec3(7.1535, 0.2000, -0.6782),
+    radius: 0.2,
+    material: @"mat_404",
+}
+
+LambertianMaterial "mat_405" {
+    albedo: Color3(0.3281, 0.5190, 0.0901),
+}
+
+Sphere "small_405" {
+    position: Vec3(7.8661, 0.2000, 0.2446),
+    radius: 0.2,
+    material: @"mat_405",
+}
+
+LambertianMaterial "mat_406" {
+    albedo: Color3(0.0663, 0.4739, 0.1230),
+}
+
+Sphere "small_406" {
+    position: Vec3(7.0528, 0.2000, 1.8482),
+    radius: 0.2,
+    material: @"mat_406",
+}
+
+LambertianMaterial "mat_407" {
+    albedo: Color3(0.5739, 0.1272, 0.1039),
+}
+
+Sphere "small_407" {
+    position: Vec3(7.3227, 0.2000, 2.0259),
+    radius: 0.2,
+    material: @"mat_407",
+}
+
+LambertianMaterial "mat_408" {
+    albedo: Color3(0.2214, 0.5203, 0.3258),
+}
+
+Sphere "small_408" {
+    position: Vec3(7.0414, 0.2000, 3.2355),
+    radius: 0.2,
+    material: @"mat_408",
+}
+
+DielectricMaterial "mat_409" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_409" {
+    position: Vec3(7.6029, 0.2000, 4.3045),
+    radius: 0.2,
+    material: @"mat_409",
+}
+
+LambertianMaterial "mat_410" {
+    albedo: Color3(0.1645, 0.2338, 0.3229),
+}
+
+Sphere "small_410" {
+    position: Vec3(7.6305, 0.2000, 5.0857),
+    radius: 0.2,
+    material: @"mat_410",
+}
+
+LambertianMaterial "mat_411" {
+    albedo: Color3(0.1010, 0.7231, 0.0651),
+}
+
+Sphere "small_411" {
+    position: Vec3(7.8890, 0.2000, 6.0491),
+    radius: 0.2,
+    material: @"mat_411",
+}
+
+LambertianMaterial "mat_412" {
+    albedo: Color3(0.0112, 0.2594, 0.1079),
+}
+
+Sphere "small_412" {
+    position: Vec3(7.2168, 0.2000, 7.8731),
+    radius: 0.2,
+    material: @"mat_412",
+}
+
+MetalMaterial "mat_413" {
+    albedo: Color3(0.7235, 0.5594, 0.7487),
+    fuzz: 0.3267,
+}
+
+Sphere "small_413" {
+    position: Vec3(7.4033, 0.2000, 8.7709),
+    radius: 0.2,
+    material: @"mat_413",
+}
+
+LambertianMaterial "mat_414" {
+    albedo: Color3(0.0000, 0.3740, 0.1548),
+}
+
+Sphere "small_414" {
+    position: Vec3(7.3711, 0.2000, 9.5014),
+    radius: 0.2,
+    material: @"mat_414",
+}
+
+LambertianMaterial "mat_415" {
+    albedo: Color3(0.0197, 0.1013, 0.3472),
+}
+
+Sphere "small_415" {
+    position: Vec3(7.6043, 0.2000, 10.8553),
+    radius: 0.2,
+    material: @"mat_415",
+}
+
+LambertianMaterial "mat_416" {
+    albedo: Color3(0.0866, 0.0757, 0.8004),
+}
+
+Sphere "small_416" {
+    position: Vec3(8.5915, 0.2000, -10.3557),
+    radius: 0.2,
+    material: @"mat_416",
+}
+
+LambertianMaterial "mat_417" {
+    albedo: Color3(0.0075, 0.1007, 0.0772),
+}
+
+Sphere "small_417" {
+    position: Vec3(8.4698, 0.2000, -9.3681),
+    radius: 0.2,
+    material: @"mat_417",
+}
+
+LambertianMaterial "mat_418" {
+    albedo: Color3(0.1796, 0.5601, 0.0447),
+}
+
+Sphere "small_418" {
+    position: Vec3(8.1688, 0.2000, -8.1628),
+    radius: 0.2,
+    material: @"mat_418",
+}
+
+MetalMaterial "mat_419" {
+    albedo: Color3(0.8861, 0.7253, 0.8292),
+    fuzz: 0.4781,
+}
+
+Sphere "small_419" {
+    position: Vec3(8.7537, 0.2000, -7.4701),
+    radius: 0.2,
+    material: @"mat_419",
+}
+
+LambertianMaterial "mat_420" {
+    albedo: Color3(0.0454, 0.4051, 0.4683),
+}
+
+Sphere "small_420" {
+    position: Vec3(8.4489, 0.2000, -6.5227),
+    radius: 0.2,
+    material: @"mat_420",
+}
+
+LambertianMaterial "mat_421" {
+    albedo: Color3(0.0497, 0.5301, 0.1939),
+}
+
+Sphere "small_421" {
+    position: Vec3(8.5207, 0.2000, -5.3426),
+    radius: 0.2,
+    material: @"mat_421",
+}
+
+DielectricMaterial "mat_422" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_422" {
+    position: Vec3(8.8243, 0.2000, -4.3139),
+    radius: 0.2,
+    material: @"mat_422",
+}
+
+LambertianMaterial "mat_423" {
+    albedo: Color3(0.0604, 0.2889, 0.2237),
+}
+
+Sphere "small_423" {
+    position: Vec3(8.8672, 0.2000, -3.1266),
+    radius: 0.2,
+    material: @"mat_423",
+}
+
+LambertianMaterial "mat_424" {
+    albedo: Color3(0.5918, 0.1254, 0.1003),
+}
+
+Sphere "small_424" {
+    position: Vec3(8.7746, 0.2000, -2.3593),
+    radius: 0.2,
+    material: @"mat_424",
+}
+
+LambertianMaterial "mat_425" {
+    albedo: Color3(0.4829, 0.2238, 0.0407),
+}
+
+Sphere "small_425" {
+    position: Vec3(8.8832, 0.2000, -1.4149),
+    radius: 0.2,
+    material: @"mat_425",
+}
+
+LambertianMaterial "mat_426" {
+    albedo: Color3(0.3122, 0.2406, 0.6849),
+}
+
+Sphere "small_426" {
+    position: Vec3(8.5136, 0.2000, -0.3996),
+    radius: 0.2,
+    material: @"mat_426",
+}
+
+LambertianMaterial "mat_427" {
+    albedo: Color3(0.1340, 0.1207, 0.0718),
+}
+
+Sphere "small_427" {
+    position: Vec3(8.0227, 0.2000, 0.1308),
+    radius: 0.2,
+    material: @"mat_427",
+}
+
+MetalMaterial "mat_428" {
+    albedo: Color3(0.8768, 0.5162, 0.9070),
+    fuzz: 0.0512,
+}
+
+Sphere "small_428" {
+    position: Vec3(8.6215, 0.2000, 1.2656),
+    radius: 0.2,
+    material: @"mat_428",
+}
+
+MetalMaterial "mat_429" {
+    albedo: Color3(0.8712, 0.7806, 0.6188),
+    fuzz: 0.3922,
+}
+
+Sphere "small_429" {
+    position: Vec3(8.6655, 0.2000, 2.7784),
+    radius: 0.2,
+    material: @"mat_429",
+}
+
+LambertianMaterial "mat_430" {
+    albedo: Color3(0.3591, 0.9336, 0.1726),
+}
+
+Sphere "small_430" {
+    position: Vec3(8.2589, 0.2000, 3.5980),
+    radius: 0.2,
+    material: @"mat_430",
+}
+
+LambertianMaterial "mat_431" {
+    albedo: Color3(0.6795, 0.7565, 0.4563),
+}
+
+Sphere "small_431" {
+    position: Vec3(8.2262, 0.2000, 4.5585),
+    radius: 0.2,
+    material: @"mat_431",
+}
+
+LambertianMaterial "mat_432" {
+    albedo: Color3(0.7484, 0.0522, 0.1276),
+}
+
+Sphere "small_432" {
+    position: Vec3(8.4920, 0.2000, 5.5430),
+    radius: 0.2,
+    material: @"mat_432",
+}
+
+LambertianMaterial "mat_433" {
+    albedo: Color3(0.2385, 0.0760, 0.0843),
+}
+
+Sphere "small_433" {
+    position: Vec3(8.4625, 0.2000, 6.3395),
+    radius: 0.2,
+    material: @"mat_433",
+}
+
+LambertianMaterial "mat_434" {
+    albedo: Color3(0.0164, 0.5740, 0.3247),
+}
+
+Sphere "small_434" {
+    position: Vec3(8.1393, 0.2000, 7.1383),
+    radius: 0.2,
+    material: @"mat_434",
+}
+
+LambertianMaterial "mat_435" {
+    albedo: Color3(0.0699, 0.0125, 0.2101),
+}
+
+Sphere "small_435" {
+    position: Vec3(8.3223, 0.2000, 8.7056),
+    radius: 0.2,
+    material: @"mat_435",
+}
+
+LambertianMaterial "mat_436" {
+    albedo: Color3(0.0708, 0.0788, 0.3993),
+}
+
+Sphere "small_436" {
+    position: Vec3(8.0828, 0.2000, 9.1991),
+    radius: 0.2,
+    material: @"mat_436",
+}
+
+DielectricMaterial "mat_437" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_437" {
+    position: Vec3(8.7413, 0.2000, 10.8830),
+    radius: 0.2,
+    material: @"mat_437",
+}
+
+LambertianMaterial "mat_438" {
+    albedo: Color3(0.5551, 0.5956, 0.2191),
+}
+
+Sphere "small_438" {
+    position: Vec3(9.6020, 0.2000, -10.5989),
+    radius: 0.2,
+    material: @"mat_438",
+}
+
+MetalMaterial "mat_439" {
+    albedo: Color3(0.7701, 0.6414, 0.9557),
+    fuzz: 0.4111,
+}
+
+Sphere "small_439" {
+    position: Vec3(9.8505, 0.2000, -9.6527),
+    radius: 0.2,
+    material: @"mat_439",
+}
+
+LambertianMaterial "mat_440" {
+    albedo: Color3(0.0394, 0.0989, 0.1587),
+}
+
+Sphere "small_440" {
+    position: Vec3(9.7225, 0.2000, -8.5990),
+    radius: 0.2,
+    material: @"mat_440",
+}
+
+DielectricMaterial "mat_441" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_441" {
+    position: Vec3(9.4842, 0.2000, -7.9934),
+    radius: 0.2,
+    material: @"mat_441",
+}
+
+LambertianMaterial "mat_442" {
+    albedo: Color3(0.3669, 0.0559, 0.6860),
+}
+
+Sphere "small_442" {
+    position: Vec3(9.6033, 0.2000, -6.3038),
+    radius: 0.2,
+    material: @"mat_442",
+}
+
+LambertianMaterial "mat_443" {
+    albedo: Color3(0.1148, 0.1523, 0.0047),
+}
+
+Sphere "small_443" {
+    position: Vec3(9.5819, 0.2000, -5.1542),
+    radius: 0.2,
+    material: @"mat_443",
+}
+
+LambertianMaterial "mat_444" {
+    albedo: Color3(0.0589, 0.2445, 0.0073),
+}
+
+Sphere "small_444" {
+    position: Vec3(9.5023, 0.2000, -4.4825),
+    radius: 0.2,
+    material: @"mat_444",
+}
+
+LambertianMaterial "mat_445" {
+    albedo: Color3(0.4674, 0.4104, 0.0674),
+}
+
+Sphere "small_445" {
+    position: Vec3(9.4814, 0.2000, -3.4227),
+    radius: 0.2,
+    material: @"mat_445",
+}
+
+LambertianMaterial "mat_446" {
+    albedo: Color3(0.0662, 0.1729, 0.3132),
+}
+
+Sphere "small_446" {
+    position: Vec3(9.7082, 0.2000, -2.7288),
+    radius: 0.2,
+    material: @"mat_446",
+}
+
+LambertianMaterial "mat_447" {
+    albedo: Color3(0.4352, 0.1383, 0.6192),
+}
+
+Sphere "small_447" {
+    position: Vec3(9.1227, 0.2000, -1.6481),
+    radius: 0.2,
+    material: @"mat_447",
+}
+
+LambertianMaterial "mat_448" {
+    albedo: Color3(0.5256, 0.0684, 0.0030),
+}
+
+Sphere "small_448" {
+    position: Vec3(9.6564, 0.2000, -0.6642),
+    radius: 0.2,
+    material: @"mat_448",
+}
+
+LambertianMaterial "mat_449" {
+    albedo: Color3(0.6761, 0.1419, 0.3311),
+}
+
+Sphere "small_449" {
+    position: Vec3(9.8523, 0.2000, 0.2742),
+    radius: 0.2,
+    material: @"mat_449",
+}
+
+LambertianMaterial "mat_450" {
+    albedo: Color3(0.0352, 0.6815, 0.7938),
+}
+
+Sphere "small_450" {
+    position: Vec3(9.1987, 0.2000, 1.7513),
+    radius: 0.2,
+    material: @"mat_450",
+}
+
+DielectricMaterial "mat_451" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_451" {
+    position: Vec3(9.4151, 0.2000, 2.4947),
+    radius: 0.2,
+    material: @"mat_451",
+}
+
+LambertianMaterial "mat_452" {
+    albedo: Color3(0.3535, 0.0424, 0.0656),
+}
+
+Sphere "small_452" {
+    position: Vec3(9.0606, 0.2000, 3.0884),
+    radius: 0.2,
+    material: @"mat_452",
+}
+
+LambertianMaterial "mat_453" {
+    albedo: Color3(0.2778, 0.1786, 0.2061),
+}
+
+Sphere "small_453" {
+    position: Vec3(9.8101, 0.2000, 4.2860),
+    radius: 0.2,
+    material: @"mat_453",
+}
+
+LambertianMaterial "mat_454" {
+    albedo: Color3(0.0545, 0.3227, 0.1128),
+}
+
+Sphere "small_454" {
+    position: Vec3(9.3855, 0.2000, 5.0043),
+    radius: 0.2,
+    material: @"mat_454",
+}
+
+LambertianMaterial "mat_455" {
+    albedo: Color3(0.1096, 0.0970, 0.5107),
+}
+
+Sphere "small_455" {
+    position: Vec3(9.7901, 0.2000, 6.4166),
+    radius: 0.2,
+    material: @"mat_455",
+}
+
+MetalMaterial "mat_456" {
+    albedo: Color3(0.6316, 0.9432, 0.5382),
+    fuzz: 0.0377,
+}
+
+Sphere "small_456" {
+    position: Vec3(9.1260, 0.2000, 7.4848),
+    radius: 0.2,
+    material: @"mat_456",
+}
+
+LambertianMaterial "mat_457" {
+    albedo: Color3(0.2357, 0.5348, 0.2998),
+}
+
+Sphere "small_457" {
+    position: Vec3(9.4565, 0.2000, 8.0281),
+    radius: 0.2,
+    material: @"mat_457",
+}
+
+DielectricMaterial "mat_458" {
+    refractionIndex: 1.5,
+}
+
+Sphere "small_458" {
+    position: Vec3(9.4249, 0.2000, 9.6977),
+    radius: 0.2,
+    material: @"mat_458",
+}
+
+LambertianMaterial "mat_459" {
+    albedo: Color3(0.2134, 0.2372, 0.1993),
+}
+
+Sphere "small_459" {
+    position: Vec3(9.2010, 0.2000, 10.6949),
+    radius: 0.2,
+    material: @"mat_459",
+}
+
+LambertianMaterial "mat_460" {
+    albedo: Color3(0.1018, 0.2294, 0.1700),
+}
+
+Sphere "small_460" {
+    position: Vec3(10.7632, 0.2000, -10.2741),
+    radius: 0.2,
+    material: @"mat_460",
+}
+
+LambertianMaterial "mat_461" {
+    albedo: Color3(0.1735, 0.1067, 0.0232),
+}
+
+Sphere "small_461" {
+    position: Vec3(10.8710, 0.2000, -9.3377),
+    radius: 0.2,
+    material: @"mat_461",
+}
+
+LambertianMaterial "mat_462" {
+    albedo: Color3(0.1697, 0.0211, 0.3178),
+}
+
+Sphere "small_462" {
+    position: Vec3(10.1861, 0.2000, -8.1830),
+    radius: 0.2,
+    material: @"mat_462",
+}
+
+LambertianMaterial "mat_463" {
+    albedo: Color3(0.2198, 0.0946, 0.2388),
+}
+
+Sphere "small_463" {
+    position: Vec3(10.4692, 0.2000, -7.2533),
+    radius: 0.2,
+    material: @"mat_463",
+}
+
+LambertianMaterial "mat_464" {
+    albedo: Color3(0.3414, 0.1822, 0.4225),
+}
+
+Sphere "small_464" {
+    position: Vec3(10.7519, 0.2000, -6.5350),
+    radius: 0.2,
+    material: @"mat_464",
+}
+
+LambertianMaterial "mat_465" {
+    albedo: Color3(0.0230, 0.0496, 0.0395),
+}
+
+Sphere "small_465" {
+    position: Vec3(10.5438, 0.2000, -5.5483),
+    radius: 0.2,
+    material: @"mat_465",
+}
+
+LambertianMaterial "mat_466" {
+    albedo: Color3(0.1869, 0.3468, 0.1009),
+}
+
+Sphere "small_466" {
+    position: Vec3(10.6456, 0.2000, -4.8935),
+    radius: 0.2,
+    material: @"mat_466",
+}
+
+LambertianMaterial "mat_467" {
+    albedo: Color3(0.0247, 0.1014, 0.0224),
+}
+
+Sphere "small_467" {
+    position: Vec3(10.7500, 0.2000, -3.9798),
+    radius: 0.2,
+    material: @"mat_467",
+}
+
+LambertianMaterial "mat_468" {
+    albedo: Color3(0.5743, 0.0105, 0.4762),
+}
+
+Sphere "small_468" {
+    position: Vec3(10.2324, 0.2000, -2.8380),
+    radius: 0.2,
+    material: @"mat_468",
+}
+
+LambertianMaterial "mat_469" {
+    albedo: Color3(0.8610, 0.1416, 0.4774),
+}
+
+Sphere "small_469" {
+    position: Vec3(10.0772, 0.2000, -1.5957),
+    radius: 0.2,
+    material: @"mat_469",
+}
+
+MetalMaterial "mat_470" {
+    albedo: Color3(0.6323, 0.8621, 0.6713),
+    fuzz: 0.2267,
+}
+
+Sphere "small_470" {
+    position: Vec3(10.1637, 0.2000, -0.4063),
+    radius: 0.2,
+    material: @"mat_470",
+}
+
+LambertianMaterial "mat_471" {
+    albedo: Color3(0.0220, 0.4335, 0.0628),
+}
+
+Sphere "small_471" {
+    position: Vec3(10.2068, 0.2000, 0.3469),
+    radius: 0.2,
+    material: @"mat_471",
+}
+
+LambertianMaterial "mat_472" {
+    albedo: Color3(0.0306, 0.0591, 0.0628),
+}
+
+Sphere "small_472" {
+    position: Vec3(10.4283, 0.2000, 1.5533),
+    radius: 0.2,
+    material: @"mat_472",
+}
+
+LambertianMaterial "mat_473" {
+    albedo: Color3(0.5031, 0.1934, 0.0230),
+}
+
+Sphere "small_473" {
+    position: Vec3(10.7448, 0.2000, 2.8073),
+    radius: 0.2,
+    material: @"mat_473",
+}
+
+LambertianMaterial "mat_474" {
+    albedo: Color3(0.2246, 0.5646, 0.0681),
+}
+
+Sphere "small_474" {
+    position: Vec3(10.7221, 0.2000, 3.7106),
+    radius: 0.2,
+    material: @"mat_474",
+}
+
+LambertianMaterial "mat_475" {
+    albedo: Color3(0.2433, 0.3583, 0.1340),
+}
+
+Sphere "small_475" {
+    position: Vec3(10.4294, 0.2000, 4.2093),
+    radius: 0.2,
+    material: @"mat_475",
+}
+
+LambertianMaterial "mat_476" {
+    albedo: Color3(0.0047, 0.2173, 0.0561),
+}
+
+Sphere "small_476" {
+    position: Vec3(10.5202, 0.2000, 5.1060),
+    radius: 0.2,
+    material: @"mat_476",
+}
+
+LambertianMaterial "mat_477" {
+    albedo: Color3(0.1549, 0.1875, 0.3120),
+}
+
+Sphere "small_477" {
+    position: Vec3(10.2283, 0.2000, 6.7695),
+    radius: 0.2,
+    material: @"mat_477",
+}
+
+LambertianMaterial "mat_478" {
+    albedo: Color3(0.1408, 0.1056, 0.5191),
+}
+
+Sphere "small_478" {
+    position: Vec3(10.4342, 0.2000, 7.3332),
+    radius: 0.2,
+    material: @"mat_478",
+}
+
+MetalMaterial "mat_479" {
+    albedo: Color3(0.7233, 0.8497, 0.5809),
+    fuzz: 0.1072,
+}
+
+Sphere "small_479" {
+    position: Vec3(10.5934, 0.2000, 8.6730),
+    radius: 0.2,
+    material: @"mat_479",
+}
+
+LambertianMaterial "mat_480" {
+    albedo: Color3(0.4927, 0.1550, 0.0005),
+}
+
+Sphere "small_480" {
+    position: Vec3(10.3046, 0.2000, 9.4955),
+    radius: 0.2,
+    material: @"mat_480",
+}
+
+LambertianMaterial "mat_481" {
+    albedo: Color3(0.0142, 0.0030, 0.3783),
+}
+
+Sphere "small_481" {
+    position: Vec3(10.8333, 0.2000, 10.3918),
+    radius: 0.2,
+    material: @"mat_481",
+}
+
+DielectricMaterial "GlassBig" {
+    refractionIndex: 1.5,
+}
+
+Sphere "BigGlass" {
+    position: Vec3(0, 1, 0),
+    radius: 1.0,
+    material: @"GlassBig",
+}
+
+LambertianMaterial "BrownMat" {
+    albedo: Color3(0.4, 0.2, 0.1),
+}
+
+Sphere "BigBrown" {
+    position: Vec3(-4, 1, 0),
+    radius: 1.0,
+    material: @"BrownMat",
+}
+
+MetalMaterial "SilverMat" {
+    albedo: Color3(0.7, 0.6, 0.5),
+    fuzz: 0.0,
+}
+
+Sphere "BigSilver" {
+    position: Vec3(4, 1, 0),
+    radius: 1.0,
+    material: @"SilverMat",
+}
