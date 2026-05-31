@@ -6,6 +6,7 @@ const Block = ast.block.Block;
 const Value = ast.block.Value;
 const Point3 = renderer.math.Point3;
 const Color3 = renderer.math.Color3;
+const Vec3 = renderer.math.Vec3;
 
 pub const InterpretError = error{
     MissingAttr,
@@ -75,6 +76,7 @@ fn parseValue(comptime T: type, value: Value, resolver: anytype) InterpretError!
     if (T == usize) return toUsize(value);
     if (T == Point3) return toPoint3(value);
     if (T == Color3) return toColor3(value);
+    if (T == Vec3) return toVec3(value);
     if (comptime @hasDecl(T, "fromValue")) return T.fromValue(value);
     @compileError("Unsupported field type in parseBlock: " ++ @typeName(T));
 }
@@ -91,10 +93,11 @@ fn getAttr(block: Block, name: []const u8) ?Value {
     return null;
 }
 
-fn extractF32x3(value: Value) InterpretError!struct { f32, f32, f32 } {
+fn extractF32x3(value: Value, name: []const u8) InterpretError!struct { f32, f32, f32 } {
     switch (value) {
         .call => |call| {
-            if (call.args.len != 3) return error.InvalidCall;
+            if (call.args.len != 3 or !std.mem.eql(u8, call.name.value, name)) return error.InvalidCall;
+
             return .{
                 @as(f32, @floatCast(call.args[0].number)),
                 @as(f32, @floatCast(call.args[1].number)),
@@ -106,13 +109,18 @@ fn extractF32x3(value: Value) InterpretError!struct { f32, f32, f32 } {
 }
 
 fn toPoint3(value: Value) InterpretError!Point3 {
-    const v = try extractF32x3(value);
+    const v = try extractF32x3(value, "Point3");
     return Point3.new(v[0], v[1], v[2]);
 }
 
 fn toColor3(value: Value) InterpretError!Color3 {
-    const v = try extractF32x3(value);
+    const v = try extractF32x3(value, "Color3");
     return Color3.new(v[0], v[1], v[2]);
+}
+
+fn toVec3(value: Value) InterpretError!Color3 {
+    const v = try extractF32x3(value, "Vec3");
+    return Vec3.new(v[0], v[1], v[2]);
 }
 
 fn toF32(value: Value) InterpretError!f32 {

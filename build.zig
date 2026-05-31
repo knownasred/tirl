@@ -39,36 +39,40 @@ pub fn build(b: *std.Build) void {
         run_cmd.addArgs(args);
     }
 
-    const raylib_dep = b.dependency("raylib_zig", .{
-        .target = target,
-        .optimize = optimize,
-        .linux_display_backend = .Wayland,
-    });
-
-    const gui_exe = b.addExecutable(.{
-        .name = "zig_scene_gui",
-        .root_module = b.createModule(.{
-            .root_source_file = b.path("src/gui_main.zig"),
-            .target = target,
-            .optimize = optimize,
-            .imports = &.{
-                .{ .name = "zig_scene", .module = mod },
-                .{ .name = "raylib", .module = raylib_dep.module("raylib") },
-            },
-        }),
-    });
-    const raylib_artifact = raylib_dep.artifact("raylib");
-    gui_exe.root_module.linkLibrary(raylib_artifact);
-
-    b.installArtifact(gui_exe);
+    const enable_gui = b.option(bool, "gui", "Build the GUI application (requires raylib)") orelse true;
 
     const run_gui_step = b.step("run-gui", "Run the GUI app");
-    const run_gui_cmd = b.addRunArtifact(gui_exe);
-    if (b.args) |args| {
-        run_gui_cmd.addArgs(args);
+
+    if (enable_gui) {
+        const raylib_dep = b.dependency("raylib_zig", .{
+            .target = target,
+            .optimize = optimize,
+            .linux_display_backend = .Wayland,
+        });
+
+        const gui_exe = b.addExecutable(.{
+            .name = "zig_scene_gui",
+            .root_module = b.createModule(.{
+                .root_source_file = b.path("src/gui_main.zig"),
+                .target = target,
+                .optimize = optimize,
+                .imports = &.{
+                    .{ .name = "zig_scene", .module = mod },
+                    .{ .name = "raylib", .module = raylib_dep.module("raylib") },
+                },
+            }),
+        });
+        gui_exe.root_module.linkLibrary(raylib_dep.artifact("raylib"));
+
+        b.installArtifact(gui_exe);
+
+        const run_gui_cmd = b.addRunArtifact(gui_exe);
+        if (b.args) |args| {
+            run_gui_cmd.addArgs(args);
+        }
+        run_gui_step.dependOn(&run_gui_cmd.step);
+        run_gui_cmd.step.dependOn(b.getInstallStep());
     }
-    run_gui_step.dependOn(&run_gui_cmd.step);
-    run_gui_cmd.step.dependOn(b.getInstallStep());
 
     const mod_tests = b.addTest(.{
         .root_module = mod,

@@ -1,7 +1,7 @@
 Camera "Camera" {
-    lookFrom: Vec3(13, 2, 3),
-    lookAt: Vec3(0, 0, 0),
-    vup: Vec3(0, 1, 0),
+    lookFrom: Point3(13, 2, 3),
+    lookAt: Point3(0, 0, 0),
+    vup: Point3(0, 1, 0),
     vfov: 20,
     aspectRatio: 1.77778,
     imageWidth: 1200,
@@ -17,7 +17,7 @@ LambertianMaterial "GroundMat" {
 }
 
 Sphere "Ground" {
-    position: Vec3(0, -1000, 0),
+    position: Point3(0, -1000, 0),
     radius: 1000,
     material: @"GroundMat",
 }
@@ -27,7 +27,7 @@ LambertianMaterial "mat_0" {
 }
 
 Sphere "small_0" {
-    position: Vec3(-10.9775, 0.2000, -10.7525),
+    position: Point3(-10.9775, 0.2000, -10.7525),
     radius: 0.2,
     material: @"mat_0",
 }
@@ -37,7 +37,7 @@ LambertianMaterial "mat_1" {
 }
 
 Sphere "small_1" {
-    position: Vec3(-10.8032, 0.2000, -9.5452),
+    position: Point3(-10.8032, 0.2000, -9.5452),
     radius: 0.2,
     material: @"mat_1",
 }
@@ -48,7 +48,7 @@ MetalMaterial "mat_2" {
 }
 
 Sphere "small_2" {
-    position: Vec3(-10.9942, 0.2000, -8.2748),
+    position: Point3(-10.9942, 0.2000, -8.2748),
     radius: 0.2,
     material: @"mat_2",
 }
@@ -58,7 +58,7 @@ LambertianMaterial "mat_3" {
 }
 
 Sphere "small_3" {
-    position: Vec3(-10.9165, 0.2000, -7.9130),
+    position: Point3(-10.9165, 0.2000, -7.9130),
     radius: 0.2,
     material: @"mat_3",
 }
@@ -68,7 +68,7 @@ LambertianMaterial "mat_4" {
 }
 
 Sphere "small_4" {
-    position: Vec3(-10.5032, 0.2000, -6.2535),
+    position: Point3(-10.5032, 0.2000, -6.2535),
     radius: 0.2,
     material: @"mat_4",
 }
@@ -78,7 +78,7 @@ LambertianMaterial "mat_5" {
 }
 
 Sphere "small_5" {
-    position: Vec3(-10.9282, 0.2000, -5.7905),
+    position: Point3(-10.9282, 0.2000, -5.7905),
     radius: 0.2,
     material: @"mat_5",
 }
@@ -88,7 +88,7 @@ LambertianMaterial "mat_6" {
 }
 
 Sphere "small_6" {
-    position: Vec3(-10.1570, 0.2000, -4.4168),
+    position: Point3(-10.1570, 0.2000, -4.4168),
     radius: 0.2,
     material: @"mat_6",
 }
@@ -98,7 +98,7 @@ LambertianMaterial "mat_7" {
 }
 
 Sphere "small_7" {
-    position: Vec3(-10.4987, 0.2000, -3.3838),
+    position: Point3(-10.4987, 0.2000, -3.3838),
     radius: 0.2,
     material: @"mat_7",
 }
@@ -108,7 +108,7 @@ LambertianMaterial "mat_8" {
 }
 
 Sphere "small_8" {
-    position: Vec3(-10.1514, 0.2000, -2.2113),
+    position: Point3(-10.1514, 0.2000, -2.2113),
     radius: 0.2,
     material: @"mat_8",
 }
@@ -118,7 +118,7 @@ LambertianMaterial "mat_9" {
 }
 
 Sphere "small_9" {
-    position: Vec3(-10.4948, 0.2000, -1.7635),
+    position: Point3(-10.4948, 0.2000, -1.7635),
     radius: 0.2,
     material: @"mat_9",
 }
@@ -128,7 +128,7 @@ LambertianMaterial "mat_10" {
 }
 
 Sphere "small_10" {
-    position: Vec3(-10.9576, 0.2000, -0.9013),
+    position: Point3(-10.9576, 0.2000, -0.9013),
     radius: 0.2,
     material: @"mat_10",
 }
@@ -138,7 +138,7 @@ LambertianMaterial "mat_11" {
 }
 
 Sphere "small_11" {
-    position: Vec3(-10.1260, 0.2000, 0.7747),
+    position: Point3(-10.1260, 0.2000, 0.7747),
     radius: 0.2,
     material: @"mat_11",
 }
@@ -148,7 +148,7 @@ LambertianMaterial "mat_12" {
 }
 
 Sphere "small_12" {
-    position: Vec3(-10.6087, 0.2000, 1.4084),
+    position: Point3(-10.6087, 0.2000, 1.4084),
     radius: 0.2,
     material: @"mat_12",
 }
@@ -159,7 +159,7 @@ MetalMaterial "mat_13" {
 }
 
 Sphere "small_13" {
-    position: Vec3(-10.7314, 0.2000, 2.5751),
+    position: Point3(-10.7314, 0.2000, 2.5751),
     radius: 0.2,
     material: @"mat_13",
 }
@@ -169,7 +169,7 @@ LambertianMaterial "mat_14" {
 }
 
 Sphere "small_14" {
-    position: Vec3(-10.5227, 0.2000, 3.0005),
+    position: Point3(-10.5227, 0.2000, 3.0005),
     radius: 0.2,
     material: @"mat_14",
 }
@@ -179,7 +179,7 @@ LambertianMaterial "mat_15" {
 }
 
 Sphere "small_15" {
-    position: Vec3(-10.2098, 0.2000, 4.8523),
+    position: Point3(-10.2098, 0.2000, 4.8523),
     radius: 0.2,
     material: @"mat_15",
 }
@@ -189,7 +189,7 @@ LambertianMaterial "mat_16" {
 }
 
 Sphere "small_16" {
-    position: Vec3(-10.5052, 0.2000, 5.2386),
+    position: Point3(-10.5052, 0.2000, 5.2386),
     radius: 0.2,
     material: @"mat_16",
 }
@@ -199,7 +199,7 @@ LambertianMaterial "mat_17" {
 }
 
 Sphere "small_17" {
-    position: Vec3(-10.1044, 0.2000, 6.5849),
+    position: Point3(-10.1044, 0.2000, 6.5849),
     radius: 0.2,
     material: @"mat_17",
 }
@@ -209,7 +209,7 @@ LambertianMaterial "mat_18" {
 }
 
 Sphere "small_18" {
-    position: Vec3(-10.8018, 0.2000, 7.0639),
+    position: Point3(-10.8018, 0.2000, 7.0639),
     radius: 0.2,
     material: @"mat_18",
 }
@@ -219,7 +219,7 @@ LambertianMaterial "mat_19" {
 }
 
 Sphere "small_19" {
-    position: Vec3(-10.8072, 0.2000, 8.1191),
+    position: Point3(-10.8072, 0.2000, 8.1191),
     radius: 0.2,
     material: @"mat_19",
 }
@@ -229,7 +229,7 @@ LambertianMaterial "mat_20" {
 }
 
 Sphere "small_20" {
-    position: Vec3(-10.6121, 0.2000, 9.3812),
+    position: Point3(-10.6121, 0.2000, 9.3812),
     radius: 0.2,
     material: @"mat_20",
 }
@@ -239,7 +239,7 @@ LambertianMaterial "mat_21" {
 }
 
 Sphere "small_21" {
-    position: Vec3(-10.2245, 0.2000, 10.2238),
+    position: Point3(-10.2245, 0.2000, 10.2238),
     radius: 0.2,
     material: @"mat_21",
 }
@@ -249,7 +249,7 @@ LambertianMaterial "mat_22" {
 }
 
 Sphere "small_22" {
-    position: Vec3(-9.2248, 0.2000, -10.5047),
+    position: Point3(-9.2248, 0.2000, -10.5047),
     radius: 0.2,
     material: @"mat_22",
 }
@@ -259,7 +259,7 @@ LambertianMaterial "mat_23" {
 }
 
 Sphere "small_23" {
-    position: Vec3(-9.5629, 0.2000, -9.8076),
+    position: Point3(-9.5629, 0.2000, -9.8076),
     radius: 0.2,
     material: @"mat_23",
 }
@@ -269,7 +269,7 @@ LambertianMaterial "mat_24" {
 }
 
 Sphere "small_24" {
-    position: Vec3(-9.6193, 0.2000, -8.1384),
+    position: Point3(-9.6193, 0.2000, -8.1384),
     radius: 0.2,
     material: @"mat_24",
 }
@@ -279,7 +279,7 @@ LambertianMaterial "mat_25" {
 }
 
 Sphere "small_25" {
-    position: Vec3(-9.5120, 0.2000, -7.3268),
+    position: Point3(-9.5120, 0.2000, -7.3268),
     radius: 0.2,
     material: @"mat_25",
 }
@@ -289,7 +289,7 @@ LambertianMaterial "mat_26" {
 }
 
 Sphere "small_26" {
-    position: Vec3(-9.8328, 0.2000, -6.4645),
+    position: Point3(-9.8328, 0.2000, -6.4645),
     radius: 0.2,
     material: @"mat_26",
 }
@@ -299,7 +299,7 @@ LambertianMaterial "mat_27" {
 }
 
 Sphere "small_27" {
-    position: Vec3(-9.6227, 0.2000, -5.4747),
+    position: Point3(-9.6227, 0.2000, -5.4747),
     radius: 0.2,
     material: @"mat_27",
 }
@@ -309,7 +309,7 @@ LambertianMaterial "mat_28" {
 }
 
 Sphere "small_28" {
-    position: Vec3(-9.7300, 0.2000, -4.7154),
+    position: Point3(-9.7300, 0.2000, -4.7154),
     radius: 0.2,
     material: @"mat_28",
 }
@@ -319,7 +319,7 @@ LambertianMaterial "mat_29" {
 }
 
 Sphere "small_29" {
-    position: Vec3(-9.7613, 0.2000, -3.1601),
+    position: Point3(-9.7613, 0.2000, -3.1601),
     radius: 0.2,
     material: @"mat_29",
 }
@@ -329,7 +329,7 @@ LambertianMaterial "mat_30" {
 }
 
 Sphere "small_30" {
-    position: Vec3(-9.1115, 0.2000, -2.4114),
+    position: Point3(-9.1115, 0.2000, -2.4114),
     radius: 0.2,
     material: @"mat_30",
 }
@@ -339,7 +339,7 @@ LambertianMaterial "mat_31" {
 }
 
 Sphere "small_31" {
-    position: Vec3(-9.9037, 0.2000, -1.5021),
+    position: Point3(-9.9037, 0.2000, -1.5021),
     radius: 0.2,
     material: @"mat_31",
 }
@@ -349,7 +349,7 @@ LambertianMaterial "mat_32" {
 }
 
 Sphere "small_32" {
-    position: Vec3(-9.1852, 0.2000, -0.2385),
+    position: Point3(-9.1852, 0.2000, -0.2385),
     radius: 0.2,
     material: @"mat_32",
 }
@@ -359,7 +359,7 @@ LambertianMaterial "mat_33" {
 }
 
 Sphere "small_33" {
-    position: Vec3(-9.3329, 0.2000, 0.4965),
+    position: Point3(-9.3329, 0.2000, 0.4965),
     radius: 0.2,
     material: @"mat_33",
 }
@@ -370,7 +370,7 @@ MetalMaterial "mat_34" {
 }
 
 Sphere "small_34" {
-    position: Vec3(-9.4757, 0.2000, 1.1333),
+    position: Point3(-9.4757, 0.2000, 1.1333),
     radius: 0.2,
     material: @"mat_34",
 }
@@ -381,7 +381,7 @@ MetalMaterial "mat_35" {
 }
 
 Sphere "small_35" {
-    position: Vec3(-9.1910, 0.2000, 2.1891),
+    position: Point3(-9.1910, 0.2000, 2.1891),
     radius: 0.2,
     material: @"mat_35",
 }
@@ -391,7 +391,7 @@ LambertianMaterial "mat_36" {
 }
 
 Sphere "small_36" {
-    position: Vec3(-9.4414, 0.2000, 3.1391),
+    position: Point3(-9.4414, 0.2000, 3.1391),
     radius: 0.2,
     material: @"mat_36",
 }
@@ -401,7 +401,7 @@ LambertianMaterial "mat_37" {
 }
 
 Sphere "small_37" {
-    position: Vec3(-9.7010, 0.2000, 4.8377),
+    position: Point3(-9.7010, 0.2000, 4.8377),
     radius: 0.2,
     material: @"mat_37",
 }
@@ -412,7 +412,7 @@ MetalMaterial "mat_38" {
 }
 
 Sphere "small_38" {
-    position: Vec3(-9.2273, 0.2000, 5.2002),
+    position: Point3(-9.2273, 0.2000, 5.2002),
     radius: 0.2,
     material: @"mat_38",
 }
@@ -422,7 +422,7 @@ LambertianMaterial "mat_39" {
 }
 
 Sphere "small_39" {
-    position: Vec3(-9.9787, 0.2000, 6.1738),
+    position: Point3(-9.9787, 0.2000, 6.1738),
     radius: 0.2,
     material: @"mat_39",
 }
@@ -432,7 +432,7 @@ DielectricMaterial "mat_40" {
 }
 
 Sphere "small_40" {
-    position: Vec3(-9.5174, 0.2000, 7.8453),
+    position: Point3(-9.5174, 0.2000, 7.8453),
     radius: 0.2,
     material: @"mat_40",
 }
@@ -442,7 +442,7 @@ LambertianMaterial "mat_41" {
 }
 
 Sphere "small_41" {
-    position: Vec3(-9.1266, 0.2000, 8.1607),
+    position: Point3(-9.1266, 0.2000, 8.1607),
     radius: 0.2,
     material: @"mat_41",
 }
@@ -452,7 +452,7 @@ LambertianMaterial "mat_42" {
 }
 
 Sphere "small_42" {
-    position: Vec3(-9.5397, 0.2000, 9.3467),
+    position: Point3(-9.5397, 0.2000, 9.3467),
     radius: 0.2,
     material: @"mat_42",
 }
@@ -462,7 +462,7 @@ LambertianMaterial "mat_43" {
 }
 
 Sphere "small_43" {
-    position: Vec3(-9.3322, 0.2000, 10.6036),
+    position: Point3(-9.3322, 0.2000, 10.6036),
     radius: 0.2,
     material: @"mat_43",
 }
@@ -472,7 +472,7 @@ LambertianMaterial "mat_44" {
 }
 
 Sphere "small_44" {
-    position: Vec3(-8.7297, 0.2000, -10.7216),
+    position: Point3(-8.7297, 0.2000, -10.7216),
     radius: 0.2,
     material: @"mat_44",
 }
@@ -482,7 +482,7 @@ LambertianMaterial "mat_45" {
 }
 
 Sphere "small_45" {
-    position: Vec3(-8.1875, 0.2000, -9.4460),
+    position: Point3(-8.1875, 0.2000, -9.4460),
     radius: 0.2,
     material: @"mat_45",
 }
@@ -492,7 +492,7 @@ LambertianMaterial "mat_46" {
 }
 
 Sphere "small_46" {
-    position: Vec3(-8.5815, 0.2000, -8.6021),
+    position: Point3(-8.5815, 0.2000, -8.6021),
     radius: 0.2,
     material: @"mat_46",
 }
@@ -502,7 +502,7 @@ LambertianMaterial "mat_47" {
 }
 
 Sphere "small_47" {
-    position: Vec3(-8.4304, 0.2000, -7.6983),
+    position: Point3(-8.4304, 0.2000, -7.6983),
     radius: 0.2,
     material: @"mat_47",
 }
@@ -512,7 +512,7 @@ LambertianMaterial "mat_48" {
 }
 
 Sphere "small_48" {
-    position: Vec3(-8.5724, 0.2000, -6.2352),
+    position: Point3(-8.5724, 0.2000, -6.2352),
     radius: 0.2,
     material: @"mat_48",
 }
@@ -522,7 +522,7 @@ LambertianMaterial "mat_49" {
 }
 
 Sphere "small_49" {
-    position: Vec3(-8.4095, 0.2000, -5.9950),
+    position: Point3(-8.4095, 0.2000, -5.9950),
     radius: 0.2,
     material: @"mat_49",
 }
@@ -532,7 +532,7 @@ LambertianMaterial "mat_50" {
 }
 
 Sphere "small_50" {
-    position: Vec3(-8.9548, 0.2000, -4.7757),
+    position: Point3(-8.9548, 0.2000, -4.7757),
     radius: 0.2,
     material: @"mat_50",
 }
@@ -542,7 +542,7 @@ DielectricMaterial "mat_51" {
 }
 
 Sphere "small_51" {
-    position: Vec3(-8.1977, 0.2000, -3.4486),
+    position: Point3(-8.1977, 0.2000, -3.4486),
     radius: 0.2,
     material: @"mat_51",
 }
@@ -552,7 +552,7 @@ LambertianMaterial "mat_52" {
 }
 
 Sphere "small_52" {
-    position: Vec3(-8.5457, 0.2000, -2.2525),
+    position: Point3(-8.5457, 0.2000, -2.2525),
     radius: 0.2,
     material: @"mat_52",
 }
@@ -562,7 +562,7 @@ LambertianMaterial "mat_53" {
 }
 
 Sphere "small_53" {
-    position: Vec3(-8.3108, 0.2000, -1.5308),
+    position: Point3(-8.3108, 0.2000, -1.5308),
     radius: 0.2,
     material: @"mat_53",
 }
@@ -572,7 +572,7 @@ LambertianMaterial "mat_54" {
 }
 
 Sphere "small_54" {
-    position: Vec3(-8.8755, 0.2000, -0.7919),
+    position: Point3(-8.8755, 0.2000, -0.7919),
     radius: 0.2,
     material: @"mat_54",
 }
@@ -582,7 +582,7 @@ LambertianMaterial "mat_55" {
 }
 
 Sphere "small_55" {
-    position: Vec3(-8.6219, 0.2000, 0.8144),
+    position: Point3(-8.6219, 0.2000, 0.8144),
     radius: 0.2,
     material: @"mat_55",
 }
@@ -592,7 +592,7 @@ LambertianMaterial "mat_56" {
 }
 
 Sphere "small_56" {
-    position: Vec3(-8.3219, 0.2000, 1.7681),
+    position: Point3(-8.3219, 0.2000, 1.7681),
     radius: 0.2,
     material: @"mat_56",
 }
@@ -602,7 +602,7 @@ LambertianMaterial "mat_57" {
 }
 
 Sphere "small_57" {
-    position: Vec3(-8.6077, 0.2000, 2.0261),
+    position: Point3(-8.6077, 0.2000, 2.0261),
     radius: 0.2,
     material: @"mat_57",
 }
@@ -612,7 +612,7 @@ LambertianMaterial "mat_58" {
 }
 
 Sphere "small_58" {
-    position: Vec3(-8.9757, 0.2000, 3.3546),
+    position: Point3(-8.9757, 0.2000, 3.3546),
     radius: 0.2,
     material: @"mat_58",
 }
@@ -622,7 +622,7 @@ LambertianMaterial "mat_59" {
 }
 
 Sphere "small_59" {
-    position: Vec3(-8.8095, 0.2000, 4.2942),
+    position: Point3(-8.8095, 0.2000, 4.2942),
     radius: 0.2,
     material: @"mat_59",
 }
@@ -632,7 +632,7 @@ LambertianMaterial "mat_60" {
 }
 
 Sphere "small_60" {
-    position: Vec3(-8.5145, 0.2000, 5.8999),
+    position: Point3(-8.5145, 0.2000, 5.8999),
     radius: 0.2,
     material: @"mat_60",
 }
@@ -642,7 +642,7 @@ LambertianMaterial "mat_61" {
 }
 
 Sphere "small_61" {
-    position: Vec3(-8.9817, 0.2000, 6.1371),
+    position: Point3(-8.9817, 0.2000, 6.1371),
     radius: 0.2,
     material: @"mat_61",
 }
@@ -652,7 +652,7 @@ LambertianMaterial "mat_62" {
 }
 
 Sphere "small_62" {
-    position: Vec3(-8.4535, 0.2000, 7.6731),
+    position: Point3(-8.4535, 0.2000, 7.6731),
     radius: 0.2,
     material: @"mat_62",
 }
@@ -662,7 +662,7 @@ LambertianMaterial "mat_63" {
 }
 
 Sphere "small_63" {
-    position: Vec3(-8.1376, 0.2000, 8.3570),
+    position: Point3(-8.1376, 0.2000, 8.3570),
     radius: 0.2,
     material: @"mat_63",
 }
@@ -673,7 +673,7 @@ MetalMaterial "mat_64" {
 }
 
 Sphere "small_64" {
-    position: Vec3(-8.4596, 0.2000, 9.1089),
+    position: Point3(-8.4596, 0.2000, 9.1089),
     radius: 0.2,
     material: @"mat_64",
 }
@@ -683,7 +683,7 @@ LambertianMaterial "mat_65" {
 }
 
 Sphere "small_65" {
-    position: Vec3(-8.5446, 0.2000, 10.3071),
+    position: Point3(-8.5446, 0.2000, 10.3071),
     radius: 0.2,
     material: @"mat_65",
 }
@@ -693,7 +693,7 @@ LambertianMaterial "mat_66" {
 }
 
 Sphere "small_66" {
-    position: Vec3(-7.6081, 0.2000, -10.3396),
+    position: Point3(-7.6081, 0.2000, -10.3396),
     radius: 0.2,
     material: @"mat_66",
 }
@@ -703,7 +703,7 @@ LambertianMaterial "mat_67" {
 }
 
 Sphere "small_67" {
-    position: Vec3(-7.7584, 0.2000, -9.2335),
+    position: Point3(-7.7584, 0.2000, -9.2335),
     radius: 0.2,
     material: @"mat_67",
 }
@@ -713,7 +713,7 @@ LambertianMaterial "mat_68" {
 }
 
 Sphere "small_68" {
-    position: Vec3(-7.9742, 0.2000, -8.2341),
+    position: Point3(-7.9742, 0.2000, -8.2341),
     radius: 0.2,
     material: @"mat_68",
 }
@@ -723,7 +723,7 @@ LambertianMaterial "mat_69" {
 }
 
 Sphere "small_69" {
-    position: Vec3(-7.9909, 0.2000, -7.1467),
+    position: Point3(-7.9909, 0.2000, -7.1467),
     radius: 0.2,
     material: @"mat_69",
 }
@@ -733,7 +733,7 @@ LambertianMaterial "mat_70" {
 }
 
 Sphere "small_70" {
-    position: Vec3(-7.2864, 0.2000, -6.9163),
+    position: Point3(-7.2864, 0.2000, -6.9163),
     radius: 0.2,
     material: @"mat_70",
 }
@@ -743,7 +743,7 @@ LambertianMaterial "mat_71" {
 }
 
 Sphere "small_71" {
-    position: Vec3(-7.3287, 0.2000, -5.7023),
+    position: Point3(-7.3287, 0.2000, -5.7023),
     radius: 0.2,
     material: @"mat_71",
 }
@@ -753,7 +753,7 @@ LambertianMaterial "mat_72" {
 }
 
 Sphere "small_72" {
-    position: Vec3(-7.3140, 0.2000, -4.8334),
+    position: Point3(-7.3140, 0.2000, -4.8334),
     radius: 0.2,
     material: @"mat_72",
 }
@@ -763,7 +763,7 @@ LambertianMaterial "mat_73" {
 }
 
 Sphere "small_73" {
-    position: Vec3(-7.8253, 0.2000, -3.7953),
+    position: Point3(-7.8253, 0.2000, -3.7953),
     radius: 0.2,
     material: @"mat_73",
 }
@@ -773,7 +773,7 @@ LambertianMaterial "mat_74" {
 }
 
 Sphere "small_74" {
-    position: Vec3(-7.8863, 0.2000, -2.2184),
+    position: Point3(-7.8863, 0.2000, -2.2184),
     radius: 0.2,
     material: @"mat_74",
 }
@@ -783,7 +783,7 @@ LambertianMaterial "mat_75" {
 }
 
 Sphere "small_75" {
-    position: Vec3(-7.1530, 0.2000, -1.5700),
+    position: Point3(-7.1530, 0.2000, -1.5700),
     radius: 0.2,
     material: @"mat_75",
 }
@@ -793,7 +793,7 @@ LambertianMaterial "mat_76" {
 }
 
 Sphere "small_76" {
-    position: Vec3(-7.7265, 0.2000, -0.1055),
+    position: Point3(-7.7265, 0.2000, -0.1055),
     radius: 0.2,
     material: @"mat_76",
 }
@@ -803,7 +803,7 @@ LambertianMaterial "mat_77" {
 }
 
 Sphere "small_77" {
-    position: Vec3(-7.6016, 0.2000, 0.7741),
+    position: Point3(-7.6016, 0.2000, 0.7741),
     radius: 0.2,
     material: @"mat_77",
 }
@@ -813,7 +813,7 @@ LambertianMaterial "mat_78" {
 }
 
 Sphere "small_78" {
-    position: Vec3(-7.8101, 0.2000, 1.5944),
+    position: Point3(-7.8101, 0.2000, 1.5944),
     radius: 0.2,
     material: @"mat_78",
 }
@@ -823,7 +823,7 @@ LambertianMaterial "mat_79" {
 }
 
 Sphere "small_79" {
-    position: Vec3(-7.7917, 0.2000, 2.6363),
+    position: Point3(-7.7917, 0.2000, 2.6363),
     radius: 0.2,
     material: @"mat_79",
 }
@@ -833,7 +833,7 @@ LambertianMaterial "mat_80" {
 }
 
 Sphere "small_80" {
-    position: Vec3(-7.1597, 0.2000, 3.3826),
+    position: Point3(-7.1597, 0.2000, 3.3826),
     radius: 0.2,
     material: @"mat_80",
 }
@@ -843,7 +843,7 @@ LambertianMaterial "mat_81" {
 }
 
 Sphere "small_81" {
-    position: Vec3(-7.3259, 0.2000, 4.5123),
+    position: Point3(-7.3259, 0.2000, 4.5123),
     radius: 0.2,
     material: @"mat_81",
 }
@@ -853,7 +853,7 @@ LambertianMaterial "mat_82" {
 }
 
 Sphere "small_82" {
-    position: Vec3(-7.9276, 0.2000, 5.0359),
+    position: Point3(-7.9276, 0.2000, 5.0359),
     radius: 0.2,
     material: @"mat_82",
 }
@@ -863,7 +863,7 @@ LambertianMaterial "mat_83" {
 }
 
 Sphere "small_83" {
-    position: Vec3(-7.1443, 0.2000, 6.8996),
+    position: Point3(-7.1443, 0.2000, 6.8996),
     radius: 0.2,
     material: @"mat_83",
 }
@@ -874,7 +874,7 @@ MetalMaterial "mat_84" {
 }
 
 Sphere "small_84" {
-    position: Vec3(-7.8367, 0.2000, 7.5268),
+    position: Point3(-7.8367, 0.2000, 7.5268),
     radius: 0.2,
     material: @"mat_84",
 }
@@ -884,7 +884,7 @@ LambertianMaterial "mat_85" {
 }
 
 Sphere "small_85" {
-    position: Vec3(-7.3969, 0.2000, 8.7720),
+    position: Point3(-7.3969, 0.2000, 8.7720),
     radius: 0.2,
     material: @"mat_85",
 }
@@ -894,7 +894,7 @@ LambertianMaterial "mat_86" {
 }
 
 Sphere "small_86" {
-    position: Vec3(-7.7169, 0.2000, 9.2909),
+    position: Point3(-7.7169, 0.2000, 9.2909),
     radius: 0.2,
     material: @"mat_86",
 }
@@ -904,7 +904,7 @@ LambertianMaterial "mat_87" {
 }
 
 Sphere "small_87" {
-    position: Vec3(-7.8312, 0.2000, 10.3256),
+    position: Point3(-7.8312, 0.2000, 10.3256),
     radius: 0.2,
     material: @"mat_87",
 }
@@ -914,7 +914,7 @@ LambertianMaterial "mat_88" {
 }
 
 Sphere "small_88" {
-    position: Vec3(-6.3716, 0.2000, -10.8907),
+    position: Point3(-6.3716, 0.2000, -10.8907),
     radius: 0.2,
     material: @"mat_88",
 }
@@ -924,7 +924,7 @@ LambertianMaterial "mat_89" {
 }
 
 Sphere "small_89" {
-    position: Vec3(-6.1070, 0.2000, -9.1784),
+    position: Point3(-6.1070, 0.2000, -9.1784),
     radius: 0.2,
     material: @"mat_89",
 }
@@ -934,7 +934,7 @@ LambertianMaterial "mat_90" {
 }
 
 Sphere "small_90" {
-    position: Vec3(-6.2487, 0.2000, -8.1178),
+    position: Point3(-6.2487, 0.2000, -8.1178),
     radius: 0.2,
     material: @"mat_90",
 }
@@ -945,7 +945,7 @@ MetalMaterial "mat_91" {
 }
 
 Sphere "small_91" {
-    position: Vec3(-6.7514, 0.2000, -7.2890),
+    position: Point3(-6.7514, 0.2000, -7.2890),
     radius: 0.2,
     material: @"mat_91",
 }
@@ -955,7 +955,7 @@ LambertianMaterial "mat_92" {
 }
 
 Sphere "small_92" {
-    position: Vec3(-6.7313, 0.2000, -6.4718),
+    position: Point3(-6.7313, 0.2000, -6.4718),
     radius: 0.2,
     material: @"mat_92",
 }
@@ -965,7 +965,7 @@ LambertianMaterial "mat_93" {
 }
 
 Sphere "small_93" {
-    position: Vec3(-6.5902, 0.2000, -5.7104),
+    position: Point3(-6.5902, 0.2000, -5.7104),
     radius: 0.2,
     material: @"mat_93",
 }
@@ -975,7 +975,7 @@ LambertianMaterial "mat_94" {
 }
 
 Sphere "small_94" {
-    position: Vec3(-6.3653, 0.2000, -4.2697),
+    position: Point3(-6.3653, 0.2000, -4.2697),
     radius: 0.2,
     material: @"mat_94",
 }
@@ -985,7 +985,7 @@ LambertianMaterial "mat_95" {
 }
 
 Sphere "small_95" {
-    position: Vec3(-6.4688, 0.2000, -3.2173),
+    position: Point3(-6.4688, 0.2000, -3.2173),
     radius: 0.2,
     material: @"mat_95",
 }
@@ -995,7 +995,7 @@ LambertianMaterial "mat_96" {
 }
 
 Sphere "small_96" {
-    position: Vec3(-6.8611, 0.2000, -2.5775),
+    position: Point3(-6.8611, 0.2000, -2.5775),
     radius: 0.2,
     material: @"mat_96",
 }
@@ -1006,7 +1006,7 @@ MetalMaterial "mat_97" {
 }
 
 Sphere "small_97" {
-    position: Vec3(-6.6580, 0.2000, -1.7150),
+    position: Point3(-6.6580, 0.2000, -1.7150),
     radius: 0.2,
     material: @"mat_97",
 }
@@ -1016,7 +1016,7 @@ LambertianMaterial "mat_98" {
 }
 
 Sphere "small_98" {
-    position: Vec3(-6.4320, 0.2000, -0.1712),
+    position: Point3(-6.4320, 0.2000, -0.1712),
     radius: 0.2,
     material: @"mat_98",
 }
@@ -1026,7 +1026,7 @@ LambertianMaterial "mat_99" {
 }
 
 Sphere "small_99" {
-    position: Vec3(-6.3754, 0.2000, 0.8131),
+    position: Point3(-6.3754, 0.2000, 0.8131),
     radius: 0.2,
     material: @"mat_99",
 }
@@ -1036,7 +1036,7 @@ LambertianMaterial "mat_100" {
 }
 
 Sphere "small_100" {
-    position: Vec3(-6.2867, 0.2000, 1.1530),
+    position: Point3(-6.2867, 0.2000, 1.1530),
     radius: 0.2,
     material: @"mat_100",
 }
@@ -1046,7 +1046,7 @@ LambertianMaterial "mat_101" {
 }
 
 Sphere "small_101" {
-    position: Vec3(-6.7714, 0.2000, 2.2298),
+    position: Point3(-6.7714, 0.2000, 2.2298),
     radius: 0.2,
     material: @"mat_101",
 }
@@ -1056,7 +1056,7 @@ LambertianMaterial "mat_102" {
 }
 
 Sphere "small_102" {
-    position: Vec3(-6.4712, 0.2000, 3.5750),
+    position: Point3(-6.4712, 0.2000, 3.5750),
     radius: 0.2,
     material: @"mat_102",
 }
@@ -1066,7 +1066,7 @@ LambertianMaterial "mat_103" {
 }
 
 Sphere "small_103" {
-    position: Vec3(-6.4853, 0.2000, 4.5173),
+    position: Point3(-6.4853, 0.2000, 4.5173),
     radius: 0.2,
     material: @"mat_103",
 }
@@ -1076,7 +1076,7 @@ LambertianMaterial "mat_104" {
 }
 
 Sphere "small_104" {
-    position: Vec3(-6.3298, 0.2000, 5.0441),
+    position: Point3(-6.3298, 0.2000, 5.0441),
     radius: 0.2,
     material: @"mat_104",
 }
@@ -1086,7 +1086,7 @@ LambertianMaterial "mat_105" {
 }
 
 Sphere "small_105" {
-    position: Vec3(-6.4270, 0.2000, 6.5588),
+    position: Point3(-6.4270, 0.2000, 6.5588),
     radius: 0.2,
     material: @"mat_105",
 }
@@ -1096,7 +1096,7 @@ LambertianMaterial "mat_106" {
 }
 
 Sphere "small_106" {
-    position: Vec3(-6.7220, 0.2000, 7.3967),
+    position: Point3(-6.7220, 0.2000, 7.3967),
     radius: 0.2,
     material: @"mat_106",
 }
@@ -1106,7 +1106,7 @@ LambertianMaterial "mat_107" {
 }
 
 Sphere "small_107" {
-    position: Vec3(-6.5145, 0.2000, 8.8743),
+    position: Point3(-6.5145, 0.2000, 8.8743),
     radius: 0.2,
     material: @"mat_107",
 }
@@ -1117,7 +1117,7 @@ MetalMaterial "mat_108" {
 }
 
 Sphere "small_108" {
-    position: Vec3(-6.3281, 0.2000, 9.3048),
+    position: Point3(-6.3281, 0.2000, 9.3048),
     radius: 0.2,
     material: @"mat_108",
 }
@@ -1128,7 +1128,7 @@ MetalMaterial "mat_109" {
 }
 
 Sphere "small_109" {
-    position: Vec3(-6.3482, 0.2000, 10.8819),
+    position: Point3(-6.3482, 0.2000, 10.8819),
     radius: 0.2,
     material: @"mat_109",
 }
@@ -1138,7 +1138,7 @@ LambertianMaterial "mat_110" {
 }
 
 Sphere "small_110" {
-    position: Vec3(-5.5171, 0.2000, -10.5907),
+    position: Point3(-5.5171, 0.2000, -10.5907),
     radius: 0.2,
     material: @"mat_110",
 }
@@ -1148,7 +1148,7 @@ LambertianMaterial "mat_111" {
 }
 
 Sphere "small_111" {
-    position: Vec3(-5.9775, 0.2000, -9.2042),
+    position: Point3(-5.9775, 0.2000, -9.2042),
     radius: 0.2,
     material: @"mat_111",
 }
@@ -1158,7 +1158,7 @@ LambertianMaterial "mat_112" {
 }
 
 Sphere "small_112" {
-    position: Vec3(-5.6325, 0.2000, -8.8742),
+    position: Point3(-5.6325, 0.2000, -8.8742),
     radius: 0.2,
     material: @"mat_112",
 }
@@ -1168,7 +1168,7 @@ LambertianMaterial "mat_113" {
 }
 
 Sphere "small_113" {
-    position: Vec3(-5.3966, 0.2000, -7.3312),
+    position: Point3(-5.3966, 0.2000, -7.3312),
     radius: 0.2,
     material: @"mat_113",
 }
@@ -1178,7 +1178,7 @@ LambertianMaterial "mat_114" {
 }
 
 Sphere "small_114" {
-    position: Vec3(-5.6327, 0.2000, -6.1436),
+    position: Point3(-5.6327, 0.2000, -6.1436),
     radius: 0.2,
     material: @"mat_114",
 }
@@ -1188,7 +1188,7 @@ LambertianMaterial "mat_115" {
 }
 
 Sphere "small_115" {
-    position: Vec3(-5.5100, 0.2000, -5.1199),
+    position: Point3(-5.5100, 0.2000, -5.1199),
     radius: 0.2,
     material: @"mat_115",
 }
@@ -1198,7 +1198,7 @@ LambertianMaterial "mat_116" {
 }
 
 Sphere "small_116" {
-    position: Vec3(-5.4225, 0.2000, -4.4626),
+    position: Point3(-5.4225, 0.2000, -4.4626),
     radius: 0.2,
     material: @"mat_116",
 }
@@ -1208,7 +1208,7 @@ LambertianMaterial "mat_117" {
 }
 
 Sphere "small_117" {
-    position: Vec3(-5.8136, 0.2000, -3.8056),
+    position: Point3(-5.8136, 0.2000, -3.8056),
     radius: 0.2,
     material: @"mat_117",
 }
@@ -1218,7 +1218,7 @@ LambertianMaterial "mat_118" {
 }
 
 Sphere "small_118" {
-    position: Vec3(-5.8830, 0.2000, -2.7744),
+    position: Point3(-5.8830, 0.2000, -2.7744),
     radius: 0.2,
     material: @"mat_118",
 }
@@ -1228,7 +1228,7 @@ LambertianMaterial "mat_119" {
 }
 
 Sphere "small_119" {
-    position: Vec3(-5.8432, 0.2000, -1.9528),
+    position: Point3(-5.8432, 0.2000, -1.9528),
     radius: 0.2,
     material: @"mat_119",
 }
@@ -1238,7 +1238,7 @@ LambertianMaterial "mat_120" {
 }
 
 Sphere "small_120" {
-    position: Vec3(-5.5465, 0.2000, -0.1491),
+    position: Point3(-5.5465, 0.2000, -0.1491),
     radius: 0.2,
     material: @"mat_120",
 }
@@ -1248,7 +1248,7 @@ LambertianMaterial "mat_121" {
 }
 
 Sphere "small_121" {
-    position: Vec3(-5.5689, 0.2000, 0.3615),
+    position: Point3(-5.5689, 0.2000, 0.3615),
     radius: 0.2,
     material: @"mat_121",
 }
@@ -1258,7 +1258,7 @@ LambertianMaterial "mat_122" {
 }
 
 Sphere "small_122" {
-    position: Vec3(-5.7525, 0.2000, 1.5698),
+    position: Point3(-5.7525, 0.2000, 1.5698),
     radius: 0.2,
     material: @"mat_122",
 }
@@ -1268,7 +1268,7 @@ LambertianMaterial "mat_123" {
 }
 
 Sphere "small_123" {
-    position: Vec3(-5.3684, 0.2000, 2.7675),
+    position: Point3(-5.3684, 0.2000, 2.7675),
     radius: 0.2,
     material: @"mat_123",
 }
@@ -1278,7 +1278,7 @@ LambertianMaterial "mat_124" {
 }
 
 Sphere "small_124" {
-    position: Vec3(-5.5919, 0.2000, 3.3744),
+    position: Point3(-5.5919, 0.2000, 3.3744),
     radius: 0.2,
     material: @"mat_124",
 }
@@ -1288,7 +1288,7 @@ LambertianMaterial "mat_125" {
 }
 
 Sphere "small_125" {
-    position: Vec3(-5.2514, 0.2000, 4.0839),
+    position: Point3(-5.2514, 0.2000, 4.0839),
     radius: 0.2,
     material: @"mat_125",
 }
@@ -1298,7 +1298,7 @@ LambertianMaterial "mat_126" {
 }
 
 Sphere "small_126" {
-    position: Vec3(-5.8900, 0.2000, 5.3182),
+    position: Point3(-5.8900, 0.2000, 5.3182),
     radius: 0.2,
     material: @"mat_126",
 }
@@ -1308,7 +1308,7 @@ LambertianMaterial "mat_127" {
 }
 
 Sphere "small_127" {
-    position: Vec3(-5.4799, 0.2000, 6.1915),
+    position: Point3(-5.4799, 0.2000, 6.1915),
     radius: 0.2,
     material: @"mat_127",
 }
@@ -1318,7 +1318,7 @@ LambertianMaterial "mat_128" {
 }
 
 Sphere "small_128" {
-    position: Vec3(-5.2735, 0.2000, 7.7606),
+    position: Point3(-5.2735, 0.2000, 7.7606),
     radius: 0.2,
     material: @"mat_128",
 }
@@ -1329,7 +1329,7 @@ MetalMaterial "mat_129" {
 }
 
 Sphere "small_129" {
-    position: Vec3(-5.7593, 0.2000, 8.1624),
+    position: Point3(-5.7593, 0.2000, 8.1624),
     radius: 0.2,
     material: @"mat_129",
 }
@@ -1340,7 +1340,7 @@ MetalMaterial "mat_130" {
 }
 
 Sphere "small_130" {
-    position: Vec3(-5.4903, 0.2000, 9.3607),
+    position: Point3(-5.4903, 0.2000, 9.3607),
     radius: 0.2,
     material: @"mat_130",
 }
@@ -1350,7 +1350,7 @@ LambertianMaterial "mat_131" {
 }
 
 Sphere "small_131" {
-    position: Vec3(-5.6222, 0.2000, 10.3068),
+    position: Point3(-5.6222, 0.2000, 10.3068),
     radius: 0.2,
     material: @"mat_131",
 }
@@ -1360,7 +1360,7 @@ LambertianMaterial "mat_132" {
 }
 
 Sphere "small_132" {
-    position: Vec3(-4.4439, 0.2000, -10.3934),
+    position: Point3(-4.4439, 0.2000, -10.3934),
     radius: 0.2,
     material: @"mat_132",
 }
@@ -1370,7 +1370,7 @@ LambertianMaterial "mat_133" {
 }
 
 Sphere "small_133" {
-    position: Vec3(-4.6131, 0.2000, -9.7451),
+    position: Point3(-4.6131, 0.2000, -9.7451),
     radius: 0.2,
     material: @"mat_133",
 }
@@ -1380,7 +1380,7 @@ LambertianMaterial "mat_134" {
 }
 
 Sphere "small_134" {
-    position: Vec3(-4.7287, 0.2000, -8.8099),
+    position: Point3(-4.7287, 0.2000, -8.8099),
     radius: 0.2,
     material: @"mat_134",
 }
@@ -1390,7 +1390,7 @@ LambertianMaterial "mat_135" {
 }
 
 Sphere "small_135" {
-    position: Vec3(-4.3667, 0.2000, -7.5498),
+    position: Point3(-4.3667, 0.2000, -7.5498),
     radius: 0.2,
     material: @"mat_135",
 }
@@ -1401,7 +1401,7 @@ MetalMaterial "mat_136" {
 }
 
 Sphere "small_136" {
-    position: Vec3(-4.2241, 0.2000, -6.4818),
+    position: Point3(-4.2241, 0.2000, -6.4818),
     radius: 0.2,
     material: @"mat_136",
 }
@@ -1411,7 +1411,7 @@ LambertianMaterial "mat_137" {
 }
 
 Sphere "small_137" {
-    position: Vec3(-4.7077, 0.2000, -5.2788),
+    position: Point3(-4.7077, 0.2000, -5.2788),
     radius: 0.2,
     material: @"mat_137",
 }
@@ -1421,7 +1421,7 @@ LambertianMaterial "mat_138" {
 }
 
 Sphere "small_138" {
-    position: Vec3(-4.5284, 0.2000, -4.6438),
+    position: Point3(-4.5284, 0.2000, -4.6438),
     radius: 0.2,
     material: @"mat_138",
 }
@@ -1431,7 +1431,7 @@ LambertianMaterial "mat_139" {
 }
 
 Sphere "small_139" {
-    position: Vec3(-4.1847, 0.2000, -3.6856),
+    position: Point3(-4.1847, 0.2000, -3.6856),
     radius: 0.2,
     material: @"mat_139",
 }
@@ -1441,7 +1441,7 @@ LambertianMaterial "mat_140" {
 }
 
 Sphere "small_140" {
-    position: Vec3(-4.3158, 0.2000, -2.4100),
+    position: Point3(-4.3158, 0.2000, -2.4100),
     radius: 0.2,
     material: @"mat_140",
 }
@@ -1452,7 +1452,7 @@ MetalMaterial "mat_141" {
 }
 
 Sphere "small_141" {
-    position: Vec3(-4.4920, 0.2000, -1.4282),
+    position: Point3(-4.4920, 0.2000, -1.4282),
     radius: 0.2,
     material: @"mat_141",
 }
@@ -1462,7 +1462,7 @@ LambertianMaterial "mat_142" {
 }
 
 Sphere "small_142" {
-    position: Vec3(-4.6020, 0.2000, -0.7275),
+    position: Point3(-4.6020, 0.2000, -0.7275),
     radius: 0.2,
     material: @"mat_142",
 }
@@ -1473,7 +1473,7 @@ MetalMaterial "mat_143" {
 }
 
 Sphere "small_143" {
-    position: Vec3(-4.9309, 0.2000, 0.7778),
+    position: Point3(-4.9309, 0.2000, 0.7778),
     radius: 0.2,
     material: @"mat_143",
 }
@@ -1483,7 +1483,7 @@ LambertianMaterial "mat_144" {
 }
 
 Sphere "small_144" {
-    position: Vec3(-4.2874, 0.2000, 1.8063),
+    position: Point3(-4.2874, 0.2000, 1.8063),
     radius: 0.2,
     material: @"mat_144",
 }
@@ -1493,7 +1493,7 @@ LambertianMaterial "mat_145" {
 }
 
 Sphere "small_145" {
-    position: Vec3(-4.9068, 0.2000, 2.8092),
+    position: Point3(-4.9068, 0.2000, 2.8092),
     radius: 0.2,
     material: @"mat_145",
 }
@@ -1503,7 +1503,7 @@ LambertianMaterial "mat_146" {
 }
 
 Sphere "small_146" {
-    position: Vec3(-4.5295, 0.2000, 3.1429),
+    position: Point3(-4.5295, 0.2000, 3.1429),
     radius: 0.2,
     material: @"mat_146",
 }
@@ -1513,7 +1513,7 @@ LambertianMaterial "mat_147" {
 }
 
 Sphere "small_147" {
-    position: Vec3(-4.9407, 0.2000, 4.0851),
+    position: Point3(-4.9407, 0.2000, 4.0851),
     radius: 0.2,
     material: @"mat_147",
 }
@@ -1523,7 +1523,7 @@ LambertianMaterial "mat_148" {
 }
 
 Sphere "small_148" {
-    position: Vec3(-4.4755, 0.2000, 5.1273),
+    position: Point3(-4.4755, 0.2000, 5.1273),
     radius: 0.2,
     material: @"mat_148",
 }
@@ -1533,7 +1533,7 @@ LambertianMaterial "mat_149" {
 }
 
 Sphere "small_149" {
-    position: Vec3(-4.6610, 0.2000, 6.7125),
+    position: Point3(-4.6610, 0.2000, 6.7125),
     radius: 0.2,
     material: @"mat_149",
 }
@@ -1543,7 +1543,7 @@ LambertianMaterial "mat_150" {
 }
 
 Sphere "small_150" {
-    position: Vec3(-4.6189, 0.2000, 7.3256),
+    position: Point3(-4.6189, 0.2000, 7.3256),
     radius: 0.2,
     material: @"mat_150",
 }
@@ -1553,7 +1553,7 @@ LambertianMaterial "mat_151" {
 }
 
 Sphere "small_151" {
-    position: Vec3(-4.9306, 0.2000, 8.7600),
+    position: Point3(-4.9306, 0.2000, 8.7600),
     radius: 0.2,
     material: @"mat_151",
 }
@@ -1563,7 +1563,7 @@ LambertianMaterial "mat_152" {
 }
 
 Sphere "small_152" {
-    position: Vec3(-4.8821, 0.2000, 9.3390),
+    position: Point3(-4.8821, 0.2000, 9.3390),
     radius: 0.2,
     material: @"mat_152",
 }
@@ -1573,7 +1573,7 @@ LambertianMaterial "mat_153" {
 }
 
 Sphere "small_153" {
-    position: Vec3(-4.3913, 0.2000, 10.2138),
+    position: Point3(-4.3913, 0.2000, 10.2138),
     radius: 0.2,
     material: @"mat_153",
 }
@@ -1584,7 +1584,7 @@ MetalMaterial "mat_154" {
 }
 
 Sphere "small_154" {
-    position: Vec3(-3.5779, 0.2000, -10.2484),
+    position: Point3(-3.5779, 0.2000, -10.2484),
     radius: 0.2,
     material: @"mat_154",
 }
@@ -1594,7 +1594,7 @@ LambertianMaterial "mat_155" {
 }
 
 Sphere "small_155" {
-    position: Vec3(-3.6563, 0.2000, -9.5253),
+    position: Point3(-3.6563, 0.2000, -9.5253),
     radius: 0.2,
     material: @"mat_155",
 }
@@ -1605,7 +1605,7 @@ MetalMaterial "mat_156" {
 }
 
 Sphere "small_156" {
-    position: Vec3(-3.5009, 0.2000, -8.9077),
+    position: Point3(-3.5009, 0.2000, -8.9077),
     radius: 0.2,
     material: @"mat_156",
 }
@@ -1615,7 +1615,7 @@ LambertianMaterial "mat_157" {
 }
 
 Sphere "small_157" {
-    position: Vec3(-3.1852, 0.2000, -7.8674),
+    position: Point3(-3.1852, 0.2000, -7.8674),
     radius: 0.2,
     material: @"mat_157",
 }
@@ -1625,7 +1625,7 @@ LambertianMaterial "mat_158" {
 }
 
 Sphere "small_158" {
-    position: Vec3(-3.5482, 0.2000, -6.7878),
+    position: Point3(-3.5482, 0.2000, -6.7878),
     radius: 0.2,
     material: @"mat_158",
 }
@@ -1635,7 +1635,7 @@ LambertianMaterial "mat_159" {
 }
 
 Sphere "small_159" {
-    position: Vec3(-3.8762, 0.2000, -5.7418),
+    position: Point3(-3.8762, 0.2000, -5.7418),
     radius: 0.2,
     material: @"mat_159",
 }
@@ -1645,7 +1645,7 @@ LambertianMaterial "mat_160" {
 }
 
 Sphere "small_160" {
-    position: Vec3(-3.7697, 0.2000, -4.2485),
+    position: Point3(-3.7697, 0.2000, -4.2485),
     radius: 0.2,
     material: @"mat_160",
 }
@@ -1655,7 +1655,7 @@ LambertianMaterial "mat_161" {
 }
 
 Sphere "small_161" {
-    position: Vec3(-3.6222, 0.2000, -3.2855),
+    position: Point3(-3.6222, 0.2000, -3.2855),
     radius: 0.2,
     material: @"mat_161",
 }
@@ -1665,7 +1665,7 @@ LambertianMaterial "mat_162" {
 }
 
 Sphere "small_162" {
-    position: Vec3(-3.8708, 0.2000, -2.6137),
+    position: Point3(-3.8708, 0.2000, -2.6137),
     radius: 0.2,
     material: @"mat_162",
 }
@@ -1675,7 +1675,7 @@ LambertianMaterial "mat_163" {
 }
 
 Sphere "small_163" {
-    position: Vec3(-3.5265, 0.2000, -1.5434),
+    position: Point3(-3.5265, 0.2000, -1.5434),
     radius: 0.2,
     material: @"mat_163",
 }
@@ -1685,7 +1685,7 @@ LambertianMaterial "mat_164" {
 }
 
 Sphere "small_164" {
-    position: Vec3(-3.9854, 0.2000, -0.2903),
+    position: Point3(-3.9854, 0.2000, -0.2903),
     radius: 0.2,
     material: @"mat_164",
 }
@@ -1695,7 +1695,7 @@ LambertianMaterial "mat_165" {
 }
 
 Sphere "small_165" {
-    position: Vec3(-3.5086, 0.2000, 0.7322),
+    position: Point3(-3.5086, 0.2000, 0.7322),
     radius: 0.2,
     material: @"mat_165",
 }
@@ -1705,7 +1705,7 @@ LambertianMaterial "mat_166" {
 }
 
 Sphere "small_166" {
-    position: Vec3(-3.3014, 0.2000, 1.4119),
+    position: Point3(-3.3014, 0.2000, 1.4119),
     radius: 0.2,
     material: @"mat_166",
 }
@@ -1715,7 +1715,7 @@ DielectricMaterial "mat_167" {
 }
 
 Sphere "small_167" {
-    position: Vec3(-3.5113, 0.2000, 2.2280),
+    position: Point3(-3.5113, 0.2000, 2.2280),
     radius: 0.2,
     material: @"mat_167",
 }
@@ -1725,7 +1725,7 @@ LambertianMaterial "mat_168" {
 }
 
 Sphere "small_168" {
-    position: Vec3(-3.8280, 0.2000, 3.3213),
+    position: Point3(-3.8280, 0.2000, 3.3213),
     radius: 0.2,
     material: @"mat_168",
 }
@@ -1735,7 +1735,7 @@ LambertianMaterial "mat_169" {
 }
 
 Sphere "small_169" {
-    position: Vec3(-3.1948, 0.2000, 4.3480),
+    position: Point3(-3.1948, 0.2000, 4.3480),
     radius: 0.2,
     material: @"mat_169",
 }
@@ -1745,7 +1745,7 @@ LambertianMaterial "mat_170" {
 }
 
 Sphere "small_170" {
-    position: Vec3(-3.9290, 0.2000, 5.5422),
+    position: Point3(-3.9290, 0.2000, 5.5422),
     radius: 0.2,
     material: @"mat_170",
 }
@@ -1755,7 +1755,7 @@ LambertianMaterial "mat_171" {
 }
 
 Sphere "small_171" {
-    position: Vec3(-3.6165, 0.2000, 6.6208),
+    position: Point3(-3.6165, 0.2000, 6.6208),
     radius: 0.2,
     material: @"mat_171",
 }
@@ -1765,7 +1765,7 @@ DielectricMaterial "mat_172" {
 }
 
 Sphere "small_172" {
-    position: Vec3(-3.1469, 0.2000, 7.0675),
+    position: Point3(-3.1469, 0.2000, 7.0675),
     radius: 0.2,
     material: @"mat_172",
 }
@@ -1775,7 +1775,7 @@ LambertianMaterial "mat_173" {
 }
 
 Sphere "small_173" {
-    position: Vec3(-3.6730, 0.2000, 8.7210),
+    position: Point3(-3.6730, 0.2000, 8.7210),
     radius: 0.2,
     material: @"mat_173",
 }
@@ -1785,7 +1785,7 @@ LambertianMaterial "mat_174" {
 }
 
 Sphere "small_174" {
-    position: Vec3(-3.2993, 0.2000, 9.3297),
+    position: Point3(-3.2993, 0.2000, 9.3297),
     radius: 0.2,
     material: @"mat_174",
 }
@@ -1795,7 +1795,7 @@ LambertianMaterial "mat_175" {
 }
 
 Sphere "small_175" {
-    position: Vec3(-3.4835, 0.2000, 10.4765),
+    position: Point3(-3.4835, 0.2000, 10.4765),
     radius: 0.2,
     material: @"mat_175",
 }
@@ -1805,7 +1805,7 @@ LambertianMaterial "mat_176" {
 }
 
 Sphere "small_176" {
-    position: Vec3(-2.4945, 0.2000, -10.7644),
+    position: Point3(-2.4945, 0.2000, -10.7644),
     radius: 0.2,
     material: @"mat_176",
 }
@@ -1815,7 +1815,7 @@ LambertianMaterial "mat_177" {
 }
 
 Sphere "small_177" {
-    position: Vec3(-2.2325, 0.2000, -9.5932),
+    position: Point3(-2.2325, 0.2000, -9.5932),
     radius: 0.2,
     material: @"mat_177",
 }
@@ -1825,7 +1825,7 @@ LambertianMaterial "mat_178" {
 }
 
 Sphere "small_178" {
-    position: Vec3(-2.9416, 0.2000, -8.5120),
+    position: Point3(-2.9416, 0.2000, -8.5120),
     radius: 0.2,
     material: @"mat_178",
 }
@@ -1835,7 +1835,7 @@ LambertianMaterial "mat_179" {
 }
 
 Sphere "small_179" {
-    position: Vec3(-2.8908, 0.2000, -7.8191),
+    position: Point3(-2.8908, 0.2000, -7.8191),
     radius: 0.2,
     material: @"mat_179",
 }
@@ -1845,7 +1845,7 @@ LambertianMaterial "mat_180" {
 }
 
 Sphere "small_180" {
-    position: Vec3(-2.4492, 0.2000, -6.9224),
+    position: Point3(-2.4492, 0.2000, -6.9224),
     radius: 0.2,
     material: @"mat_180",
 }
@@ -1855,7 +1855,7 @@ LambertianMaterial "mat_181" {
 }
 
 Sphere "small_181" {
-    position: Vec3(-2.1249, 0.2000, -5.4219),
+    position: Point3(-2.1249, 0.2000, -5.4219),
     radius: 0.2,
     material: @"mat_181",
 }
@@ -1865,7 +1865,7 @@ LambertianMaterial "mat_182" {
 }
 
 Sphere "small_182" {
-    position: Vec3(-2.1304, 0.2000, -4.6106),
+    position: Point3(-2.1304, 0.2000, -4.6106),
     radius: 0.2,
     material: @"mat_182",
 }
@@ -1875,7 +1875,7 @@ LambertianMaterial "mat_183" {
 }
 
 Sphere "small_183" {
-    position: Vec3(-2.6886, 0.2000, -3.1532),
+    position: Point3(-2.6886, 0.2000, -3.1532),
     radius: 0.2,
     material: @"mat_183",
 }
@@ -1885,7 +1885,7 @@ LambertianMaterial "mat_184" {
 }
 
 Sphere "small_184" {
-    position: Vec3(-2.5199, 0.2000, -2.5477),
+    position: Point3(-2.5199, 0.2000, -2.5477),
     radius: 0.2,
     material: @"mat_184",
 }
@@ -1896,7 +1896,7 @@ MetalMaterial "mat_185" {
 }
 
 Sphere "small_185" {
-    position: Vec3(-2.4927, 0.2000, -1.2573),
+    position: Point3(-2.4927, 0.2000, -1.2573),
     radius: 0.2,
     material: @"mat_185",
 }
@@ -1906,7 +1906,7 @@ LambertianMaterial "mat_186" {
 }
 
 Sphere "small_186" {
-    position: Vec3(-2.3097, 0.2000, -0.6251),
+    position: Point3(-2.3097, 0.2000, -0.6251),
     radius: 0.2,
     material: @"mat_186",
 }
@@ -1917,7 +1917,7 @@ MetalMaterial "mat_187" {
 }
 
 Sphere "small_187" {
-    position: Vec3(-2.3835, 0.2000, 0.2677),
+    position: Point3(-2.3835, 0.2000, 0.2677),
     radius: 0.2,
     material: @"mat_187",
 }
@@ -1927,7 +1927,7 @@ LambertianMaterial "mat_188" {
 }
 
 Sphere "small_188" {
-    position: Vec3(-2.4540, 0.2000, 1.2813),
+    position: Point3(-2.4540, 0.2000, 1.2813),
     radius: 0.2,
     material: @"mat_188",
 }
@@ -1937,7 +1937,7 @@ LambertianMaterial "mat_189" {
 }
 
 Sphere "small_189" {
-    position: Vec3(-2.7128, 0.2000, 2.4198),
+    position: Point3(-2.7128, 0.2000, 2.4198),
     radius: 0.2,
     material: @"mat_189",
 }
@@ -1947,7 +1947,7 @@ LambertianMaterial "mat_190" {
 }
 
 Sphere "small_190" {
-    position: Vec3(-2.2212, 0.2000, 3.1437),
+    position: Point3(-2.2212, 0.2000, 3.1437),
     radius: 0.2,
     material: @"mat_190",
 }
@@ -1957,7 +1957,7 @@ LambertianMaterial "mat_191" {
 }
 
 Sphere "small_191" {
-    position: Vec3(-2.7223, 0.2000, 4.0209),
+    position: Point3(-2.7223, 0.2000, 4.0209),
     radius: 0.2,
     material: @"mat_191",
 }
@@ -1967,7 +1967,7 @@ LambertianMaterial "mat_192" {
 }
 
 Sphere "small_192" {
-    position: Vec3(-2.2059, 0.2000, 5.5888),
+    position: Point3(-2.2059, 0.2000, 5.5888),
     radius: 0.2,
     material: @"mat_192",
 }
@@ -1977,7 +1977,7 @@ LambertianMaterial "mat_193" {
 }
 
 Sphere "small_193" {
-    position: Vec3(-2.6707, 0.2000, 6.3605),
+    position: Point3(-2.6707, 0.2000, 6.3605),
     radius: 0.2,
     material: @"mat_193",
 }
@@ -1987,7 +1987,7 @@ LambertianMaterial "mat_194" {
 }
 
 Sphere "small_194" {
-    position: Vec3(-2.1098, 0.2000, 7.6124),
+    position: Point3(-2.1098, 0.2000, 7.6124),
     radius: 0.2,
     material: @"mat_194",
 }
@@ -1997,7 +1997,7 @@ LambertianMaterial "mat_195" {
 }
 
 Sphere "small_195" {
-    position: Vec3(-2.8208, 0.2000, 8.4582),
+    position: Point3(-2.8208, 0.2000, 8.4582),
     radius: 0.2,
     material: @"mat_195",
 }
@@ -2007,7 +2007,7 @@ LambertianMaterial "mat_196" {
 }
 
 Sphere "small_196" {
-    position: Vec3(-2.5360, 0.2000, 9.2952),
+    position: Point3(-2.5360, 0.2000, 9.2952),
     radius: 0.2,
     material: @"mat_196",
 }
@@ -2018,7 +2018,7 @@ MetalMaterial "mat_197" {
 }
 
 Sphere "small_197" {
-    position: Vec3(-2.5209, 0.2000, 10.6379),
+    position: Point3(-2.5209, 0.2000, 10.6379),
     radius: 0.2,
     material: @"mat_197",
 }
@@ -2028,7 +2028,7 @@ DielectricMaterial "mat_198" {
 }
 
 Sphere "small_198" {
-    position: Vec3(-1.4747, 0.2000, -10.2829),
+    position: Point3(-1.4747, 0.2000, -10.2829),
     radius: 0.2,
     material: @"mat_198",
 }
@@ -2038,7 +2038,7 @@ LambertianMaterial "mat_199" {
 }
 
 Sphere "small_199" {
-    position: Vec3(-1.3808, 0.2000, -9.9760),
+    position: Point3(-1.3808, 0.2000, -9.9760),
     radius: 0.2,
     material: @"mat_199",
 }
@@ -2048,7 +2048,7 @@ LambertianMaterial "mat_200" {
 }
 
 Sphere "small_200" {
-    position: Vec3(-1.8465, 0.2000, -8.4339),
+    position: Point3(-1.8465, 0.2000, -8.4339),
     radius: 0.2,
     material: @"mat_200",
 }
@@ -2058,7 +2058,7 @@ LambertianMaterial "mat_201" {
 }
 
 Sphere "small_201" {
-    position: Vec3(-1.9830, 0.2000, -7.7177),
+    position: Point3(-1.9830, 0.2000, -7.7177),
     radius: 0.2,
     material: @"mat_201",
 }
@@ -2068,7 +2068,7 @@ LambertianMaterial "mat_202" {
 }
 
 Sphere "small_202" {
-    position: Vec3(-1.9439, 0.2000, -6.8757),
+    position: Point3(-1.9439, 0.2000, -6.8757),
     radius: 0.2,
     material: @"mat_202",
 }
@@ -2079,7 +2079,7 @@ MetalMaterial "mat_203" {
 }
 
 Sphere "small_203" {
-    position: Vec3(-1.6919, 0.2000, -5.6811),
+    position: Point3(-1.6919, 0.2000, -5.6811),
     radius: 0.2,
     material: @"mat_203",
 }
@@ -2089,7 +2089,7 @@ LambertianMaterial "mat_204" {
 }
 
 Sphere "small_204" {
-    position: Vec3(-1.8270, 0.2000, -4.7781),
+    position: Point3(-1.8270, 0.2000, -4.7781),
     radius: 0.2,
     material: @"mat_204",
 }
@@ -2099,7 +2099,7 @@ LambertianMaterial "mat_205" {
 }
 
 Sphere "small_205" {
-    position: Vec3(-1.7147, 0.2000, -3.6861),
+    position: Point3(-1.7147, 0.2000, -3.6861),
     radius: 0.2,
     material: @"mat_205",
 }
@@ -2109,7 +2109,7 @@ DielectricMaterial "mat_206" {
 }
 
 Sphere "small_206" {
-    position: Vec3(-1.2635, 0.2000, -2.1409),
+    position: Point3(-1.2635, 0.2000, -2.1409),
     radius: 0.2,
     material: @"mat_206",
 }
@@ -2120,7 +2120,7 @@ MetalMaterial "mat_207" {
 }
 
 Sphere "small_207" {
-    position: Vec3(-1.7386, 0.2000, -1.7411),
+    position: Point3(-1.7386, 0.2000, -1.7411),
     radius: 0.2,
     material: @"mat_207",
 }
@@ -2130,7 +2130,7 @@ LambertianMaterial "mat_208" {
 }
 
 Sphere "small_208" {
-    position: Vec3(-1.8181, 0.2000, -0.5153),
+    position: Point3(-1.8181, 0.2000, -0.5153),
     radius: 0.2,
     material: @"mat_208",
 }
@@ -2140,7 +2140,7 @@ LambertianMaterial "mat_209" {
 }
 
 Sphere "small_209" {
-    position: Vec3(-1.5221, 0.2000, 0.5742),
+    position: Point3(-1.5221, 0.2000, 0.5742),
     radius: 0.2,
     material: @"mat_209",
 }
@@ -2150,7 +2150,7 @@ LambertianMaterial "mat_210" {
 }
 
 Sphere "small_210" {
-    position: Vec3(-1.1638, 0.2000, 1.3662),
+    position: Point3(-1.1638, 0.2000, 1.3662),
     radius: 0.2,
     material: @"mat_210",
 }
@@ -2160,7 +2160,7 @@ LambertianMaterial "mat_211" {
 }
 
 Sphere "small_211" {
-    position: Vec3(-1.1829, 0.2000, 2.0805),
+    position: Point3(-1.1829, 0.2000, 2.0805),
     radius: 0.2,
     material: @"mat_211",
 }
@@ -2171,7 +2171,7 @@ MetalMaterial "mat_212" {
 }
 
 Sphere "small_212" {
-    position: Vec3(-1.8418, 0.2000, 3.8277),
+    position: Point3(-1.8418, 0.2000, 3.8277),
     radius: 0.2,
     material: @"mat_212",
 }
@@ -2181,7 +2181,7 @@ DielectricMaterial "mat_213" {
 }
 
 Sphere "small_213" {
-    position: Vec3(-1.1666, 0.2000, 4.7891),
+    position: Point3(-1.1666, 0.2000, 4.7891),
     radius: 0.2,
     material: @"mat_213",
 }
@@ -2191,7 +2191,7 @@ LambertianMaterial "mat_214" {
 }
 
 Sphere "small_214" {
-    position: Vec3(-1.4888, 0.2000, 5.0966),
+    position: Point3(-1.4888, 0.2000, 5.0966),
     radius: 0.2,
     material: @"mat_214",
 }
@@ -2202,7 +2202,7 @@ MetalMaterial "mat_215" {
 }
 
 Sphere "small_215" {
-    position: Vec3(-1.5788, 0.2000, 6.1735),
+    position: Point3(-1.5788, 0.2000, 6.1735),
     radius: 0.2,
     material: @"mat_215",
 }
@@ -2212,7 +2212,7 @@ LambertianMaterial "mat_216" {
 }
 
 Sphere "small_216" {
-    position: Vec3(-1.3370, 0.2000, 7.7117),
+    position: Point3(-1.3370, 0.2000, 7.7117),
     radius: 0.2,
     material: @"mat_216",
 }
@@ -2222,7 +2222,7 @@ LambertianMaterial "mat_217" {
 }
 
 Sphere "small_217" {
-    position: Vec3(-1.9219, 0.2000, 8.6023),
+    position: Point3(-1.9219, 0.2000, 8.6023),
     radius: 0.2,
     material: @"mat_217",
 }
@@ -2232,7 +2232,7 @@ LambertianMaterial "mat_218" {
 }
 
 Sphere "small_218" {
-    position: Vec3(-1.1414, 0.2000, 9.2718),
+    position: Point3(-1.1414, 0.2000, 9.2718),
     radius: 0.2,
     material: @"mat_218",
 }
@@ -2242,7 +2242,7 @@ LambertianMaterial "mat_219" {
 }
 
 Sphere "small_219" {
-    position: Vec3(-1.6351, 0.2000, 10.4523),
+    position: Point3(-1.6351, 0.2000, 10.4523),
     radius: 0.2,
     material: @"mat_219",
 }
@@ -2252,7 +2252,7 @@ LambertianMaterial "mat_220" {
 }
 
 Sphere "small_220" {
-    position: Vec3(-0.8028, 0.2000, -10.8798),
+    position: Point3(-0.8028, 0.2000, -10.8798),
     radius: 0.2,
     material: @"mat_220",
 }
@@ -2262,7 +2262,7 @@ LambertianMaterial "mat_221" {
 }
 
 Sphere "small_221" {
-    position: Vec3(-0.4023, 0.2000, -9.8034),
+    position: Point3(-0.4023, 0.2000, -9.8034),
     radius: 0.2,
     material: @"mat_221",
 }
@@ -2272,7 +2272,7 @@ LambertianMaterial "mat_222" {
 }
 
 Sphere "small_222" {
-    position: Vec3(-0.4922, 0.2000, -8.9444),
+    position: Point3(-0.4922, 0.2000, -8.9444),
     radius: 0.2,
     material: @"mat_222",
 }
@@ -2282,7 +2282,7 @@ LambertianMaterial "mat_223" {
 }
 
 Sphere "small_223" {
-    position: Vec3(-0.8151, 0.2000, -7.4752),
+    position: Point3(-0.8151, 0.2000, -7.4752),
     radius: 0.2,
     material: @"mat_223",
 }
@@ -2292,7 +2292,7 @@ LambertianMaterial "mat_224" {
 }
 
 Sphere "small_224" {
-    position: Vec3(-0.5839, 0.2000, -6.2738),
+    position: Point3(-0.5839, 0.2000, -6.2738),
     radius: 0.2,
     material: @"mat_224",
 }
@@ -2302,7 +2302,7 @@ LambertianMaterial "mat_225" {
 }
 
 Sphere "small_225" {
-    position: Vec3(-0.9426, 0.2000, -5.1053),
+    position: Point3(-0.9426, 0.2000, -5.1053),
     radius: 0.2,
     material: @"mat_225",
 }
@@ -2312,7 +2312,7 @@ LambertianMaterial "mat_226" {
 }
 
 Sphere "small_226" {
-    position: Vec3(-0.1195, 0.2000, -4.4187),
+    position: Point3(-0.1195, 0.2000, -4.4187),
     radius: 0.2,
     material: @"mat_226",
 }
@@ -2322,7 +2322,7 @@ LambertianMaterial "mat_227" {
 }
 
 Sphere "small_227" {
-    position: Vec3(-0.4044, 0.2000, -3.5146),
+    position: Point3(-0.4044, 0.2000, -3.5146),
     radius: 0.2,
     material: @"mat_227",
 }
@@ -2332,7 +2332,7 @@ LambertianMaterial "mat_228" {
 }
 
 Sphere "small_228" {
-    position: Vec3(-0.9969, 0.2000, -2.9795),
+    position: Point3(-0.9969, 0.2000, -2.9795),
     radius: 0.2,
     material: @"mat_228",
 }
@@ -2342,7 +2342,7 @@ LambertianMaterial "mat_229" {
 }
 
 Sphere "small_229" {
-    position: Vec3(-0.7519, 0.2000, -1.1563),
+    position: Point3(-0.7519, 0.2000, -1.1563),
     radius: 0.2,
     material: @"mat_229",
 }
@@ -2352,7 +2352,7 @@ LambertianMaterial "mat_230" {
 }
 
 Sphere "small_230" {
-    position: Vec3(-0.8145, 0.2000, -0.9092),
+    position: Point3(-0.8145, 0.2000, -0.9092),
     radius: 0.2,
     material: @"mat_230",
 }
@@ -2362,7 +2362,7 @@ LambertianMaterial "mat_231" {
 }
 
 Sphere "small_231" {
-    position: Vec3(-0.8045, 0.2000, 0.7774),
+    position: Point3(-0.8045, 0.2000, 0.7774),
     radius: 0.2,
     material: @"mat_231",
 }
@@ -2372,7 +2372,7 @@ LambertianMaterial "mat_232" {
 }
 
 Sphere "small_232" {
-    position: Vec3(-0.3947, 0.2000, 1.2886),
+    position: Point3(-0.3947, 0.2000, 1.2886),
     radius: 0.2,
     material: @"mat_232",
 }
@@ -2383,7 +2383,7 @@ MetalMaterial "mat_233" {
 }
 
 Sphere "small_233" {
-    position: Vec3(-0.2083, 0.2000, 2.8204),
+    position: Point3(-0.2083, 0.2000, 2.8204),
     radius: 0.2,
     material: @"mat_233",
 }
@@ -2394,7 +2394,7 @@ MetalMaterial "mat_234" {
 }
 
 Sphere "small_234" {
-    position: Vec3(-0.3958, 0.2000, 3.7072),
+    position: Point3(-0.3958, 0.2000, 3.7072),
     radius: 0.2,
     material: @"mat_234",
 }
@@ -2404,7 +2404,7 @@ LambertianMaterial "mat_235" {
 }
 
 Sphere "small_235" {
-    position: Vec3(-0.5738, 0.2000, 4.7644),
+    position: Point3(-0.5738, 0.2000, 4.7644),
     radius: 0.2,
     material: @"mat_235",
 }
@@ -2414,7 +2414,7 @@ LambertianMaterial "mat_236" {
 }
 
 Sphere "small_236" {
-    position: Vec3(-0.8793, 0.2000, 5.2186),
+    position: Point3(-0.8793, 0.2000, 5.2186),
     radius: 0.2,
     material: @"mat_236",
 }
@@ -2424,7 +2424,7 @@ LambertianMaterial "mat_237" {
 }
 
 Sphere "small_237" {
-    position: Vec3(-0.7584, 0.2000, 6.6063),
+    position: Point3(-0.7584, 0.2000, 6.6063),
     radius: 0.2,
     material: @"mat_237",
 }
@@ -2434,7 +2434,7 @@ LambertianMaterial "mat_238" {
 }
 
 Sphere "small_238" {
-    position: Vec3(-0.2175, 0.2000, 7.2997),
+    position: Point3(-0.2175, 0.2000, 7.2997),
     radius: 0.2,
     material: @"mat_238",
 }
@@ -2444,7 +2444,7 @@ LambertianMaterial "mat_239" {
 }
 
 Sphere "small_239" {
-    position: Vec3(-0.7817, 0.2000, 8.5440),
+    position: Point3(-0.7817, 0.2000, 8.5440),
     radius: 0.2,
     material: @"mat_239",
 }
@@ -2454,7 +2454,7 @@ LambertianMaterial "mat_240" {
 }
 
 Sphere "small_240" {
-    position: Vec3(-0.7646, 0.2000, 9.4615),
+    position: Point3(-0.7646, 0.2000, 9.4615),
     radius: 0.2,
     material: @"mat_240",
 }
@@ -2464,7 +2464,7 @@ LambertianMaterial "mat_241" {
 }
 
 Sphere "small_241" {
-    position: Vec3(-0.6275, 0.2000, 10.5063),
+    position: Point3(-0.6275, 0.2000, 10.5063),
     radius: 0.2,
     material: @"mat_241",
 }
@@ -2474,7 +2474,7 @@ LambertianMaterial "mat_242" {
 }
 
 Sphere "small_242" {
-    position: Vec3(0.2969, 0.2000, -10.6581),
+    position: Point3(0.2969, 0.2000, -10.6581),
     radius: 0.2,
     material: @"mat_242",
 }
@@ -2484,7 +2484,7 @@ DielectricMaterial "mat_243" {
 }
 
 Sphere "small_243" {
-    position: Vec3(0.5775, 0.2000, -9.5585),
+    position: Point3(0.5775, 0.2000, -9.5585),
     radius: 0.2,
     material: @"mat_243",
 }
@@ -2494,7 +2494,7 @@ LambertianMaterial "mat_244" {
 }
 
 Sphere "small_244" {
-    position: Vec3(0.7155, 0.2000, -8.8477),
+    position: Point3(0.7155, 0.2000, -8.8477),
     radius: 0.2,
     material: @"mat_244",
 }
@@ -2504,7 +2504,7 @@ LambertianMaterial "mat_245" {
 }
 
 Sphere "small_245" {
-    position: Vec3(0.7620, 0.2000, -7.1493),
+    position: Point3(0.7620, 0.2000, -7.1493),
     radius: 0.2,
     material: @"mat_245",
 }
@@ -2514,7 +2514,7 @@ LambertianMaterial "mat_246" {
 }
 
 Sphere "small_246" {
-    position: Vec3(0.4552, 0.2000, -6.6641),
+    position: Point3(0.4552, 0.2000, -6.6641),
     radius: 0.2,
     material: @"mat_246",
 }
@@ -2524,7 +2524,7 @@ LambertianMaterial "mat_247" {
 }
 
 Sphere "small_247" {
-    position: Vec3(0.0107, 0.2000, -5.5235),
+    position: Point3(0.0107, 0.2000, -5.5235),
     radius: 0.2,
     material: @"mat_247",
 }
@@ -2535,7 +2535,7 @@ MetalMaterial "mat_248" {
 }
 
 Sphere "small_248" {
-    position: Vec3(0.0963, 0.2000, -4.9133),
+    position: Point3(0.0963, 0.2000, -4.9133),
     radius: 0.2,
     material: @"mat_248",
 }
@@ -2545,7 +2545,7 @@ LambertianMaterial "mat_249" {
 }
 
 Sphere "small_249" {
-    position: Vec3(0.3572, 0.2000, -3.6643),
+    position: Point3(0.3572, 0.2000, -3.6643),
     radius: 0.2,
     material: @"mat_249",
 }
@@ -2555,7 +2555,7 @@ LambertianMaterial "mat_250" {
 }
 
 Sphere "small_250" {
-    position: Vec3(0.7724, 0.2000, -2.3164),
+    position: Point3(0.7724, 0.2000, -2.3164),
     radius: 0.2,
     material: @"mat_250",
 }
@@ -2565,7 +2565,7 @@ LambertianMaterial "mat_251" {
 }
 
 Sphere "small_251" {
-    position: Vec3(0.3905, 0.2000, -1.2941),
+    position: Point3(0.3905, 0.2000, -1.2941),
     radius: 0.2,
     material: @"mat_251",
 }
@@ -2576,7 +2576,7 @@ MetalMaterial "mat_252" {
 }
 
 Sphere "small_252" {
-    position: Vec3(0.7988, 0.2000, -0.5720),
+    position: Point3(0.7988, 0.2000, -0.5720),
     radius: 0.2,
     material: @"mat_252",
 }
@@ -2586,7 +2586,7 @@ LambertianMaterial "mat_253" {
 }
 
 Sphere "small_253" {
-    position: Vec3(0.0296, 0.2000, 0.8359),
+    position: Point3(0.0296, 0.2000, 0.8359),
     radius: 0.2,
     material: @"mat_253",
 }
@@ -2596,7 +2596,7 @@ LambertianMaterial "mat_254" {
 }
 
 Sphere "small_254" {
-    position: Vec3(0.1462, 0.2000, 1.2164),
+    position: Point3(0.1462, 0.2000, 1.2164),
     radius: 0.2,
     material: @"mat_254",
 }
@@ -2606,7 +2606,7 @@ DielectricMaterial "mat_255" {
 }
 
 Sphere "small_255" {
-    position: Vec3(0.6517, 0.2000, 2.4507),
+    position: Point3(0.6517, 0.2000, 2.4507),
     radius: 0.2,
     material: @"mat_255",
 }
@@ -2616,7 +2616,7 @@ DielectricMaterial "mat_256" {
 }
 
 Sphere "small_256" {
-    position: Vec3(0.0483, 0.2000, 3.3934),
+    position: Point3(0.0483, 0.2000, 3.3934),
     radius: 0.2,
     material: @"mat_256",
 }
@@ -2627,7 +2627,7 @@ MetalMaterial "mat_257" {
 }
 
 Sphere "small_257" {
-    position: Vec3(0.3065, 0.2000, 4.6921),
+    position: Point3(0.3065, 0.2000, 4.6921),
     radius: 0.2,
     material: @"mat_257",
 }
@@ -2637,7 +2637,7 @@ LambertianMaterial "mat_258" {
 }
 
 Sphere "small_258" {
-    position: Vec3(0.8933, 0.2000, 5.4415),
+    position: Point3(0.8933, 0.2000, 5.4415),
     radius: 0.2,
     material: @"mat_258",
 }
@@ -2647,7 +2647,7 @@ LambertianMaterial "mat_259" {
 }
 
 Sphere "small_259" {
-    position: Vec3(0.7182, 0.2000, 6.6418),
+    position: Point3(0.7182, 0.2000, 6.6418),
     radius: 0.2,
     material: @"mat_259",
 }
@@ -2657,7 +2657,7 @@ LambertianMaterial "mat_260" {
 }
 
 Sphere "small_260" {
-    position: Vec3(0.0047, 0.2000, 7.2774),
+    position: Point3(0.0047, 0.2000, 7.2774),
     radius: 0.2,
     material: @"mat_260",
 }
@@ -2667,7 +2667,7 @@ LambertianMaterial "mat_261" {
 }
 
 Sphere "small_261" {
-    position: Vec3(0.0236, 0.2000, 8.3185),
+    position: Point3(0.0236, 0.2000, 8.3185),
     radius: 0.2,
     material: @"mat_261",
 }
@@ -2677,7 +2677,7 @@ LambertianMaterial "mat_262" {
 }
 
 Sphere "small_262" {
-    position: Vec3(0.8110, 0.2000, 9.8147),
+    position: Point3(0.8110, 0.2000, 9.8147),
     radius: 0.2,
     material: @"mat_262",
 }
@@ -2687,7 +2687,7 @@ LambertianMaterial "mat_263" {
 }
 
 Sphere "small_263" {
-    position: Vec3(0.0569, 0.2000, 10.3912),
+    position: Point3(0.0569, 0.2000, 10.3912),
     radius: 0.2,
     material: @"mat_263",
 }
@@ -2697,7 +2697,7 @@ LambertianMaterial "mat_264" {
 }
 
 Sphere "small_264" {
-    position: Vec3(1.1760, 0.2000, -10.9037),
+    position: Point3(1.1760, 0.2000, -10.9037),
     radius: 0.2,
     material: @"mat_264",
 }
@@ -2707,7 +2707,7 @@ LambertianMaterial "mat_265" {
 }
 
 Sphere "small_265" {
-    position: Vec3(1.7339, 0.2000, -9.2264),
+    position: Point3(1.7339, 0.2000, -9.2264),
     radius: 0.2,
     material: @"mat_265",
 }
@@ -2717,7 +2717,7 @@ DielectricMaterial "mat_266" {
 }
 
 Sphere "small_266" {
-    position: Vec3(1.8719, 0.2000, -8.7377),
+    position: Point3(1.8719, 0.2000, -8.7377),
     radius: 0.2,
     material: @"mat_266",
 }
@@ -2727,7 +2727,7 @@ LambertianMaterial "mat_267" {
 }
 
 Sphere "small_267" {
-    position: Vec3(1.4419, 0.2000, -7.4817),
+    position: Point3(1.4419, 0.2000, -7.4817),
     radius: 0.2,
     material: @"mat_267",
 }
@@ -2737,7 +2737,7 @@ LambertianMaterial "mat_268" {
 }
 
 Sphere "small_268" {
-    position: Vec3(1.4911, 0.2000, -6.3865),
+    position: Point3(1.4911, 0.2000, -6.3865),
     radius: 0.2,
     material: @"mat_268",
 }
@@ -2747,7 +2747,7 @@ LambertianMaterial "mat_269" {
 }
 
 Sphere "small_269" {
-    position: Vec3(1.7371, 0.2000, -5.2839),
+    position: Point3(1.7371, 0.2000, -5.2839),
     radius: 0.2,
     material: @"mat_269",
 }
@@ -2757,7 +2757,7 @@ LambertianMaterial "mat_270" {
 }
 
 Sphere "small_270" {
-    position: Vec3(1.0666, 0.2000, -4.1084),
+    position: Point3(1.0666, 0.2000, -4.1084),
     radius: 0.2,
     material: @"mat_270",
 }
@@ -2767,7 +2767,7 @@ LambertianMaterial "mat_271" {
 }
 
 Sphere "small_271" {
-    position: Vec3(1.3236, 0.2000, -3.1940),
+    position: Point3(1.3236, 0.2000, -3.1940),
     radius: 0.2,
     material: @"mat_271",
 }
@@ -2777,7 +2777,7 @@ LambertianMaterial "mat_272" {
 }
 
 Sphere "small_272" {
-    position: Vec3(1.0399, 0.2000, -2.1148),
+    position: Point3(1.0399, 0.2000, -2.1148),
     radius: 0.2,
     material: @"mat_272",
 }
@@ -2787,7 +2787,7 @@ LambertianMaterial "mat_273" {
 }
 
 Sphere "small_273" {
-    position: Vec3(1.4596, 0.2000, -1.5331),
+    position: Point3(1.4596, 0.2000, -1.5331),
     radius: 0.2,
     material: @"mat_273",
 }
@@ -2797,7 +2797,7 @@ LambertianMaterial "mat_274" {
 }
 
 Sphere "small_274" {
-    position: Vec3(1.3105, 0.2000, -0.9779),
+    position: Point3(1.3105, 0.2000, -0.9779),
     radius: 0.2,
     material: @"mat_274",
 }
@@ -2807,7 +2807,7 @@ LambertianMaterial "mat_275" {
 }
 
 Sphere "small_275" {
-    position: Vec3(1.4098, 0.2000, 0.1862),
+    position: Point3(1.4098, 0.2000, 0.1862),
     radius: 0.2,
     material: @"mat_275",
 }
@@ -2818,7 +2818,7 @@ MetalMaterial "mat_276" {
 }
 
 Sphere "small_276" {
-    position: Vec3(1.1036, 0.2000, 1.7643),
+    position: Point3(1.1036, 0.2000, 1.7643),
     radius: 0.2,
     material: @"mat_276",
 }
@@ -2828,7 +2828,7 @@ LambertianMaterial "mat_277" {
 }
 
 Sphere "small_277" {
-    position: Vec3(1.1570, 0.2000, 2.1441),
+    position: Point3(1.1570, 0.2000, 2.1441),
     radius: 0.2,
     material: @"mat_277",
 }
@@ -2838,7 +2838,7 @@ LambertianMaterial "mat_278" {
 }
 
 Sphere "small_278" {
-    position: Vec3(1.0263, 0.2000, 3.5527),
+    position: Point3(1.0263, 0.2000, 3.5527),
     radius: 0.2,
     material: @"mat_278",
 }
@@ -2849,7 +2849,7 @@ MetalMaterial "mat_279" {
 }
 
 Sphere "small_279" {
-    position: Vec3(1.0563, 0.2000, 4.0916),
+    position: Point3(1.0563, 0.2000, 4.0916),
     radius: 0.2,
     material: @"mat_279",
 }
@@ -2859,7 +2859,7 @@ LambertianMaterial "mat_280" {
 }
 
 Sphere "small_280" {
-    position: Vec3(1.7764, 0.2000, 5.4749),
+    position: Point3(1.7764, 0.2000, 5.4749),
     radius: 0.2,
     material: @"mat_280",
 }
@@ -2869,7 +2869,7 @@ LambertianMaterial "mat_281" {
 }
 
 Sphere "small_281" {
-    position: Vec3(1.7324, 0.2000, 6.6354),
+    position: Point3(1.7324, 0.2000, 6.6354),
     radius: 0.2,
     material: @"mat_281",
 }
@@ -2879,7 +2879,7 @@ LambertianMaterial "mat_282" {
 }
 
 Sphere "small_282" {
-    position: Vec3(1.6241, 0.2000, 7.4597),
+    position: Point3(1.6241, 0.2000, 7.4597),
     radius: 0.2,
     material: @"mat_282",
 }
@@ -2889,7 +2889,7 @@ LambertianMaterial "mat_283" {
 }
 
 Sphere "small_283" {
-    position: Vec3(1.8999, 0.2000, 8.4994),
+    position: Point3(1.8999, 0.2000, 8.4994),
     radius: 0.2,
     material: @"mat_283",
 }
@@ -2899,7 +2899,7 @@ LambertianMaterial "mat_284" {
 }
 
 Sphere "small_284" {
-    position: Vec3(1.1229, 0.2000, 9.7337),
+    position: Point3(1.1229, 0.2000, 9.7337),
     radius: 0.2,
     material: @"mat_284",
 }
@@ -2909,7 +2909,7 @@ LambertianMaterial "mat_285" {
 }
 
 Sphere "small_285" {
-    position: Vec3(1.0744, 0.2000, 10.0278),
+    position: Point3(1.0744, 0.2000, 10.0278),
     radius: 0.2,
     material: @"mat_285",
 }
@@ -2919,7 +2919,7 @@ LambertianMaterial "mat_286" {
 }
 
 Sphere "small_286" {
-    position: Vec3(2.6893, 0.2000, -10.5052),
+    position: Point3(2.6893, 0.2000, -10.5052),
     radius: 0.2,
     material: @"mat_286",
 }
@@ -2929,7 +2929,7 @@ LambertianMaterial "mat_287" {
 }
 
 Sphere "small_287" {
-    position: Vec3(2.6471, 0.2000, -9.5083),
+    position: Point3(2.6471, 0.2000, -9.5083),
     radius: 0.2,
     material: @"mat_287",
 }
@@ -2939,7 +2939,7 @@ LambertianMaterial "mat_288" {
 }
 
 Sphere "small_288" {
-    position: Vec3(2.3137, 0.2000, -8.2649),
+    position: Point3(2.3137, 0.2000, -8.2649),
     radius: 0.2,
     material: @"mat_288",
 }
@@ -2949,7 +2949,7 @@ LambertianMaterial "mat_289" {
 }
 
 Sphere "small_289" {
-    position: Vec3(2.6397, 0.2000, -7.4305),
+    position: Point3(2.6397, 0.2000, -7.4305),
     radius: 0.2,
     material: @"mat_289",
 }
@@ -2959,7 +2959,7 @@ LambertianMaterial "mat_290" {
 }
 
 Sphere "small_290" {
-    position: Vec3(2.4849, 0.2000, -6.7087),
+    position: Point3(2.4849, 0.2000, -6.7087),
     radius: 0.2,
     material: @"mat_290",
 }
@@ -2969,7 +2969,7 @@ LambertianMaterial "mat_291" {
 }
 
 Sphere "small_291" {
-    position: Vec3(2.8665, 0.2000, -5.2929),
+    position: Point3(2.8665, 0.2000, -5.2929),
     radius: 0.2,
     material: @"mat_291",
 }
@@ -2979,7 +2979,7 @@ LambertianMaterial "mat_292" {
 }
 
 Sphere "small_292" {
-    position: Vec3(2.7456, 0.2000, -4.3147),
+    position: Point3(2.7456, 0.2000, -4.3147),
     radius: 0.2,
     material: @"mat_292",
 }
@@ -2989,7 +2989,7 @@ LambertianMaterial "mat_293" {
 }
 
 Sphere "small_293" {
-    position: Vec3(2.7921, 0.2000, -3.9162),
+    position: Point3(2.7921, 0.2000, -3.9162),
     radius: 0.2,
     material: @"mat_293",
 }
@@ -2999,7 +2999,7 @@ LambertianMaterial "mat_294" {
 }
 
 Sphere "small_294" {
-    position: Vec3(2.6967, 0.2000, -2.3405),
+    position: Point3(2.6967, 0.2000, -2.3405),
     radius: 0.2,
     material: @"mat_294",
 }
@@ -3009,7 +3009,7 @@ LambertianMaterial "mat_295" {
 }
 
 Sphere "small_295" {
-    position: Vec3(2.3867, 0.2000, -1.8093),
+    position: Point3(2.3867, 0.2000, -1.8093),
     radius: 0.2,
     material: @"mat_295",
 }
@@ -3019,7 +3019,7 @@ LambertianMaterial "mat_296" {
 }
 
 Sphere "small_296" {
-    position: Vec3(2.6143, 0.2000, -0.9564),
+    position: Point3(2.6143, 0.2000, -0.9564),
     radius: 0.2,
     material: @"mat_296",
 }
@@ -3029,7 +3029,7 @@ LambertianMaterial "mat_297" {
 }
 
 Sphere "small_297" {
-    position: Vec3(2.8622, 0.2000, 0.1821),
+    position: Point3(2.8622, 0.2000, 0.1821),
     radius: 0.2,
     material: @"mat_297",
 }
@@ -3039,7 +3039,7 @@ LambertianMaterial "mat_298" {
 }
 
 Sphere "small_298" {
-    position: Vec3(2.2254, 0.2000, 1.3347),
+    position: Point3(2.2254, 0.2000, 1.3347),
     radius: 0.2,
     material: @"mat_298",
 }
@@ -3049,7 +3049,7 @@ LambertianMaterial "mat_299" {
 }
 
 Sphere "small_299" {
-    position: Vec3(2.6333, 0.2000, 2.0010),
+    position: Point3(2.6333, 0.2000, 2.0010),
     radius: 0.2,
     material: @"mat_299",
 }
@@ -3060,7 +3060,7 @@ MetalMaterial "mat_300" {
 }
 
 Sphere "small_300" {
-    position: Vec3(2.8893, 0.2000, 3.3801),
+    position: Point3(2.8893, 0.2000, 3.3801),
     radius: 0.2,
     material: @"mat_300",
 }
@@ -3070,7 +3070,7 @@ LambertianMaterial "mat_301" {
 }
 
 Sphere "small_301" {
-    position: Vec3(2.2820, 0.2000, 4.7929),
+    position: Point3(2.2820, 0.2000, 4.7929),
     radius: 0.2,
     material: @"mat_301",
 }
@@ -3080,7 +3080,7 @@ LambertianMaterial "mat_302" {
 }
 
 Sphere "small_302" {
-    position: Vec3(2.0076, 0.2000, 5.5850),
+    position: Point3(2.0076, 0.2000, 5.5850),
     radius: 0.2,
     material: @"mat_302",
 }
@@ -3091,7 +3091,7 @@ MetalMaterial "mat_303" {
 }
 
 Sphere "small_303" {
-    position: Vec3(2.0780, 0.2000, 6.0904),
+    position: Point3(2.0780, 0.2000, 6.0904),
     radius: 0.2,
     material: @"mat_303",
 }
@@ -3101,7 +3101,7 @@ LambertianMaterial "mat_304" {
 }
 
 Sphere "small_304" {
-    position: Vec3(2.1258, 0.2000, 7.2493),
+    position: Point3(2.1258, 0.2000, 7.2493),
     radius: 0.2,
     material: @"mat_304",
 }
@@ -3112,7 +3112,7 @@ MetalMaterial "mat_305" {
 }
 
 Sphere "small_305" {
-    position: Vec3(2.5926, 0.2000, 8.2715),
+    position: Point3(2.5926, 0.2000, 8.2715),
     radius: 0.2,
     material: @"mat_305",
 }
@@ -3122,7 +3122,7 @@ LambertianMaterial "mat_306" {
 }
 
 Sphere "small_306" {
-    position: Vec3(2.8081, 0.2000, 9.8592),
+    position: Point3(2.8081, 0.2000, 9.8592),
     radius: 0.2,
     material: @"mat_306",
 }
@@ -3132,7 +3132,7 @@ DielectricMaterial "mat_307" {
 }
 
 Sphere "small_307" {
-    position: Vec3(2.8405, 0.2000, 10.1188),
+    position: Point3(2.8405, 0.2000, 10.1188),
     radius: 0.2,
     material: @"mat_307",
 }
@@ -3143,7 +3143,7 @@ MetalMaterial "mat_308" {
 }
 
 Sphere "small_308" {
-    position: Vec3(3.5115, 0.2000, -10.6711),
+    position: Point3(3.5115, 0.2000, -10.6711),
     radius: 0.2,
     material: @"mat_308",
 }
@@ -3153,7 +3153,7 @@ LambertianMaterial "mat_309" {
 }
 
 Sphere "small_309" {
-    position: Vec3(3.0608, 0.2000, -9.7640),
+    position: Point3(3.0608, 0.2000, -9.7640),
     radius: 0.2,
     material: @"mat_309",
 }
@@ -3163,7 +3163,7 @@ LambertianMaterial "mat_310" {
 }
 
 Sphere "small_310" {
-    position: Vec3(3.6316, 0.2000, -8.9258),
+    position: Point3(3.6316, 0.2000, -8.9258),
     radius: 0.2,
     material: @"mat_310",
 }
@@ -3174,7 +3174,7 @@ MetalMaterial "mat_311" {
 }
 
 Sphere "small_311" {
-    position: Vec3(3.4828, 0.2000, -7.6483),
+    position: Point3(3.4828, 0.2000, -7.6483),
     radius: 0.2,
     material: @"mat_311",
 }
@@ -3184,7 +3184,7 @@ LambertianMaterial "mat_312" {
 }
 
 Sphere "small_312" {
-    position: Vec3(3.6570, 0.2000, -6.2382),
+    position: Point3(3.6570, 0.2000, -6.2382),
     radius: 0.2,
     material: @"mat_312",
 }
@@ -3194,7 +3194,7 @@ LambertianMaterial "mat_313" {
 }
 
 Sphere "small_313" {
-    position: Vec3(3.6666, 0.2000, -5.8925),
+    position: Point3(3.6666, 0.2000, -5.8925),
     radius: 0.2,
     material: @"mat_313",
 }
@@ -3204,7 +3204,7 @@ LambertianMaterial "mat_314" {
 }
 
 Sphere "small_314" {
-    position: Vec3(3.1503, 0.2000, -4.8858),
+    position: Point3(3.1503, 0.2000, -4.8858),
     radius: 0.2,
     material: @"mat_314",
 }
@@ -3214,7 +3214,7 @@ LambertianMaterial "mat_315" {
 }
 
 Sphere "small_315" {
-    position: Vec3(3.0575, 0.2000, -3.3589),
+    position: Point3(3.0575, 0.2000, -3.3589),
     radius: 0.2,
     material: @"mat_315",
 }
@@ -3224,7 +3224,7 @@ LambertianMaterial "mat_316" {
 }
 
 Sphere "small_316" {
-    position: Vec3(3.2296, 0.2000, -2.9074),
+    position: Point3(3.2296, 0.2000, -2.9074),
     radius: 0.2,
     material: @"mat_316",
 }
@@ -3234,7 +3234,7 @@ LambertianMaterial "mat_317" {
 }
 
 Sphere "small_317" {
-    position: Vec3(3.4246, 0.2000, -1.6553),
+    position: Point3(3.4246, 0.2000, -1.6553),
     radius: 0.2,
     material: @"mat_317",
 }
@@ -3244,7 +3244,7 @@ LambertianMaterial "mat_318" {
 }
 
 Sphere "small_318" {
-    position: Vec3(3.2896, 0.2000, -0.6254),
+    position: Point3(3.2896, 0.2000, -0.6254),
     radius: 0.2,
     material: @"mat_318",
 }
@@ -3254,7 +3254,7 @@ LambertianMaterial "mat_319" {
 }
 
 Sphere "small_319" {
-    position: Vec3(3.7239, 0.2000, 0.8833),
+    position: Point3(3.7239, 0.2000, 0.8833),
     radius: 0.2,
     material: @"mat_319",
 }
@@ -3264,7 +3264,7 @@ LambertianMaterial "mat_320" {
 }
 
 Sphere "small_320" {
-    position: Vec3(3.0072, 0.2000, 1.1806),
+    position: Point3(3.0072, 0.2000, 1.1806),
     radius: 0.2,
     material: @"mat_320",
 }
@@ -3274,7 +3274,7 @@ LambertianMaterial "mat_321" {
 }
 
 Sphere "small_321" {
-    position: Vec3(3.1759, 0.2000, 2.8104),
+    position: Point3(3.1759, 0.2000, 2.8104),
     radius: 0.2,
     material: @"mat_321",
 }
@@ -3285,7 +3285,7 @@ MetalMaterial "mat_322" {
 }
 
 Sphere "small_322" {
-    position: Vec3(3.7895, 0.2000, 3.8559),
+    position: Point3(3.7895, 0.2000, 3.8559),
     radius: 0.2,
     material: @"mat_322",
 }
@@ -3295,7 +3295,7 @@ LambertianMaterial "mat_323" {
 }
 
 Sphere "small_323" {
-    position: Vec3(3.4768, 0.2000, 4.2144),
+    position: Point3(3.4768, 0.2000, 4.2144),
     radius: 0.2,
     material: @"mat_323",
 }
@@ -3306,7 +3306,7 @@ MetalMaterial "mat_324" {
 }
 
 Sphere "small_324" {
-    position: Vec3(3.4678, 0.2000, 5.6308),
+    position: Point3(3.4678, 0.2000, 5.6308),
     radius: 0.2,
     material: @"mat_324",
 }
@@ -3316,7 +3316,7 @@ LambertianMaterial "mat_325" {
 }
 
 Sphere "small_325" {
-    position: Vec3(3.7380, 0.2000, 6.0673),
+    position: Point3(3.7380, 0.2000, 6.0673),
     radius: 0.2,
     material: @"mat_325",
 }
@@ -3327,7 +3327,7 @@ MetalMaterial "mat_326" {
 }
 
 Sphere "small_326" {
-    position: Vec3(3.6307, 0.2000, 7.6618),
+    position: Point3(3.6307, 0.2000, 7.6618),
     radius: 0.2,
     material: @"mat_326",
 }
@@ -3337,7 +3337,7 @@ LambertianMaterial "mat_327" {
 }
 
 Sphere "small_327" {
-    position: Vec3(3.5262, 0.2000, 8.1399),
+    position: Point3(3.5262, 0.2000, 8.1399),
     radius: 0.2,
     material: @"mat_327",
 }
@@ -3347,7 +3347,7 @@ LambertianMaterial "mat_328" {
 }
 
 Sphere "small_328" {
-    position: Vec3(3.2385, 0.2000, 9.1079),
+    position: Point3(3.2385, 0.2000, 9.1079),
     radius: 0.2,
     material: @"mat_328",
 }
@@ -3357,7 +3357,7 @@ LambertianMaterial "mat_329" {
 }
 
 Sphere "small_329" {
-    position: Vec3(3.0821, 0.2000, 10.2234),
+    position: Point3(3.0821, 0.2000, 10.2234),
     radius: 0.2,
     material: @"mat_329",
 }
@@ -3367,7 +3367,7 @@ LambertianMaterial "mat_330" {
 }
 
 Sphere "small_330" {
-    position: Vec3(4.4070, 0.2000, -10.3267),
+    position: Point3(4.4070, 0.2000, -10.3267),
     radius: 0.2,
     material: @"mat_330",
 }
@@ -3377,7 +3377,7 @@ DielectricMaterial "mat_331" {
 }
 
 Sphere "small_331" {
-    position: Vec3(4.1176, 0.2000, -9.2587),
+    position: Point3(4.1176, 0.2000, -9.2587),
     radius: 0.2,
     material: @"mat_331",
 }
@@ -3387,7 +3387,7 @@ LambertianMaterial "mat_332" {
 }
 
 Sphere "small_332" {
-    position: Vec3(4.5673, 0.2000, -8.4198),
+    position: Point3(4.5673, 0.2000, -8.4198),
     radius: 0.2,
     material: @"mat_332",
 }
@@ -3397,7 +3397,7 @@ LambertianMaterial "mat_333" {
 }
 
 Sphere "small_333" {
-    position: Vec3(4.1159, 0.2000, -7.1854),
+    position: Point3(4.1159, 0.2000, -7.1854),
     radius: 0.2,
     material: @"mat_333",
 }
@@ -3408,7 +3408,7 @@ MetalMaterial "mat_334" {
 }
 
 Sphere "small_334" {
-    position: Vec3(4.3555, 0.2000, -6.9735),
+    position: Point3(4.3555, 0.2000, -6.9735),
     radius: 0.2,
     material: @"mat_334",
 }
@@ -3418,7 +3418,7 @@ LambertianMaterial "mat_335" {
 }
 
 Sphere "small_335" {
-    position: Vec3(4.7951, 0.2000, -5.9688),
+    position: Point3(4.7951, 0.2000, -5.9688),
     radius: 0.2,
     material: @"mat_335",
 }
@@ -3428,7 +3428,7 @@ LambertianMaterial "mat_336" {
 }
 
 Sphere "small_336" {
-    position: Vec3(4.1235, 0.2000, -4.8205),
+    position: Point3(4.1235, 0.2000, -4.8205),
     radius: 0.2,
     material: @"mat_336",
 }
@@ -3438,7 +3438,7 @@ LambertianMaterial "mat_337" {
 }
 
 Sphere "small_337" {
-    position: Vec3(4.3232, 0.2000, -3.5099),
+    position: Point3(4.3232, 0.2000, -3.5099),
     radius: 0.2,
     material: @"mat_337",
 }
@@ -3448,7 +3448,7 @@ LambertianMaterial "mat_338" {
 }
 
 Sphere "small_338" {
-    position: Vec3(4.8062, 0.2000, -2.2993),
+    position: Point3(4.8062, 0.2000, -2.2993),
     radius: 0.2,
     material: @"mat_338",
 }
@@ -3458,7 +3458,7 @@ LambertianMaterial "mat_339" {
 }
 
 Sphere "small_339" {
-    position: Vec3(4.5912, 0.2000, -1.7601),
+    position: Point3(4.5912, 0.2000, -1.7601),
     radius: 0.2,
     material: @"mat_339",
 }
@@ -3469,7 +3469,7 @@ MetalMaterial "mat_340" {
 }
 
 Sphere "small_340" {
-    position: Vec3(4.6279, 0.2000, 1.8226),
+    position: Point3(4.6279, 0.2000, 1.8226),
     radius: 0.2,
     material: @"mat_340",
 }
@@ -3479,7 +3479,7 @@ LambertianMaterial "mat_341" {
 }
 
 Sphere "small_341" {
-    position: Vec3(4.1694, 0.2000, 2.8892),
+    position: Point3(4.1694, 0.2000, 2.8892),
     radius: 0.2,
     material: @"mat_341",
 }
@@ -3489,7 +3489,7 @@ LambertianMaterial "mat_342" {
 }
 
 Sphere "small_342" {
-    position: Vec3(4.4738, 0.2000, 3.0006),
+    position: Point3(4.4738, 0.2000, 3.0006),
     radius: 0.2,
     material: @"mat_342",
 }
@@ -3499,7 +3499,7 @@ LambertianMaterial "mat_343" {
 }
 
 Sphere "small_343" {
-    position: Vec3(4.0197, 0.2000, 4.5279),
+    position: Point3(4.0197, 0.2000, 4.5279),
     radius: 0.2,
     material: @"mat_343",
 }
@@ -3510,7 +3510,7 @@ MetalMaterial "mat_344" {
 }
 
 Sphere "small_344" {
-    position: Vec3(4.3560, 0.2000, 5.0909),
+    position: Point3(4.3560, 0.2000, 5.0909),
     radius: 0.2,
     material: @"mat_344",
 }
@@ -3520,7 +3520,7 @@ LambertianMaterial "mat_345" {
 }
 
 Sphere "small_345" {
-    position: Vec3(4.8646, 0.2000, 6.5843),
+    position: Point3(4.8646, 0.2000, 6.5843),
     radius: 0.2,
     material: @"mat_345",
 }
@@ -3530,7 +3530,7 @@ LambertianMaterial "mat_346" {
 }
 
 Sphere "small_346" {
-    position: Vec3(4.1578, 0.2000, 7.2761),
+    position: Point3(4.1578, 0.2000, 7.2761),
     radius: 0.2,
     material: @"mat_346",
 }
@@ -3540,7 +3540,7 @@ DielectricMaterial "mat_347" {
 }
 
 Sphere "small_347" {
-    position: Vec3(4.8687, 0.2000, 8.0291),
+    position: Point3(4.8687, 0.2000, 8.0291),
     radius: 0.2,
     material: @"mat_347",
 }
@@ -3550,7 +3550,7 @@ LambertianMaterial "mat_348" {
 }
 
 Sphere "small_348" {
-    position: Vec3(4.8289, 0.2000, 9.8708),
+    position: Point3(4.8289, 0.2000, 9.8708),
     radius: 0.2,
     material: @"mat_348",
 }
@@ -3560,7 +3560,7 @@ DielectricMaterial "mat_349" {
 }
 
 Sphere "small_349" {
-    position: Vec3(4.1511, 0.2000, 10.7968),
+    position: Point3(4.1511, 0.2000, 10.7968),
     radius: 0.2,
     material: @"mat_349",
 }
@@ -3570,7 +3570,7 @@ LambertianMaterial "mat_350" {
 }
 
 Sphere "small_350" {
-    position: Vec3(5.6381, 0.2000, -10.4248),
+    position: Point3(5.6381, 0.2000, -10.4248),
     radius: 0.2,
     material: @"mat_350",
 }
@@ -3580,7 +3580,7 @@ LambertianMaterial "mat_351" {
 }
 
 Sphere "small_351" {
-    position: Vec3(5.0012, 0.2000, -9.6527),
+    position: Point3(5.0012, 0.2000, -9.6527),
     radius: 0.2,
     material: @"mat_351",
 }
@@ -3590,7 +3590,7 @@ LambertianMaterial "mat_352" {
 }
 
 Sphere "small_352" {
-    position: Vec3(5.4315, 0.2000, -8.2224),
+    position: Point3(5.4315, 0.2000, -8.2224),
     radius: 0.2,
     material: @"mat_352",
 }
@@ -3600,7 +3600,7 @@ LambertianMaterial "mat_353" {
 }
 
 Sphere "small_353" {
-    position: Vec3(5.8565, 0.2000, -7.9332),
+    position: Point3(5.8565, 0.2000, -7.9332),
     radius: 0.2,
     material: @"mat_353",
 }
@@ -3610,7 +3610,7 @@ LambertianMaterial "mat_354" {
 }
 
 Sphere "small_354" {
-    position: Vec3(5.5523, 0.2000, -6.5655),
+    position: Point3(5.5523, 0.2000, -6.5655),
     radius: 0.2,
     material: @"mat_354",
 }
@@ -3620,7 +3620,7 @@ LambertianMaterial "mat_355" {
 }
 
 Sphere "small_355" {
-    position: Vec3(5.1710, 0.2000, -5.3725),
+    position: Point3(5.1710, 0.2000, -5.3725),
     radius: 0.2,
     material: @"mat_355",
 }
@@ -3630,7 +3630,7 @@ LambertianMaterial "mat_356" {
 }
 
 Sphere "small_356" {
-    position: Vec3(5.7559, 0.2000, -4.8618),
+    position: Point3(5.7559, 0.2000, -4.8618),
     radius: 0.2,
     material: @"mat_356",
 }
@@ -3640,7 +3640,7 @@ LambertianMaterial "mat_357" {
 }
 
 Sphere "small_357" {
-    position: Vec3(5.1537, 0.2000, -3.7374),
+    position: Point3(5.1537, 0.2000, -3.7374),
     radius: 0.2,
     material: @"mat_357",
 }
@@ -3650,7 +3650,7 @@ LambertianMaterial "mat_358" {
 }
 
 Sphere "small_358" {
-    position: Vec3(5.4897, 0.2000, -2.8336),
+    position: Point3(5.4897, 0.2000, -2.8336),
     radius: 0.2,
     material: @"mat_358",
 }
@@ -3660,7 +3660,7 @@ LambertianMaterial "mat_359" {
 }
 
 Sphere "small_359" {
-    position: Vec3(5.0555, 0.2000, -1.3230),
+    position: Point3(5.0555, 0.2000, -1.3230),
     radius: 0.2,
     material: @"mat_359",
 }
@@ -3670,7 +3670,7 @@ LambertianMaterial "mat_360" {
 }
 
 Sphere "small_360" {
-    position: Vec3(5.7567, 0.2000, -0.2634),
+    position: Point3(5.7567, 0.2000, -0.2634),
     radius: 0.2,
     material: @"mat_360",
 }
@@ -3680,7 +3680,7 @@ LambertianMaterial "mat_361" {
 }
 
 Sphere "small_361" {
-    position: Vec3(5.8125, 0.2000, 0.6429),
+    position: Point3(5.8125, 0.2000, 0.6429),
     radius: 0.2,
     material: @"mat_361",
 }
@@ -3690,7 +3690,7 @@ LambertianMaterial "mat_362" {
 }
 
 Sphere "small_362" {
-    position: Vec3(5.1556, 0.2000, 1.8859),
+    position: Point3(5.1556, 0.2000, 1.8859),
     radius: 0.2,
     material: @"mat_362",
 }
@@ -3700,7 +3700,7 @@ DielectricMaterial "mat_363" {
 }
 
 Sphere "small_363" {
-    position: Vec3(5.5645, 0.2000, 2.7507),
+    position: Point3(5.5645, 0.2000, 2.7507),
     radius: 0.2,
     material: @"mat_363",
 }
@@ -3710,7 +3710,7 @@ LambertianMaterial "mat_364" {
 }
 
 Sphere "small_364" {
-    position: Vec3(5.8197, 0.2000, 3.8228),
+    position: Point3(5.8197, 0.2000, 3.8228),
     radius: 0.2,
     material: @"mat_364",
 }
@@ -3721,7 +3721,7 @@ MetalMaterial "mat_365" {
 }
 
 Sphere "small_365" {
-    position: Vec3(5.7079, 0.2000, 4.5608),
+    position: Point3(5.7079, 0.2000, 4.5608),
     radius: 0.2,
     material: @"mat_365",
 }
@@ -3731,7 +3731,7 @@ LambertianMaterial "mat_366" {
 }
 
 Sphere "small_366" {
-    position: Vec3(5.6825, 0.2000, 5.8457),
+    position: Point3(5.6825, 0.2000, 5.8457),
     radius: 0.2,
     material: @"mat_366",
 }
@@ -3741,7 +3741,7 @@ LambertianMaterial "mat_367" {
 }
 
 Sphere "small_367" {
-    position: Vec3(5.3447, 0.2000, 6.4370),
+    position: Point3(5.3447, 0.2000, 6.4370),
     radius: 0.2,
     material: @"mat_367",
 }
@@ -3751,7 +3751,7 @@ LambertianMaterial "mat_368" {
 }
 
 Sphere "small_368" {
-    position: Vec3(5.8006, 0.2000, 7.2983),
+    position: Point3(5.8006, 0.2000, 7.2983),
     radius: 0.2,
     material: @"mat_368",
 }
@@ -3761,7 +3761,7 @@ LambertianMaterial "mat_369" {
 }
 
 Sphere "small_369" {
-    position: Vec3(5.2523, 0.2000, 8.4425),
+    position: Point3(5.2523, 0.2000, 8.4425),
     radius: 0.2,
     material: @"mat_369",
 }
@@ -3772,7 +3772,7 @@ MetalMaterial "mat_370" {
 }
 
 Sphere "small_370" {
-    position: Vec3(5.2425, 0.2000, 9.3751),
+    position: Point3(5.2425, 0.2000, 9.3751),
     radius: 0.2,
     material: @"mat_370",
 }
@@ -3782,7 +3782,7 @@ LambertianMaterial "mat_371" {
 }
 
 Sphere "small_371" {
-    position: Vec3(5.6835, 0.2000, 10.7805),
+    position: Point3(5.6835, 0.2000, 10.7805),
     radius: 0.2,
     material: @"mat_371",
 }
@@ -3793,7 +3793,7 @@ MetalMaterial "mat_372" {
 }
 
 Sphere "small_372" {
-    position: Vec3(6.7914, 0.2000, -10.9739),
+    position: Point3(6.7914, 0.2000, -10.9739),
     radius: 0.2,
     material: @"mat_372",
 }
@@ -3803,7 +3803,7 @@ LambertianMaterial "mat_373" {
 }
 
 Sphere "small_373" {
-    position: Vec3(6.8262, 0.2000, -9.3658),
+    position: Point3(6.8262, 0.2000, -9.3658),
     radius: 0.2,
     material: @"mat_373",
 }
@@ -3813,7 +3813,7 @@ LambertianMaterial "mat_374" {
 }
 
 Sphere "small_374" {
-    position: Vec3(6.5346, 0.2000, -8.8402),
+    position: Point3(6.5346, 0.2000, -8.8402),
     radius: 0.2,
     material: @"mat_374",
 }
@@ -3823,7 +3823,7 @@ LambertianMaterial "mat_375" {
 }
 
 Sphere "small_375" {
-    position: Vec3(6.2566, 0.2000, -7.6521),
+    position: Point3(6.2566, 0.2000, -7.6521),
     radius: 0.2,
     material: @"mat_375",
 }
@@ -3833,7 +3833,7 @@ LambertianMaterial "mat_376" {
 }
 
 Sphere "small_376" {
-    position: Vec3(6.3686, 0.2000, -6.9820),
+    position: Point3(6.3686, 0.2000, -6.9820),
     radius: 0.2,
     material: @"mat_376",
 }
@@ -3843,7 +3843,7 @@ LambertianMaterial "mat_377" {
 }
 
 Sphere "small_377" {
-    position: Vec3(6.2272, 0.2000, -5.2754),
+    position: Point3(6.2272, 0.2000, -5.2754),
     radius: 0.2,
     material: @"mat_377",
 }
@@ -3853,7 +3853,7 @@ LambertianMaterial "mat_378" {
 }
 
 Sphere "small_378" {
-    position: Vec3(6.4200, 0.2000, -4.3905),
+    position: Point3(6.4200, 0.2000, -4.3905),
     radius: 0.2,
     material: @"mat_378",
 }
@@ -3863,7 +3863,7 @@ LambertianMaterial "mat_379" {
 }
 
 Sphere "small_379" {
-    position: Vec3(6.5826, 0.2000, -3.4519),
+    position: Point3(6.5826, 0.2000, -3.4519),
     radius: 0.2,
     material: @"mat_379",
 }
@@ -3873,7 +3873,7 @@ LambertianMaterial "mat_380" {
 }
 
 Sphere "small_380" {
-    position: Vec3(6.6400, 0.2000, -2.1969),
+    position: Point3(6.6400, 0.2000, -2.1969),
     radius: 0.2,
     material: @"mat_380",
 }
@@ -3883,7 +3883,7 @@ LambertianMaterial "mat_381" {
 }
 
 Sphere "small_381" {
-    position: Vec3(6.5945, 0.2000, -1.3873),
+    position: Point3(6.5945, 0.2000, -1.3873),
     radius: 0.2,
     material: @"mat_381",
 }
@@ -3893,7 +3893,7 @@ LambertianMaterial "mat_382" {
 }
 
 Sphere "small_382" {
-    position: Vec3(6.6373, 0.2000, -0.4852),
+    position: Point3(6.6373, 0.2000, -0.4852),
     radius: 0.2,
     material: @"mat_382",
 }
@@ -3903,7 +3903,7 @@ LambertianMaterial "mat_383" {
 }
 
 Sphere "small_383" {
-    position: Vec3(6.4566, 0.2000, 0.7609),
+    position: Point3(6.4566, 0.2000, 0.7609),
     radius: 0.2,
     material: @"mat_383",
 }
@@ -3914,7 +3914,7 @@ MetalMaterial "mat_384" {
 }
 
 Sphere "small_384" {
-    position: Vec3(6.6866, 0.2000, 1.1648),
+    position: Point3(6.6866, 0.2000, 1.1648),
     radius: 0.2,
     material: @"mat_384",
 }
@@ -3924,7 +3924,7 @@ LambertianMaterial "mat_385" {
 }
 
 Sphere "small_385" {
-    position: Vec3(6.2764, 0.2000, 2.7093),
+    position: Point3(6.2764, 0.2000, 2.7093),
     radius: 0.2,
     material: @"mat_385",
 }
@@ -3934,7 +3934,7 @@ LambertianMaterial "mat_386" {
 }
 
 Sphere "small_386" {
-    position: Vec3(6.8499, 0.2000, 3.0641),
+    position: Point3(6.8499, 0.2000, 3.0641),
     radius: 0.2,
     material: @"mat_386",
 }
@@ -3945,7 +3945,7 @@ MetalMaterial "mat_387" {
 }
 
 Sphere "small_387" {
-    position: Vec3(6.1236, 0.2000, 4.1803),
+    position: Point3(6.1236, 0.2000, 4.1803),
     radius: 0.2,
     material: @"mat_387",
 }
@@ -3955,7 +3955,7 @@ LambertianMaterial "mat_388" {
 }
 
 Sphere "small_388" {
-    position: Vec3(6.6441, 0.2000, 5.7010),
+    position: Point3(6.6441, 0.2000, 5.7010),
     radius: 0.2,
     material: @"mat_388",
 }
@@ -3965,7 +3965,7 @@ LambertianMaterial "mat_389" {
 }
 
 Sphere "small_389" {
-    position: Vec3(6.1517, 0.2000, 6.6880),
+    position: Point3(6.1517, 0.2000, 6.6880),
     radius: 0.2,
     material: @"mat_389",
 }
@@ -3975,7 +3975,7 @@ DielectricMaterial "mat_390" {
 }
 
 Sphere "small_390" {
-    position: Vec3(6.3450, 0.2000, 7.0340),
+    position: Point3(6.3450, 0.2000, 7.0340),
     radius: 0.2,
     material: @"mat_390",
 }
@@ -3985,7 +3985,7 @@ LambertianMaterial "mat_391" {
 }
 
 Sphere "small_391" {
-    position: Vec3(6.3358, 0.2000, 8.0127),
+    position: Point3(6.3358, 0.2000, 8.0127),
     radius: 0.2,
     material: @"mat_391",
 }
@@ -3995,7 +3995,7 @@ LambertianMaterial "mat_392" {
 }
 
 Sphere "small_392" {
-    position: Vec3(6.3099, 0.2000, 9.1160),
+    position: Point3(6.3099, 0.2000, 9.1160),
     radius: 0.2,
     material: @"mat_392",
 }
@@ -4005,7 +4005,7 @@ LambertianMaterial "mat_393" {
 }
 
 Sphere "small_393" {
-    position: Vec3(6.5367, 0.2000, 10.3041),
+    position: Point3(6.5367, 0.2000, 10.3041),
     radius: 0.2,
     material: @"mat_393",
 }
@@ -4016,7 +4016,7 @@ MetalMaterial "mat_394" {
 }
 
 Sphere "small_394" {
-    position: Vec3(7.8264, 0.2000, -10.6369),
+    position: Point3(7.8264, 0.2000, -10.6369),
     radius: 0.2,
     material: @"mat_394",
 }
@@ -4026,7 +4026,7 @@ LambertianMaterial "mat_395" {
 }
 
 Sphere "small_395" {
-    position: Vec3(7.1521, 0.2000, -9.6701),
+    position: Point3(7.1521, 0.2000, -9.6701),
     radius: 0.2,
     material: @"mat_395",
 }
@@ -4036,7 +4036,7 @@ DielectricMaterial "mat_396" {
 }
 
 Sphere "small_396" {
-    position: Vec3(7.5958, 0.2000, -8.4118),
+    position: Point3(7.5958, 0.2000, -8.4118),
     radius: 0.2,
     material: @"mat_396",
 }
@@ -4046,7 +4046,7 @@ LambertianMaterial "mat_397" {
 }
 
 Sphere "small_397" {
-    position: Vec3(7.6208, 0.2000, -7.6249),
+    position: Point3(7.6208, 0.2000, -7.6249),
     radius: 0.2,
     material: @"mat_397",
 }
@@ -4056,7 +4056,7 @@ LambertianMaterial "mat_398" {
 }
 
 Sphere "small_398" {
-    position: Vec3(7.5955, 0.2000, -6.4038),
+    position: Point3(7.5955, 0.2000, -6.4038),
     radius: 0.2,
     material: @"mat_398",
 }
@@ -4066,7 +4066,7 @@ LambertianMaterial "mat_399" {
 }
 
 Sphere "small_399" {
-    position: Vec3(7.1026, 0.2000, -5.9044),
+    position: Point3(7.1026, 0.2000, -5.9044),
     radius: 0.2,
     material: @"mat_399",
 }
@@ -4076,7 +4076,7 @@ LambertianMaterial "mat_400" {
 }
 
 Sphere "small_400" {
-    position: Vec3(7.0355, 0.2000, -4.5533),
+    position: Point3(7.0355, 0.2000, -4.5533),
     radius: 0.2,
     material: @"mat_400",
 }
@@ -4087,7 +4087,7 @@ MetalMaterial "mat_401" {
 }
 
 Sphere "small_401" {
-    position: Vec3(7.6021, 0.2000, -3.8658),
+    position: Point3(7.6021, 0.2000, -3.8658),
     radius: 0.2,
     material: @"mat_401",
 }
@@ -4097,7 +4097,7 @@ LambertianMaterial "mat_402" {
 }
 
 Sphere "small_402" {
-    position: Vec3(7.2080, 0.2000, -2.1102),
+    position: Point3(7.2080, 0.2000, -2.1102),
     radius: 0.2,
     material: @"mat_402",
 }
@@ -4108,7 +4108,7 @@ MetalMaterial "mat_403" {
 }
 
 Sphere "small_403" {
-    position: Vec3(7.2814, 0.2000, -1.3353),
+    position: Point3(7.2814, 0.2000, -1.3353),
     radius: 0.2,
     material: @"mat_403",
 }
@@ -4118,7 +4118,7 @@ LambertianMaterial "mat_404" {
 }
 
 Sphere "small_404" {
-    position: Vec3(7.1535, 0.2000, -0.6782),
+    position: Point3(7.1535, 0.2000, -0.6782),
     radius: 0.2,
     material: @"mat_404",
 }
@@ -4128,7 +4128,7 @@ LambertianMaterial "mat_405" {
 }
 
 Sphere "small_405" {
-    position: Vec3(7.8661, 0.2000, 0.2446),
+    position: Point3(7.8661, 0.2000, 0.2446),
     radius: 0.2,
     material: @"mat_405",
 }
@@ -4138,7 +4138,7 @@ LambertianMaterial "mat_406" {
 }
 
 Sphere "small_406" {
-    position: Vec3(7.0528, 0.2000, 1.8482),
+    position: Point3(7.0528, 0.2000, 1.8482),
     radius: 0.2,
     material: @"mat_406",
 }
@@ -4148,7 +4148,7 @@ LambertianMaterial "mat_407" {
 }
 
 Sphere "small_407" {
-    position: Vec3(7.3227, 0.2000, 2.0259),
+    position: Point3(7.3227, 0.2000, 2.0259),
     radius: 0.2,
     material: @"mat_407",
 }
@@ -4158,7 +4158,7 @@ LambertianMaterial "mat_408" {
 }
 
 Sphere "small_408" {
-    position: Vec3(7.0414, 0.2000, 3.2355),
+    position: Point3(7.0414, 0.2000, 3.2355),
     radius: 0.2,
     material: @"mat_408",
 }
@@ -4168,7 +4168,7 @@ DielectricMaterial "mat_409" {
 }
 
 Sphere "small_409" {
-    position: Vec3(7.6029, 0.2000, 4.3045),
+    position: Point3(7.6029, 0.2000, 4.3045),
     radius: 0.2,
     material: @"mat_409",
 }
@@ -4178,7 +4178,7 @@ LambertianMaterial "mat_410" {
 }
 
 Sphere "small_410" {
-    position: Vec3(7.6305, 0.2000, 5.0857),
+    position: Point3(7.6305, 0.2000, 5.0857),
     radius: 0.2,
     material: @"mat_410",
 }
@@ -4188,7 +4188,7 @@ LambertianMaterial "mat_411" {
 }
 
 Sphere "small_411" {
-    position: Vec3(7.8890, 0.2000, 6.0491),
+    position: Point3(7.8890, 0.2000, 6.0491),
     radius: 0.2,
     material: @"mat_411",
 }
@@ -4198,7 +4198,7 @@ LambertianMaterial "mat_412" {
 }
 
 Sphere "small_412" {
-    position: Vec3(7.2168, 0.2000, 7.8731),
+    position: Point3(7.2168, 0.2000, 7.8731),
     radius: 0.2,
     material: @"mat_412",
 }
@@ -4209,7 +4209,7 @@ MetalMaterial "mat_413" {
 }
 
 Sphere "small_413" {
-    position: Vec3(7.4033, 0.2000, 8.7709),
+    position: Point3(7.4033, 0.2000, 8.7709),
     radius: 0.2,
     material: @"mat_413",
 }
@@ -4219,7 +4219,7 @@ LambertianMaterial "mat_414" {
 }
 
 Sphere "small_414" {
-    position: Vec3(7.3711, 0.2000, 9.5014),
+    position: Point3(7.3711, 0.2000, 9.5014),
     radius: 0.2,
     material: @"mat_414",
 }
@@ -4229,7 +4229,7 @@ LambertianMaterial "mat_415" {
 }
 
 Sphere "small_415" {
-    position: Vec3(7.6043, 0.2000, 10.8553),
+    position: Point3(7.6043, 0.2000, 10.8553),
     radius: 0.2,
     material: @"mat_415",
 }
@@ -4239,7 +4239,7 @@ LambertianMaterial "mat_416" {
 }
 
 Sphere "small_416" {
-    position: Vec3(8.5915, 0.2000, -10.3557),
+    position: Point3(8.5915, 0.2000, -10.3557),
     radius: 0.2,
     material: @"mat_416",
 }
@@ -4249,7 +4249,7 @@ LambertianMaterial "mat_417" {
 }
 
 Sphere "small_417" {
-    position: Vec3(8.4698, 0.2000, -9.3681),
+    position: Point3(8.4698, 0.2000, -9.3681),
     radius: 0.2,
     material: @"mat_417",
 }
@@ -4259,7 +4259,7 @@ LambertianMaterial "mat_418" {
 }
 
 Sphere "small_418" {
-    position: Vec3(8.1688, 0.2000, -8.1628),
+    position: Point3(8.1688, 0.2000, -8.1628),
     radius: 0.2,
     material: @"mat_418",
 }
@@ -4270,7 +4270,7 @@ MetalMaterial "mat_419" {
 }
 
 Sphere "small_419" {
-    position: Vec3(8.7537, 0.2000, -7.4701),
+    position: Point3(8.7537, 0.2000, -7.4701),
     radius: 0.2,
     material: @"mat_419",
 }
@@ -4280,7 +4280,7 @@ LambertianMaterial "mat_420" {
 }
 
 Sphere "small_420" {
-    position: Vec3(8.4489, 0.2000, -6.5227),
+    position: Point3(8.4489, 0.2000, -6.5227),
     radius: 0.2,
     material: @"mat_420",
 }
@@ -4290,7 +4290,7 @@ LambertianMaterial "mat_421" {
 }
 
 Sphere "small_421" {
-    position: Vec3(8.5207, 0.2000, -5.3426),
+    position: Point3(8.5207, 0.2000, -5.3426),
     radius: 0.2,
     material: @"mat_421",
 }
@@ -4300,7 +4300,7 @@ DielectricMaterial "mat_422" {
 }
 
 Sphere "small_422" {
-    position: Vec3(8.8243, 0.2000, -4.3139),
+    position: Point3(8.8243, 0.2000, -4.3139),
     radius: 0.2,
     material: @"mat_422",
 }
@@ -4310,7 +4310,7 @@ LambertianMaterial "mat_423" {
 }
 
 Sphere "small_423" {
-    position: Vec3(8.8672, 0.2000, -3.1266),
+    position: Point3(8.8672, 0.2000, -3.1266),
     radius: 0.2,
     material: @"mat_423",
 }
@@ -4320,7 +4320,7 @@ LambertianMaterial "mat_424" {
 }
 
 Sphere "small_424" {
-    position: Vec3(8.7746, 0.2000, -2.3593),
+    position: Point3(8.7746, 0.2000, -2.3593),
     radius: 0.2,
     material: @"mat_424",
 }
@@ -4330,7 +4330,7 @@ LambertianMaterial "mat_425" {
 }
 
 Sphere "small_425" {
-    position: Vec3(8.8832, 0.2000, -1.4149),
+    position: Point3(8.8832, 0.2000, -1.4149),
     radius: 0.2,
     material: @"mat_425",
 }
@@ -4340,7 +4340,7 @@ LambertianMaterial "mat_426" {
 }
 
 Sphere "small_426" {
-    position: Vec3(8.5136, 0.2000, -0.3996),
+    position: Point3(8.5136, 0.2000, -0.3996),
     radius: 0.2,
     material: @"mat_426",
 }
@@ -4350,7 +4350,7 @@ LambertianMaterial "mat_427" {
 }
 
 Sphere "small_427" {
-    position: Vec3(8.0227, 0.2000, 0.1308),
+    position: Point3(8.0227, 0.2000, 0.1308),
     radius: 0.2,
     material: @"mat_427",
 }
@@ -4361,7 +4361,7 @@ MetalMaterial "mat_428" {
 }
 
 Sphere "small_428" {
-    position: Vec3(8.6215, 0.2000, 1.2656),
+    position: Point3(8.6215, 0.2000, 1.2656),
     radius: 0.2,
     material: @"mat_428",
 }
@@ -4372,7 +4372,7 @@ MetalMaterial "mat_429" {
 }
 
 Sphere "small_429" {
-    position: Vec3(8.6655, 0.2000, 2.7784),
+    position: Point3(8.6655, 0.2000, 2.7784),
     radius: 0.2,
     material: @"mat_429",
 }
@@ -4382,7 +4382,7 @@ LambertianMaterial "mat_430" {
 }
 
 Sphere "small_430" {
-    position: Vec3(8.2589, 0.2000, 3.5980),
+    position: Point3(8.2589, 0.2000, 3.5980),
     radius: 0.2,
     material: @"mat_430",
 }
@@ -4392,7 +4392,7 @@ LambertianMaterial "mat_431" {
 }
 
 Sphere "small_431" {
-    position: Vec3(8.2262, 0.2000, 4.5585),
+    position: Point3(8.2262, 0.2000, 4.5585),
     radius: 0.2,
     material: @"mat_431",
 }
@@ -4402,7 +4402,7 @@ LambertianMaterial "mat_432" {
 }
 
 Sphere "small_432" {
-    position: Vec3(8.4920, 0.2000, 5.5430),
+    position: Point3(8.4920, 0.2000, 5.5430),
     radius: 0.2,
     material: @"mat_432",
 }
@@ -4412,7 +4412,7 @@ LambertianMaterial "mat_433" {
 }
 
 Sphere "small_433" {
-    position: Vec3(8.4625, 0.2000, 6.3395),
+    position: Point3(8.4625, 0.2000, 6.3395),
     radius: 0.2,
     material: @"mat_433",
 }
@@ -4422,7 +4422,7 @@ LambertianMaterial "mat_434" {
 }
 
 Sphere "small_434" {
-    position: Vec3(8.1393, 0.2000, 7.1383),
+    position: Point3(8.1393, 0.2000, 7.1383),
     radius: 0.2,
     material: @"mat_434",
 }
@@ -4432,7 +4432,7 @@ LambertianMaterial "mat_435" {
 }
 
 Sphere "small_435" {
-    position: Vec3(8.3223, 0.2000, 8.7056),
+    position: Point3(8.3223, 0.2000, 8.7056),
     radius: 0.2,
     material: @"mat_435",
 }
@@ -4442,7 +4442,7 @@ LambertianMaterial "mat_436" {
 }
 
 Sphere "small_436" {
-    position: Vec3(8.0828, 0.2000, 9.1991),
+    position: Point3(8.0828, 0.2000, 9.1991),
     radius: 0.2,
     material: @"mat_436",
 }
@@ -4452,7 +4452,7 @@ DielectricMaterial "mat_437" {
 }
 
 Sphere "small_437" {
-    position: Vec3(8.7413, 0.2000, 10.8830),
+    position: Point3(8.7413, 0.2000, 10.8830),
     radius: 0.2,
     material: @"mat_437",
 }
@@ -4462,7 +4462,7 @@ LambertianMaterial "mat_438" {
 }
 
 Sphere "small_438" {
-    position: Vec3(9.6020, 0.2000, -10.5989),
+    position: Point3(9.6020, 0.2000, -10.5989),
     radius: 0.2,
     material: @"mat_438",
 }
@@ -4473,7 +4473,7 @@ MetalMaterial "mat_439" {
 }
 
 Sphere "small_439" {
-    position: Vec3(9.8505, 0.2000, -9.6527),
+    position: Point3(9.8505, 0.2000, -9.6527),
     radius: 0.2,
     material: @"mat_439",
 }
@@ -4483,7 +4483,7 @@ LambertianMaterial "mat_440" {
 }
 
 Sphere "small_440" {
-    position: Vec3(9.7225, 0.2000, -8.5990),
+    position: Point3(9.7225, 0.2000, -8.5990),
     radius: 0.2,
     material: @"mat_440",
 }
@@ -4493,7 +4493,7 @@ DielectricMaterial "mat_441" {
 }
 
 Sphere "small_441" {
-    position: Vec3(9.4842, 0.2000, -7.9934),
+    position: Point3(9.4842, 0.2000, -7.9934),
     radius: 0.2,
     material: @"mat_441",
 }
@@ -4503,7 +4503,7 @@ LambertianMaterial "mat_442" {
 }
 
 Sphere "small_442" {
-    position: Vec3(9.6033, 0.2000, -6.3038),
+    position: Point3(9.6033, 0.2000, -6.3038),
     radius: 0.2,
     material: @"mat_442",
 }
@@ -4513,7 +4513,7 @@ LambertianMaterial "mat_443" {
 }
 
 Sphere "small_443" {
-    position: Vec3(9.5819, 0.2000, -5.1542),
+    position: Point3(9.5819, 0.2000, -5.1542),
     radius: 0.2,
     material: @"mat_443",
 }
@@ -4523,7 +4523,7 @@ LambertianMaterial "mat_444" {
 }
 
 Sphere "small_444" {
-    position: Vec3(9.5023, 0.2000, -4.4825),
+    position: Point3(9.5023, 0.2000, -4.4825),
     radius: 0.2,
     material: @"mat_444",
 }
@@ -4533,7 +4533,7 @@ LambertianMaterial "mat_445" {
 }
 
 Sphere "small_445" {
-    position: Vec3(9.4814, 0.2000, -3.4227),
+    position: Point3(9.4814, 0.2000, -3.4227),
     radius: 0.2,
     material: @"mat_445",
 }
@@ -4543,7 +4543,7 @@ LambertianMaterial "mat_446" {
 }
 
 Sphere "small_446" {
-    position: Vec3(9.7082, 0.2000, -2.7288),
+    position: Point3(9.7082, 0.2000, -2.7288),
     radius: 0.2,
     material: @"mat_446",
 }
@@ -4553,7 +4553,7 @@ LambertianMaterial "mat_447" {
 }
 
 Sphere "small_447" {
-    position: Vec3(9.1227, 0.2000, -1.6481),
+    position: Point3(9.1227, 0.2000, -1.6481),
     radius: 0.2,
     material: @"mat_447",
 }
@@ -4563,7 +4563,7 @@ LambertianMaterial "mat_448" {
 }
 
 Sphere "small_448" {
-    position: Vec3(9.6564, 0.2000, -0.6642),
+    position: Point3(9.6564, 0.2000, -0.6642),
     radius: 0.2,
     material: @"mat_448",
 }
@@ -4573,7 +4573,7 @@ LambertianMaterial "mat_449" {
 }
 
 Sphere "small_449" {
-    position: Vec3(9.8523, 0.2000, 0.2742),
+    position: Point3(9.8523, 0.2000, 0.2742),
     radius: 0.2,
     material: @"mat_449",
 }
@@ -4583,7 +4583,7 @@ LambertianMaterial "mat_450" {
 }
 
 Sphere "small_450" {
-    position: Vec3(9.1987, 0.2000, 1.7513),
+    position: Point3(9.1987, 0.2000, 1.7513),
     radius: 0.2,
     material: @"mat_450",
 }
@@ -4593,7 +4593,7 @@ DielectricMaterial "mat_451" {
 }
 
 Sphere "small_451" {
-    position: Vec3(9.4151, 0.2000, 2.4947),
+    position: Point3(9.4151, 0.2000, 2.4947),
     radius: 0.2,
     material: @"mat_451",
 }
@@ -4603,7 +4603,7 @@ LambertianMaterial "mat_452" {
 }
 
 Sphere "small_452" {
-    position: Vec3(9.0606, 0.2000, 3.0884),
+    position: Point3(9.0606, 0.2000, 3.0884),
     radius: 0.2,
     material: @"mat_452",
 }
@@ -4613,7 +4613,7 @@ LambertianMaterial "mat_453" {
 }
 
 Sphere "small_453" {
-    position: Vec3(9.8101, 0.2000, 4.2860),
+    position: Point3(9.8101, 0.2000, 4.2860),
     radius: 0.2,
     material: @"mat_453",
 }
@@ -4623,7 +4623,7 @@ LambertianMaterial "mat_454" {
 }
 
 Sphere "small_454" {
-    position: Vec3(9.3855, 0.2000, 5.0043),
+    position: Point3(9.3855, 0.2000, 5.0043),
     radius: 0.2,
     material: @"mat_454",
 }
@@ -4633,7 +4633,7 @@ LambertianMaterial "mat_455" {
 }
 
 Sphere "small_455" {
-    position: Vec3(9.7901, 0.2000, 6.4166),
+    position: Point3(9.7901, 0.2000, 6.4166),
     radius: 0.2,
     material: @"mat_455",
 }
@@ -4644,7 +4644,7 @@ MetalMaterial "mat_456" {
 }
 
 Sphere "small_456" {
-    position: Vec3(9.1260, 0.2000, 7.4848),
+    position: Point3(9.1260, 0.2000, 7.4848),
     radius: 0.2,
     material: @"mat_456",
 }
@@ -4654,7 +4654,7 @@ LambertianMaterial "mat_457" {
 }
 
 Sphere "small_457" {
-    position: Vec3(9.4565, 0.2000, 8.0281),
+    position: Point3(9.4565, 0.2000, 8.0281),
     radius: 0.2,
     material: @"mat_457",
 }
@@ -4664,7 +4664,7 @@ DielectricMaterial "mat_458" {
 }
 
 Sphere "small_458" {
-    position: Vec3(9.4249, 0.2000, 9.6977),
+    position: Point3(9.4249, 0.2000, 9.6977),
     radius: 0.2,
     material: @"mat_458",
 }
@@ -4674,7 +4674,7 @@ LambertianMaterial "mat_459" {
 }
 
 Sphere "small_459" {
-    position: Vec3(9.2010, 0.2000, 10.6949),
+    position: Point3(9.2010, 0.2000, 10.6949),
     radius: 0.2,
     material: @"mat_459",
 }
@@ -4684,7 +4684,7 @@ LambertianMaterial "mat_460" {
 }
 
 Sphere "small_460" {
-    position: Vec3(10.7632, 0.2000, -10.2741),
+    position: Point3(10.7632, 0.2000, -10.2741),
     radius: 0.2,
     material: @"mat_460",
 }
@@ -4694,7 +4694,7 @@ LambertianMaterial "mat_461" {
 }
 
 Sphere "small_461" {
-    position: Vec3(10.8710, 0.2000, -9.3377),
+    position: Point3(10.8710, 0.2000, -9.3377),
     radius: 0.2,
     material: @"mat_461",
 }
@@ -4704,7 +4704,7 @@ LambertianMaterial "mat_462" {
 }
 
 Sphere "small_462" {
-    position: Vec3(10.1861, 0.2000, -8.1830),
+    position: Point3(10.1861, 0.2000, -8.1830),
     radius: 0.2,
     material: @"mat_462",
 }
@@ -4714,7 +4714,7 @@ LambertianMaterial "mat_463" {
 }
 
 Sphere "small_463" {
-    position: Vec3(10.4692, 0.2000, -7.2533),
+    position: Point3(10.4692, 0.2000, -7.2533),
     radius: 0.2,
     material: @"mat_463",
 }
@@ -4724,7 +4724,7 @@ LambertianMaterial "mat_464" {
 }
 
 Sphere "small_464" {
-    position: Vec3(10.7519, 0.2000, -6.5350),
+    position: Point3(10.7519, 0.2000, -6.5350),
     radius: 0.2,
     material: @"mat_464",
 }
@@ -4734,7 +4734,7 @@ LambertianMaterial "mat_465" {
 }
 
 Sphere "small_465" {
-    position: Vec3(10.5438, 0.2000, -5.5483),
+    position: Point3(10.5438, 0.2000, -5.5483),
     radius: 0.2,
     material: @"mat_465",
 }
@@ -4744,7 +4744,7 @@ LambertianMaterial "mat_466" {
 }
 
 Sphere "small_466" {
-    position: Vec3(10.6456, 0.2000, -4.8935),
+    position: Point3(10.6456, 0.2000, -4.8935),
     radius: 0.2,
     material: @"mat_466",
 }
@@ -4754,7 +4754,7 @@ LambertianMaterial "mat_467" {
 }
 
 Sphere "small_467" {
-    position: Vec3(10.7500, 0.2000, -3.9798),
+    position: Point3(10.7500, 0.2000, -3.9798),
     radius: 0.2,
     material: @"mat_467",
 }
@@ -4764,7 +4764,7 @@ LambertianMaterial "mat_468" {
 }
 
 Sphere "small_468" {
-    position: Vec3(10.2324, 0.2000, -2.8380),
+    position: Point3(10.2324, 0.2000, -2.8380),
     radius: 0.2,
     material: @"mat_468",
 }
@@ -4774,7 +4774,7 @@ LambertianMaterial "mat_469" {
 }
 
 Sphere "small_469" {
-    position: Vec3(10.0772, 0.2000, -1.5957),
+    position: Point3(10.0772, 0.2000, -1.5957),
     radius: 0.2,
     material: @"mat_469",
 }
@@ -4785,7 +4785,7 @@ MetalMaterial "mat_470" {
 }
 
 Sphere "small_470" {
-    position: Vec3(10.1637, 0.2000, -0.4063),
+    position: Point3(10.1637, 0.2000, -0.4063),
     radius: 0.2,
     material: @"mat_470",
 }
@@ -4795,7 +4795,7 @@ LambertianMaterial "mat_471" {
 }
 
 Sphere "small_471" {
-    position: Vec3(10.2068, 0.2000, 0.3469),
+    position: Point3(10.2068, 0.2000, 0.3469),
     radius: 0.2,
     material: @"mat_471",
 }
@@ -4805,7 +4805,7 @@ LambertianMaterial "mat_472" {
 }
 
 Sphere "small_472" {
-    position: Vec3(10.4283, 0.2000, 1.5533),
+    position: Point3(10.4283, 0.2000, 1.5533),
     radius: 0.2,
     material: @"mat_472",
 }
@@ -4815,7 +4815,7 @@ LambertianMaterial "mat_473" {
 }
 
 Sphere "small_473" {
-    position: Vec3(10.7448, 0.2000, 2.8073),
+    position: Point3(10.7448, 0.2000, 2.8073),
     radius: 0.2,
     material: @"mat_473",
 }
@@ -4825,7 +4825,7 @@ LambertianMaterial "mat_474" {
 }
 
 Sphere "small_474" {
-    position: Vec3(10.7221, 0.2000, 3.7106),
+    position: Point3(10.7221, 0.2000, 3.7106),
     radius: 0.2,
     material: @"mat_474",
 }
@@ -4835,7 +4835,7 @@ LambertianMaterial "mat_475" {
 }
 
 Sphere "small_475" {
-    position: Vec3(10.4294, 0.2000, 4.2093),
+    position: Point3(10.4294, 0.2000, 4.2093),
     radius: 0.2,
     material: @"mat_475",
 }
@@ -4845,7 +4845,7 @@ LambertianMaterial "mat_476" {
 }
 
 Sphere "small_476" {
-    position: Vec3(10.5202, 0.2000, 5.1060),
+    position: Point3(10.5202, 0.2000, 5.1060),
     radius: 0.2,
     material: @"mat_476",
 }
@@ -4855,7 +4855,7 @@ LambertianMaterial "mat_477" {
 }
 
 Sphere "small_477" {
-    position: Vec3(10.2283, 0.2000, 6.7695),
+    position: Point3(10.2283, 0.2000, 6.7695),
     radius: 0.2,
     material: @"mat_477",
 }
@@ -4865,7 +4865,7 @@ LambertianMaterial "mat_478" {
 }
 
 Sphere "small_478" {
-    position: Vec3(10.4342, 0.2000, 7.3332),
+    position: Point3(10.4342, 0.2000, 7.3332),
     radius: 0.2,
     material: @"mat_478",
 }
@@ -4876,7 +4876,7 @@ MetalMaterial "mat_479" {
 }
 
 Sphere "small_479" {
-    position: Vec3(10.5934, 0.2000, 8.6730),
+    position: Point3(10.5934, 0.2000, 8.6730),
     radius: 0.2,
     material: @"mat_479",
 }
@@ -4886,7 +4886,7 @@ LambertianMaterial "mat_480" {
 }
 
 Sphere "small_480" {
-    position: Vec3(10.3046, 0.2000, 9.4955),
+    position: Point3(10.3046, 0.2000, 9.4955),
     radius: 0.2,
     material: @"mat_480",
 }
@@ -4896,7 +4896,7 @@ LambertianMaterial "mat_481" {
 }
 
 Sphere "small_481" {
-    position: Vec3(10.8333, 0.2000, 10.3918),
+    position: Point3(10.8333, 0.2000, 10.3918),
     radius: 0.2,
     material: @"mat_481",
 }
@@ -4906,7 +4906,7 @@ DielectricMaterial "GlassBig" {
 }
 
 Sphere "BigGlass" {
-    position: Vec3(0, 1, 0),
+    position: Point3(0, 1, 0),
     radius: 1.0,
     material: @"GlassBig",
 }
@@ -4916,7 +4916,7 @@ LambertianMaterial "BrownMat" {
 }
 
 Sphere "BigBrown" {
-    position: Vec3(-4, 1, 0),
+    position: Point3(-4, 1, 0),
     radius: 1.0,
     material: @"BrownMat",
 }
@@ -4927,7 +4927,7 @@ MetalMaterial "SilverMat" {
 }
 
 Sphere "BigSilver" {
-    position: Vec3(4, 1, 0),
+    position: Point3(4, 1, 0),
     radius: 1.0,
     material: @"SilverMat",
 }
