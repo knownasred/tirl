@@ -19,6 +19,8 @@ aspectRatio: f32 = 16.0 / 9.0,
 samplesPerPixel: usize = 100,
 /// Maximum number of ray bounces into scene
 maxDepth: usize = 10,
+/// Number of samples to accumulate before updating the display in progressive mode
+samplesPerBatch: usize = 1,
 
 /// vfov is the vertical view angle (field of view)
 vfov: f32 = 90,
@@ -87,28 +89,36 @@ fn renderPerPixel(self: *const Self, alloc: std.mem.Allocator, progress: anytype
 
 fn renderProgressive(self: *const Self, alloc: std.mem.Allocator, progress: anytype, world: *const hittables.HittableList) !Image {
     const state = self.initialize();
-    progress.setTotal(self.samplesPerPixel);
+    const totalBatches = (self.samplesPerPixel + self.samplesPerBatch - 1) / self.samplesPerBatch;
+    progress.setTotal(totalBatches);
 
     var image = try Image.create(alloc, self.imageWidth, state.imageHeight);
     var accum = try AccumulationBuffer.create(alloc, self.imageWidth, state.imageHeight);
     var prng: std.Random.DefaultPrng = .init(constants.SEED);
     const rng = prng.random();
 
-    for (0..self.samplesPerPixel) |s| {
+    var samplesCompleted: usize = 0;
+    for (0..totalBatches) |batch| {
+        const batchEnd = @min(samplesCompleted + self.samplesPerBatch, self.samplesPerPixel);
+        const batchSize = batchEnd - samplesCompleted;
+
         for (0..image.height) |j| {
             for (0..image.width) |i| {
-                const ray = self.getRay(state, i, j, rng);
-                accum.accumulate(j, i, rayColor(ray, self.maxDepth, world, rng).inner);
+                for (0..batchSize) |_| {
+                    const ray = self.getRay(state, i, j, rng);
+                    accum.accumulate(j, i, rayColor(ray, self.maxDepth, world, rng).inner);
+                }
             }
         }
 
-        accum.incrementSamples();
+        samplesCompleted = batchEnd;
+        accum.setSamples(samplesCompleted);
 
         for (0..image.height) |j| {
             for (0..image.width) |i| {
                 const color = accum.averaged(j, i);
                 image.set(j, i, color);
-                progress.onPixel(j, i, s + 1, color);
+                progress.onPixel(j, i, batch + 1, color);
             }
         }
 
@@ -200,8 +210,9 @@ fn renderTiledProgressive(self: *const Self, alloc: std.mem.Allocator, progress:
     const tilesX = (self.imageWidth + TILE_SIZE - 1) / TILE_SIZE;
     const tilesY = (state.imageHeight + TILE_SIZE - 1) / TILE_SIZE;
     const totalTiles = tilesX * tilesY;
+    const totalBatches = (self.samplesPerPixel + self.samplesPerBatch - 1) / self.samplesPerBatch;
 
-    progress.setTotal(self.samplesPerPixel);
+    progress.setTotal(totalBatches);
 
     var image = try Image.create(alloc, self.imageWidth, state.imageHeight);
     const accumBuffer = try alloc.alloc(Vec3, self.imageWidth * state.imageHeight);
@@ -224,6 +235,7 @@ fn renderTiledProgressive(self: *const Self, alloc: std.mem.Allocator, progress:
             numThreads,
             tilesX,
             totalTiles,
+            totalBatches,
             &barrierCount,
             &barrierGeneration,
         });
@@ -247,14 +259,19 @@ fn progressiveTileWorker(
     numThreads: usize,
     tilesX: usize,
     totalTiles: usize,
+    totalBatches: usize,
     barrierCount: *std.atomic.Value(usize),
     barrierGeneration: *std.atomic.Value(usize),
 ) void {
-    for (0..self.samplesPerPixel) |s| {
+    var samplesCompleted: usize = 0;
+    for (0..totalBatches) |batch| {
+        const batchEnd = @min(samplesCompleted + self.samplesPerBatch, self.samplesPerPixel);
+        const batchSize = batchEnd - samplesCompleted;
+
         var tileIdx = threadIdx;
         while (tileIdx < totalTiles) : (tileIdx += numThreads) {
             progress.onTileStart(tileIdx);
-            var prng: std.Random.DefaultPrng = .init(constants.SEED ^ @as(u64, tileIdx) ^ (@as(u64, s) << 32));
+            var prng: std.Random.DefaultPrng = .init(constants.SEED ^ @as(u64, tileIdx) ^ (@as(u64, samplesCompleted) << 32));
             const rng = prng.random();
 
             const tileX = tileIdx % tilesX;
@@ -264,18 +281,37 @@ fn progressiveTileWorker(
             const endCol = @min(startCol + TILE_SIZE, self.imageWidth);
             const endRow = @min(startRow + TILE_SIZE, state.imageHeight);
 
-            const scale = 1.0 / toFloat(s + 1);
             for (startRow..endRow) |j| {
                 for (startCol..endCol) |i| {
                     const idx = j * self.imageWidth + i;
-                    const ray = self.getRay(state, i, j, rng);
-                    accumBuffer[idx] = accumBuffer[idx].add(rayColor(ray, self.maxDepth, world, rng).inner);
-                    const color: Color3 = .from(accumBuffer[idx].mul_s(scale));
-                    image.set(j, i, color);
-                    progress.onPixel(j, i, s + 1, color);
+                    for (0..batchSize) |_| {
+                        const ray = self.getRay(state, i, j, rng);
+                        accumBuffer[idx] = accumBuffer[idx].add(rayColor(ray, self.maxDepth, world, rng).inner);
+                    }
                 }
             }
             progress.onTileEnd(tileIdx);
+        }
+
+        samplesCompleted = batchEnd;
+        const scale = 1.0 / toFloat(samplesCompleted);
+        tileIdx = threadIdx;
+        while (tileIdx < totalTiles) : (tileIdx += numThreads) {
+            const tileX = tileIdx % tilesX;
+            const tileY = tileIdx / tilesX;
+            const startCol = tileX * TILE_SIZE;
+            const startRow = tileY * TILE_SIZE;
+            const endCol = @min(startCol + TILE_SIZE, self.imageWidth);
+            const endRow = @min(startRow + TILE_SIZE, state.imageHeight);
+
+            for (startRow..endRow) |j| {
+                for (startCol..endCol) |i| {
+                    const idx = j * self.imageWidth + i;
+                    const color: Color3 = .from(accumBuffer[idx].mul_s(scale));
+                    image.set(j, i, color);
+                    progress.onPixel(j, i, batch + 1, color);
+                }
+            }
         }
 
         // Spin barrier: last thread to arrive advances the generation

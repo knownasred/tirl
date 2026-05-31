@@ -9,7 +9,7 @@ const HittableList = zig_scene.renderer.hittables.HittableList;
 const UiProgress = zig_scene.ui.UiProgress;
 const TileStatus = zig_scene.ui.TileStatus;
 
-const SCALE = 2;
+const INITIAL_SCALE = 2;
 const PROGRESS_BAR_HEIGHT = 24;
 const CORNER_LEN = 8;
 
@@ -55,15 +55,16 @@ pub fn main(init: std.process.Init) !void {
         @as(usize, @intFromFloat(@as(f32, @floatFromInt(render_width)) / scene.camera.aspectRatio)),
         1,
     );
-    const window_width: i32 = @intCast(render_width * SCALE);
-    const window_height: i32 = @intCast(render_height * SCALE + PROGRESS_BAR_HEIGHT);
+    const initial_window_width: i32 = @intCast(render_width * INITIAL_SCALE);
+    const initial_window_height: i32 = @intCast(render_height * INITIAL_SCALE + PROGRESS_BAR_HEIGHT);
 
     const ui_progress = try zig_scene.ui.UiProgress.init(alloc, render_width, render_height);
 
     scene.camera.renderMode = .progressive;
     var render_future = try init.io.concurrent(renderWorker, .{ alloc, ui_progress, &scene.camera, &scene.world });
 
-    rl.initWindow(window_width, window_height, "Zig Raytracer");
+    rl.setConfigFlags(.{ .window_resizable = true });
+    rl.initWindow(initial_window_width, initial_window_height, "Zig Raytracer");
     defer rl.closeWindow();
     rl.setTargetFPS(30);
 
@@ -88,21 +89,25 @@ pub fn main(init: std.process.Init) !void {
         const current = ui_progress.current.load(.monotonic);
         const total = ui_progress.total.load(.monotonic);
 
+        const win_w = rl.getScreenWidth();
+        const win_h = rl.getScreenHeight();
+        const scale = @as(f32, @floatFromInt(win_w)) / @as(f32, @floatFromInt(render_width));
+
         rl.beginDrawing();
         rl.clearBackground(.{ .r = 30, .g = 30, .b = 30, .a = 255 });
-        rl.drawTextureEx(texture, .{ .x = 0, .y = @as(f32, PROGRESS_BAR_HEIGHT) }, 0, SCALE, rl.Color.white);
+        rl.drawTextureEx(texture, .{ .x = 0, .y = @as(f32, PROGRESS_BAR_HEIGHT) }, 0, scale, rl.Color.white);
 
-        drawTileCorners(ui_progress);
+        drawTileCorners(ui_progress, scale);
 
-        rl.drawRectangle(0, 0, window_width, PROGRESS_BAR_HEIGHT, .{ .r = 50, .g = 50, .b = 50, .a = 255 });
+        rl.drawRectangle(0, 0, win_w, PROGRESS_BAR_HEIGHT, .{ .r = 50, .g = 50, .b = 50, .a = 255 });
 
         if (total > 0) {
-            const bar_width: i32 = @intFromFloat(@as(f32, @floatFromInt(window_width)) * @as(f32, @floatFromInt(@min(current, total))) / @as(f32, @floatFromInt(total)));
+            const bar_width: i32 = @intFromFloat(@as(f32, @floatFromInt(win_w)) * @as(f32, @floatFromInt(@min(current, total))) / @as(f32, @floatFromInt(total)));
             rl.drawRectangle(0, 0, bar_width, PROGRESS_BAR_HEIGHT, .{ .r = 80, .g = 180, .b = 80, .a = 255 });
         }
 
         var buf: [64:0]u8 = undefined;
-        const label = std.fmt.bufPrintZ(&buf, "{} / {}", .{ current, total }) catch "?";
+        const label = std.fmt.bufPrintZ(&buf, "{} / {} ({}x{})", .{ current, total, win_w, win_h }) catch "?";
         rl.drawText(label, 6, 4, 16, rl.Color.white);
 
         rl.endDrawing();
@@ -112,9 +117,9 @@ pub fn main(init: std.process.Init) !void {
     render_future.cancel(init.io);
 }
 
-fn drawTileCorners(ui_progress: *UiProgress) void {
+fn drawTileCorners(ui_progress: *UiProgress, scale: f32) void {
     const tileStatus = ui_progress.tile_status orelse return;
-    const tileSize = Camera.TILE_SIZE;
+    const tileSize: f32 = @floatFromInt(Camera.TILE_SIZE);
     const color: rl.Color = .{ .r = 255, .g = 100, .b = 50, .a = 220 };
 
     for (0..ui_progress.tiles_y) |ty| {
@@ -122,16 +127,12 @@ fn drawTileCorners(ui_progress: *UiProgress) void {
             const idx = ty * ui_progress.tiles_x + tx;
             if (tileStatus[idx].load(.monotonic) != .rendering) continue;
 
-            const x1: i32 = @intCast(tx * tileSize * SCALE);
-            const y1: i32 = @intCast(ty * tileSize * SCALE + PROGRESS_BAR_HEIGHT);
-            const x2: i32 = @intCast(@min((tx + 1) * tileSize, ui_progress.width) * SCALE);
-            const y2: i32 = @intCast(@min((ty + 1) * tileSize, ui_progress.height) * SCALE + PROGRESS_BAR_HEIGHT);
+            const fx1 = @as(f32, @floatFromInt(tx)) * tileSize * scale;
+            const fy1 = @as(f32, @floatFromInt(ty)) * tileSize * scale + PROGRESS_BAR_HEIGHT;
+            const fx2 = @min(@as(f32, @floatFromInt(tx + 1)) * tileSize, @as(f32, @floatFromInt(ui_progress.width))) * scale;
+            const fy2 = @min(@as(f32, @floatFromInt(ty + 1)) * tileSize, @as(f32, @floatFromInt(ui_progress.height))) * scale + PROGRESS_BAR_HEIGHT;
 
             const thick: f32 = 3;
-            const fx1: f32 = @floatFromInt(x1);
-            const fy1: f32 = @floatFromInt(y1);
-            const fx2: f32 = @floatFromInt(x2);
-            const fy2: f32 = @floatFromInt(y2);
             const cl: f32 = CORNER_LEN;
 
             rl.drawLineEx(.{ .x = fx1, .y = fy1 }, .{ .x = fx1 + cl, .y = fy1 }, thick, color);

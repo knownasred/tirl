@@ -6,6 +6,7 @@ Camera "Camera" {
     aspectRatio: 1.77778,
     imageWidth: 1200,
     samplesPerPixel: 500,
+    samplesPerBatch: 10,
     maxDepth: 50,
     defocusAngle: 0.6,
     focusDistance: 10.0,

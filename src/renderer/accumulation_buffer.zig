@@ -33,6 +33,10 @@ pub const AccumulationBuffer = struct {
         self.samples += 1;
     }
 
+    pub fn setSamples(self: *AccumulationBuffer, samples: usize) void {
+        self.samples = samples;
+    }
+
     pub fn deinit(self: AccumulationBuffer, alloc: std.mem.Allocator) void {
         alloc.free(self.buffer);
     }
