@@ -7,6 +7,7 @@ const Block = ast.block.Block;
 const Camera = renderer.Camera;
 const Material = renderer.Material;
 const Sphere = renderer.hittables.Sphere;
+const Quad = renderer.hittables.Quad;
 const Hittable = renderer.hittables.Hittable;
 const HittableList = renderer.hittables.HittableList;
 
@@ -27,6 +28,7 @@ const block_handlers = .{
     handler("DielectricMaterial", renderer.materials.Dielectric, .material),
     handler("Camera", Camera, .camera),
     handler("Sphere", Sphere, .hittable),
+    handler("Quad", Quad, .hittable),
 };
 
 fn handler(comptime name: []const u8, comptime T: type, comptime output: Output) type {

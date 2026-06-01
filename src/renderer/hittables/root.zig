@@ -1,5 +1,6 @@
 const common = @import("common.zig");
 pub const Sphere = @import("Sphere.zig");
+pub const Quad = @import("Quad.zig");
 
 const renderer = @import("../root.zig");
 const Ray = renderer.math.Ray;
@@ -11,6 +12,7 @@ const std = @import("std");
 
 pub const Hittable = union(enum) {
     sphere: Sphere,
+    quad: Quad,
 
     pub fn from(value: anytype) Hittable {
         const fields = @typeInfo(Hittable).@"union".fields;

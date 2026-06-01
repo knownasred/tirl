@@ -118,7 +118,7 @@ fn toColor3(value: Value) InterpretError!Color3 {
     return Color3.new(v[0], v[1], v[2]);
 }
 
-fn toVec3(value: Value) InterpretError!Color3 {
+fn toVec3(value: Value) InterpretError!Vec3 {
     const v = try extractF32x3(value, "Vec3");
     return Vec3.new(v[0], v[1], v[2]);
 }

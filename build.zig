@@ -61,6 +61,7 @@ pub fn build(b: *std.Build) void {
                     .{ .name = "raylib", .module = raylib_dep.module("raylib") },
                 },
             }),
+            .use_lld = false,
         });
         gui_exe.root_module.linkLibrary(raylib_dep.artifact("raylib"));
 

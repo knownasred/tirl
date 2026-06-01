@@ -31,5 +31,12 @@ pub fn Progress(comptime T: type) type {
                 self.context.onTileEnd(tileIdx);
             }
         }
+
+        pub fn isCancelled(self: Self) bool {
+            if (comptime @hasDecl(T, "isCancelled")) {
+                return self.context.isCancelled();
+            }
+            return false;
+        }
     };
 }

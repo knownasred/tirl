@@ -8,10 +8,13 @@ const HittableList = zig_scene.renderer.hittables.HittableList;
 
 const UiProgress = zig_scene.ui.UiProgress;
 const TileStatus = zig_scene.ui.TileStatus;
+const Scene = zig_scene.interpreter.Scene;
+const Io = std.Io;
 
 const INITIAL_SCALE = 2;
 const PROGRESS_BAR_HEIGHT = 24;
 const CORNER_LEN = 8;
+const WATCH_INTERVAL_FRAMES = 15;
 
 pub fn main(init: std.process.Init) !void {
     const alloc = init.arena.allocator();
@@ -24,31 +27,9 @@ pub fn main(init: std.process.Init) !void {
         return;
     };
 
-    const cwd = std.Io.Dir.cwd();
-    const f = try cwd.openFile(init.io, path, .{});
-    defer f.close(init.io);
+    const cwd = Io.Dir.cwd();
 
-    var read_buf: [4096]u8 = undefined;
-    var reader = f.reader(init.io, &read_buf);
-    const content = try reader.interface.allocRemaining(alloc, .unlimited);
-
-    const parsed = zig_scene.ast.file.parse(alloc, content);
-    const file = switch (parsed) {
-        .ok => |tree| tree,
-        .err => |err| {
-            var err_buf: [256]u8 = undefined;
-            const stderr = std.Io.File.stderr();
-            var err_out = stderr.writer(init.io, &err_buf);
-            try err.display(&err_out.interface);
-            try err_out.flush();
-            return;
-        },
-    };
-
-    var scene = zig_scene.interpreter.interpret(alloc, file) catch |err| {
-        std.debug.print("Interpret error: {}\n", .{err});
-        return;
-    };
+    var scene = loadScene(alloc, init.io, cwd, path) orelse return;
 
     const render_width = scene.camera.imageWidth;
     const render_height: usize = @max(
@@ -58,7 +39,7 @@ pub fn main(init: std.process.Init) !void {
     const initial_window_width: i32 = @intCast(render_width * INITIAL_SCALE);
     const initial_window_height: i32 = @intCast(render_height * INITIAL_SCALE + PROGRESS_BAR_HEIGHT);
 
-    const ui_progress = try zig_scene.ui.UiProgress.init(alloc, render_width, render_height);
+    var ui_progress = try UiProgress.init(alloc, render_width, render_height);
 
     scene.camera.renderMode = .progressive;
     var render_future = try init.io.concurrent(renderWorker, .{ alloc, ui_progress, &scene.camera, &scene.world });
@@ -82,7 +63,32 @@ pub fn main(init: std.process.Init) !void {
     const texture = try rl.loadTextureFromImage(image);
     defer rl.unloadTexture(texture);
 
+    var last_mtime = getFileMtime(init.io, cwd, path);
+    var watch_counter: u32 = 0;
+    var reload_count: u32 = 0;
+
     while (!rl.windowShouldClose()) {
+        watch_counter += 1;
+        if (watch_counter >= WATCH_INTERVAL_FRAMES) {
+            watch_counter = 0;
+            const new_mtime = getFileMtime(init.io, cwd, path);
+            if (new_mtime != last_mtime) {
+                last_mtime = new_mtime;
+                if (loadScene(alloc, init.io, cwd, path)) |new_scene| {
+                    ui_progress.cancel();
+                    render_future.cancel(init.io);
+
+                    scene = new_scene;
+                    scene.camera.renderMode = .progressive;
+                    ui_progress.reset();
+                    @memset(pixels, .{ .r = 0, .g = 0, .b = 0, .a = 255 });
+
+                    render_future = init.io.concurrent(renderWorker, .{ alloc, ui_progress, &scene.camera, &scene.world }) catch continue;
+                    reload_count += 1;
+                }
+            }
+        }
+
         copyBufferToPixels(ui_progress.display_buffer, pixels);
         rl.updateTexture(texture, pixels.ptr);
 
@@ -106,8 +112,11 @@ pub fn main(init: std.process.Init) !void {
             rl.drawRectangle(0, 0, bar_width, PROGRESS_BAR_HEIGHT, .{ .r = 80, .g = 180, .b = 80, .a = 255 });
         }
 
-        var buf: [64:0]u8 = undefined;
-        const label = std.fmt.bufPrintZ(&buf, "{} / {} ({}x{})", .{ current, total, win_w, win_h }) catch "?";
+        var buf: [128:0]u8 = undefined;
+        const label = if (reload_count > 0)
+            std.fmt.bufPrintZ(&buf, "{} / {} | reloaded {} time(s)", .{ current, total, reload_count }) catch "?"
+        else
+            std.fmt.bufPrintZ(&buf, "{} / {} ({}x{})", .{ current, total, win_w, win_h }) catch "?";
         rl.drawText(label, 6, 4, 16, rl.Color.white);
 
         rl.endDrawing();
@@ -115,6 +124,44 @@ pub fn main(init: std.process.Init) !void {
 
     ui_progress.cancel();
     render_future.cancel(init.io);
+}
+
+fn loadScene(alloc: std.mem.Allocator, io: Io, dir: Io.Dir, path: []const u8) ?Scene {
+    const f = dir.openFile(io, path, .{}) catch |err| {
+        std.debug.print("Cannot open file: {}\n", .{err});
+        return null;
+    };
+    defer f.close(io);
+
+    var read_buf: [4096]u8 = undefined;
+    var reader = f.reader(io, &read_buf);
+    const content = reader.interface.allocRemaining(alloc, .unlimited) catch |err| {
+        std.debug.print("Cannot read file: {}\n", .{err});
+        return null;
+    };
+
+    const parsed = zig_scene.ast.file.parse(alloc, content);
+    const file = switch (parsed) {
+        .ok => |tree| tree,
+        .err => |err| {
+            var err_buf: [256]u8 = undefined;
+            const stderr = Io.File.stderr();
+            var err_out = stderr.writer(io, &err_buf);
+            err.display(&err_out.interface) catch {};
+            err_out.flush() catch {};
+            return null;
+        },
+    };
+
+    return zig_scene.interpreter.interpret(alloc, file) catch |err| {
+        std.debug.print("Interpret error: {}\n", .{err});
+        return null;
+    };
+}
+
+fn getFileMtime(io: Io, dir: Io.Dir, path: []const u8) i96 {
+    const file_stat = dir.statFile(io, path, .{}) catch return 0;
+    return file_stat.mtime.nanoseconds;
 }
 
 fn drawTileCorners(ui_progress: *UiProgress, scale: f32) void {

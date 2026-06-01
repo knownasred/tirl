@@ -318,11 +318,12 @@ fn progressiveTileWorker(
         const gen = barrierGeneration.load(.acquire);
         const arrived = barrierCount.fetchAdd(1, .acq_rel) + 1;
         if (arrived == numThreads) {
-            if (progress.increment(1)) return;
             barrierCount.store(0, .release);
             barrierGeneration.store(gen + 1, .release);
+            if (progress.increment(1)) return;
         } else {
             while (barrierGeneration.load(.acquire) == gen) {
+                if (progress.isCancelled()) return;
                 std.atomic.spinLoopHint();
             }
         }

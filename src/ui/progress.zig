@@ -51,6 +51,10 @@ pub const UiProgress = struct {
         self.cancelled.store(true, .monotonic);
     }
 
+    pub fn isCancelled(self: *UiProgress) bool {
+        return self.cancelled.load(.monotonic);
+    }
+
     pub fn setTotal(self: *UiProgress, total: u64) void {
         self.total.store(total, .monotonic);
     }
@@ -69,6 +73,16 @@ pub const UiProgress = struct {
     pub fn onTileEnd(self: *UiProgress, tileIdx: usize) void {
         if (self.tile_status) |ts| {
             ts[tileIdx].store(.done, .monotonic);
+        }
+    }
+
+    pub fn reset(self: *UiProgress) void {
+        self.cancelled.store(false, .monotonic);
+        self.current.store(0, .monotonic);
+        self.total.store(0, .monotonic);
+        @memset(self.display_buffer, Color3.new(0, 0, 0));
+        if (self.tile_status) |ts| {
+            for (ts) |*t| t.store(.idle, .monotonic);
         }
     }
 };
