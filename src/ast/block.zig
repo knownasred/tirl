@@ -32,10 +32,10 @@ pub const Item = union(enum) {
     block: Block,
 };
 
-const lbrace = combinators.lexme(literal("{"));
-const rbrace = combinators.lexme(literal("}"));
-const comma = combinators.lexme(literal(","));
-const colon = combinators.lexme(literal(":"));
+const lbrace = combinators.lexeme(literal("{"));
+const rbrace = combinators.lexeme(literal("}"));
+const comma = combinators.lexeme(literal(","));
+const colon = combinators.lexeme(literal(":"));
 
 pub const item = parser.Parser(Item){ .parse = parseItem };
 pub const block_body = parser.Parser([]const Item){ .parse = parseBlockBody };

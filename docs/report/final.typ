@@ -34,12 +34,18 @@ Le rapport final, dans l'idéal, ne devrait pas excéder 7 pages. Le rapport int
 
 = Introduction
 
-Les logiciels de rendu sont considérés comme nécessitant beaucoup de puissance de calcul en parallèle. Des optimisations
-mineures, tel que le précalcul d'indexes, ou la génération d'une table de lookup, prennent beaucoup plus d'ampleur quand
-la fonction est appelée plusieurs milliards de fois lors de l'exécution d'un programme. Tirl cherche donc à prouver que
-des outils de métaprogrammation, tels que comptime, permettent de prendre en charge la complexité algorithmique qui
-aurait autrement été payée à l'exécution. Ce rapport présente les mécanismes qui ont permis cette approche, et montre
-comment les choix de conception de Zig l'ont rendu facile.
+Les abstractions de haut niveau telles que l'introspection ou la composition simplifient considérablement la conception
+de logiciels complexes. Cependant, ces mécanismes sont généralement résolus à l'exécution, via des tables de fonctions
+virtuelles ou des offsets dynamiques, ce qui introduit un coût non-négligeable. Le développeur est ainsi souvent
+contraint de choisir entre expressivité et performance, choisissant parfois d'ignorer ces abstractions au profit
+d'implémentations artisanales.
+
+Tirl, un moteur de rendu de scène, cherche à démontrer que cette opposition n'est pas inévitable. En s'appuyant sur
+`comptime`, le mécanisme de métaprogrammation de Zig, il est possible de concevoir des combinateurs de parseurs et un
+interpréteur par réflexion qui sont entièrement résolus à la compilation. Le code produit est ainsi équivalent à celui
+d'une implémentation spécialisée écrite à la main, sans que le développeur ait eu à en gérer la complexité. Ce rapport
+présente les mécanismes qui ont permis cette approche, et montre comment les choix de conception de Zig l'ont rendu
+possible.
 
 = Architecture
 
@@ -128,7 +134,7 @@ Cela a aussi pour avantage de segmenter clairement les parties du code utilisant
 (combinateurs de parseurs, interpréteur), du moteur de rendu, qui utilise de la programmation impérative plus
 traditionnelle.
 
-Tout d'abord, la définition de scène (.scene) est lue et convertie en AST via les combinateurs de parseurs, qui peut
+Tout d'abord, la définition de scène (.scene) est lue et convertie en AST (à l'execution) via les combinateurs de parseurs (générés à la compilation), qui peut
 être ensuite fourni à l'interpréteur, afin d'être converti en représentation de scène, qui peut enfin être consommée par
 le moteur de rendu pour obtenir une image détaillée, qui est sauvegardée sur disque.
 
@@ -160,7 +166,7 @@ symbol ::= alpha {alphanumeric}
 Voici ensuite comment cette grammaire est implémentée dans Tirl:
 
 ```zig
-pub const combinator = combinators.lexme(
+pub const combinator = combinators.lexeme(
     combinators.recognize(
         combinators.seq(.{
             combinators.satisfy(std.ascii.isAlphabetic),
@@ -217,9 +223,7 @@ const block_handlers = .{
 ```
 Cette ligne suffit, car elle appellera la fonction `reflect.parseBlock`, qui itère sur tous les attributs de la
 structure (via `inline for`), et génère un parseur optimisé à partir de ces informations. Cela permet des optimisations
-telles que la génération de lookup structures, ou un inlining agressif des parseurs de valeur (`Vec3`). Ces
-optimisations seraient impossibles à obtenir dans un langage comme Java, dont les paramètres de la structure ne sont
-accessibles qu'à l'exécution, forçant l'utilisation d'offsets dynamiques, et aux sauts via VTable.
+telles que la génération de lookup structures, ou un inlining agressif des parseurs de valeur (`Vec3`).
 
 = Retour d'expérience
 
@@ -264,14 +268,13 @@ facile que cela change de la structure habituelle d'un projet.
 
 = Conclusion
 
-Nous avons donc pu voir tout au long de ce rapport comment Zig permet, via ces outils de métaprogrammation, la mise en
-place d'abstractions claires et haute performance, sans sacrifier l'expressivité du langage, et sa compréhension.
+Nous avons donc pu voir tout au long de ce rapport comment Zig permet, via ses outils de métaprogrammation, la mise en
+place d'abstractions claires et expressives, sans sacrifier le contrôle sur le code généré.
 
 Pouvoir mettre en application ces principes, découverts pendant le rendu intermédiaire, dans un projet pratique à
-échelle moyenne (Tirl), nous a permis de voir les avantages et l'absence de limites ou contraintes majeures de
-l'implémentation de la métaprogrammation en Zig. La combinaison de performance, lisibilité et contrôle que laisse le
-langage en fait un candidat parfait pour les projets sur lesquels le contrôle sur la façon dont le code est exécuté est
-une nécessité importante.
+échelle moyenne (Tirl), nous a permis de voir les avantages de la métaprogrammation en Zig. La combinaison de
+lisibilité, contrôle et vérification statique que permet le langage en fait un candidat pertinent pour les projets
+nécessitant un contrôle fin sur la compilation et l'exécution.
 
 Tirl n'est cependant pas fini. Si le projet venait à continuer, il serait appréciable de rajouter le support des BVH,
 afin d'augmenter la performance. Aussi, rajouter le support pour plus de fonctionnalités et éléments, tel que

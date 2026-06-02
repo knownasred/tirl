@@ -2,7 +2,7 @@ const combinators = @import("../combinators/root.zig");
 const std = @import("std");
 
 pub const Symbol = struct {
-    pub const combinator = combinators.lexme(
+    pub const combinator = combinators.lexeme(
         combinators.recognize(
             combinators.seq(.{
                 combinators.satisfy(std.ascii.isAlphabetic),

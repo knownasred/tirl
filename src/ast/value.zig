@@ -65,7 +65,7 @@ const value = combinators.either(.{
 }.map);
 
 const call = combinators.seq(.{
-    combinators.lexme(Symbol.combinator),
+    combinators.lexeme(Symbol.combinator),
     combinators.delimited(lparen, combinators.separated(Value.combinator, comma), rparen),
 }).map(struct {
     fn map(input: anytype) Call {
@@ -81,7 +81,7 @@ fn parseFloatResult(s: []const u8) parser.Result(f64) {
         return .{ .err = .{ .code = .ValueTooBig, .desc = "invalid number", .expected = "a number", .location = null } } };
 }
 
-const number = combinators.lexme(combinators.recognize(combinators.seq(.{
+const number = combinators.lexeme(combinators.recognize(combinators.seq(.{
     combinators.opt(literal("-")),
     combinators.seq(.{ combinators.satisfy(std.ascii.isDigit), combinators.takeWhile(std.ascii.isDigit) }),
     combinators.opt(combinators.seq(.{
@@ -90,9 +90,9 @@ const number = combinators.lexme(combinators.recognize(combinators.seq(.{
     })),
 }))).tryMap(&parseFloatResult);
 
-const lparen = combinators.lexme(literal("("));
-const rparen = combinators.lexme(literal(")"));
-const comma = combinators.lexme(literal(","));
+const lparen = combinators.lexeme(literal("("));
+const rparen = combinators.lexeme(literal(")"));
+const comma = combinators.lexeme(literal(","));
 
 test "value: parses a string" {
     var r = t.testParse(Value.combinator, "\"hello\"");
