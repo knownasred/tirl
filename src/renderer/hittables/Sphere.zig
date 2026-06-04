@@ -38,19 +38,17 @@ pub fn hit(self: @This(), ray: Ray, ray_t: Interval) ?HitRecord {
 
     const p = ray.at(root);
 
-    var result: HitRecord = .{
-        .t = root,
-        .p = p,
-        .normal = p.inner
-            .sub(self.position.inner)
-            .div_s(self.radius),
-        .front_face = false,
-        .material = self.material,
-    };
-
     const outward_normal = p.inner
         .sub(self.position.inner)
         .div_s(self.radius);
+
+    var result: HitRecord = .{
+        .t = root,
+        .p = p,
+        .normal = outward_normal,
+        .front_face = false,
+        .material = self.material,
+    };
     result.setFaceNormal(ray, outward_normal);
 
     return result;

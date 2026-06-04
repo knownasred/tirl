@@ -18,9 +18,7 @@ const std = @import("std");
 /// index of the enclosing media.
 refractionIndex: f32,
 
-const std_lib = @import("std");
-
-pub fn scatter(self: @This(), r_in: Ray, record: HitRecord, rng: std_lib.Random) ?common.ScatterResult {
+pub fn scatter(self: @This(), r_in: Ray, record: HitRecord, rng: std.Random) ?common.ScatterResult {
     const ri = if (record.front_face) 1 / self.refractionIndex else self.refractionIndex;
 
     const unitDirection = r_in.direction.unit();

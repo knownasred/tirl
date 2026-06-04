@@ -139,6 +139,7 @@ fn renderTiled(self: *const Self, alloc: std.mem.Allocator, progress: anytype, w
     var image = try Image.create(alloc, self.imageWidth, state.imageHeight);
 
     const threads = try alloc.alloc(std.Thread, numThreads);
+    defer alloc.free(threads);
 
     for (0..numThreads) |threadIdx| {
         threads[threadIdx] = try std.Thread.spawn(.{}, tileWorker, .{
@@ -222,6 +223,7 @@ fn renderTiledProgressive(self: *const Self, alloc: std.mem.Allocator, progress:
     var barrierGeneration = std.atomic.Value(usize).init(0);
 
     const threads = try alloc.alloc(std.Thread, numThreads);
+    defer alloc.free(threads);
 
     for (0..numThreads) |threadIdx| {
         threads[threadIdx] = try std.Thread.spawn(.{}, progressiveTileWorker, .{
@@ -267,6 +269,7 @@ fn progressiveTileWorker(
     for (0..totalBatches) |batch| {
         const batchEnd = @min(samplesCompleted + self.samplesPerBatch, self.samplesPerPixel);
         const batchSize = batchEnd - samplesCompleted;
+        const scale = 1.0 / toFloat(batchEnd);
 
         var tileIdx = threadIdx;
         while (tileIdx < totalTiles) : (tileIdx += numThreads) {
@@ -288,41 +291,25 @@ fn progressiveTileWorker(
                         const ray = self.getRay(state, i, j, rng);
                         accumBuffer[idx] = accumBuffer[idx].add(rayColor(ray, self.maxDepth, world, rng).inner);
                     }
+                    const color: Color3 = .from(accumBuffer[idx].mul_s(scale));
+                    image.set(j, i, color);
+                    progress.onPixel(j, i, batch + 1, color);
                 }
             }
             progress.onTileEnd(tileIdx);
         }
 
         samplesCompleted = batchEnd;
-        const scale = 1.0 / toFloat(samplesCompleted);
-        tileIdx = threadIdx;
-        while (tileIdx < totalTiles) : (tileIdx += numThreads) {
-            const tileX = tileIdx % tilesX;
-            const tileY = tileIdx / tilesX;
-            const startCol = tileX * TILE_SIZE;
-            const startRow = tileY * TILE_SIZE;
-            const endCol = @min(startCol + TILE_SIZE, self.imageWidth);
-            const endRow = @min(startRow + TILE_SIZE, state.imageHeight);
-
-            for (startRow..endRow) |j| {
-                for (startCol..endCol) |i| {
-                    const idx = j * self.imageWidth + i;
-                    const color: Color3 = .from(accumBuffer[idx].mul_s(scale));
-                    image.set(j, i, color);
-                    progress.onPixel(j, i, batch + 1, color);
-                }
-            }
-        }
 
         // Spin barrier: last thread to arrive advances the generation
-        const gen = barrierGeneration.load(.acquire);
-        const arrived = barrierCount.fetchAdd(1, .acq_rel) + 1;
+        const gen = barrierGeneration.load(.seq_cst);
+        const arrived = barrierCount.fetchAdd(1, .seq_cst) + 1;
         if (arrived == numThreads) {
-            barrierCount.store(0, .release);
-            barrierGeneration.store(gen + 1, .release);
+            barrierCount.store(0, .seq_cst);
             if (progress.increment(1)) return;
+            barrierGeneration.store(gen + 1, .seq_cst);
         } else {
-            while (barrierGeneration.load(.acquire) == gen) {
+            while (barrierGeneration.load(.seq_cst) == gen) {
                 if (progress.isCancelled()) return;
                 std.atomic.spinLoopHint();
             }

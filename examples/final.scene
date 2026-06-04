@@ -4933,7 +4933,7 @@ Sphere "BigSilver" {
 }
 
 LambertianMaterial "CubeMat" {
-    albedo: Color3(0.9, 0.0, 0.3),
+    albedo: Color3(0.1, 0.6, 0.3),
 }
 
 Quad "CubeFront" {
